@@ -1,0 +1,14 @@
+{
+  "name": "墨然的方块世界",
+  "short_name": "方块世界",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#7ec8ff",
+  "theme_color": "#5aa83a",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

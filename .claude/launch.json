@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "momo",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "tools/devserver.py",
+        "8766"
+      ],
+      "port": 8766
+    }
+  ]
+}

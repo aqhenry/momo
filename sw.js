@@ -1,0 +1,31 @@
+// Network first (so new levels show up as soon as they're published), cache as offline fallback.
+const CACHE = 'momo-v1';
+const SHELL = [
+  './', 'index.html', 'manifest.webmanifest', 'css/app.css',
+  'js/main.js', 'js/ui.js', 'js/store.js', 'js/audio.js', 'js/blocks.js', 'js/pinyin.js', 'js/pics.js',
+  'js/items/choice.js', 'js/items/blend.js', 'js/items/spell.js', 'js/items/stroke.js', 'js/items/order.js', 'js/items/text.js',
+  'vendor/hanzi-writer.min.js', 'fonts/andika-400.woff2', 'fonts/andika-700.woff2',
+  'levels/index.json', 'icons/icon-180.png',
+];
+
+self.addEventListener('install', e => {
+  self.skipWaiting();
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).catch(() => {}));
+});
+self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+
+self.addEventListener('fetch', e => {
+  const req = e.request;
+  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  e.respondWith(
+    fetch(req, { cache: 'no-cache' })
+      .then(res => {
+        if (res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(req, copy));
+        }
+        return res;
+      })
+      .catch(() => caches.match(req, { ignoreSearch: true }))
+  );
+});
