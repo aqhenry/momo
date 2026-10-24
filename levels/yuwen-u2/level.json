@@ -7,7 +7,7 @@
     {
       "id": "letters",
       "title": "字母寻宝",
-      "icon": "🔍",
+      "icon": "sprite:magnifier",
       "items": [
         {
           "type": "choice",
@@ -264,7 +264,7 @@
     {
       "id": "tones",
       "title": "动物园标声调",
-      "icon": "🦌",
+      "icon": "sprite:bell",
       "items": [
         {
           "type": "choice",
@@ -463,7 +463,7 @@
     {
       "id": "blend",
       "title": "拼音积木",
-      "icon": "🧱",
+      "icon": "sprite:bricks",
       "items": [
         {
           "type": "blend",
@@ -596,7 +596,7 @@
     {
       "id": "match",
       "title": "看图找音节",
-      "icon": "🎯",
+      "icon": "sprite:target",
       "items": [
         {
           "type": "choice",
@@ -795,7 +795,7 @@
     {
       "id": "words",
       "title": "拼音画册",
-      "icon": "🎨",
+      "icon": "sprite:painting",
       "items": [
         {
           "type": "spell",
@@ -874,7 +874,7 @@
     {
       "id": "odd",
       "title": "找不同韵母",
-      "icon": "🧐",
+      "icon": "sprite:eye",
       "items": [
         {
           "type": "choice",
@@ -1067,7 +1067,7 @@
     {
       "id": "write",
       "title": "门票写汉字",
-      "icon": "✏️",
+      "icon": "sprite:quill",
       "items": [
         {
           "type": "stroke",
@@ -1162,7 +1162,7 @@
     {
       "id": "pick-word",
       "title": "看图选词语",
-      "icon": "🖼️",
+      "icon": "sprite:sign",
       "items": [
         {
           "type": "choice",
@@ -1298,7 +1298,7 @@
     {
       "id": "poem",
       "title": "古诗《画》",
-      "icon": "📜",
+      "icon": "sprite:book",
       "items": [
         {
           "type": "read",
@@ -1413,7 +1413,7 @@
     {
       "id": "rhyme",
       "title": "悟空儿歌",
-      "icon": "🐒",
+      "icon": "sprite:disc",
       "items": [
         {
           "type": "read",
@@ -1540,7 +1540,7 @@
     {
       "id": "trip",
       "title": "一起去旅行",
-      "icon": "🧳",
+      "icon": "sprite:map",
       "items": [
         {
           "type": "spell",

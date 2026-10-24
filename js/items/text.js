@@ -43,8 +43,8 @@ function matches(rule, p) {
 
 export function renderRead(root, item, ctx) {
   const { wrap } = passage(item, cell => ctx.say(item.tapSay?.[cell.p] || cell.p, cell.c));
-  const again = h('button.btn.small', { onclick: () => ctx.say(item.read || item.lines.join('')) }, '🔊 再听一遍');
-  const done = h('button.btn.go', { onclick: () => { done.disabled = true; ctx.right(item.after); } }, '✔ 我读好了');
+  const again = h('button.mc-btn.small', { onclick: () => ctx.say(item.read || item.lines.join('')) }, '再听一遍');
+  const done = h('button.mc-btn.go', { onclick: () => { done.disabled = true; ctx.right(item.after); } }, '我读好了！');
   if (item.title) root.append(h('div.ptitle', item.title));
   root.append(wrap, h('div.row-btns', again, done));
   setTimeout(() => ctx.say(item.read || item.lines.join('')), 900);
@@ -62,7 +62,7 @@ export function renderTap(root, item, ctx) {
   });
   let finished = false;
   const all = rows.flat().filter(c => matches(item.rule, c.p));
-  const check = h('button.btn.go', { onclick: submit }, '✔ 找完了');
+  const check = h('button.mc-btn.go', { onclick: submit }, '找完了！');
   root.append(promptEl(item.prompt, ctx), wrap, h('div.row-btns', counter, check));
 
   function submit() {

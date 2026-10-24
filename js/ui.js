@@ -64,16 +64,16 @@ export function promptEl(p = {}, ctx) {
   const box = h('div.prompt');
   if (p.card) box.append(h('div.card', p.card.map(line => h('div', line))));
   if (p.pic) {
-    const pic = picEl(p.pic, 'big');
+    const frame = h('div.frame', picEl(p.pic, 'big'));
     if (p.picSay) {
-      pic.classList.add('tappable');
-      pic.addEventListener('click', () => ctx.say(p.picSay));
+      frame.classList.add('tappable');
+      frame.addEventListener('click', () => ctx.say(p.picSay));
     }
-    box.append(pic);
+    box.append(frame);
   }
   if (p.label) box.append(h('div.label', p.label));
   if (p.text) box.append(h('div.ptext', p.text));
-  if (p.py) box.append(h('div.pgrid', gridSVG(p.py, 36, { minWidth: 180 })));
-  if (p.context) box.append(contextLine(p.context));
+  if (p.py) box.append(h('div.paper', gridSVG(p.py, 36, { minWidth: 180 })));
+  if (p.context) box.append(h('div.paper', contextLine(p.context)));
   return box;
 }

@@ -15,7 +15,7 @@ export function render(root, item, ctx) {
 
   const names = item.strokes || [];
   const status = h('div.stroke-status', names.length ? `一共 ${names.length} 笔` : '');
-  const demoBtn = h('button.btn.small', { onclick: demo }, '👀 看示范');
+  const demoBtn = h('button.mc-btn.small', { onclick: demo }, '看示范');
 
   root.append(promptEl(item.prompt, ctx), h('div.stroke-area', box, h('div.stroke-side', status, demoBtn)));
 

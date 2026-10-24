@@ -2,7 +2,11 @@ import { h, wait } from './ui.js';
 import { store } from './store.js';
 import { speak, stopSpeaking, unlockAudio, preload, warmCache, sfx, praise, retry } from './audio.js';
 import { S, PRAISE, stageDone } from './phrases.js';
-import { BLOCKS, blockEl, rollAnswerBlock, rollChest } from './blocks.js';
+import { BLOCKS, blockEl, blockURL, rollAnswerBlock, rollChest } from './blocks.js';
+import { spriteEl, spriteURL } from './sprites.js';
+import { picEl } from './pics.js';
+import { burst, orbs, flyTo } from './fx.js';
+import { initScene } from './scene.js';
 import { measureFont } from './pinyin.js';
 import * as choice from './items/choice.js';
 import * as blend from './items/blend.js';
@@ -42,7 +46,7 @@ async function loadLevel(id) {
   return levelCache[id];
 }
 
-const starsText = n => '★'.repeat(n) + '☆'.repeat(3 - n);
+const starsText = n => '★'.repeat(n) + '☆'.repeat(3 - n);   // parent page
 function levelStats(level) {
   const done = level.stages.filter(s => store.stage(level.id, s.id)?.done).length;
   const stars = level.stages.reduce((a, s) => a + (store.stage(level.id, s.id)?.stars || 0), 0);
@@ -64,7 +68,7 @@ async function route() {
     else await screenHome();
   } catch (e) {
     console.error(e);
-    app.append(h('div.screen.center', h('div.panel', '出错了：' + e.message, h('button.btn', { onclick: () => go('#/') }, '回首页'))));
+    app.append(h('div.screen.center', h('div.mc-panel', '出错了：' + e.message, h('div.row-btns', h('button.mc-btn', { onclick: () => go('#/') }, '回首页')))));
   }
 }
 window.addEventListener('hashchange', route);
@@ -72,71 +76,106 @@ window.addEventListener('hashchange', route);
 function topBar(left, title, right) {
   return h('div.topbar', h('div.tb-left', left), h('div.tb-title', title), h('div.tb-right', right));
 }
-const backBtn = (hash, label = '⬅') => h('button.btn.icon', { onclick: () => { sfx.tap(); go(hash); } }, label);
+const iconBtn = (sprite, onclick) => h('button.mc-btn.icon', { onclick: () => { sfx.tap(); onclick(); } }, spriteEl(sprite));
+const backBtn = (hash, sprite = 'back') => iconBtn(sprite, () => go(hash));
+const starRow = (n, cls = '') => h(`div${cls}`, [0, 1, 2].map(k => spriteEl(k < n ? 'star' : 'star_off')));
 
 function invCount() {
   return Object.values(store.state.inventory).reduce((a, b) => a + b, 0);
 }
 
 // ---------- home ----------
+const SPLASHES = ['拼音小矿工！', '答对就有方块！', '钻石在等你！', '今天也要加油！', '方块越多越好玩！', '声调要读准！'];
+
 async function screenHome() {
-  app.className = 'sky';
   const levels = await loadIndex();
   const latest = levels[0];
 
-  const gear = h('button.gear', '⚙︎');
+  const gear = h('button.gear', spriteEl('gear'));
   let timer;
   gear.addEventListener('pointerdown', () => { timer = setTimeout(() => go('#/parent'), 1500); });
   ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => gear.addEventListener(ev, () => clearTimeout(timer)));
 
-  const levelCards = await Promise.all(levels.map(async meta => {
+  const rows = await Promise.all(levels.map(async meta => {
     const lv = await loadLevel(meta.id);
     const st = levelStats(lv);
-    return h('button.level-card', { onclick: () => { sfx.tap(); go(`#/level/${meta.id}`); } },
-      h('div.lc-subject', meta.subject),
-      h('div.lc-title', meta.title),
-      h('div.lc-sub', meta.subtitle || ''),
-      h('div.lc-progress', `${st.done}/${st.total} 关`, h('span.stars', ` ★ ${st.stars}`)));
+    return h('button.world-row', { onclick: () => { sfx.tap(); go(`#/level/${meta.id}`); } },
+      blockEl(meta.block || 'grass'),
+      h('div.wr-text',
+        h('div.wr-tag', meta.subject),
+        h('div.wr-title', meta.title),
+        h('div.wr-sub', meta.subtitle || '')),
+      h('div.wr-progress', h('div', spriteEl('star'), ` ${st.stars}`), h('div', `${st.done}/${st.total}关`)));
   }));
+
+  // the four kinds of block he owns most, for the build button preview
+  const owned = Object.entries(store.state.inventory).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]).map(([t]) => t);
+  const preview = [...owned, 'grass', 'toy_red', 'diamond', 'planks'].slice(0, 4);
 
   app.append(
     h('div.screen.home',
       gear,
-      h('h1.title', '墨然的方块世界'),
-      h('div.home-sub', '答对题目，收集方块，搭出你的世界！'),
+      h('div.logo-wrap',
+        h('h1.logo', '墨然的方块世界'),
+        h('div.splash', SPLASHES[Math.floor(Math.random() * SPLASHES.length)])),
       h('div.home-main',
-        h('div.home-col',
-          h('div.section-title', latest ? '⛏️ 冒险任务' : ''),
-          h('div.level-list', levelCards)),
-        h('button.build-card', { onclick: () => { sfx.tap(); go('#/build'); } },
-          h('div.bc-blocks', ['grass', 'toy_red', 'diamond', 'planks'].map(t => blockEl(t))),
-          h('div.bc-title', '🧱 我的建造'),
-          h('div.bc-sub', `背包里有 ${invCount()} 个方块`))),
-      h('div.ground')));
+        h('div.mc-panel.worlds', h('div.panel-title', '冒险任务'), h('div.world-list', rows)),
+        h('div.home-side',
+          latest ? h('button.mc-btn.big.go', { onclick: () => { sfx.tap(); go(`#/level/${latest.id}`); } }, '开始冒险') : null,
+          h('div.mc-panel',
+            h('div.build-preview', preview.map(t => blockEl(t))),
+            h('div.inv-count', `背包 ${invCount()} 个方块`),
+            h('div.row-btns', h('button.mc-btn', { onclick: () => { sfx.tap(); go('#/build'); } }, '我的建造')))))));
 }
 
 // ---------- level map ----------
 async function screenLevel(id) {
-  app.className = 'sky';
   const level = await loadLevel(id);
   const st = levelStats(level);
   const nextIdx = level.stages.findIndex(s => !store.stage(id, s.id)?.done);
 
-  const tiles = level.stages.map((s, i) => {
+  const board = h('div.map-board');
+  const nodes = level.stages.map((s, i) => {
     const p = store.stage(id, s.id);
-    return h(`button.stage-tile${p?.done ? '.done' : ''}${i === nextIdx ? '.next' : ''}`,
+    const tex = p?.done ? 'gold' : i === nextIdx ? 'grass' : 'stone';
+    const block = h('div.node-block', { style: { backgroundImage: `url(${blockURL(tex)})` } },
+      picEl(s.icon || 'sprite:pickaxe'), h('span.node-num', String(i + 1)));
+    return h(`button.node${p?.done ? '.done' : ''}${i === nextIdx ? '.next' : ''}`,
       { onclick: () => { sfx.tap(); go(`#/play/${id}/${s.id}`); } },
-      h('div.st-num', String(i + 1)),
-      h('div.st-icon', s.icon || '⛏️'),
-      h('div.st-title', s.title),
-      h('div.st-stars', p?.done ? starsText(p.stars) : '　'));
+      block, h('div.node-sign', s.title), p?.done ? starRow(p.stars, '.node-stars') : h('div.node-stars'));
   });
+  board.append(...nodes);
 
   app.append(h('div.screen',
-    topBar(backBtn('#/'), level.title, h('div.tb-stat', `★ ${st.stars}/${st.total * 3}`)),
-    h('div.level-note', level.note || ''),
-    h('div.stage-grid', tiles),
-    h('div.ground')));
+    topBar(backBtn('#/'), h('div.plate', spriteEl('map'), level.title), h('div.plate', spriteEl('star'), `${st.stars}/${st.total * 3}`)),
+    level.note ? h('div.map-note.plate', level.note) : null,
+    board));
+
+  // snake path: rows left→right, then right→left
+  const layout = () => {
+    const w = board.clientWidth;
+    const cols = Math.max(3, Math.min(5, Math.floor(w / 210)));
+    const rowH = 200;
+    const pts = nodes.map((n, i) => {
+      const r = Math.floor(i / cols), c = i % cols;
+      const col = r % 2 ? cols - 1 - c : c;
+      const x = (col + 0.5) * w / cols, y = 80 + r * rowH;
+      n.style.left = `${x}px`;
+      n.style.top = `${y}px`;
+      return [x, y];
+    });
+    board.style.height = `${80 + Math.ceil(nodes.length / cols) * rowH}px`;
+    const d = 'M' + pts.map(([x, y]) => `${x} ${y}`).join(' L');
+    board.querySelector('svg')?.remove();
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.classList.add('map-path');
+    svg.innerHTML = `<path d="${d}" stroke="#3b2a14" stroke-width="34"/><path d="${d}" stroke="#9b6b43" stroke-width="26"/><path d="${d}" stroke="#b98b5c" stroke-width="8" stroke-dasharray="10 18"/>`;
+    board.prepend(svg);
+  };
+  layout();
+  const onResize = () => { if (board.isConnected) layout(); else removeEventListener('resize', onResize); };
+  addEventListener('resize', onResize);
+  nodes[nextIdx]?.scrollIntoView({ block: 'center' });
   if (nextIdx === 0 && level.intro) setTimeout(() => speak(level.intro), 300);
 }
 
@@ -145,16 +184,20 @@ async function screenPlay(levelId, stageId) {
   const level = await loadLevel(levelId);
   const stageIdx = level.stages.findIndex(s => s.id === stageId);
   const stage = level.stages[stageIdx];
-  app.className = 'play';
 
-  const pips = h('div.pips', stage.items.map(() => h('div.pip')));
-  const replay = h('button.btn.icon', { onclick: () => speak(current?.say || '') }, '🔊');
+  const total = stage.items.length;
+  const slots = stage.items.map(() => h('div.hb-slot'));
+  const xpFill = h('div.xp-fill');
+  const xpLevel = h('div.xp-level', '0');
+  const xp = h('div.xp', xpFill, h('div.xp-ticks'), xpLevel);
   const body = h('div.item-body');
   app.append(h('div.screen',
-    topBar(backBtn(`#/level/${levelId}`, '✕'), h('span', stage.icon || '', ' ', stage.title), replay),
-    pips, body));
+    topBar(backBtn(`#/level/${levelId}`, 'cross'), h('div.plate', picEl(stage.icon || 'sprite:pickaxe'), stage.title), iconBtn('speaker', () => speak(current?.say || ''))),
+    h('div.play-wrap',
+      h('div.mc-panel.play-panel', body),
+      h('div.hud', xp, h('div.hotbar', slots)))));
 
-  let idx = 0, current = null;
+  let current = null;
   let firstTry = 0;
   const mistakes = [];
   const earned = [];
@@ -163,7 +206,7 @@ async function screenPlay(levelId, stageId) {
     current = stage.items[i];
     body.innerHTML = '';
     body.classList.remove('enter'); void body.offsetWidth; body.classList.add('enter');
-    pips.children[i]?.classList.add('now');
+    slots.forEach((s, k) => s.classList.toggle('now', k === i));
     let attempts = 0, solved = false;
     const ctx = {
       say: (t, fallback) => speak(t, { fallback }),
@@ -180,16 +223,20 @@ async function screenPlay(levelId, stageId) {
         const block = rollAnswerBlock(first);
         store.addBlock(block);
         earned.push(block);
-        const pip = pips.children[i];
-        pip.classList.remove('now');
-        pip.classList.add('filled');
-        pip.style.backgroundImage = blockEl(block).style.backgroundImage;
         sfx.right();
-        flyBlock(block);
+        burst(block);
+        orbs(xp);
+        flyTo(block, slots[i]).then(() => {
+          slots[i].innerHTML = '';
+          slots[i].append(blockEl(block));
+          xpFill.style.width = `${(earned.length / total) * 100}%`;
+          xpLevel.textContent = String(earned.length);
+          sfx.place();
+        });
         await speak([praise(), after]);
         await wait(350);
         if (location.hash !== `#/play/${levelId}/${stageId}`) return;
-        if (i + 1 < stage.items.length) show(i + 1);
+        if (i + 1 < total) show(i + 1);
         else finish();
       },
     };
@@ -199,7 +246,6 @@ async function screenPlay(levelId, stageId) {
   }
 
   function finish() {
-    const total = stage.items.length;
     const rate = firstTry / total;
     const stars = rate >= 0.9 ? 3 : rate >= 0.7 ? 2 : 1;
     store.finishStage(levelId, stageId, { stars, firstTry, total, mistakes });
@@ -208,7 +254,7 @@ async function screenPlay(levelId, stageId) {
     showReward(level, stageIdx, stars, chest, earned);
   }
 
-  show(idx);
+  show(0);
 }
 
 // Everything an item might say, so its clips are fetched before they're needed.
@@ -217,37 +263,46 @@ function itemTexts(it) {
   return [it.say, it.after, it.hint, it.prompt?.picSay, it.read, ...(it.strokes || []), ...(it.pieces || []), ...opts, ...PRAISE];
 }
 
-function flyBlock(type) {
-  const el = blockEl(type, 'fly');
-  document.getElementById('toast-layer').append(el);
-  setTimeout(() => el.remove(), 1300);
-}
-
 function showReward(level, stageIdx, stars, chest, earned) {
-  sfx.chest();
   const next = level.stages[stageIdx + 1];
   app.innerHTML = '';
-  app.className = 'sky';
-  const all = [...earned, ...chest];
-  app.append(h('div.screen.center',
-    h('div.panel.reward',
-      h('div.reward-title', '🎉 过关啦！'),
-      h('div.reward-stars', starsText(stars)),
-      h('div.reward-label', '宝箱里有：'),
-      h('div.reward-blocks', chest.map((b, i) => h('div.rb', { style: { animationDelay: `${i * 0.15}s` } }, blockEl(b), h('span', BLOCKS[b].name)))),
-      h('div.reward-sub', `这一关一共得到 ${all.length} 个方块`),
-      h('div.row-btns',
-        h('button.btn', { onclick: () => go(`#/level/${level.id}`) }, '🗺️ 回地图'),
-        h('button.btn', { onclick: () => go('#/build') }, '🧱 去建造'),
-        next ? h('button.btn.go', { onclick: () => go(`#/play/${level.id}/${next.id}`) }, '下一关 ➜') : null)),
-    h('div.ground')));
+  const chestIcon = spriteEl('chest', 'chest');
+  const stars3 = starRow(stars, '.reward-stars');
+  const blocks = h('div.reward-blocks');
+  const btns = h('div.row-btns',
+    h('button.mc-btn', { onclick: () => go(`#/level/${level.id}`) }, spriteEl('map'), '回地图'),
+    h('button.mc-btn', { onclick: () => go('#/build') }, spriteEl('bricks'), '去建造'),
+    next ? h('button.mc-btn.go', { onclick: () => go(`#/play/${level.id}/${next.id}`) }, '下一关') : null);
+  btns.style.visibility = 'hidden';
+  [...stars3.children].forEach((s, k) => { s.style.animationDelay = `${0.2 + k * 0.25}s`; });
+
+  app.append(h('div.dim'), h('div.screen.center',
+    h('div.mc-panel.reward',
+      h('div.reward-title', '过关啦！'),
+      stars3,
+      chestIcon,
+      blocks,
+      h('div.reward-sub', `这一关一共得到 ${earned.length + chest.length} 个方块`),
+      btns)));
   speak(stageDone(stars));
+  for (let k = 0; k < stars; k++) setTimeout(() => sfx.tap(), 200 + k * 250);
+
+  // chest shakes, pops open, blocks drop into slots
+  setTimeout(() => {
+    chestIcon.style.backgroundImage = `url(${spriteURL('chest_open')})`;
+    chestIcon.classList.add('open');
+    sfx.chest();
+    const r = chestIcon.getBoundingClientRect();
+    burst(chest[0], { x: r.left + r.width / 2, y: r.top + r.height / 3 }, 18);
+    chest.forEach((b, i) => blocks.append(h('div.rb', { style: { animationDelay: `${i * 0.12}s` } },
+      h('div.inv-slot', blockEl(b)), h('div.rb-name', BLOCKS[b].name))));
+    btns.style.visibility = '';
+  }, 1300);
 }
 
 // ---------- build ----------
 const COLS = 20, ROWS = 12;
 function screenBuild() {
-  app.className = 'sky';
   let world = store.state.world;
   if (!world || world.length !== ROWS * COLS) {
     world = Array(ROWS * COLS).fill(null);
@@ -266,13 +321,13 @@ function screenBuild() {
 
   function paintCell(i) {
     const t = world[i];
-    cells[i].style.backgroundImage = t ? blockEl(t).style.backgroundImage : '';
+    cells[i].style.backgroundImage = t ? `url(${blockURL(t)})` : '';
     cells[i].classList.toggle('filled', !!t);
   }
   function paintInv() {
     inv.innerHTML = '';
     const types = Object.keys(BLOCKS).filter(k => store.state.inventory[k] > 0);
-    if (!types.length) inv.append(h('div.inv-empty', '背包空了，去冒险答题赚方块吧！'));
+    if (!types.length) inv.append(h('div.inv-empty', '背包空了，去冒险赚方块吧！'));
     for (const t of types) {
       inv.append(h(`button.inv-slot${t === selected ? '.sel' : ''}`, { onclick: () => { selected = t; sfx.tap(); paintInv(); } },
         blockEl(t), h('span.inv-n', String(store.state.inventory[t]))));
@@ -281,6 +336,8 @@ function screenBuild() {
   function tapCell(i) {
     if (world[i]) {
       if (fixed(i)) return;
+      const r = cells[i].getBoundingClientRect();
+      burst(world[i], { x: r.left + r.width / 2, y: r.top + r.height / 2 }, 8);
       store.returnBlock(world[i]);
       world[i] = null;
       sfx.dig();
@@ -298,7 +355,7 @@ function screenBuild() {
   world.forEach((_, i) => paintCell(i));
   paintInv();
   app.append(h('div.screen.build',
-    topBar(backBtn('#/'), '🧱 我的建造', h('div.tb-stat', '点空格放方块，点方块挖回来')),
+    topBar(backBtn('#/'), h('div.plate', spriteEl('bricks'), '我的建造'), h('div.plate.small-tip', '点空格放，点方块挖')),
     h('div.world-wrap', grid), inv));
 }
 
@@ -317,23 +374,27 @@ async function screenParent() {
           h('span.p-stat', p?.done ? `${starsText(p.stars)}  一次答对 ${p.firstTry}/${p.total}  玩了${p.plays}次  ${new Date(p.at).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}` : '未完成')),
         miss.length ? h('ul.p-miss', miss.map(m => h('li', `${m.q}  →  选了：${m.got}`))) : null);
     });
-    box.append(h('div.panel.p-level',
+    box.append(h('div.mc-panel.p-level',
       h('h2', `${meta.subject} · ${lv.title}`),
       h('div.p-note', lv.note || ''),
       rows,
-      h('button.btn.small', { onclick: () => { if (confirm('清空这个任务的进度？')) { store.resetLevel(lv.id); route(); } } }, '重置这个任务')));
+      h('button.mc-btn.small', { onclick: () => { if (confirm('清空这个任务的进度？')) { store.resetLevel(lv.id); route(); } } }, '重置这个任务')));
   }
-  box.append(h('div.panel',
+  box.append(h('div.mc-panel',
     h('h2', '方块'),
     h('div', `背包 ${invCount()} 个，累计获得 ${store.state.totalBlocks} 个`),
     h('div.row-btns',
-      h('button.btn.small', { onclick: () => { ['diamond', 'gold', 'toy_red', 'toy_blue', 'toy_yellow'].forEach(b => store.addBlock(b, 2)); route(); } }, '奖励 10 个方块'),
-      h('button.btn.small.danger', { onclick: () => { if (confirm('清空所有进度、方块和建造？不能恢复。')) { store.resetAll(); route(); } } }, '清空全部数据'))));
-  app.append(h('div.screen', topBar(backBtn('#/'), '家长页面', ''), box));
+      h('button.mc-btn.small', { onclick: () => { ['diamond', 'gold', 'toy_red', 'toy_blue', 'toy_yellow'].forEach(b => store.addBlock(b, 2)); route(); } }, '奖励 10 个方块'),
+      h('button.mc-btn.small.danger', { onclick: () => { if (confirm('清空所有进度、方块和建造？不能恢复。')) { store.resetAll(); route(); } } }, '清空全部数据'))));
+  app.append(h('div.screen', topBar(backBtn('#/'), h('div.plate', '家长页面'), ''), box));
 }
 
 // ---------- boot ----------
-measureFont().then(route);
+for (const t of ['stone', 'cobble', 'planks', 'dirt', 'grass']) {
+  document.documentElement.style.setProperty(`--tex-${t}`, `url(${blockURL(t)})`);
+}
+initScene();
+Promise.all([measureFont(), document.fonts.load('24px Pixel'), document.fonts.load('32px Kai')]).catch(() => {}).then(route);
 if ('serviceWorker' in navigator && location.protocol === 'https:') {
   navigator.serviceWorker.register('sw.js').then(() => setTimeout(warmCache, 4000)).catch(() => {});
 }

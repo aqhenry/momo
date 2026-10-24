@@ -2,7 +2,9 @@
 //   "🐓"            emoji (any text)
 //   "block:dirt"    a pixel block texture
 //   "svg:waterfall" a hand-drawn SVG below
+//   "sprite:book"   a pixel icon from js/sprites.js
 import { blockEl } from './blocks.js';
+import { spriteEl } from './sprites.js';
 
 const SVGS = {
   waterfall: `<svg viewBox="0 0 120 100"><rect width="120" height="100" fill="#bfe6ff"/>
@@ -25,6 +27,12 @@ export function picEl(spec, cls = '') {
   if (!spec) return document.createElement('span');
   if (spec.startsWith('block:')) {
     const el = blockEl(spec.slice(6), `pic ${cls}`);
+    return el;
+  }
+  if (spec.startsWith('sprite:')) {
+    const el = document.createElement('div');
+    el.className = `pic pic-sprite ${cls}`;
+    el.append(spriteEl(spec.slice(7)));
     return el;
   }
   if (spec.startsWith('svg:')) {

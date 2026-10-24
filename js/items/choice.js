@@ -11,7 +11,7 @@ export function render(root, item, ctx) {
   let locked = false;
 
   const grid = h(`div.options.cols-${item.cols || Math.min(order.length, 4)}`);
-  const confirm = item.listen ? h('button.btn.go.confirm', { disabled: true, onclick: submit }, '✔ 就选它') : null;
+  const confirm = item.listen ? h('button.mc-btn.go.confirm', { disabled: true, onclick: submit }, '就选它！') : null;
 
   for (const o of order) {
     const btn = h('button.option', { onclick: () => tap(o, btn) });

@@ -40,9 +40,11 @@ export function render(root, item, ctx) {
   const { ini, fin } = pools(sylls, item);
   const tileRow = (list, kind, label) => h('div.tile-row',
     h(`span.tag.${kind}`, label),
-    list.map(x => h(`button.tile.${kind}`, { onclick: () => put(x, kind) }, gridSVG(x, 28, { minWidth: 64 }))));
+    list.map(x => h(`button.tile.${kind}`, { onclick: () => put(x, kind) }, gridSVG(x, 25, { minWidth: 58 }))));
 
-  root.append(promptEl(item.prompt, ctx), word, h('div.tiles.split', tileRow(ini, 'ini', '声母'), tileRow(fin, 'fin', '韵母')));
+  const prompt = promptEl(item.prompt, ctx);
+  if (item.prompt?.pic && (item.prompt.context || item.prompt.label)) prompt.classList.add('row');
+  root.append(prompt, word, h('div.tiles.split', tileRow(ini, 'ini', '声母'), tileRow(fin, 'fin', '韵母')));
   slots.forEach(paint);
   let busy = false;
 
