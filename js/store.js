@@ -4,7 +4,10 @@ const KEY = 'momo.v1';
 const fresh = () => ({
   progress: {},   // levelId -> stageId -> { done, stars, firstTry, total, mistakes: [] }
   inventory: {},  // blockType -> count
-  world: null,    // build area cells
+  found: {},      // blockType -> date first obtained (collection book)
+  world: null,    // old 2D build area cells (migrated into world3d)
+  world3d: null,  // "x,y,z" -> blockType
+  pity: 0,        // gold chests since the last legendary
   totalBlocks: 0,
 });
 
@@ -13,7 +16,12 @@ let state = load();
 function load() {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return { ...fresh(), ...JSON.parse(raw) };
+    if (raw) {
+      const s = { ...fresh(), ...JSON.parse(raw) };
+      // anything already owned counts as found
+      for (const t of Object.keys(s.inventory)) s.found[t] ||= new Date().toISOString();
+      return s;
+    }
   } catch (e) { /* private mode or blocked storage */ }
   return fresh();
 }
@@ -49,10 +57,14 @@ export const store = {
     save();
   },
 
+  // returns true the first time this kind of block is ever obtained
   addBlock(type, n = 1) {
     state.inventory[type] = (state.inventory[type] || 0) + n;
-    if (n > 0) state.totalBlocks += n;
+    state.totalBlocks += n;
+    const isNew = !state.found[type];
+    if (isNew) state.found[type] = new Date().toISOString();
     save();
+    return isNew;
   },
 
   // a block dug back out of the build area (not a new reward)
@@ -68,8 +80,8 @@ export const store = {
     return true;
   },
 
-  setWorld(world) {
-    state.world = world;
+  setWorld3d(world) {
+    state.world3d = world;
     save();
   },
 

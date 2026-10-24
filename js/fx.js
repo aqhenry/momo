@@ -1,5 +1,5 @@
 // Little celebrations: block-break bits, XP orbs flying to the XP bar, a block flying into the hotbar.
-import { blockURL } from './blocks.js';
+import { BLOCKS, RARITY, blockURL, iconURL } from './blocks.js';
 
 let last = { x: innerWidth / 2, y: innerHeight / 2 };
 document.addEventListener('pointerdown', e => { last = { x: e.clientX, y: e.clientY }; }, { capture: true });
@@ -51,11 +51,27 @@ export function orbs(target, at = last, n = 6) {
 export function flyTo(type, target, at = last) {
   if (!target) return Promise.resolve();
   const to = center(target);
-  const b = el('flyblock', at.x - 32, at.y - 32, { backgroundImage: `url(${blockURL(type)})` });
+  const b = el('flyblock', at.x - 32, at.y - 32, { backgroundImage: `url(${iconURL(type)})` });
   const anim = b.animate([
     { transform: 'translate(0,0) scale(.3) rotate(0)' },
     { transform: 'translate(0,-70px) scale(1.2) rotate(-12deg)', offset: 0.3 },
     { transform: `translate(${to.x - at.x}px, ${to.y - at.y}px) scale(.5) rotate(20deg)` },
   ], { duration: 750, easing: 'cubic-bezier(.3,.1,.3,1)' });
   return new Promise(r => { anim.onfinish = () => { b.remove(); r(); }; });
+}
+
+// A name-tag banner sliding down from the top: icon + text in the block's rarity colour.
+export function banner(type, text) {
+  const b = document.createElement('div');
+  b.className = `banner r${BLOCKS[type].rarity}`;
+  b.innerHTML = `<i style="background-image:url(${iconURL(type)})"></i><span></span>`;
+  b.querySelector('span').textContent = text;
+  b.querySelector('span').style.color = RARITY[BLOCKS[type].rarity].color;
+  document.body.append(b);
+  b.animate([
+    { transform: 'translate(-50%, -120%)' },
+    { transform: 'translate(-50%, 0)', offset: 0.12 },
+    { transform: 'translate(-50%, 0)', offset: 0.85 },
+    { transform: 'translate(-50%, -120%)' },
+  ], { duration: 2600, easing: 'ease-out' }).onfinish = () => b.remove();
 }

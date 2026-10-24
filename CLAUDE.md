@@ -18,6 +18,8 @@ Look: Minecraft-style GUI (stone buttons `.mc-btn`, gray `.mc-panel`, inventory 
 
 Kid can't read much yet: every item needs a `say`. All spoken lines are pre-recorded with Gemini TTS, which reads tone-marked pinyin correctly, so spoken text may contain pinyin (`"d，ǎ，dǎ，打鼓的打。"`). After adding or changing a level run `python3 tools/tts_build.py` (needs `OPENROUTER_API_KEY` in env or `.env`): it records only new lines, has an audio model check each clip's pronunciation, re-records failures, and rewrites `audio/manifest.json`. Lines with no clip fall back to the iPad's built-in voice, which reads pinyin badly. Sentences spoken from code live in `js/phrases.js` (templates may use only `${n}`).
 
+Rewards (`js/rewards.js`): ~50 blocks in 5 rarities (`js/blocks.js`, keys are saved on the iPad — never rename one). Harder items drop rarer blocks (`difficulty` 1–3 is inferred from the item type; set it on an item to override), every 3 first-try answers in a row give a bonus block, stage chests are wood/iron/gold by stars, and replaying a finished stage gives a smaller chest. Build mode is 3D (`js/build3d.js`, three.js in `vendor/three`). Preview on the iPad without publishing: `python3 tools/devserver.py 8770 --lan`, then open `http://<Mac IP>:8770` on the same Wi-Fi.
+
 ## Item types (`js/items/`)
 
 All items take optional `q` (short label shown on the parent page), `say`, `after` (spoken after a correct answer), `hint` (spoken after a wrong one).

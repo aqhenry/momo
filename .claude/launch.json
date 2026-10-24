@@ -9,6 +9,16 @@
         "8766"
       ],
       "port": 8766
+    },
+    {
+      "name": "momo-lan",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "tools/devserver.py",
+        "8770",
+        "--lan"
+      ],
+      "port": 8770
     }
   ]
 }

@@ -40,6 +40,32 @@ function canvas16() {
 const hex = c => [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
 const rgb = ([r, g, b], k) => `rgb(${Math.min(255, r * k) | 0},${Math.min(255, g * k) | 0},${Math.min(255, b * k) | 0})`;
 
+const CHEST_COLORS = {
+  wood: { body: '#a0662a', band: '#5a3410', hi: '#c07c34', lid: '#b8783a', latch: '#c9c9c9' },
+  iron: { body: '#9a9ea6', band: '#55595f', hi: '#c4c8ce', lid: '#aeb2b8', latch: '#ffd23a' },
+  gold: { body: '#e0a820', band: '#8a6010', hi: '#ffd860', lid: '#f0bc30', latch: '#5ee0d8' },
+};
+
+function drawChest(g, open, c) {
+  if (!open) {
+    g.rect(1, 4, 14, 10, c.body);
+    g.rect(1, 7, 14, 1, c.band);
+    g.rect(1, 4, 14, 1, c.hi);
+    g.rect(7, 6, 2, 3, c.latch);
+    g.px(7, 8, '#555'); g.px(8, 8, '#555');
+    return;
+  }
+  g.rect(1, 8, 14, 7, c.body);
+  g.rect(1, 8, 14, 1, c.hi);
+  g.poly([[1, 6], [3, 0], [15, 0], [15, 6]], c.lid);
+  g.rect(2, 6, 12, 2, '#2a1a08');
+  // treasure heaped above the rim
+  const pile = ['#ffd23a', '#5ee0d8', '#ffd23a', '#4fd06a', '#ffe680', '#5ee0d8', '#ffd23a', '#e2403a', '#ffd23a', '#5ee0d8', '#ffe680', '#4fd06a'];
+  pile.forEach((col, k) => g.rect(2 + k, k % 3 === 1 ? 5 : 6, 1, k % 3 === 1 ? 3 : 2, col));
+  g.rect(5, 4, 2, 1, '#ffd23a'); g.rect(9, 4, 2, 1, '#5ee0d8');
+  g.rect(7, 9, 2, 2, c.latch);
+}
+
 const DRAW = {
   pickaxe(g) {
     g.line(3, 13, 10, 6, '#8a5a2b', 2);
@@ -74,24 +100,12 @@ const DRAW = {
     g.line(2, 14, 6, 10, '#3a3a3a', 1);
     g.rect(1, 13, 3, 2, '#2a2a6a');
   },
-  chest(g) {
-    g.rect(1, 4, 14, 10, '#a0662a');
-    g.rect(1, 7, 14, 1, '#5a3410');
-    g.rect(1, 4, 14, 1, '#c07c34');
-    g.rect(7, 6, 2, 3, '#c9c9c9');
-    g.px(7, 8, '#555'); g.px(8, 8, '#555');
-  },
-  chest_open(g) {
-    g.rect(1, 8, 14, 7, '#a0662a');
-    g.rect(1, 8, 14, 1, '#c07c34');
-    g.poly([[1, 6], [3, 0], [15, 0], [15, 6]], '#b8783a');
-    g.rect(2, 6, 12, 2, '#2a1a08');
-    // treasure heaped above the rim
-    const pile = ['#ffd23a', '#5ee0d8', '#ffd23a', '#4fd06a', '#ffe680', '#5ee0d8', '#ffd23a', '#e2403a', '#ffd23a', '#5ee0d8', '#ffe680', '#4fd06a'];
-    pile.forEach((c, k) => g.rect(2 + k, k % 3 === 1 ? 5 : 6, 1, k % 3 === 1 ? 3 : 2, c));
-    g.rect(5, 4, 2, 1, '#ffd23a'); g.rect(9, 4, 2, 1, '#5ee0d8');
-    g.rect(7, 9, 2, 2, '#c9c9c9');
-  },
+  chest: g => drawChest(g, false, CHEST_COLORS.wood),
+  chest_open: g => drawChest(g, true, CHEST_COLORS.wood),
+  chest_iron: g => drawChest(g, false, CHEST_COLORS.iron),
+  chest_iron_open: g => drawChest(g, true, CHEST_COLORS.iron),
+  chest_gold: g => drawChest(g, false, CHEST_COLORS.gold),
+  chest_gold_open: g => drawChest(g, true, CHEST_COLORS.gold),
   gear(g) {
     g.disc(8, 8, 5.5, '#9a9a9a');
     for (const [x, y] of [[7, 0], [7, 13], [0, 7], [13, 7], [2, 2], [12, 2], [2, 12], [12, 12]]) g.rect(x, y, 3, 3, '#9a9a9a');
