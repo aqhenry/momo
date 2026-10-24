@@ -4,6 +4,7 @@
 import { h, shake, promptEl } from '../ui.js';
 import { split, stripTone } from '../pinyin.js';
 import { sfx } from '../audio.js';
+import { S, tapMissing, tapTotal } from '../phrases.js';
 
 const isHan = c => /\p{Script=Han}/u.test(c);
 
@@ -41,7 +42,7 @@ function matches(rule, p) {
 }
 
 export function renderRead(root, item, ctx) {
-  const { wrap } = passage(item, cell => ctx.say(cell.c));
+  const { wrap } = passage(item, cell => ctx.say(item.tapSay?.[cell.p] || cell.p, cell.c));
   const again = h('button.btn.small', { onclick: () => ctx.say(item.read || item.lines.join('')) }, '🔊 再听一遍');
   const done = h('button.btn.go', { onclick: () => { done.disabled = true; ctx.right(item.after); } }, '✔ 我读好了');
   if (item.title) root.append(h('div.ptitle', item.title));
@@ -70,12 +71,12 @@ export function renderTap(root, item, ctx) {
     if (!wrongPicks.length && !missed.length) {
       finished = true;
       all.forEach(c => c.el.classList.add('right'));
-      ctx.right(item.after || `一共有 ${all.length} 个！`);
+      ctx.right(item.after || tapTotal(all.length));
       return;
     }
     wrongPicks.forEach(c => { c.el.classList.add('wrong'); shake(c.el); picked.delete(c); setTimeout(() => c.el.classList.remove('wrong', 'picked'), 1000); });
     counter.textContent = `找到 ${picked.size} 个`;
-    const hint = wrongPicks.length ? '红色的不对哦，再看看它的拼音。' : `还少了 ${missed.length} 个，再找找。`;
+    const hint = wrongPicks.length ? S.tapWrong : tapMissing(missed.length);
     ctx.wrong(`选了${picked.size + wrongPicks.length}个，应为${all.length}个`, hint);
   }
 }

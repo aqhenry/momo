@@ -1,6 +1,7 @@
 // 排顺序: tap the pieces in the right order (e.g. lines of a poem).
 import { h, shuffle, shake, promptEl } from '../ui.js';
 import { sfx } from '../audio.js';
+import { S } from '../phrases.js';
 
 export function render(root, item, ctx) {
   const pieces = item.pieces.map((text, i) => ({ text, i }));
@@ -30,7 +31,7 @@ export function render(root, item, ctx) {
       if (next === pieces.length) ctx.right(item.after);
     } else {
       shake(btn);
-      ctx.wrong(p.text, firstMiss ? (item.hint || '不是这一句，想想下一句是什么？') : '再想想。');
+      ctx.wrong(p.text, firstMiss ? (item.hint || S.orderWrong) : S.orderAgain);
       firstMiss = false;
     }
   }

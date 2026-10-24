@@ -1,6 +1,7 @@
 import { h, wait } from './ui.js';
 import { store } from './store.js';
-import { speak, stopSpeaking, unlockAudio, sfx, praise, retry } from './audio.js';
+import { speak, stopSpeaking, unlockAudio, preload, warmCache, sfx, praise, retry } from './audio.js';
+import { S, PRAISE, stageDone } from './phrases.js';
 import { BLOCKS, blockEl, rollAnswerBlock, rollChest } from './blocks.js';
 import { measureFont } from './pinyin.js';
 import * as choice from './items/choice.js';
@@ -165,7 +166,7 @@ async function screenPlay(levelId, stageId) {
     pips.children[i]?.classList.add('now');
     let attempts = 0, solved = false;
     const ctx = {
-      say: t => speak(t),
+      say: (t, fallback) => speak(t, { fallback }),
       wrong(got, hint) {
         attempts++;
         mistakes.push({ q: current.q || current.say, got: String(got ?? '') });
@@ -185,13 +186,14 @@ async function screenPlay(levelId, stageId) {
         pip.style.backgroundImage = blockEl(block).style.backgroundImage;
         sfx.right();
         flyBlock(block);
-        await speak(praise() + (after ? ' ' + after : ''));
+        await speak([praise(), after]);
         await wait(350);
         if (location.hash !== `#/play/${levelId}/${stageId}`) return;
         if (i + 1 < stage.items.length) show(i + 1);
         else finish();
       },
     };
+    preload(itemTexts(current));
     ITEM_TYPES[current.type](body, current, ctx);
     setTimeout(() => speak(current.say), 350);
   }
@@ -207,6 +209,12 @@ async function screenPlay(levelId, stageId) {
   }
 
   show(idx);
+}
+
+// Everything an item might say, so its clips are fetched before they're needed.
+function itemTexts(it) {
+  const opts = (it.options || []).map(o => (typeof o === 'string' ? o : o.say || o.text));
+  return [it.say, it.after, it.hint, it.prompt?.picSay, it.read, ...(it.strokes || []), ...(it.pieces || []), ...opts, ...PRAISE];
 }
 
 function flyBlock(type) {
@@ -233,7 +241,7 @@ function showReward(level, stageIdx, stars, chest, earned) {
         h('button.btn', { onclick: () => go('#/build') }, '🧱 去建造'),
         next ? h('button.btn.go', { onclick: () => go(`#/play/${level.id}/${next.id}`) }, '下一关 ➜') : null)),
     h('div.ground')));
-  speak(`过关啦！你得到了${stars}颗星，还有一个宝箱！`);
+  speak(stageDone(stars));
 }
 
 // ---------- build ----------
@@ -277,7 +285,7 @@ function screenBuild() {
       world[i] = null;
       sfx.dig();
     } else {
-      if (!selected || !store.takeBlock(selected)) { speak('先在下面选一个方块。'); return; }
+      if (!selected || !store.takeBlock(selected)) { speak(S.pickBlock); return; }
       world[i] = selected;
       sfx.place();
       if (!store.state.inventory[selected]) selected = Object.keys(store.state.inventory).find(k => store.state.inventory[k] > 0) || null;
@@ -327,5 +335,5 @@ async function screenParent() {
 // ---------- boot ----------
 measureFont().then(route);
 if ('serviceWorker' in navigator && location.protocol === 'https:') {
-  navigator.serviceWorker.register('sw.js').catch(() => {});
+  navigator.serviceWorker.register('sw.js').then(() => setTimeout(warmCache, 4000)).catch(() => {});
 }

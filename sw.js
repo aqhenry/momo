@@ -1,11 +1,11 @@
 // Network first (so new levels show up as soon as they're published), cache as offline fallback.
-const CACHE = 'momo-v1';
+const CACHE = 'momo-v2';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
-  'js/main.js', 'js/ui.js', 'js/store.js', 'js/audio.js', 'js/blocks.js', 'js/pinyin.js', 'js/pics.js',
+  'js/main.js', 'js/ui.js', 'js/phrases.js', 'js/store.js', 'js/audio.js', 'js/blocks.js', 'js/pinyin.js', 'js/pics.js',
   'js/items/choice.js', 'js/items/blend.js', 'js/items/spell.js', 'js/items/stroke.js', 'js/items/order.js', 'js/items/text.js',
   'vendor/hanzi-writer.min.js', 'fonts/andika-400.woff2', 'fonts/andika-700.woff2',
-  'levels/index.json', 'icons/icon-180.png',
+  'levels/index.json', 'audio/manifest.json', 'icons/icon-180.png',
 ];
 
 self.addEventListener('install', e => {

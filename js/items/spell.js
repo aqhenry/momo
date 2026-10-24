@@ -2,6 +2,7 @@
 import { h, shuffle, shake, promptEl, wait } from '../ui.js';
 import { gridSVG, split, stripTone, toneOf, withTone } from '../pinyin.js';
 import { sfx } from '../audio.js';
+import { S } from '../phrases.js';
 
 const CONFUSE = { b: ['d', 'p'], d: ['b', 't'], p: ['b', 'm'], m: ['n'], n: ['m', 'l'], l: ['n'], t: ['f', 'd'], f: ['t'], y: ['w'], w: ['y'] };
 
@@ -66,7 +67,7 @@ export function render(root, item, ctx) {
     if (slot.kind !== kind) {
       sfx.wrong();
       shake(slot.el);
-      ctx.say(slot.kind === 'ini' ? '先放声母哦。' : '这里该放韵母啦。');
+      ctx.say(slot.kind === 'ini' ? S.spellIniFirst : S.spellFinNow);
       return;
     }
     slot.got = x;
@@ -95,7 +96,7 @@ export function render(root, item, ctx) {
 }
 
 function hintFor(bad) {
-  if (bad.some(s => s.kind === 'ini')) return '声母不对，再听听开头的声音。';
-  if (bad.every(s => stripTone(s.got) === stripTone(s.want))) return '韵母对了，声调再听一听。';
-  return '红色的格子不对，再试一次。';
+  if (bad.some(s => s.kind === 'ini')) return S.spellBadIni;
+  if (bad.every(s => stripTone(s.got) === stripTone(s.want))) return S.spellBadTone;
+  return S.spellBadOther;
 }

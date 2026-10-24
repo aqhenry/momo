@@ -13,7 +13,7 @@ The parent sends homework / teacher notes → make one level:
 3. Hanzi used by `stroke` items need data: download `https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0.1/<char>.json` into `vendor/hanzi/`.
 4. Don't commit the teacher's PDFs or photos.
 
-Kid can't read much yet: every item needs a `say` (spoken by the iPad's zh-CN voice). Never put Latin pinyin letters in spoken text — TTS reads them as English. Use a Chinese character with that sound instead (a→啊, o→喔, e→鹅, i→衣, u→乌, ü→鱼, b→波, p→坡, m→摸, f→佛, d→得, t→特, n→讷, l→勒).
+Kid can't read much yet: every item needs a `say`. All spoken lines are pre-recorded with Gemini TTS, which reads tone-marked pinyin correctly, so spoken text may contain pinyin (`"d，ǎ，dǎ，打鼓的打。"`). After adding or changing a level run `python3 tools/tts_build.py` (needs `OPENROUTER_API_KEY` in env or `.env`): it records only new lines, has an audio model check each clip's pronunciation, re-records failures, and rewrites `audio/manifest.json`. Lines with no clip fall back to the iPad's built-in voice, which reads pinyin badly. Sentences spoken from code live in `js/phrases.js` (templates may use only `${n}`).
 
 ## Item types (`js/items/`)
 
@@ -23,7 +23,7 @@ All items take optional `q` (short label shown on the parent page), `say`, `afte
 - `blend` — `parts: [initial, final, syllable]`, `missing: 0|1|2`, optional `options`.
 - `spell` — `word: "ní tǔ"` (space-separated syllables), `prompt`; builds 声母+韵母 on 四线三格. Neutral tone = untoned final (`"bà ba"`).
 - `stroke` — `char`, `strokes: ["横", ...]` (spoken per stroke), `prompt`.
-- `read` — `lines[]`, `py[]` (one pinyin token per Han char), `read` (text to speak).
+- `read` — `lines[]`, `py[]` (one pinyin token per Han char), `read` (text to speak). Tapping a character says its pinyin; `tapSay: {"né": "哪吒的哪，né"}` overrides syllables TTS misreads alone.
 - `tapText` — `lines`, `py`, `rule: {base: "da"} | {final: "e"}`.
 - `order` — `pieces[]` in correct order.
 

@@ -9,16 +9,256 @@
       "title": "字母寻宝",
       "icon": "🔍",
       "items": [
-        { "type": "choice", "q": "公鸡打鸣 → o", "say": "公鸡喔喔叫，它藏着哪个字母？", "prompt": { "pic": "🐓", "label": "公鸡打鸣" }, "options": [{ "py": "o", "grid": true }, { "py": "a", "grid": true }, { "py": "e", "grid": true }], "answer": 0, "after": "公鸡打鸣，喔，喔，喔。" },
-        { "type": "choice", "q": "白鹅 → e", "say": "白鹅在水里游，它藏着哪个字母？", "prompt": { "pic": "🪿", "label": "白鹅" }, "options": [{ "py": "e", "grid": true }, { "py": "o", "grid": true }, { "py": "a", "grid": true }], "answer": 0, "after": "白鹅倒影，鹅，鹅，鹅。" },
-        { "type": "choice", "q": "张大嘴巴 → a", "say": "小姑娘张大嘴巴唱歌，啊——，是哪个字母？", "prompt": { "pic": "👧🎤", "label": "张大嘴巴 啊——" }, "options": [{ "py": "a", "grid": true }, { "py": "o", "grid": true }, { "py": "i", "grid": true }], "answer": 0, "after": "张大嘴巴，啊，啊，啊。" },
-        { "type": "choice", "q": "衣服 → i", "say": "衣服的衣，藏着哪个字母？", "prompt": { "pic": "👕", "label": "衣服" }, "options": [{ "py": "i", "grid": true }, { "py": "u", "grid": true }, { "py": "ü", "grid": true }], "answer": 0, "after": "衣服的衣，衣，衣，衣。" },
-        { "type": "choice", "q": "乌龟 → u", "say": "乌龟的乌，藏着哪个字母？", "prompt": { "pic": "🐢", "label": "乌龟" }, "options": [{ "py": "ü", "grid": true }, { "py": "u", "grid": true }, { "py": "i", "grid": true }], "answer": 1, "after": "乌龟的乌，乌，乌，乌。" },
-        { "type": "choice", "q": "小鱼 → ü", "say": "小鱼吐泡泡，藏着哪个字母？", "prompt": { "pic": "🐟", "label": "小鱼吐泡泡" }, "options": [{ "py": "u", "grid": true }, { "py": "i", "grid": true }, { "py": "ü", "grid": true }], "answer": 2, "after": "小鱼的鱼，两个点是小鱼的眼睛。" },
-        { "type": "choice", "q": "听广播 → b", "say": "听广播，藏着哪个字母？", "prompt": { "pic": "📻", "label": "听广播" }, "options": [{ "py": "d", "grid": true }, { "py": "b", "grid": true }, { "py": "p", "grid": true }], "answer": 1, "after": "听广播，波，波，波。右下半圆就是它。" },
-        { "type": "choice", "q": "泼水 → p", "say": "泼水，藏着哪个字母？", "prompt": { "pic": "💦", "label": "泼水" }, "options": [{ "py": "b", "grid": true }, { "py": "p", "grid": true }, { "py": "d", "grid": true }], "answer": 1, "after": "泼水，坡，坡，坡。右上半圆就是它。" },
-        { "type": "choice", "q": "打鼓 → d", "say": "小朋友在打鼓，鼓和鼓槌藏着哪个字母？", "prompt": { "pic": "🥁", "label": "打鼓" }, "options": [{ "py": "b", "grid": true }, { "py": "d", "grid": true }, { "py": "t", "grid": true }], "answer": 1, "after": "打鼓，得，得，得。左下半圆就是它。" },
-        { "type": "choice", "q": "伞柄 → t", "say": "雨伞的伞柄，像哪个字母？", "prompt": { "pic": "🌂", "label": "伞柄" }, "options": [{ "py": "f", "grid": true }, { "py": "l", "grid": true }, { "py": "t", "grid": true }], "answer": 2, "after": "伞柄，特，特，特。" }
+        {
+          "type": "choice",
+          "q": "公鸡打鸣 → o",
+          "say": "公鸡喔喔叫，它藏着哪个字母？",
+          "prompt": {
+            "pic": "🐓",
+            "label": "公鸡打鸣"
+          },
+          "options": [
+            {
+              "py": "o",
+              "grid": true
+            },
+            {
+              "py": "a",
+              "grid": true
+            },
+            {
+              "py": "e",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "after": "公鸡打鸣，o，o，o。"
+        },
+        {
+          "type": "choice",
+          "q": "白鹅 → e",
+          "say": "白鹅在水里游，它藏着哪个字母？",
+          "prompt": {
+            "pic": "🪿",
+            "label": "白鹅"
+          },
+          "options": [
+            {
+              "py": "e",
+              "grid": true
+            },
+            {
+              "py": "o",
+              "grid": true
+            },
+            {
+              "py": "a",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "after": "白鹅倒影，e，e，e。"
+        },
+        {
+          "type": "choice",
+          "q": "张大嘴巴 → a",
+          "say": "小姑娘张大嘴巴唱歌，啊——，是哪个字母？",
+          "prompt": {
+            "pic": "👧🎤",
+            "label": "张大嘴巴 啊——"
+          },
+          "options": [
+            {
+              "py": "a",
+              "grid": true
+            },
+            {
+              "py": "o",
+              "grid": true
+            },
+            {
+              "py": "i",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "after": "张大嘴巴，a，a，a。"
+        },
+        {
+          "type": "choice",
+          "q": "衣服 → i",
+          "say": "衣服的衣，藏着哪个字母？",
+          "prompt": {
+            "pic": "👕",
+            "label": "衣服"
+          },
+          "options": [
+            {
+              "py": "i",
+              "grid": true
+            },
+            {
+              "py": "u",
+              "grid": true
+            },
+            {
+              "py": "ü",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "after": "衣服的衣，i，i，i。"
+        },
+        {
+          "type": "choice",
+          "q": "乌龟 → u",
+          "say": "乌龟的乌，藏着哪个字母？",
+          "prompt": {
+            "pic": "🐢",
+            "label": "乌龟"
+          },
+          "options": [
+            {
+              "py": "ü",
+              "grid": true
+            },
+            {
+              "py": "u",
+              "grid": true
+            },
+            {
+              "py": "i",
+              "grid": true
+            }
+          ],
+          "answer": 1,
+          "after": "乌龟的乌，u，u，u。"
+        },
+        {
+          "type": "choice",
+          "q": "小鱼 → ü",
+          "say": "小鱼吐泡泡，藏着哪个字母？",
+          "prompt": {
+            "pic": "🐟",
+            "label": "小鱼吐泡泡"
+          },
+          "options": [
+            {
+              "py": "u",
+              "grid": true
+            },
+            {
+              "py": "i",
+              "grid": true
+            },
+            {
+              "py": "ü",
+              "grid": true
+            }
+          ],
+          "answer": 2,
+          "after": "小鱼吐泡泡，ü，ü，ü。两个点是小鱼的眼睛。"
+        },
+        {
+          "type": "choice",
+          "q": "听广播 → b",
+          "say": "听广播，藏着哪个字母？",
+          "prompt": {
+            "pic": "📻",
+            "label": "听广播"
+          },
+          "options": [
+            {
+              "py": "d",
+              "grid": true
+            },
+            {
+              "py": "b",
+              "grid": true
+            },
+            {
+              "py": "p",
+              "grid": true
+            }
+          ],
+          "answer": 1,
+          "after": "听广播，b，b，b。右下半圆就是它。"
+        },
+        {
+          "type": "choice",
+          "q": "泼水 → p",
+          "say": "泼水，藏着哪个字母？",
+          "prompt": {
+            "pic": "💦",
+            "label": "泼水"
+          },
+          "options": [
+            {
+              "py": "b",
+              "grid": true
+            },
+            {
+              "py": "p",
+              "grid": true
+            },
+            {
+              "py": "d",
+              "grid": true
+            }
+          ],
+          "answer": 1,
+          "after": "泼水，p，p，p。右上半圆就是它。"
+        },
+        {
+          "type": "choice",
+          "q": "打鼓 → d",
+          "say": "小朋友在打鼓，鼓和鼓槌藏着哪个字母？",
+          "prompt": {
+            "pic": "🥁",
+            "label": "打鼓"
+          },
+          "options": [
+            {
+              "py": "b",
+              "grid": true
+            },
+            {
+              "py": "d",
+              "grid": true
+            },
+            {
+              "py": "t",
+              "grid": true
+            }
+          ],
+          "answer": 1,
+          "after": "打鼓，d，d，d。左下半圆就是它。"
+        },
+        {
+          "type": "choice",
+          "q": "伞柄 → t",
+          "say": "雨伞的伞柄，像哪个字母？",
+          "prompt": {
+            "pic": "🌂",
+            "label": "伞柄"
+          },
+          "options": [
+            {
+              "py": "f",
+              "grid": true
+            },
+            {
+              "py": "l",
+              "grid": true
+            },
+            {
+              "py": "t",
+              "grid": true
+            }
+          ],
+          "answer": 2,
+          "after": "伞柄，t，t，t。"
+        }
       ]
     },
     {
@@ -26,12 +266,198 @@
       "title": "动物园标声调",
       "icon": "🦌",
       "items": [
-        { "type": "choice", "q": "鹿 lù", "say": "这是小鹿的鹿。鹿，是第几声？选一选。", "prompt": { "pic": "🦌", "label": "鹿", "picSay": "鹿" }, "options": [{ "py": "lū", "grid": true }, { "py": "lú", "grid": true }, { "py": "lǔ", "grid": true }, { "py": "lù", "grid": true }], "answer": 3, "fixed": true, "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。", "after": "鹿，第四声。" },
-        { "type": "choice", "q": "马 mǎ", "say": "这是马。马，是第几声？", "prompt": { "pic": "🐴", "label": "马", "picSay": "马" }, "options": [{ "py": "mā", "grid": true }, { "py": "má", "grid": true }, { "py": "mǎ", "grid": true }, { "py": "mà", "grid": true }], "answer": 2, "fixed": true, "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。", "after": "马，第三声，声音拐个弯。" },
-        { "type": "choice", "q": "兔 tù", "say": "这是小兔子的兔。兔，是第几声？", "prompt": { "pic": "🐰", "label": "兔", "picSay": "兔" }, "options": [{ "py": "tū", "grid": true }, { "py": "tú", "grid": true }, { "py": "tǔ", "grid": true }, { "py": "tù", "grid": true }], "answer": 3, "fixed": true, "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。", "after": "兔，第四声。" },
-        { "type": "choice", "q": "鱼 yú", "say": "这是鱼。鱼，是第几声？", "prompt": { "pic": "🐟", "label": "鱼", "picSay": "鱼" }, "options": [{ "py": "yū", "grid": true }, { "py": "yú", "grid": true }, { "py": "yǔ", "grid": true }, { "py": "yù", "grid": true }], "answer": 1, "fixed": true, "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。", "after": "鱼，第二声，声音往上扬。" },
-        { "type": "choice", "q": "鹅 é", "say": "这是大白鹅的鹅。鹅，是第几声？", "prompt": { "pic": "🪿", "label": "鹅", "picSay": "鹅" }, "options": [{ "py": "ē", "grid": true }, { "py": "é", "grid": true }, { "py": "ě", "grid": true }, { "py": "è", "grid": true }], "answer": 1, "fixed": true, "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。", "after": "鹅，第二声。" },
-        { "type": "choice", "q": "蛙 wā", "say": "这是青蛙的蛙。蛙，是第几声？", "prompt": { "pic": "🐸", "label": "蛙", "picSay": "蛙" }, "options": [{ "py": "wā", "grid": true }, { "py": "wá", "grid": true }, { "py": "wǎ", "grid": true }, { "py": "wà", "grid": true }], "answer": 0, "fixed": true, "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。", "after": "蛙，第一声，平平的。" }
+        {
+          "type": "choice",
+          "q": "鹿 lù",
+          "say": "这是小鹿的鹿。鹿，是第几声？选一选。",
+          "prompt": {
+            "pic": "🦌",
+            "label": "鹿",
+            "picSay": "鹿"
+          },
+          "options": [
+            {
+              "py": "lū",
+              "grid": true
+            },
+            {
+              "py": "lú",
+              "grid": true
+            },
+            {
+              "py": "lǔ",
+              "grid": true
+            },
+            {
+              "py": "lù",
+              "grid": true
+            }
+          ],
+          "answer": 3,
+          "fixed": true,
+          "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。",
+          "after": "鹿，第四声。"
+        },
+        {
+          "type": "choice",
+          "q": "马 mǎ",
+          "say": "这是马。马，是第几声？",
+          "prompt": {
+            "pic": "🐴",
+            "label": "马",
+            "picSay": "马"
+          },
+          "options": [
+            {
+              "py": "mā",
+              "grid": true
+            },
+            {
+              "py": "má",
+              "grid": true
+            },
+            {
+              "py": "mǎ",
+              "grid": true
+            },
+            {
+              "py": "mà",
+              "grid": true
+            }
+          ],
+          "answer": 2,
+          "fixed": true,
+          "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。",
+          "after": "马，mǎ，第三声，声音拐个弯。"
+        },
+        {
+          "type": "choice",
+          "q": "兔 tù",
+          "say": "这是小兔子的兔。兔，是第几声？",
+          "prompt": {
+            "pic": "🐰",
+            "label": "兔",
+            "picSay": "兔"
+          },
+          "options": [
+            {
+              "py": "tū",
+              "grid": true
+            },
+            {
+              "py": "tú",
+              "grid": true
+            },
+            {
+              "py": "tǔ",
+              "grid": true
+            },
+            {
+              "py": "tù",
+              "grid": true
+            }
+          ],
+          "answer": 3,
+          "fixed": true,
+          "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。",
+          "after": "兔，tù，第四声。"
+        },
+        {
+          "type": "choice",
+          "q": "鱼 yú",
+          "say": "这是鱼。鱼，是第几声？",
+          "prompt": {
+            "pic": "🐟",
+            "label": "鱼",
+            "picSay": "鱼"
+          },
+          "options": [
+            {
+              "py": "yū",
+              "grid": true
+            },
+            {
+              "py": "yú",
+              "grid": true
+            },
+            {
+              "py": "yǔ",
+              "grid": true
+            },
+            {
+              "py": "yù",
+              "grid": true
+            }
+          ],
+          "answer": 1,
+          "fixed": true,
+          "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。",
+          "after": "鱼，yú，第二声，声音往上扬。"
+        },
+        {
+          "type": "choice",
+          "q": "鹅 é",
+          "say": "这是大白鹅的鹅。鹅，是第几声？",
+          "prompt": {
+            "pic": "🪿",
+            "label": "鹅",
+            "picSay": "鹅"
+          },
+          "options": [
+            {
+              "py": "ē",
+              "grid": true
+            },
+            {
+              "py": "é",
+              "grid": true
+            },
+            {
+              "py": "ě",
+              "grid": true
+            },
+            {
+              "py": "è",
+              "grid": true
+            }
+          ],
+          "answer": 1,
+          "fixed": true,
+          "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。",
+          "after": "鹅，é，第二声。"
+        },
+        {
+          "type": "choice",
+          "q": "蛙 wā",
+          "say": "这是青蛙的蛙。蛙，是第几声？",
+          "prompt": {
+            "pic": "🐸",
+            "label": "蛙",
+            "picSay": "蛙"
+          },
+          "options": [
+            {
+              "py": "wā",
+              "grid": true
+            },
+            {
+              "py": "wá",
+              "grid": true
+            },
+            {
+              "py": "wǎ",
+              "grid": true
+            },
+            {
+              "py": "wà",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "fixed": true,
+          "hint": "一声平，二声扬，三声拐弯，四声降。再听一听。",
+          "after": "蛙，wā，第一声，平平的。"
+        }
       ]
     },
     {
@@ -39,16 +465,132 @@
       "title": "拼音积木",
       "icon": "🧱",
       "items": [
-        { "type": "blend", "q": "m + ? = mú", "say": "声母加韵母，拼成音节。缺了哪一块积木？", "parts": ["m", "ú", "mú"], "missing": 1 },
-        { "type": "blend", "q": "? + è = tè", "say": "缺了哪个声母？", "parts": ["t", "è", "tè"], "missing": 0, "after": "特，特别的特。" },
-        { "type": "blend", "q": "d + ǎ = ?", "say": "拼一拼，拼出来是哪个音节？", "parts": ["d", "ǎ", "dǎ"], "missing": 2, "after": "打，打鼓的打。" },
-        { "type": "blend", "q": "t + ì = ?", "say": "拼一拼，拼出来是哪个音节？", "parts": ["t", "ì", "tì"], "missing": 2, "after": "替，代替的替。" },
-        { "type": "blend", "q": "n + ? = nǚ", "say": "缺了哪个韵母？小心小鱼的眼睛哦。", "parts": ["n", "ǚ", "nǚ"], "missing": 1, "options": ["ǚ", "ǔ", "ǜ"], "hint": "小鱼的两个点还在吗？声调对吗？", "after": "女，女孩的女。小鱼的两点眼睛要保留。" },
-        { "type": "blend", "q": "? + ō = pō", "say": "缺了哪个声母？", "parts": ["p", "ō", "pō"], "missing": 0, "after": "坡，山坡的坡。" },
-        { "type": "blend", "q": "b + ? = bù", "say": "缺了哪个韵母？", "parts": ["b", "ù", "bù"], "missing": 1, "after": "布，花布的布。" },
-        { "type": "blend", "q": "f + ó = ?", "say": "拼一拼，拼出来是哪个音节？", "parts": ["f", "ó", "fó"], "missing": 2 },
-        { "type": "blend", "q": "? + ě = lě", "say": "缺了哪个声母？", "parts": ["l", "ě", "lě"], "missing": 0 },
-        { "type": "blend", "q": "l + ǜ = ?", "say": "拼一拼，拼出来是哪个音节？", "parts": ["l", "ǜ", "lǜ"], "missing": 2, "after": "绿，绿色的绿。" }
+        {
+          "type": "blend",
+          "q": "m + ? = mú",
+          "say": "声母加韵母，拼成音节。缺了哪一块积木？",
+          "parts": [
+            "m",
+            "ú",
+            "mú"
+          ],
+          "missing": 1,
+          "after": "m，ú，拼成 mú。"
+        },
+        {
+          "type": "blend",
+          "q": "? + è = tè",
+          "say": "缺了哪个声母？",
+          "parts": [
+            "t",
+            "è",
+            "tè"
+          ],
+          "missing": 0,
+          "after": "t，è，tè，特别的特。"
+        },
+        {
+          "type": "blend",
+          "q": "d + ǎ = ?",
+          "say": "拼一拼，拼出来是哪个音节？",
+          "parts": [
+            "d",
+            "ǎ",
+            "dǎ"
+          ],
+          "missing": 2,
+          "after": "d，ǎ，dǎ，打鼓的打。"
+        },
+        {
+          "type": "blend",
+          "q": "t + ì = ?",
+          "say": "拼一拼，拼出来是哪个音节？",
+          "parts": [
+            "t",
+            "ì",
+            "tì"
+          ],
+          "missing": 2,
+          "after": "t，ì，tì。"
+        },
+        {
+          "type": "blend",
+          "q": "n + ? = nǚ",
+          "say": "缺了哪个韵母？小心小鱼的眼睛哦。",
+          "parts": [
+            "n",
+            "ǚ",
+            "nǚ"
+          ],
+          "missing": 1,
+          "options": [
+            "ǚ",
+            "ǔ",
+            "ǜ"
+          ],
+          "hint": "小鱼的两个点还在吗？声调对吗？",
+          "after": "n，ǚ，nǚ，女孩的女。n 和 ü 拼，小鱼的两点眼睛要保留。"
+        },
+        {
+          "type": "blend",
+          "q": "? + ō = pō",
+          "say": "缺了哪个声母？",
+          "parts": [
+            "p",
+            "ō",
+            "pō"
+          ],
+          "missing": 0,
+          "after": "p，ō，pō，山坡的坡。"
+        },
+        {
+          "type": "blend",
+          "q": "b + ? = bù",
+          "say": "缺了哪个韵母？",
+          "parts": [
+            "b",
+            "ù",
+            "bù"
+          ],
+          "missing": 1,
+          "after": "b，ù，bù，花布的布。"
+        },
+        {
+          "type": "blend",
+          "q": "f + ó = ?",
+          "say": "拼一拼，拼出来是哪个音节？",
+          "parts": [
+            "f",
+            "ó",
+            "fó"
+          ],
+          "missing": 2,
+          "after": "f，ó，fó。"
+        },
+        {
+          "type": "blend",
+          "q": "? + ě = lě",
+          "say": "缺了哪个声母？",
+          "parts": [
+            "l",
+            "ě",
+            "lě"
+          ],
+          "missing": 0,
+          "after": "l，ě，lě。"
+        },
+        {
+          "type": "blend",
+          "q": "l + ǜ = ?",
+          "say": "拼一拼，拼出来是哪个音节？",
+          "parts": [
+            "l",
+            "ǜ",
+            "lǜ"
+          ],
+          "missing": 2,
+          "after": "l，ǜ，lǜ，绿色的绿。"
+        }
       ]
     },
     {
@@ -56,14 +598,198 @@
       "title": "看图找音节",
       "icon": "🎯",
       "items": [
-        { "type": "choice", "q": "拔萝卜 → bá", "say": "拔萝卜的拔，是哪个音节？", "prompt": { "pic": "🥕", "label": "拔萝卜", "picSay": "拔萝卜" }, "options": [{ "py": "bá", "grid": true }, { "py": "bā", "grid": true }, { "py": "bǎ", "grid": true }], "answer": 0, "fixed": true, "hint": "三个音节声调不同，再听一听：拔。", "after": "拔，第二声。" },
-        { "type": "choice", "q": "八 → bā", "say": "数字八，是哪个音节？", "prompt": { "pic": "8️⃣", "label": "八", "picSay": "八" }, "options": [{ "py": "bá", "grid": true }, { "py": "bā", "grid": true }, { "py": "bǎ", "grid": true }], "answer": 1, "fixed": true, "hint": "再听一听：八。", "after": "八，第一声。" },
-        { "type": "choice", "q": "靶子 → bǎ", "say": "射箭的靶子，靶，是哪个音节？", "prompt": { "pic": "🎯", "label": "靶子", "picSay": "靶子" }, "options": [{ "py": "bá", "grid": true }, { "py": "bā", "grid": true }, { "py": "bǎ", "grid": true }], "answer": 2, "fixed": true, "hint": "再听一听：靶。", "after": "靶，第三声。" },
-        { "type": "choice", "q": "葡萄 → pú", "say": "葡萄的葡，是哪个音节？", "prompt": { "pic": "🍇", "label": "葡萄", "picSay": "葡萄" }, "options": [{ "py": "tú", "grid": true }, { "py": "dú", "grid": true }, { "py": "pú", "grid": true }], "answer": 2, "fixed": true, "hint": "这三个音节声母不一样，听听开头：葡。", "after": "葡，声母是坡。" },
-        { "type": "choice", "q": "图画本 → tú", "say": "图画本的图，是哪个音节？", "prompt": { "pic": "📒🖍️", "label": "图画本", "picSay": "图画本" }, "options": [{ "py": "tú", "grid": true }, { "py": "dú", "grid": true }, { "py": "pú", "grid": true }], "answer": 0, "fixed": true, "hint": "听听开头：图。", "after": "图，声母是特。" },
-        { "type": "choice", "q": "读书 → dú", "say": "读书的读，是哪个音节？", "prompt": { "pic": "📖", "label": "读书", "picSay": "读书" }, "options": [{ "py": "tú", "grid": true }, { "py": "dú", "grid": true }, { "py": "pú", "grid": true }], "answer": 1, "fixed": true, "hint": "听听开头：读。", "after": "读，声母是得。" },
-        { "type": "spell", "q": "写 bǎ（靶）", "say": "把靶子的靶，写在四线三格里。先放声母，再放韵母。", "prompt": { "pic": "🎯", "label": "靶", "picSay": "靶" }, "word": "bǎ" },
-        { "type": "spell", "q": "写 pú（葡）", "say": "把葡萄的葡，写在四线三格里。", "prompt": { "pic": "🍇", "label": "葡", "picSay": "葡" }, "word": "pú" }
+        {
+          "type": "choice",
+          "q": "拔萝卜 → bá",
+          "say": "拔萝卜的拔，是哪个音节？",
+          "prompt": {
+            "pic": "🥕",
+            "label": "拔萝卜",
+            "picSay": "拔萝卜"
+          },
+          "options": [
+            {
+              "py": "bá",
+              "grid": true
+            },
+            {
+              "py": "bā",
+              "grid": true
+            },
+            {
+              "py": "bǎ",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "fixed": true,
+          "hint": "三个音节声调不同，再听一听：拔。",
+          "after": "拔，bá，第二声。"
+        },
+        {
+          "type": "choice",
+          "q": "八 → bā",
+          "say": "数字八，是哪个音节？",
+          "prompt": {
+            "pic": "8️⃣",
+            "label": "八",
+            "picSay": "八"
+          },
+          "options": [
+            {
+              "py": "bá",
+              "grid": true
+            },
+            {
+              "py": "bā",
+              "grid": true
+            },
+            {
+              "py": "bǎ",
+              "grid": true
+            }
+          ],
+          "answer": 1,
+          "fixed": true,
+          "hint": "再听一听：八。",
+          "after": "八，bā，第一声。"
+        },
+        {
+          "type": "choice",
+          "q": "靶子 → bǎ",
+          "say": "射箭的靶子，靶，是哪个音节？",
+          "prompt": {
+            "pic": "🎯",
+            "label": "靶子",
+            "picSay": "靶子"
+          },
+          "options": [
+            {
+              "py": "bá",
+              "grid": true
+            },
+            {
+              "py": "bā",
+              "grid": true
+            },
+            {
+              "py": "bǎ",
+              "grid": true
+            }
+          ],
+          "answer": 2,
+          "fixed": true,
+          "hint": "再听一听：靶。",
+          "after": "靶，bǎ，第三声。"
+        },
+        {
+          "type": "choice",
+          "q": "葡萄 → pú",
+          "say": "葡萄的葡，是哪个音节？",
+          "prompt": {
+            "pic": "🍇",
+            "label": "葡萄",
+            "picSay": "葡萄"
+          },
+          "options": [
+            {
+              "py": "tú",
+              "grid": true
+            },
+            {
+              "py": "dú",
+              "grid": true
+            },
+            {
+              "py": "pú",
+              "grid": true
+            }
+          ],
+          "answer": 2,
+          "fixed": true,
+          "hint": "这三个音节声母不一样，听听开头：葡。",
+          "after": "葡，pú，声母是 p。"
+        },
+        {
+          "type": "choice",
+          "q": "图画本 → tú",
+          "say": "图画本的图，是哪个音节？",
+          "prompt": {
+            "pic": "📒🖍️",
+            "label": "图画本",
+            "picSay": "图画本"
+          },
+          "options": [
+            {
+              "py": "tú",
+              "grid": true
+            },
+            {
+              "py": "dú",
+              "grid": true
+            },
+            {
+              "py": "pú",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "fixed": true,
+          "hint": "听听开头：图。",
+          "after": "图，tú，声母是 t。"
+        },
+        {
+          "type": "choice",
+          "q": "读书 → dú",
+          "say": "读书的读，是哪个音节？",
+          "prompt": {
+            "pic": "📖",
+            "label": "读书",
+            "picSay": "读书"
+          },
+          "options": [
+            {
+              "py": "tú",
+              "grid": true
+            },
+            {
+              "py": "dú",
+              "grid": true
+            },
+            {
+              "py": "pú",
+              "grid": true
+            }
+          ],
+          "answer": 1,
+          "fixed": true,
+          "hint": "听听开头：读。",
+          "after": "读，声母是 d。"
+        },
+        {
+          "type": "spell",
+          "q": "写 bǎ（靶）",
+          "say": "把靶子的靶，写在四线三格里。先放声母，再放韵母。",
+          "prompt": {
+            "pic": "🎯",
+            "label": "靶",
+            "picSay": "靶"
+          },
+          "word": "bǎ",
+          "after": "bǎ，靶。"
+        },
+        {
+          "type": "spell",
+          "q": "写 pú（葡）",
+          "say": "把葡萄的葡，写在四线三格里。",
+          "prompt": {
+            "pic": "🍇",
+            "label": "葡",
+            "picSay": "葡"
+          },
+          "word": "pú",
+          "after": "pú，葡。"
+        }
       ]
     },
     {
@@ -71,12 +797,78 @@
       "title": "拼音画册",
       "icon": "🎨",
       "items": [
-        { "type": "spell", "q": "泥土 ní tǔ", "say": "看图写音节：泥土。", "prompt": { "pic": "block:dirt", "label": "泥土", "picSay": "泥土" }, "word": "ní tǔ" },
-        { "type": "spell", "q": "马路 mǎ lù", "say": "看图写音节：马路。", "prompt": { "pic": "🛣️", "label": "马路", "picSay": "马路" }, "word": "mǎ lù" },
-        { "type": "spell", "q": "木马 mù mǎ", "say": "看图写音节：木马。", "prompt": { "pic": "🎠", "label": "木马", "picSay": "木马" }, "word": "mù mǎ" },
-        { "type": "spell", "q": "大米 dà mǐ", "say": "看图写音节：大米。", "prompt": { "pic": "🍚", "label": "大米", "picSay": "大米" }, "word": "dà mǐ" },
-        { "type": "spell", "q": "地图 dì tú", "say": "看图写音节：地图。", "prompt": { "pic": "🗺️", "label": "地图", "picSay": "地图" }, "word": "dì tú" },
-        { "type": "spell", "q": "蜡笔 là bǐ", "say": "看图写音节：蜡笔。", "prompt": { "pic": "🖍️", "label": "蜡笔", "picSay": "蜡笔" }, "word": "là bǐ" }
+        {
+          "type": "spell",
+          "q": "泥土 ní tǔ",
+          "say": "看图写音节：泥土。",
+          "prompt": {
+            "pic": "block:dirt",
+            "label": "泥土",
+            "picSay": "泥土"
+          },
+          "word": "ní tǔ",
+          "after": "ní，tǔ，泥土。"
+        },
+        {
+          "type": "spell",
+          "q": "马路 mǎ lù",
+          "say": "看图写音节：马路。",
+          "prompt": {
+            "pic": "🛣️",
+            "label": "马路",
+            "picSay": "马路"
+          },
+          "word": "mǎ lù",
+          "after": "mǎ，lù，马路。"
+        },
+        {
+          "type": "spell",
+          "q": "木马 mù mǎ",
+          "say": "看图写音节：木马。",
+          "prompt": {
+            "pic": "🎠",
+            "label": "木马",
+            "picSay": "木马"
+          },
+          "word": "mù mǎ",
+          "after": "mù，mǎ，木马。"
+        },
+        {
+          "type": "spell",
+          "q": "大米 dà mǐ",
+          "say": "看图写音节：大米。",
+          "prompt": {
+            "pic": "🍚",
+            "label": "大米",
+            "picSay": "大米"
+          },
+          "word": "dà mǐ",
+          "after": "dà，mǐ，大米。"
+        },
+        {
+          "type": "spell",
+          "q": "地图 dì tú",
+          "say": "看图写音节：地图。",
+          "prompt": {
+            "pic": "🗺️",
+            "label": "地图",
+            "picSay": "地图"
+          },
+          "word": "dì tú",
+          "after": "地图，dì tú。"
+        },
+        {
+          "type": "spell",
+          "q": "蜡笔 là bǐ",
+          "say": "看图写音节：蜡笔。",
+          "prompt": {
+            "pic": "🖍️",
+            "label": "蜡笔",
+            "picSay": "蜡笔"
+          },
+          "word": "là bǐ",
+          "after": "蜡笔，là bǐ。"
+        }
       ]
     },
     {
@@ -84,12 +876,192 @@
       "title": "找不同韵母",
       "icon": "🧐",
       "items": [
-        { "type": "choice", "q": "日 一 地 他（韵母 i）", "say": "这四个字里，哪个字的韵母和别人不一样？点一点，听一听。", "prompt": { "py": "i" }, "listen": true, "cols": 4, "options": [{ "text": "日", "big": true }, { "text": "一", "big": true }, { "text": "地", "big": true }, { "text": "他", "big": true }], "answer": 3, "hint": "仔细听每个字最后的声音。", "after": "他，韵母是啊，不是衣。" },
-        { "type": "choice", "q": "木 八 爸 大（韵母 a）", "say": "哪个字的韵母和别人不一样？", "prompt": { "py": "a" }, "listen": true, "cols": 4, "options": [{ "text": "木", "big": true }, { "text": "八", "big": true }, { "text": "爸", "big": true }, { "text": "大", "big": true }], "answer": 0, "hint": "仔细听每个字最后的声音。", "after": "木，韵母是乌，不是啊。" },
-        { "type": "choice", "q": "土 路 足 妈（韵母 u）", "say": "哪个字的韵母和别人不一样？", "prompt": { "py": "u" }, "listen": true, "cols": 4, "options": [{ "text": "土", "big": true }, { "text": "路", "big": true }, { "text": "足", "big": true }, { "text": "妈", "big": true }], "answer": 3, "hint": "仔细听每个字最后的声音。", "after": "妈，韵母是啊，不是乌。" },
-        { "type": "choice", "q": "鱼 女 绿 马（韵母 ü）", "say": "哪个字的韵母和别人不一样？", "prompt": { "py": "ü" }, "listen": true, "cols": 4, "options": [{ "text": "鱼", "big": true }, { "text": "女", "big": true }, { "text": "绿", "big": true }, { "text": "马", "big": true }], "answer": 3, "hint": "仔细听每个字最后的声音。", "after": "马，韵母是啊。别的字都是小鱼的韵母。" },
-        { "type": "choice", "q": "鹅 特 饿 爸（韵母 e）", "say": "哪个字的韵母和别人不一样？", "prompt": { "py": "e" }, "listen": true, "cols": 4, "options": [{ "text": "鹅", "big": true }, { "text": "特", "big": true }, { "text": "饿", "big": true }, { "text": "爸", "big": true }], "answer": 3, "hint": "仔细听每个字最后的声音。", "after": "爸，韵母是啊，不是鹅。" },
-        { "type": "choice", "q": "波 坡 摸 米（韵母 o）", "say": "哪个字的韵母和别人不一样？", "prompt": { "py": "o" }, "listen": true, "cols": 4, "options": [{ "text": "波", "big": true }, { "text": "坡", "big": true }, { "text": "摸", "big": true }, { "text": "米", "big": true }], "answer": 3, "hint": "仔细听每个字最后的声音。", "after": "米，韵母是衣，不是喔。" }
+        {
+          "type": "choice",
+          "q": "日 一 地 他（韵母 i）",
+          "say": "这四个字里，哪个字的韵母和别人不一样？点一点，听一听。",
+          "prompt": {
+            "py": "i"
+          },
+          "listen": true,
+          "cols": 4,
+          "options": [
+            {
+              "text": "日",
+              "big": true
+            },
+            {
+              "text": "一",
+              "big": true
+            },
+            {
+              "text": "地",
+              "big": true
+            },
+            {
+              "text": "他",
+              "big": true
+            }
+          ],
+          "answer": 3,
+          "hint": "仔细听每个字最后的声音。",
+          "after": "他，tā，韵母是 a。"
+        },
+        {
+          "type": "choice",
+          "q": "木 八 爸 大（韵母 a）",
+          "say": "哪个字的韵母和别人不一样？",
+          "prompt": {
+            "py": "a"
+          },
+          "listen": true,
+          "cols": 4,
+          "options": [
+            {
+              "text": "木",
+              "big": true
+            },
+            {
+              "text": "八",
+              "big": true
+            },
+            {
+              "text": "爸",
+              "big": true
+            },
+            {
+              "text": "大",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "hint": "仔细听每个字最后的声音。",
+          "after": "木，mù，韵母是 u，不是 a。"
+        },
+        {
+          "type": "choice",
+          "q": "土 路 足 妈（韵母 u）",
+          "say": "哪个字的韵母和别人不一样？",
+          "prompt": {
+            "py": "u"
+          },
+          "listen": true,
+          "cols": 4,
+          "options": [
+            {
+              "text": "土",
+              "big": true
+            },
+            {
+              "text": "路",
+              "big": true
+            },
+            {
+              "text": "足",
+              "big": true
+            },
+            {
+              "text": "妈",
+              "big": true
+            }
+          ],
+          "answer": 3,
+          "hint": "仔细听每个字最后的声音。",
+          "after": "妈，mā，韵母是 a，不是 u。"
+        },
+        {
+          "type": "choice",
+          "q": "鱼 女 绿 马（韵母 ü）",
+          "say": "哪个字的韵母和别人不一样？",
+          "prompt": {
+            "py": "ü"
+          },
+          "listen": true,
+          "cols": 4,
+          "options": [
+            {
+              "text": "鱼",
+              "big": true
+            },
+            {
+              "text": "女",
+              "big": true
+            },
+            {
+              "text": "绿",
+              "big": true
+            },
+            {
+              "text": "马",
+              "big": true
+            }
+          ],
+          "answer": 3,
+          "hint": "仔细听每个字最后的声音。",
+          "after": "马，mǎ，韵母是 a，别的字韵母都是 ü。"
+        },
+        {
+          "type": "choice",
+          "q": "鹅 特 饿 爸（韵母 e）",
+          "say": "哪个字的韵母和别人不一样？",
+          "prompt": {
+            "py": "e"
+          },
+          "listen": true,
+          "cols": 4,
+          "options": [
+            {
+              "text": "鹅",
+              "big": true
+            },
+            {
+              "text": "特",
+              "big": true
+            },
+            {
+              "text": "饿",
+              "big": true
+            },
+            {
+              "text": "爸",
+              "big": true
+            }
+          ],
+          "answer": 3,
+          "hint": "仔细听每个字最后的声音。",
+          "after": "爸，bà，韵母是 a，不是 e。"
+        },
+        {
+          "type": "choice",
+          "q": "波 坡 摸 米（韵母 o）",
+          "say": "哪个字的韵母和别人不一样？",
+          "prompt": {
+            "py": "o"
+          },
+          "listen": true,
+          "cols": 4,
+          "options": [
+            {
+              "text": "波",
+              "big": true
+            },
+            {
+              "text": "坡",
+              "big": true
+            },
+            {
+              "text": "摸",
+              "big": true
+            },
+            {
+              "text": "米",
+              "big": true
+            }
+          ],
+          "answer": 3,
+          "hint": "仔细听每个字最后的声音。",
+          "after": "米，韵母是 i，不是 o。"
+        }
       ]
     },
     {
@@ -97,11 +1069,94 @@
       "title": "门票写汉字",
       "icon": "✏️",
       "items": [
-        { "type": "stroke", "q": "写 王", "say": "看门票，购票人叫王川。用手指写一写：王。", "char": "王", "strokes": ["横", "横", "竖", "横"], "prompt": { "card": ["国家大剧院 · 小剧场", "剧目：儿童剧《西游记》", "座位：9排7座", "购票人：王川"], "context": "▢川坐第▢排第▢座。" }, "after": "王，王川的王。" },
-        { "type": "stroke", "q": "写 九", "say": "王川坐第几排？写一写：九。", "char": "九", "strokes": ["撇", "横折弯钩"], "prompt": { "context": "王川坐第▢排第▢座。" }, "after": "九，第九排。" },
-        { "type": "stroke", "q": "写 七", "say": "坐第几座？写一写：七。", "char": "七", "strokes": ["横", "竖弯钩"], "prompt": { "context": "王川坐第九排第▢座。" }, "after": "七，第七座。" },
-        { "type": "choice", "q": "九的第二笔", "say": "九的第二笔是什么？点一点，听一听。", "prompt": { "text": "九" }, "listen": true, "cols": 4, "options": ["撇", "横折弯钩", "横折", "竖弯钩"], "answer": 1, "hint": "九先写撇，第二笔先横、再折、再弯、最后带个钩。", "after": "九的第二笔是横折弯钩。" },
-        { "type": "choice", "q": "七的第二笔", "say": "七的第二笔是什么？", "prompt": { "text": "七" }, "listen": true, "cols": 4, "options": ["横", "竖弯钩", "横折弯钩", "竖"], "answer": 1, "hint": "七先写横，第二笔先竖下来，再弯过去，带个钩。", "after": "七的第二笔是竖弯钩。" }
+        {
+          "type": "stroke",
+          "q": "写 王",
+          "say": "看门票，购票人叫王川。用手指写一写：王。",
+          "char": "王",
+          "strokes": [
+            "横",
+            "横",
+            "竖",
+            "横"
+          ],
+          "prompt": {
+            "card": [
+              "国家大剧院 · 小剧场",
+              "剧目：儿童剧《西游记》",
+              "座位：9排7座",
+              "购票人：王川"
+            ],
+            "context": "▢川坐第▢排第▢座。"
+          },
+          "after": "王，王川的王。"
+        },
+        {
+          "type": "stroke",
+          "q": "写 九",
+          "say": "王川坐第几排？写一写：九。",
+          "char": "九",
+          "strokes": [
+            "撇",
+            "横折弯钩"
+          ],
+          "prompt": {
+            "context": "王川坐第▢排第▢座。"
+          },
+          "after": "九，第九排。"
+        },
+        {
+          "type": "stroke",
+          "q": "写 七",
+          "say": "坐第几座？写一写：七。",
+          "char": "七",
+          "strokes": [
+            "横",
+            "竖弯钩"
+          ],
+          "prompt": {
+            "context": "王川坐第九排第▢座。"
+          },
+          "after": "七，第七座。"
+        },
+        {
+          "type": "choice",
+          "q": "九的第二笔",
+          "say": "九的第二笔是什么？点一点，听一听。",
+          "prompt": {
+            "text": "九"
+          },
+          "listen": true,
+          "cols": 4,
+          "options": [
+            "撇",
+            "横折弯钩",
+            "横折",
+            "竖弯钩"
+          ],
+          "answer": 1,
+          "hint": "九先写撇，第二笔先横、再折、再弯、最后带个钩。",
+          "after": "九的第二笔是横折弯钩。"
+        },
+        {
+          "type": "choice",
+          "q": "七的第二笔",
+          "say": "七的第二笔是什么？",
+          "prompt": {
+            "text": "七"
+          },
+          "listen": true,
+          "cols": 4,
+          "options": [
+            "横",
+            "竖弯钩",
+            "横折弯钩",
+            "竖"
+          ],
+          "answer": 1,
+          "hint": "七先写横，第二笔先竖下来，再弯过去，带个钩。",
+          "after": "七的第二笔是竖弯钩。"
+        }
       ]
     },
     {
@@ -109,12 +1164,135 @@
       "title": "看图选词语",
       "icon": "🖼️",
       "items": [
-        { "type": "choice", "q": "理发 → lǐ fà", "say": "看图，读一读拼音，选出对的词语。", "prompt": { "pic": "💇‍♂️" }, "options": [{ "py": "lǎ ba" }, { "py": "lǐ fà" }, { "py": "mǔ nǚ" }], "answer": 1, "fixed": true, "after": "理发！" },
-        { "type": "choice", "q": "母女 → mǔ nǚ", "say": "这张图是哪个词语？", "prompt": { "pic": "👩‍👧" }, "options": [{ "py": "lǎ ba" }, { "py": "lǐ fà" }, { "py": "mǔ nǚ" }], "answer": 2, "fixed": true, "after": "母女，妈妈和女儿。" },
-        { "type": "choice", "q": "喇叭 → lǎ ba", "say": "这张图是哪个词语？", "prompt": { "pic": "📢" }, "options": [{ "py": "lǎ ba" }, { "py": "lǐ fà" }, { "py": "mǔ nǚ" }], "answer": 0, "fixed": true, "after": "喇叭！" },
-        { "type": "choice", "q": "mù mǎ → 木马", "say": "读一读拼音，找出对的图片。", "prompt": { "py": "mù mǎ" }, "options": [{ "pic": "🎠" }, { "pic": "🐴" }, { "pic": "🌳" }], "answer": 0, "after": "木马！" },
-        { "type": "choice", "q": "dì tú → 地图", "say": "读一读拼音，找出对的图片。", "prompt": { "py": "dì tú" }, "options": [{ "pic": "📖" }, { "pic": "🗺️" }, { "pic": "🧭" }], "answer": 1, "after": "地图！" },
-        { "type": "choice", "q": "bà ba → 爸爸", "say": "读一读拼音，找出对的图片。", "prompt": { "py": "bà ba" }, "options": [{ "pic": "👩" }, { "pic": "👴" }, { "pic": "👨" }], "answer": 2, "after": "爸爸！" }
+        {
+          "type": "choice",
+          "q": "理发 → lǐ fà",
+          "say": "看图，读一读拼音，选出对的词语。",
+          "prompt": {
+            "pic": "💇‍♂️"
+          },
+          "options": [
+            {
+              "py": "lǎ ba"
+            },
+            {
+              "py": "lǐ fà"
+            },
+            {
+              "py": "mǔ nǚ"
+            }
+          ],
+          "answer": 1,
+          "fixed": true,
+          "after": "理发，lǐ fà！"
+        },
+        {
+          "type": "choice",
+          "q": "母女 → mǔ nǚ",
+          "say": "这张图是哪个词语？",
+          "prompt": {
+            "pic": "👩‍👧"
+          },
+          "options": [
+            {
+              "py": "lǎ ba"
+            },
+            {
+              "py": "lǐ fà"
+            },
+            {
+              "py": "mǔ nǚ"
+            }
+          ],
+          "answer": 2,
+          "fixed": true,
+          "after": "母女，就是妈妈和女儿。"
+        },
+        {
+          "type": "choice",
+          "q": "喇叭 → lǎ ba",
+          "say": "这张图是哪个词语？",
+          "prompt": {
+            "pic": "📢"
+          },
+          "options": [
+            {
+              "py": "lǎ ba"
+            },
+            {
+              "py": "lǐ fà"
+            },
+            {
+              "py": "mǔ nǚ"
+            }
+          ],
+          "answer": 0,
+          "fixed": true,
+          "after": "喇叭，lǎ ba！"
+        },
+        {
+          "type": "choice",
+          "q": "mù mǎ → 木马",
+          "say": "读一读拼音，找出对的图片。",
+          "prompt": {
+            "py": "mù mǎ"
+          },
+          "options": [
+            {
+              "pic": "🎠"
+            },
+            {
+              "pic": "🐴"
+            },
+            {
+              "pic": "🌳"
+            }
+          ],
+          "answer": 0,
+          "after": "木马，mù mǎ！"
+        },
+        {
+          "type": "choice",
+          "q": "dì tú → 地图",
+          "say": "读一读拼音，找出对的图片。",
+          "prompt": {
+            "py": "dì tú"
+          },
+          "options": [
+            {
+              "pic": "📖"
+            },
+            {
+              "pic": "🗺️"
+            },
+            {
+              "pic": "🧭"
+            }
+          ],
+          "answer": 1,
+          "after": "地图，dì tú！"
+        },
+        {
+          "type": "choice",
+          "q": "bà ba → 爸爸",
+          "say": "读一读拼音，找出对的图片。",
+          "prompt": {
+            "py": "bà ba"
+          },
+          "options": [
+            {
+              "pic": "👩"
+            },
+            {
+              "pic": "👴"
+            },
+            {
+              "pic": "👨"
+            }
+          ],
+          "answer": 2,
+          "after": "爸爸，bà ba！"
+        }
       ]
     },
     {
@@ -122,12 +1300,114 @@
       "title": "古诗《画》",
       "icon": "📜",
       "items": [
-        { "type": "read", "q": "读《画》", "say": "我们先来读一读古诗《画》。跟着一起读吧。", "title": "画", "lines": ["远看山有色，", "近听水无声。", "春去花还在，", "人来鸟不惊。"], "py": ["yuǎn kàn shān yǒu sè", "jìn tīng shuǐ wú shēng", "chūn qù huā hái zài", "rén lái niǎo bù jīng"], "read": "画。远看山有色，近听水无声。春去花还在，人来鸟不惊。" },
-        { "type": "choice", "q": "“近听水无声”的上一句", "say": "近听水无声，它的上一句是什么？点一点，听一听。", "prompt": { "text": "（　　），近听水无声。" }, "listen": true, "cols": 3, "options": ["远看山有色", "春去花还在", "人来鸟不惊"], "answer": 0, "hint": "先远看，再近听。", "after": "远看山有色，近听水无声。" },
-        { "type": "choice", "q": "“人来鸟不惊”的上一句", "say": "人来鸟不惊，它的上一句是什么？", "prompt": { "text": "（　　），人来鸟不惊。" }, "listen": true, "cols": 3, "options": ["近听水无声", "春去花还在", "远看山有色"], "answer": 1, "after": "春去花还在，人来鸟不惊。" },
-        { "type": "order", "q": "《画》排顺序", "say": "把古诗《画》按顺序排好。先点第一句。", "prompt": { "text": "画" }, "pieces": ["远看山有色", "近听水无声", "春去花还在", "人来鸟不惊"], "after": "背得真好！" },
-        { "type": "choice", "q": "《画》的插图", "say": "下面哪张图，可能是古诗《画》的插图呢？", "prompt": { "text": "哪张是《画》的插图？" }, "options": [{ "pic": "🐰🐰🥬" }, { "pic": "svg:painting" }, { "pic": "🐇🌼" }], "answer": 1, "hint": "这首诗的名字叫《画》，想一想。", "after": "对！诗里写的是一幅画，画上的山、水、花、鸟都不会变。" },
-        { "type": "choice", "q": "人来了鸟为什么不怕", "say": "为什么人来了，鸟也不害怕？", "prompt": { "text": "人来鸟不惊，为什么？" }, "listen": true, "cols": 3, "options": ["因为是画上的鸟", "因为鸟睡着了", "因为鸟很勇敢"], "answer": 0, "after": "画上的鸟，当然不会飞走啦。" }
+        {
+          "type": "read",
+          "q": "读《画》",
+          "say": "我们先来读一读古诗《画》。跟着一起读吧。",
+          "title": "画",
+          "lines": [
+            "远看山有色，",
+            "近听水无声。",
+            "春去花还在，",
+            "人来鸟不惊。"
+          ],
+          "py": [
+            "yuǎn kàn shān yǒu sè",
+            "jìn tīng shuǐ wú shēng",
+            "chūn qù huā hái zài",
+            "rén lái niǎo bù jīng"
+          ],
+          "read": "画。远看山有色，近听水无声。春去花还在，人来鸟不惊。"
+        },
+        {
+          "type": "choice",
+          "q": "“近听水无声”的上一句",
+          "say": "近听水无声，它的上一句是什么？点一点，听一听。",
+          "prompt": {
+            "text": "（　　），近听水无声。"
+          },
+          "listen": true,
+          "cols": 3,
+          "options": [
+            "远看山有色",
+            "春去花还在",
+            "人来鸟不惊"
+          ],
+          "answer": 0,
+          "hint": "先远看，再近听。",
+          "after": "远看山有色，近听水无声。"
+        },
+        {
+          "type": "choice",
+          "q": "“人来鸟不惊”的上一句",
+          "say": "人来鸟不惊，它的上一句是什么？",
+          "prompt": {
+            "text": "（　　），人来鸟不惊。"
+          },
+          "listen": true,
+          "cols": 3,
+          "options": [
+            "近听水无声",
+            "春去花还在",
+            "远看山有色"
+          ],
+          "answer": 1,
+          "after": "春去花还在，人来鸟不惊。"
+        },
+        {
+          "type": "order",
+          "q": "《画》排顺序",
+          "say": "把古诗《画》按顺序排好。先点第一句。",
+          "prompt": {
+            "text": "画"
+          },
+          "pieces": [
+            "远看山有色",
+            "近听水无声",
+            "春去花还在",
+            "人来鸟不惊"
+          ],
+          "after": "背得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "《画》的插图",
+          "say": "下面哪张图，可能是古诗《画》的插图呢？",
+          "prompt": {
+            "text": "哪张是《画》的插图？"
+          },
+          "options": [
+            {
+              "pic": "🐰🐰🥬"
+            },
+            {
+              "pic": "svg:painting"
+            },
+            {
+              "pic": "🐇🌼"
+            }
+          ],
+          "answer": 1,
+          "hint": "这首诗的名字叫《画》，想一想。",
+          "after": "对！诗里写的是一幅画，画上的山、水、花、鸟都不会变。"
+        },
+        {
+          "type": "choice",
+          "q": "人来了鸟为什么不怕",
+          "say": "为什么人来了，鸟也不害怕？",
+          "prompt": {
+            "text": "人来鸟不惊，为什么？"
+          },
+          "listen": true,
+          "cols": 3,
+          "options": [
+            "因为是画上的鸟",
+            "因为鸟睡着了",
+            "因为鸟很勇敢"
+          ],
+          "answer": 0,
+          "after": "画上的鸟，当然不会飞走啦。"
+        }
       ]
     },
     {
@@ -135,12 +1415,126 @@
       "title": "悟空儿歌",
       "icon": "🐒",
       "items": [
-        { "type": "read", "q": "读儿歌", "say": "读一读这首儿歌。", "lines": ["悟空本领特别大，", "天兵天将都不怕。", "打败哪吒三太子，", "乐得悟空笑哈哈。"], "py": ["wù kōng běn lǐng tè bié dà", "tiān bīng tiān jiàng dōu bú pà", "dǎ bài né zhā sān tài zǐ", "lè de wù kōng xiào hā hā"], "read": "悟空本领特别大，天兵天将都不怕。打败哪吒三太子，乐得悟空笑哈哈。" },
-        { "type": "tapText", "q": "儿歌中 da 出现几次", "say": "找一找，哪些音节的拼音和这个一样？声调不同也算，都点出来。", "prompt": { "py": "da", "label": "声调不限" }, "lines": ["悟空本领特别大，", "天兵天将都不怕。", "打败哪吒三太子，", "乐得悟空笑哈哈。"], "py": ["wù kōng běn lǐng tè bié dà", "tiān bīng tiān jiàng dōu bú pà", "dǎ bài né zhā sān tài zǐ", "lè de wù kōng xiào hā hā"], "rule": { "base": "da" }, "after": "一共两次：大，打。" },
-        { "type": "tapText", "q": "韵母为 e 的有几个", "say": "找出韵母是这个的音节，声调不算，都点出来。", "prompt": { "py": "e", "label": "韵母是它" }, "lines": ["悟空本领特别大，", "天兵天将都不怕。", "打败哪吒三太子，", "乐得悟空笑哈哈。"], "py": ["wù kōng běn lǐng tè bié dà", "tiān bīng tiān jiàng dōu bú pà", "dǎ bài né zhā sān tài zǐ", "lè de wù kōng xiào hā hā"], "rule": { "final": "e" }, "after": "一共四个：特，哪，乐，得。" },
-        { "type": "spell", "q": "悟空 bú pà 天兵天将", "say": "悟空什么天兵天将？用拼音写出来：不怕。", "prompt": { "context": "悟空▢天兵天将。" }, "word": "bú pà", "after": "不怕！" },
-        { "type": "choice", "q": "悟空打败了谁", "say": "这首儿歌中，悟空打败了谁？", "listen": true, "cols": 3, "options": ["二郎神", "如来佛祖", "哪吒三太子"], "answer": 2, "after": "打败哪吒三太子！" },
-        { "type": "choice", "q": "悟空的心情", "say": "孙悟空的心情是怎样的？", "listen": true, "cols": 3, "options": [{ "pic": "😠", "text": "生气" }, { "pic": "😄", "text": "快乐" }, { "pic": "😨", "text": "害怕" }], "answer": 1, "hint": "儿歌最后一句说：乐得悟空笑哈哈。", "after": "乐得悟空笑哈哈，很快乐！" }
+        {
+          "type": "read",
+          "q": "读儿歌",
+          "say": "读一读这首儿歌。",
+          "lines": [
+            "悟空本领特别大，",
+            "天兵天将都不怕。",
+            "打败哪吒三太子，",
+            "乐得悟空笑哈哈。"
+          ],
+          "py": [
+            "wù kōng běn lǐng tè bié dà",
+            "tiān bīng tiān jiàng dōu bú pà",
+            "dǎ bài né zhā sān tài zǐ",
+            "lè de wù kōng xiào hā hā"
+          ],
+          "read": "悟空本领特别大，天兵天将都不怕。打败哪吒三太子，乐得悟空笑哈哈。",
+          "tapSay": {
+            "bài": "败，bài",
+            "né": "哪吒的哪，né"
+          }
+        },
+        {
+          "type": "tapText",
+          "q": "儿歌中 da 出现几次",
+          "say": "找一找，哪些音节的拼音和这个一样？声调不同也算，都点出来。",
+          "prompt": {
+            "py": "da",
+            "label": "声调不限"
+          },
+          "lines": [
+            "悟空本领特别大，",
+            "天兵天将都不怕。",
+            "打败哪吒三太子，",
+            "乐得悟空笑哈哈。"
+          ],
+          "py": [
+            "wù kōng běn lǐng tè bié dà",
+            "tiān bīng tiān jiàng dōu bú pà",
+            "dǎ bài né zhā sān tài zǐ",
+            "lè de wù kōng xiào hā hā"
+          ],
+          "rule": {
+            "base": "da"
+          },
+          "after": "一共两次：大，打。"
+        },
+        {
+          "type": "tapText",
+          "q": "韵母为 e 的有几个",
+          "say": "找出韵母是这个的音节，声调不算，都点出来。",
+          "prompt": {
+            "py": "e",
+            "label": "韵母是它"
+          },
+          "lines": [
+            "悟空本领特别大，",
+            "天兵天将都不怕。",
+            "打败哪吒三太子，",
+            "乐得悟空笑哈哈。"
+          ],
+          "py": [
+            "wù kōng běn lǐng tè bié dà",
+            "tiān bīng tiān jiàng dōu bú pà",
+            "dǎ bài né zhā sān tài zǐ",
+            "lè de wù kōng xiào hā hā"
+          ],
+          "rule": {
+            "final": "e"
+          },
+          "after": "一共有四个！"
+        },
+        {
+          "type": "spell",
+          "q": "悟空 bú pà 天兵天将",
+          "say": "悟空什么天兵天将？用拼音写出来：不怕。",
+          "prompt": {
+            "context": "悟空▢天兵天将。"
+          },
+          "word": "bú pà",
+          "after": "不怕！"
+        },
+        {
+          "type": "choice",
+          "q": "悟空打败了谁",
+          "say": "这首儿歌中，悟空打败了谁？",
+          "listen": true,
+          "cols": 3,
+          "options": [
+            "二郎神",
+            "如来佛祖",
+            "哪吒三太子"
+          ],
+          "answer": 2,
+          "after": "打败哪吒三太子！"
+        },
+        {
+          "type": "choice",
+          "q": "悟空的心情",
+          "say": "孙悟空的心情是怎样的？",
+          "listen": true,
+          "cols": 3,
+          "options": [
+            {
+              "pic": "😠",
+              "text": "生气"
+            },
+            {
+              "pic": "😄",
+              "text": "快乐"
+            },
+            {
+              "pic": "😨",
+              "text": "害怕"
+            }
+          ],
+          "answer": 1,
+          "hint": "儿歌最后一句说：乐得悟空笑哈哈。",
+          "after": "乐得悟空笑哈哈，很快乐！"
+        }
       ]
     },
     {
@@ -148,10 +1542,50 @@
       "title": "一起去旅行",
       "icon": "🧳",
       "items": [
-        { "type": "spell", "q": "bà ba", "say": "我和谁一起去旅行？看图，用拼音写：爸爸。", "prompt": { "pic": "👨", "context": "我和▢、▢一起去旅行。" }, "word": "bà ba", "after": "爸爸！第二个爸读得轻轻的，不标调。" },
-        { "type": "spell", "q": "mā ma", "say": "还有谁？用拼音写：妈妈。", "prompt": { "pic": "👩", "context": "我和{bà ba}、▢一起去旅行。" }, "word": "mā ma", "after": "妈妈！" },
-        { "type": "spell", "q": "dà bà", "say": "我们看到了壮观的三峡什么？写：大坝。", "prompt": { "pic": "svg:dam", "context": "我们看到了壮观的三峡▢，" }, "word": "dà bà", "after": "三峡大坝！" },
-        { "type": "spell", "q": "pù bù", "say": "还有美丽的黄果树什么？写：瀑布。", "prompt": { "pic": "svg:waterfall", "context": "还有美丽的黄果树▢。" }, "word": "pù bù", "after": "黄果树瀑布！" }
+        {
+          "type": "spell",
+          "q": "bà ba",
+          "say": "我和谁一起去旅行？看图，用拼音写：爸爸。",
+          "prompt": {
+            "pic": "👨",
+            "context": "我和▢、▢一起去旅行。"
+          },
+          "word": "bà ba",
+          "after": "爸爸！第二个爸读得轻轻的，不标调。"
+        },
+        {
+          "type": "spell",
+          "q": "mā ma",
+          "say": "还有谁？用拼音写：妈妈。",
+          "prompt": {
+            "pic": "👩",
+            "context": "我和{bà ba}、▢一起去旅行。"
+          },
+          "word": "mā ma",
+          "after": "妈妈！"
+        },
+        {
+          "type": "spell",
+          "q": "dà bà",
+          "say": "我们看到了壮观的三峡什么？写：大坝。",
+          "prompt": {
+            "pic": "svg:dam",
+            "context": "我们看到了壮观的三峡▢，"
+          },
+          "word": "dà bà",
+          "after": "三峡大坝！"
+        },
+        {
+          "type": "spell",
+          "q": "pù bù",
+          "say": "还有美丽的黄果树什么？写：瀑布。",
+          "prompt": {
+            "pic": "svg:waterfall",
+            "context": "还有美丽的黄果树▢。"
+          },
+          "word": "pù bù",
+          "after": "黄果树瀑布！"
+        }
       ]
     }
   ]

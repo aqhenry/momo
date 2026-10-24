@@ -1,6 +1,7 @@
 // 拼积木: initial brick + final brick = syllable brick, one of the three is missing.
 import { h, shuffle, shake } from '../ui.js';
 import { gridSVG, split, toneOf, withTone } from '../pinyin.js';
+import { S } from '../phrases.js';
 
 const CONFUSE = { b: ['d', 'p'], d: ['b', 't'], p: ['b', 'm'], m: ['n', 'f'], n: ['m', 'l'], l: ['n', 't'], t: ['f', 'd'], f: ['t', 'b'], y: ['w'], w: ['y'] };
 
@@ -53,12 +54,11 @@ export function render(root, item, ctx) {
       t.classList.add('wrong');
       t.disabled = true;
       shake(t);
-      ctx.wrong(o, item.hint || (missing === 1 ? '听听声调，再找一找。' : retryHint(parts, missing)));
+      ctx.wrong(o, item.hint || (missing === 1 ? S.blendTone : retryHint(missing)));
     }
   }
 }
 
-function retryHint(parts, missing) {
-  if (missing === 0) return '看看拼出来的音节，它开头是哪个声母？';
-  return '声母和韵母拼在一起，声调跟着韵母走哦。';
+function retryHint(missing) {
+  return missing === 0 ? S.blendInitial : S.blendRule;
 }
