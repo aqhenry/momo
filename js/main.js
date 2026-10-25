@@ -1,6 +1,6 @@
 import { h, wait } from './ui.js';
 import { store } from './store.js';
-import { speak, stopSpeaking, unlockAudio, preload, warmCache, sfx, praise, retry } from './audio.js';
+import { speak, stopSpeaking, preload, warmCache, sfx, praise, retry } from './audio.js';
 import { S, PRAISE, stageDone } from './phrases.js';
 import { BLOCKS, RARITY, blockURL, iconEl } from './blocks.js';
 import { answerDrop, isCombo, comboDrop, openChest, CHESTS } from './rewards.js';
@@ -27,7 +27,6 @@ const ITEM_TYPES = {
 };
 
 const app = document.getElementById('app');
-document.addEventListener('pointerdown', unlockAudio, { capture: true });
 // keep iOS from zooming / showing callouts on long-press
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('contextmenu', e => e.preventDefault());

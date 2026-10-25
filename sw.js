@@ -1,5 +1,5 @@
 // Network first (so new levels show up as soon as they're published), cache as offline fallback.
-const CACHE = 'momo-v4';
+const CACHE = 'momo-v5';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/main.js', 'js/ui.js', 'js/phrases.js', 'js/sprites.js', 'js/scene.js', 'js/fx.js', 'js/rewards.js', 'js/build3d.js',

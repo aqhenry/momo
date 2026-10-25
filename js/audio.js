@@ -3,7 +3,6 @@
 import { PRAISE, RETRY } from './phrases.js';
 
 let voice = null;
-let unlocked = false;
 
 function pickVoice() {
   const voices = speechSynthesis.getVoices().filter(v => /zh[-_]CN/i.test(v.lang));
@@ -30,7 +29,7 @@ function clip(text) {
     buffers.set(id, fetch(`audio/${id}.m4a`)
       .then(r => (r.ok ? r.arrayBuffer() : Promise.reject()))
       .then(data => new Promise((ok, fail) => ac().decodeAudioData(data, ok, fail)))
-      .catch(() => null));
+      .catch(() => { buffers.delete(id); return null; }));   // retry next time
   }
   return buffers.get(id);
 }
@@ -51,13 +50,25 @@ export function preload(texts) {
 let current = null;   // { stop() } for whatever is speaking now
 let token = 0;
 
-function playBuffer(buf) {
+async function playBuffer(buf) {
+  const c = ac();
+  if (!c) return;
+  // after an interruption the context only comes back on a tap; until then skip the clip
+  // instead of waiting for an 'ended' event that would never fire
+  if (c.state !== 'running') {
+    c.resume().catch(() => {});
+    await new Promise(r => setTimeout(r, 300));
+    if (c.state !== 'running') return;
+  }
   return new Promise(resolve => {
-    const src = ac().createBufferSource();
+    const src = c.createBufferSource();
     src.buffer = buf;
-    src.connect(ac().destination);
-    src.onended = () => resolve();
-    current = { stop: () => { try { src.stop(); } catch (e) {} resolve(); } };
+    src.connect(c.destination);
+    // safety net: the clock freezes if the audio gets interrupted mid-clip
+    const timer = setTimeout(resolve, buf.duration * 1000 + 1500);
+    const done = () => { clearTimeout(timer); resolve(); };
+    src.onended = done;
+    current = { stop: () => { try { src.stop(); } catch (e) {} done(); } };
     src.start();
   });
 }
@@ -103,29 +114,58 @@ export function stopSpeaking() {
 }
 
 let ctx = null;
+let ranBefore = false;   // the context has played at least once, so a non-running state means an interruption
 function ac() {
-  if (!ctx) {
+  if (!ctx || ctx.state === 'closed') {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return null;
-    ctx = new AC();
+    const c = (ctx = new AC());
+    // if audio stops mid-sentence (a call, Siri, another app), end the sentence so the game doesn't wait on it
+    c.onstatechange = () => {
+      if (c.state === 'running') ranBefore = true;
+      else if (c === ctx) current?.stop();
+    };
   }
-  if (ctx.state === 'suspended') ctx.resume();
+  // 'suspended' or iOS's 'interrupted' (after a phone call / other app's audio)
+  if (ctx.state !== 'running') ctx.resume().catch(() => {});
   return ctx;
 }
 
-// iOS needs audio and speech to start inside a user gesture once.
+// iOS only lets audio start, or restart after an interruption, inside a tap. So every tap checks:
+// resume the context, and if iOS refuses to bring it back, replace it with a fresh one
+// (decoded clips are plain AudioBuffers and work in the new context too).
+let primedSpeech = false;
 export function unlockAudio() {
-  if (unlocked) return;
-  unlocked = true;
   // play through the silent switch, like a game would
-  if (navigator.audioSession) navigator.audioSession.type = 'playback';
-  ac();
+  if (navigator.audioSession && navigator.audioSession.type !== 'playback') navigator.audioSession.type = 'playback';
+  const c = ac();
+  if (c && c.state !== 'running' && ranBefore) {
+    const stale = c;
+    setTimeout(() => {
+      if (stale === ctx && stale.state !== 'running') {
+        stale.close().catch(() => {});
+        ctx = null;
+        ac();
+      }
+    }, 400);
+  }
   if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance(' ');
-    u.volume = 0;
-    speechSynthesis.speak(u);
+    speechSynthesis.resume();
+    if (!primedSpeech) {
+      primedSpeech = true;
+      const u = new SpeechSynthesisUtterance(' ');
+      u.volume = 0;
+      speechSynthesis.speak(u);
+    }
   }
 }
+// touchend / click count as a user gesture on iOS (pointerdown from a finger does not)
+for (const ev of ['pointerdown', 'pointerup', 'touchend', 'click']) {
+  document.addEventListener(ev, unlockAudio, { capture: true, passive: true });
+}
+// coming back from a call or another app: try straight away (works on some iOS versions; otherwise the next tap does it)
+document.addEventListener('visibilitychange', () => { if (!document.hidden && ctx) ac(); });
+addEventListener('pageshow', () => { if (ctx) ac(); });
 
 function tone(freq, start, dur, type = 'square', gain = 0.08) {
   const c = ac();
