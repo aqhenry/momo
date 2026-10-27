@@ -1,10 +1,22 @@
 [
   {
+    "id": "math-u2",
+    "chapter": 2,
+    "subject": "数学",
+    "title": "方块农场",
+    "subtitle": "一年级上 · 5 以内加减法",
+    "date": "2026-10-27",
+    "block": "crafting_table",
+    "path": "levels/math-u2/level.json"
+  },
+  {
     "id": "yuwen-u2",
     "subject": "语文",
     "title": "拼音大冒险",
     "subtitle": "一年级上 · 第二单元随堂练习复习",
     "date": "2026-10-24",
-    "path": "levels/yuwen-u2/level.json"
+    "path": "levels/yuwen-u2/level.json",
+    "chapter": 1,
+    "block": "bookshelf"
   }
 ]

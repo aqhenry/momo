@@ -1,0 +1,258 @@
+{
+  "apple": {
+    "zh": "苹果",
+    "prompt": "shiny red apple with a small green leaf"
+  },
+  "egg": {
+    "zh": "鸡蛋",
+    "prompt": "single white chicken egg, standing upright"
+  },
+  "cake": {
+    "zh": "蛋糕",
+    "prompt": "small round birthday cake slice with pink frosting and a cherry"
+  },
+  "melon_slice": {
+    "zh": "西瓜片",
+    "prompt": "triangle slice of watermelon with red flesh, black seeds and green rind"
+  },
+  "melon_rind": {
+    "zh": "西瓜皮",
+    "prompt": "eaten watermelon rind, only the curved green and pale skin left, no red flesh"
+  },
+  "chicken": {
+    "zh": "小鸡",
+    "prompt": "cute white chicken with red comb and yellow beak, side view"
+  },
+  "sheep": {
+    "zh": "小羊",
+    "prompt": "cute fluffy white sheep, side view"
+  },
+  "pig": {
+    "zh": "小猪",
+    "prompt": "cute pink pig, side view"
+  },
+  "cow": {
+    "zh": "奶牛",
+    "prompt": "cute black and white cow, side view"
+  },
+  "cat": {
+    "zh": "小猫",
+    "prompt": "cute orange kitten sitting"
+  },
+  "bee": {
+    "zh": "蜜蜂",
+    "prompt": "cute round bumblebee with yellow and black stripes and small wings"
+  },
+  "fish": {
+    "zh": "小鱼",
+    "prompt": "cute orange fish swimming, side view"
+  },
+  "carrot": {
+    "zh": "胡萝卜",
+    "prompt": "orange carrot with green leaves on top"
+  },
+  "radish": {
+    "zh": "萝卜",
+    "prompt": "big white radish with a pink top and green leaves, like the turnip in a children's story"
+  },
+  "pumpkin": {
+    "zh": "南瓜",
+    "prompt": "round orange pumpkin with a short stem"
+  },
+  "bread": {
+    "zh": "面包",
+    "prompt": "golden loaf of bread"
+  },
+  "cookie": {
+    "zh": "饼干",
+    "prompt": "round chocolate chip cookie"
+  },
+  "grapes": {
+    "zh": "葡萄",
+    "prompt": "bunch of purple grapes with a green leaf"
+  },
+  "rice_bowl": {
+    "zh": "米饭",
+    "prompt": "blue bowl full of white rice"
+  },
+  "nest": {
+    "zh": "鸡窝",
+    "prompt": "round straw nest, empty, seen slightly from above"
+  },
+  "wheat": {
+    "zh": "麦苗",
+    "prompt": "small green wheat sprout plant growing from a bit of soil"
+  },
+  "flower": {
+    "zh": "小红花",
+    "prompt": "red flower with yellow center and a green stem with two leaves"
+  },
+  "vase": {
+    "zh": "花瓶",
+    "prompt": "round blue flower vase, empty"
+  },
+  "balloon": {
+    "zh": "气球",
+    "prompt": "big round red party balloon with a shiny highlight and a short string, filling the frame"
+  },
+  "umbrella": {
+    "zh": "雨伞",
+    "prompt": "open red umbrella with a curved handle"
+  },
+  "umbrella_closed": {
+    "zh": "收起的伞",
+    "prompt": "closed folded umbrella standing upright with a straight handle"
+  },
+  "kid": {
+    "zh": "小朋友",
+    "prompt": "single cheerful young child boy with round face, black hair and a blue shirt, full body, standing alone, no beard"
+  },
+  "girl": {
+    "zh": "小女孩",
+    "prompt": "single cheerful young girl with black pigtails and a pink dress, full body, standing alone"
+  },
+  "girl_singing": {
+    "zh": "小姑娘唱歌",
+    "prompt": "single little girl singing with her mouth wide open, music notes near her, full body"
+  },
+  "farmer": {
+    "zh": "村民",
+    "prompt": "friendly farmer villager with a straw hat and green overalls, full body, standing"
+  },
+  "dad": {
+    "zh": "爸爸",
+    "prompt": "smiling young father with short black hair and a blue shirt, upper body"
+  },
+  "mom": {
+    "zh": "妈妈",
+    "prompt": "smiling young mother with long black hair and a red top, upper body"
+  },
+  "grandpa": {
+    "zh": "爷爷",
+    "prompt": "smiling grandpa with white hair and glasses, upper body"
+  },
+  "mother_daughter": {
+    "zh": "母女",
+    "prompt": "close-up of a smiling mother and her little daughter cheek to cheek, just their two faces and shoulders, filling the frame"
+  },
+  "haircut": {
+    "zh": "理发",
+    "prompt": "close-up of a smiling little boy getting a haircut, a big pair of silver scissors snipping his black hair, his head and shoulders with a white cape, filling the frame"
+  },
+  "rooster": {
+    "zh": "公鸡",
+    "prompt": "rooster crowing with its beak open, red comb, colourful tail"
+  },
+  "goose": {
+    "zh": "大白鹅",
+    "prompt": "white goose with orange beak swimming on a little water"
+  },
+  "turtle": {
+    "zh": "乌龟",
+    "prompt": "cute green turtle walking, side view"
+  },
+  "deer": {
+    "zh": "小鹿",
+    "prompt": "cute spotted fawn deer with small antlers, standing, side view"
+  },
+  "horse": {
+    "zh": "马",
+    "prompt": "brown horse standing, side view"
+  },
+  "rabbit": {
+    "zh": "小兔子",
+    "prompt": "cute white rabbit with long ears, sitting"
+  },
+  "frog": {
+    "zh": "青蛙",
+    "prompt": "cute green frog sitting"
+  },
+  "rabbit_cabbage": {
+    "zh": "兔子和白菜",
+    "prompt": "cute white rabbit hugging a green cabbage"
+  },
+  "rabbit_flower": {
+    "zh": "兔子和花",
+    "prompt": "cute white rabbit sniffing a yellow flower"
+  },
+  "monkey_happy": {
+    "zh": "开心的猴子",
+    "prompt": "monkey king face laughing happily, golden fur, headband"
+  },
+  "monkey_angry": {
+    "zh": "生气的猴子",
+    "prompt": "monkey king face looking angry with frowning eyebrows, golden fur, headband"
+  },
+  "monkey_scared": {
+    "zh": "害怕的猴子",
+    "prompt": "monkey king face looking scared and trembling, golden fur, headband"
+  },
+  "shirt": {
+    "zh": "衣服",
+    "prompt": "blue t-shirt laid flat"
+  },
+  "radio": {
+    "zh": "收音机",
+    "prompt": "old red radio with an antenna and a round speaker"
+  },
+  "water_splash": {
+    "zh": "泼水",
+    "prompt": "blue bucket throwing a big splash of water"
+  },
+  "drum": {
+    "zh": "小鼓",
+    "prompt": "red toy drum with two drumsticks"
+  },
+  "target": {
+    "zh": "靶子",
+    "prompt": "round archery target with red and white rings and an arrow in the center"
+  },
+  "picture_book": {
+    "zh": "图画本",
+    "prompt": "children's drawing book with a colourful crayon drawing of a sun and a house on the cover"
+  },
+  "open_book": {
+    "zh": "书",
+    "prompt": "open book with pages showing lines of text"
+  },
+  "road": {
+    "zh": "马路",
+    "prompt": "straight grey road going into the distance with white dashed lines and grass on both sides"
+  },
+  "rocking_horse": {
+    "zh": "木马",
+    "prompt": "one wooden toy rocking horse with a red saddle standing on curved rockers, side view"
+  },
+  "map": {
+    "zh": "地图",
+    "prompt": "folded paper world map with green land and blue sea"
+  },
+  "crayon": {
+    "zh": "蜡笔",
+    "prompt": "three crayons, red, blue and yellow, lying together"
+  },
+  "megaphone": {
+    "zh": "喇叭",
+    "prompt": "red and yellow loudspeaker megaphone"
+  },
+  "tree": {
+    "zh": "大树",
+    "prompt": "round green leafy tree with a brown trunk"
+  },
+  "compass": {
+    "zh": "指南针",
+    "prompt": "round compass with a red needle"
+  },
+  "painting": {
+    "zh": "山水画",
+    "prompt": "framed landscape painting of mountains, a river, pink flowers and a small bird, wooden frame"
+  },
+  "waterfall": {
+    "zh": "瀑布",
+    "prompt": "big waterfall pouring from green cliffs into a blue pool with white foam"
+  },
+  "dam": {
+    "zh": "大坝",
+    "prompt": "huge concrete river dam with water flowing through its gates"
+  }
+}

@@ -106,6 +106,14 @@ const DRAW = {
   chest_iron_open: g => drawChest(g, true, CHEST_COLORS.iron),
   chest_gold: g => drawChest(g, false, CHEST_COLORS.gold),
   chest_gold_open: g => drawChest(g, true, CHEST_COLORS.gold),
+  scale(g) {
+    g.rect(7, 2, 2, 11, '#8a5a2b');
+    g.rect(2, 4, 12, 1, '#c9c9c9');
+    g.line(2, 5, 1, 9, '#9a9a9a'); g.line(2, 5, 4, 9, '#9a9a9a');
+    g.line(13, 5, 12, 9, '#9a9a9a'); g.line(13, 5, 15, 9, '#9a9a9a');
+    g.rect(0, 9, 6, 2, '#ffd23a'); g.rect(10, 9, 6, 2, '#ffd23a');
+    g.rect(4, 13, 8, 2, '#8a5a2b');
+  },
   gear(g) {
     g.disc(8, 8, 5.5, '#9a9a9a');
     for (const [x, y] of [[7, 0], [7, 13], [0, 7], [13, 7], [2, 2], [12, 2], [2, 12], [12, 12]]) g.rect(x, y, 3, 3, '#9a9a9a');

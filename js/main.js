@@ -15,6 +15,7 @@ import * as spell from './items/spell.js';
 import * as stroke from './items/stroke.js';
 import * as order from './items/order.js';
 import { renderRead, renderTap } from './items/text.js';
+import { renderCalc, renderCraft, renderPattern } from './items/math.js';
 
 const ITEM_TYPES = {
   choice: choice.render,
@@ -24,6 +25,9 @@ const ITEM_TYPES = {
   order: order.render,
   read: renderRead,
   tapText: renderTap,
+  calc: renderCalc,
+  craft: renderCraft,
+  pattern: renderPattern,
 };
 
 const app = document.getElementById('app');
@@ -103,7 +107,7 @@ async function screenHome() {
     return h('button.world-row', { onclick: () => { sfx.tap(); go(`#/level/${meta.id}`); } },
       iconEl(meta.block || 'grass'),
       h('div.wr-text',
-        h('div.wr-tag', meta.subject),
+        h('div.wr-tag', meta.chapter ? `第${'一二三四五六七八九十'[meta.chapter - 1]}大关 · ${meta.subject}` : meta.subject),
         h('div.wr-title', meta.title),
         h('div.wr-sub', meta.subtitle || '')),
       h('div.wr-progress', h('div', spriteEl('star'), ` ${st.stars}`), h('div', `${st.done}/${st.total}关`)));
@@ -224,7 +228,7 @@ async function screenPlay(levelId, stageId) {
         solved = true;
         const first = attempts === 0;
         if (first) { firstTry++; streak++; } else streak = 0;
-        const block = answerDrop(current, first);
+        const block = answerDrop(current, first, level.blockSet);
         const isNew = store.addBlock(block);
         earned.push(block);
         sfx.right();
@@ -241,7 +245,7 @@ async function screenPlay(levelId, stageId) {
         });
         const lines = [isNew ? S.newFind : praise(), after];
         if (first && isCombo(streak)) {
-          const bonus = comboDrop();
+          const bonus = comboDrop(level.blockSet);
           const bonusNew = store.addBlock(bonus);
           earned.push(bonus);
           setTimeout(() => { banner(bonus, `三连击！${BLOCKS[bonus].name}${bonusNew ? '（新）' : ''}`); sfx.chest(); }, 900);
@@ -264,7 +268,7 @@ async function screenPlay(levelId, stageId) {
     const stars = rate >= 0.9 ? 3 : rate >= 0.7 ? 2 : 1;
     const replay = !!store.stage(levelId, stageId)?.done;
     store.finishStage(levelId, stageId, { stars, firstTry, total, mistakes });
-    const chest = openChest(stars, replay);
+    const chest = openChest(stars, replay, level.blockSet);
     const fresh = chest.blocks.map(b => store.addBlock(b));
     showReward(level, stageIdx, stars, chest, fresh, earned, replay);
   }

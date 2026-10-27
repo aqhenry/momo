@@ -9,7 +9,8 @@ export const RARITY = [
   { key: 'legendary', name: '传说', color: '#ffb020' },
 ];
 
-// keys are stored in saved inventories/worlds, so never rename one
+// keys are stored in saved inventories/worlds, so never rename one.
+// `set`: blocks that only drop in adventures with that blockSet (each new adventure brings its own).
 export const BLOCKS = {
   grass:   { name: '草方块', rarity: 0 },
   dirt:    { name: '泥土', rarity: 0 },
@@ -65,9 +66,18 @@ export const BLOCKS = {
   rainbow:       { name: '彩虹方块', rarity: 4 },
   star_block:    { name: '星空方块', rarity: 4, glow: true },
   crystal_core:  { name: '能量水晶', rarity: 4, glow: true, clear: true },
+
+  // 第二大关 · 数学
+  crafting_table: { name: '工作台', rarity: 1, set: 'math' },
+  furnace:        { name: '熔炉', rarity: 1, set: 'math' },
+  bee_nest:       { name: '蜂巢', rarity: 2, set: 'math' },
+  honey_block:    { name: '蜂蜜块', rarity: 2, set: 'math', clear: true },
+  ...Object.fromEntries([...'0123456789'].map(d => [`num_${d}`, { name: `数字${d}`, rarity: 2, set: 'math' }])),
+  golden_apple_block: { name: '金苹果块', rarity: 4, set: 'math', glow: true },
 };
 
-export const blocksOfRarity = r => Object.keys(BLOCKS).filter(k => BLOCKS[k].rarity === r);
+// blocks of a rarity that can drop in an adventure using `set` (base blocks always can)
+export const blocksOfRarity = (r, set) => Object.keys(BLOCKS).filter(k => BLOCKS[k].rarity === r && (!BLOCKS[k].set || BLOCKS[k].set === set));
 
 function rng(seed) {
   let s = seed >>> 0;
@@ -249,6 +259,57 @@ const PAINT = {
   },
 };
 
+// 3x5 digit glyphs for the number blocks
+const DIGITS = ['111101101101111', '010110010010111', '111001111100111', '111001111001111', '101101111001001',
+  '111100111001111', '111100111101111', '111001010010010', '111101111101111', '111101111001111'];
+const DIGIT_COLORS = [[90, 90, 100], [214, 60, 50], [235, 140, 40], [235, 200, 40], [70, 170, 70],
+  [50, 160, 200], [60, 100, 210], [130, 80, 200], [210, 90, 160], [120, 80, 50]];
+function numberBlock(px, d) {
+  const c = DIGIT_COLORS[d];
+  each((x, y) => px(x, y, shade(c, edgeK(x, y))));
+  const glyph = DIGITS[d];
+  for (let gy = 0; gy < 5; gy++) for (let gx = 0; gx < 3; gx++) {
+    if (glyph[gy * 3 + gx] !== '1') continue;
+    for (let k = 0; k < 4; k++) {
+      const x = 5 + gx * 2 + (k & 1), y = 3 + gy * 2 + (k >> 1);
+      px(x + 1, y + 1, shade(c, 0.55));
+      px(x, y, '#ffffff');
+    }
+  }
+}
+for (let d = 0; d < 10; d++) PAINT[`num_${d}`] = px => numberBlock(px, d);
+
+Object.assign(PAINT, {
+  crafting_table: (px, r) => {
+    planksOf(px, r, [162, 120, 70]);
+    for (let y = 5; y < 13; y++) px(4, y, 'rgb(80,55,30)');                       // saw handle
+    for (let x = 3; x < 7; x++) px(x, 5, 'rgb(170,170,170)');
+    for (let y = 4; y < 12; y++) px(11, y, 'rgb(90,60,30)');                       // hammer
+    for (let x = 9; x < 14; x++) { px(x, 4, 'rgb(150,150,150)'); px(x, 5, 'rgb(120,120,120)'); }
+  },
+  furnace: (px, r) => {
+    PAINT.cobble(px, r);
+    for (let y = 8; y < 14; y++) for (let x = 4; x < 12; x++) px(x, y, y > 11 ? (r() < 0.5 ? 'rgb(255,150,40)' : 'rgb(255,210,80)') : 'rgb(30,30,30)');
+  },
+  bee_nest: (px, r) => each((x, y) => {
+    const hole = (y % 4 === 2) && ((x + (y >> 2) * 2) % 4 === 1);
+    px(x, y, hole ? 'rgb(90,60,20)' : shade([205, 160, 70], edgeK(x, y) * (0.92 + r() * 0.1)));
+  }),
+  honey_block: px => each((x, y) => {
+    const border = x === 0 || y === 0 || x === 15 || y === 15;
+    const inner = x > 3 && x < 12 && y > 3 && y < 12;
+    px(x, y, border ? 'rgb(220,140,20)' : inner ? 'rgba(250,190,50,0.95)' : 'rgba(245,170,40,0.75)');
+  }),
+  golden_apple_block: (px, r) => {
+    metal(px, r, [245, 205, 60]);
+    const apple = ['..0110..', '.111111.', '11111111', '11111111', '11111111', '.111111.', '..1111..'];
+    apple.forEach((row, y) => [...row].forEach((c, x) => {
+      if (c === '1') px(4 + x, 5 + y, x < 3 && y < 3 ? 'rgb(255,250,200)' : 'rgb(255,225,90)');
+      if (c === '0') px(4 + x, 5 + y, 'rgb(90,140,40)');
+    }));
+  },
+});
+
 const TOP = {
   grass: (px, r) => noise(px, r, [95, 159, 53], 0.18),
   log: (px, r) => rings(px, r, [102, 81, 50], [176, 140, 86]),
@@ -260,6 +321,12 @@ const TOP = {
   melon: (px, r) => each((x, y) => px(x, y, shade([110, 160, 40], (Math.abs(x - 7.5) + Math.abs(y - 7.5)) % 4 < 2 ? 1 : 0.8))),
   bookshelf: (px, r) => planksOf(px, r, [162, 130, 78]),
   sandstone: (px, r) => noise(px, r, [222, 208, 160], 0.04),
+  crafting_table: (px, r) => {
+    planksOf(px, r, [176, 132, 80]);
+    for (let i = 0; i < 16; i++) { px(5, i, 'rgb(110,75,40)'); px(10, i, 'rgb(110,75,40)'); px(i, 5, 'rgb(110,75,40)'); px(i, 10, 'rgb(110,75,40)'); }
+  },
+  furnace: (px, r) => noise(px, r, [125, 125, 125], 0.12),
+  bee_nest: (px, r) => planksOf(px, r, [196, 150, 80]),
 };
 const BOTTOM = { grass: PAINT.dirt, bookshelf: TOP.bookshelf, log: TOP.log, hay: TOP.hay };
 

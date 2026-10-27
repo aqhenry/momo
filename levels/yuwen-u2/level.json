@@ -14,7 +14,7 @@
           "q": "公鸡打鸣 → o",
           "say": "公鸡喔喔叫，它藏着哪个字母？",
           "prompt": {
-            "pic": "🐓",
+            "pic": "art:rooster",
             "label": "公鸡打鸣"
           },
           "options": [
@@ -39,7 +39,7 @@
           "q": "白鹅 → e",
           "say": "白鹅在水里游，它藏着哪个字母？",
           "prompt": {
-            "pic": "🪿",
+            "pic": "art:goose",
             "label": "白鹅"
           },
           "options": [
@@ -64,7 +64,7 @@
           "q": "张大嘴巴 → a",
           "say": "小姑娘张大嘴巴唱歌，啊——，是哪个字母？",
           "prompt": {
-            "pic": "👧🎤",
+            "pic": "art:girl_singing",
             "label": "张大嘴巴 啊——"
           },
           "options": [
@@ -89,7 +89,7 @@
           "q": "衣服 → i",
           "say": "衣服的衣，藏着哪个字母？",
           "prompt": {
-            "pic": "👕",
+            "pic": "art:shirt",
             "label": "衣服"
           },
           "options": [
@@ -114,7 +114,7 @@
           "q": "乌龟 → u",
           "say": "乌龟的乌，藏着哪个字母？",
           "prompt": {
-            "pic": "🐢",
+            "pic": "art:turtle",
             "label": "乌龟"
           },
           "options": [
@@ -139,7 +139,7 @@
           "q": "小鱼 → ü",
           "say": "小鱼吐泡泡，藏着哪个字母？",
           "prompt": {
-            "pic": "🐟",
+            "pic": "art:fish",
             "label": "小鱼吐泡泡"
           },
           "options": [
@@ -164,7 +164,7 @@
           "q": "听广播 → b",
           "say": "听广播，藏着哪个字母？",
           "prompt": {
-            "pic": "📻",
+            "pic": "art:radio",
             "label": "听广播"
           },
           "options": [
@@ -189,7 +189,7 @@
           "q": "泼水 → p",
           "say": "泼水，藏着哪个字母？",
           "prompt": {
-            "pic": "💦",
+            "pic": "art:water_splash",
             "label": "泼水"
           },
           "options": [
@@ -214,7 +214,7 @@
           "q": "打鼓 → d",
           "say": "小朋友在打鼓，鼓和鼓槌藏着哪个字母？",
           "prompt": {
-            "pic": "🥁",
+            "pic": "art:drum",
             "label": "打鼓"
           },
           "options": [
@@ -239,7 +239,7 @@
           "q": "伞柄 → t",
           "say": "雨伞的伞柄，像哪个字母？",
           "prompt": {
-            "pic": "🌂",
+            "pic": "art:umbrella_closed",
             "label": "伞柄"
           },
           "options": [
@@ -271,7 +271,7 @@
           "q": "鹿 lù",
           "say": "这是小鹿的鹿。鹿，是第几声？选一选。",
           "prompt": {
-            "pic": "🦌",
+            "pic": "art:deer",
             "label": "鹿",
             "picSay": "鹿"
           },
@@ -303,7 +303,7 @@
           "q": "马 mǎ",
           "say": "这是马。马，是第几声？",
           "prompt": {
-            "pic": "🐴",
+            "pic": "art:horse",
             "label": "马",
             "picSay": "马"
           },
@@ -335,7 +335,7 @@
           "q": "兔 tù",
           "say": "这是小兔子的兔。兔，是第几声？",
           "prompt": {
-            "pic": "🐰",
+            "pic": "art:rabbit",
             "label": "兔",
             "picSay": "兔"
           },
@@ -367,7 +367,7 @@
           "q": "鱼 yú",
           "say": "这是鱼。鱼，是第几声？",
           "prompt": {
-            "pic": "🐟",
+            "pic": "art:fish",
             "label": "鱼",
             "picSay": "鱼"
           },
@@ -399,7 +399,7 @@
           "q": "鹅 é",
           "say": "这是大白鹅的鹅。鹅，是第几声？",
           "prompt": {
-            "pic": "🪿",
+            "pic": "art:goose",
             "label": "鹅",
             "picSay": "鹅"
           },
@@ -431,7 +431,7 @@
           "q": "蛙 wā",
           "say": "这是青蛙的蛙。蛙，是第几声？",
           "prompt": {
-            "pic": "🐸",
+            "pic": "art:frog",
             "label": "蛙",
             "picSay": "蛙"
           },
@@ -603,7 +603,7 @@
           "q": "拔萝卜 → bá",
           "say": "拔萝卜的拔，是哪个音节？",
           "prompt": {
-            "pic": "🥕",
+            "pic": "art:radish",
             "label": "拔萝卜",
             "picSay": "拔萝卜"
           },
@@ -631,7 +631,7 @@
           "q": "八 → bā",
           "say": "数字八，是哪个音节？",
           "prompt": {
-            "pic": "8️⃣",
+            "pic": "text:8",
             "label": "八",
             "picSay": "八"
           },
@@ -659,7 +659,7 @@
           "q": "靶子 → bǎ",
           "say": "射箭的靶子，靶，是哪个音节？",
           "prompt": {
-            "pic": "🎯",
+            "pic": "art:target",
             "label": "靶子",
             "picSay": "靶子"
           },
@@ -687,7 +687,7 @@
           "q": "葡萄 → pú",
           "say": "葡萄的葡，是哪个音节？",
           "prompt": {
-            "pic": "🍇",
+            "pic": "art:grapes",
             "label": "葡萄",
             "picSay": "葡萄"
           },
@@ -715,7 +715,7 @@
           "q": "图画本 → tú",
           "say": "图画本的图，是哪个音节？",
           "prompt": {
-            "pic": "📒🖍️",
+            "pic": "art:picture_book",
             "label": "图画本",
             "picSay": "图画本"
           },
@@ -743,7 +743,7 @@
           "q": "读书 → dú",
           "say": "读书的读，是哪个音节？",
           "prompt": {
-            "pic": "📖",
+            "pic": "art:open_book",
             "label": "读书",
             "picSay": "读书"
           },
@@ -771,7 +771,7 @@
           "q": "写 bǎ（靶）",
           "say": "把靶子的靶，写在四线三格里。先放声母，再放韵母。",
           "prompt": {
-            "pic": "🎯",
+            "pic": "art:target",
             "label": "靶",
             "picSay": "靶"
           },
@@ -783,7 +783,7 @@
           "q": "写 pú（葡）",
           "say": "把葡萄的葡，写在四线三格里。",
           "prompt": {
-            "pic": "🍇",
+            "pic": "art:grapes",
             "label": "葡",
             "picSay": "葡"
           },
@@ -814,7 +814,7 @@
           "q": "马路 mǎ lù",
           "say": "看图写音节：马路。",
           "prompt": {
-            "pic": "🛣️",
+            "pic": "art:road",
             "label": "马路",
             "picSay": "马路"
           },
@@ -826,7 +826,7 @@
           "q": "木马 mù mǎ",
           "say": "看图写音节：木马。",
           "prompt": {
-            "pic": "🎠",
+            "pic": "art:rocking_horse",
             "label": "木马",
             "picSay": "木马"
           },
@@ -838,7 +838,7 @@
           "q": "大米 dà mǐ",
           "say": "看图写音节：大米。",
           "prompt": {
-            "pic": "🍚",
+            "pic": "art:rice_bowl",
             "label": "大米",
             "picSay": "大米"
           },
@@ -850,7 +850,7 @@
           "q": "地图 dì tú",
           "say": "看图写音节：地图。",
           "prompt": {
-            "pic": "🗺️",
+            "pic": "art:map",
             "label": "地图",
             "picSay": "地图"
           },
@@ -862,7 +862,7 @@
           "q": "蜡笔 là bǐ",
           "say": "看图写音节：蜡笔。",
           "prompt": {
-            "pic": "🖍️",
+            "pic": "art:crayon",
             "label": "蜡笔",
             "picSay": "蜡笔"
           },
@@ -1169,7 +1169,7 @@
           "q": "理发 → lǐ fà",
           "say": "看图，读一读拼音，选出对的词语。",
           "prompt": {
-            "pic": "💇‍♂️"
+            "pic": "art:haircut"
           },
           "options": [
             {
@@ -1191,7 +1191,7 @@
           "q": "母女 → mǔ nǚ",
           "say": "这张图是哪个词语？",
           "prompt": {
-            "pic": "👩‍👧"
+            "pic": "art:mother_daughter"
           },
           "options": [
             {
@@ -1213,7 +1213,7 @@
           "q": "喇叭 → lǎ ba",
           "say": "这张图是哪个词语？",
           "prompt": {
-            "pic": "📢"
+            "pic": "art:megaphone"
           },
           "options": [
             {
@@ -1239,13 +1239,13 @@
           },
           "options": [
             {
-              "pic": "🎠"
+              "pic": "art:rocking_horse"
             },
             {
-              "pic": "🐴"
+              "pic": "art:horse"
             },
             {
-              "pic": "🌳"
+              "pic": "art:tree"
             }
           ],
           "answer": 0,
@@ -1260,13 +1260,13 @@
           },
           "options": [
             {
-              "pic": "📖"
+              "pic": "art:open_book"
             },
             {
-              "pic": "🗺️"
+              "pic": "art:map"
             },
             {
-              "pic": "🧭"
+              "pic": "art:compass"
             }
           ],
           "answer": 1,
@@ -1281,13 +1281,13 @@
           },
           "options": [
             {
-              "pic": "👩"
+              "pic": "art:mom"
             },
             {
-              "pic": "👴"
+              "pic": "art:grandpa"
             },
             {
-              "pic": "👨"
+              "pic": "art:dad"
             }
           ],
           "answer": 2,
@@ -1378,13 +1378,13 @@
           },
           "options": [
             {
-              "pic": "🐰🐰🥬"
+              "pic": "art:rabbit_cabbage"
             },
             {
-              "pic": "svg:painting"
+              "pic": "art:painting"
             },
             {
-              "pic": "🐇🌼"
+              "pic": "art:rabbit_flower"
             }
           ],
           "answer": 1,
@@ -1519,15 +1519,15 @@
           "cols": 3,
           "options": [
             {
-              "pic": "😠",
+              "pic": "art:monkey_angry",
               "text": "生气"
             },
             {
-              "pic": "😄",
+              "pic": "art:monkey_happy",
               "text": "快乐"
             },
             {
-              "pic": "😨",
+              "pic": "art:monkey_scared",
               "text": "害怕"
             }
           ],
@@ -1547,7 +1547,7 @@
           "q": "bà ba",
           "say": "我和谁一起去旅行？看图，用拼音写：爸爸。",
           "prompt": {
-            "pic": "👨",
+            "pic": "art:dad",
             "context": "我和▢、▢一起去旅行。"
           },
           "word": "bà ba",
@@ -1558,7 +1558,7 @@
           "q": "mā ma",
           "say": "还有谁？用拼音写：妈妈。",
           "prompt": {
-            "pic": "👩",
+            "pic": "art:mom",
             "context": "我和{bà ba}、▢一起去旅行。"
           },
           "word": "mā ma",
@@ -1569,7 +1569,7 @@
           "q": "dà bà",
           "say": "我们看到了壮观的三峡什么？写：大坝。",
           "prompt": {
-            "pic": "svg:dam",
+            "pic": "art:dam",
             "context": "我们看到了壮观的三峡▢，"
           },
           "word": "dà bà",
@@ -1580,7 +1580,7 @@
           "q": "pù bù",
           "say": "还有美丽的黄果树什么？写：瀑布。",
           "prompt": {
-            "pic": "svg:waterfall",
+            "pic": "art:waterfall",
             "context": "还有美丽的黄果树▢。"
           },
           "word": "pù bù",
