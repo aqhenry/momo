@@ -1,4 +1,4 @@
-import { h, wait } from './ui.js';
+import { h, wait, shuffle } from './ui.js';
 import { store } from './store.js';
 import { speak, stopSpeaking, preload, warmCache, sfx, praise, retry } from './audio.js';
 import { S, PRAISE, stageDone } from './phrases.js';
@@ -16,6 +16,7 @@ import * as stroke from './items/stroke.js';
 import * as order from './items/order.js';
 import { renderRead, renderTap } from './items/text.js';
 import { renderCalc, renderCraft, renderPattern } from './items/math.js';
+import { renderHunt, renderLab, renderDictation, mountPaper } from './items/pinyin-challenge.js';
 
 const ITEM_TYPES = {
   choice: choice.render,
@@ -28,6 +29,9 @@ const ITEM_TYPES = {
   calc: renderCalc,
   craft: renderCraft,
   pattern: renderPattern,
+  letterHunt: renderHunt,
+  pinyinLab: renderLab,
+  dictation: renderDictation,
 };
 
 const app = document.getElementById('app');
@@ -70,6 +74,7 @@ async function route() {
     else if (name === 'build') await screenBuild();
     else if (name === 'book') screenBook();
     else if (name === 'parent') await screenParent();
+    else if (name === 'paper') await screenPaper(a);
     else await screenHome();
   } catch (e) {
     console.error(e);
@@ -156,6 +161,7 @@ async function screenLevel(id) {
   app.append(h('div.screen',
     topBar(backBtn('#/'), h('div.plate', spriteEl('map'), level.title), h('div.plate', spriteEl('star'), `${st.stars}/${st.total * 3}`)),
     level.note ? h('div.map-note.plate', level.note) : null,
+    level.paperStage ? h('div.map-practice', h('button.mc-btn.small', { onclick: () => go(`#/paper/${id}`) }, spriteEl('speaker'), '纸上听写')) : null,
     board));
 
   // snake path: rows left→right, then right→left
@@ -192,7 +198,8 @@ async function screenPlay(levelId, stageId) {
   const stageIdx = level.stages.findIndex(s => s.id === stageId);
   const stage = level.stages[stageIdx];
 
-  const total = stage.items.length;
+  const items = stage.shuffle ? shuffle(stage.items) : stage.items;
+  const total = items.length;
   const slots = stage.items.map(() => h('div.hb-slot'));
   const xpFill = h('div.xp-fill');
   const xpLevel = h('div.xp-level', '0');
@@ -211,9 +218,12 @@ async function screenPlay(levelId, stageId) {
   const earned = [];
 
   async function show(i) {
-    current = stage.items[i];
+    current = items[i];
     body.innerHTML = '';
+    body.classList.remove('dictation-body', 'lab-body');
     body.classList.remove('enter'); void body.offsetWidth; body.classList.add('enter');
+    if (current.source) body.append(h('div.item-source', current.source));
+    if (stage.note) body.append(h('div.challenge-note', stage.note));
     slots.forEach((s, k) => s.classList.toggle('now', k === i));
     let attempts = 0, solved = false;
     const ctx = {
@@ -224,7 +234,7 @@ async function screenPlay(levelId, stageId) {
         if (hint !== null) { sfx.wrong(); speak(hint || retry()); }
       },
       async right(after) {
-        if (solved) return;
+        if (solved || !body.isConnected) return;
         solved = true;
         const first = attempts === 0;
         if (first) { firstTry++; streak++; } else streak = 0;
@@ -253,14 +263,14 @@ async function screenPlay(levelId, stageId) {
         }
         await speak(lines);
         await wait(350);
-        if (location.hash !== `#/play/${levelId}/${stageId}`) return;
+        if (!body.isConnected || location.hash !== `#/play/${levelId}/${stageId}`) return;
         if (i + 1 < total) show(i + 1);
         else finish();
       },
     };
     preload(itemTexts(current));
     ITEM_TYPES[current.type](body, current, ctx);
-    setTimeout(() => speak(current.say), 350);
+    setTimeout(() => { if (body.isConnected && current === items[i]) speak(current.say); }, 350);
   }
 
   function finish() {
@@ -335,6 +345,17 @@ function showReward(level, stageIdx, stars, chest, fresh, earned, replay) {
 async function screenBuild() {
   const { mountBuild } = await import('./build3d.js');
   mountBuild(app, { onBack: () => go('#/'), onBook: () => go('#/book') });
+}
+
+// Paper practice has no automatic grading or block rewards: the child and parent check the writing.
+async function screenPaper(levelId) {
+  const level = await loadLevel(levelId);
+  const stage = level.stages.find(s => s.id === level.paperStage);
+  if (!stage) throw new Error('这个冒险还没有纸上听写。');
+  const body = h('div.mc-panel.paper-practice');
+  app.append(h('div.screen',
+    topBar(backBtn(`#/level/${levelId}`), h('div.plate', spriteEl('book'), '纸上听写'), ''), body));
+  mountPaper(body, stage.items);
 }
 
 // ---------- collection book ----------

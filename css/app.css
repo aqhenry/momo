@@ -39,6 +39,7 @@ html, body {
   touch-action: manipulation; overscroll-behavior: none;
 }
 button { font: inherit; color: inherit; touch-action: manipulation; cursor: pointer; border: 0; background: none; padding: 0; }
+[hidden] { display: none !important; }
 .py { font-family: var(--py); }
 
 /* ---------- scene ---------- */
@@ -289,6 +290,67 @@ svg.grid4 .gl-base { stroke: #e07a7a; }
 .slot.right { background: #e4ffd6; }
 .slot.wrong { background: #ffd0d0; }
 
+/* ---------- 拼音秘境 ---------- */
+.map-practice { align-self: center; margin: 4px 0 28px; }
+.item-source { font-family: var(--ui); font-size: 12px; color: #fff; background: #445b73; padding: 5px 12px; }
+.challenge-note { font-family: var(--kai); font-size: 19px; color: #514937; text-align: center; }
+.challenge-title { font-family: var(--kai); font-size: 30px; text-align: center; }
+.challenge-help { font-family: var(--kai); font-size: 21px; text-align: center; line-height: 1.4; max-width: 760px; }
+.letter-hunt { display: grid; grid-template-columns: repeat(4, minmax(68px, 112px)); gap: 14px; padding: 4px 8px 16px; }
+.hunt-cell { display: flex; justify-content: center; padding: 8px; background: var(--paper); box-shadow: 0 0 0 3px #6b5a3a, 0 5px 0 3px #8c704c; }
+.hunt-cell.found { background: #e4ffd6; box-shadow: 0 0 0 3px #2b8b35, 0 5px 0 3px #28632e; }
+.hunt-cell.found::after { content: '✓'; color: #28722d; align-self: flex-end; }
+.tag.med { background: #328d69; }
+.lab-body { gap: 10px; }
+.tile.med { box-shadow: 0 0 0 4px #328d69, 0 0 0 7px #000, 0 9px 0 3px #175039; }
+.lab-recipe { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 10px 6px; }
+.lab-column { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.lab-slot { display: flex; justify-content: center; align-items: center; min-width: 116px; height: 104px; padding: 6px; background: var(--paper); box-shadow: 0 0 0 4px var(--ini), 0 7px 0 4px #264269; }
+.lab-slot.med { box-shadow: 0 0 0 4px #328d69, 0 7px 0 4px #175039; }
+.lab-slot.fin { box-shadow: 0 0 0 4px var(--fin), 0 7px 0 4px #8f3c15; }
+.lab-slot.now { background: #fff1a8; }
+.lab-slot.wrong { background: #ffd0d0; }
+.lab-slot.right { background: #e4ffd6; }
+.lab-plus, .lab-arrow { font-family: var(--py); font-size: 36px; color: #4b4236; }
+.lab-plus { padding-top: 30px; }
+.lab-pool { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; padding-bottom: 12px; }
+.lab-result { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.umlaut-note { font-family: var(--kai); font-size: 24px; color: #4b3475; background: #eee2ff; padding: 12px; box-shadow: 0 0 0 2px #9b80bb; }
+.dictation-body { gap: 8px; }
+.dictation-body .challenge-note { display: none; }
+.dictation-body .challenge-help { font-size: 18px; }
+.dictation-body .prompt { flex-direction: row; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.dictation-body .prompt img.pic-art.big, .dictation-body .prompt .block.pic.big { width: 64px; height: 64px; }
+.dictation-body .prompt .frame { padding: 6px; }
+.dictation-word { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; max-width: 100%; }
+.dictation-syllable { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.dictation-number { font-family: var(--ui); font-size: 12px; color: #6d604c; }
+.dictation-slot { padding: 4px 8px; background: var(--paper); box-shadow: 0 0 0 2px #8c7954; }
+.dictation-slot.now { background: #fff1a8; box-shadow: 0 0 0 3px #c18b12; }
+.dictation-slot.wrong { background: #ffd0d0; box-shadow: 0 0 0 3px var(--wrong); }
+.dictation-slot.right { background: #e4ffd6; box-shadow: 0 0 0 3px #348c36; }
+.dictation-keys { display: grid; grid-template-columns: repeat(10, minmax(44px, 58px)); gap: 6px; width: 100%; max-width: 634px; padding: 4px; }
+.letter-key { min-height: 44px; font-size: 30px; line-height: 1; background: var(--paper); box-shadow: inset 0 -4px 0 #d8c8a3, 0 0 0 2px #6b5a3a; }
+.letter-key:active, .tone-key:active { background: #fff1a8; transform: translateY(2px); }
+.tone-keys { display: flex; gap: 8px; padding: 4px; }
+.tone-key { display: flex; align-items: center; gap: 6px; justify-content: center; min-height: 48px; min-width: 90px; padding: 4px 8px; background: #e3edf7; box-shadow: 0 0 0 2px #4b6b8e, inset 0 -4px 0 #b0c5db; }
+.tone-key .py { font-size: 30px; }
+.tone-key small { font-family: var(--kai); font-size: 18px; }
+.dictation-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 4px; }
+.dictation-actions .mc-btn { min-height: 48px; font-size: 24px; }
+.paper-practice { margin: 22px auto; width: 100%; max-width: 940px; display: flex; flex: 1; flex-direction: column; gap: 24px; align-items: center; justify-content: center; }
+.paper-answer { max-width: 100%; overflow-x: auto; }
+@media (max-width: 600px) {
+  .lab-recipe { gap: 8px; }
+  .lab-slot { min-width: 78px; height: 96px; }
+  .lab-plus { font-size: 24px; }
+  .dictation-keys { grid-template-columns: repeat(7, minmax(36px, 1fr)); }
+  .tone-keys { gap: 6px; }
+  .tone-key { min-width: 54px; flex-direction: column; gap: 0; padding: 2px 6px; }
+  .tone-key small { font-size: 14px; }
+  .dictation-actions .mc-btn { font-size: 18px; padding: 0 12px; }
+}
+
 /* stroke */
 .stroke-area { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; justify-content: center; }
 .tianzige { position: relative; background: #fff; box-shadow: 0 0 0 8px #9c7a48, 0 0 0 11px #3b2a14, 0 14px 0 3px rgba(0,0,0,.25); }
@@ -328,6 +390,8 @@ img.pic-art.big { width: clamp(110px, 17vh, 150px); height: clamp(110px, 17vh, 1
 .pic-text { font-family: var(--ui); font-size: 96px; color: #2a2a2a; line-height: 1; padding: 6px 28px; }
 .node-block img.pic-art { width: 56px; height: 56px; padding: 0; filter: drop-shadow(2px 2px 0 rgba(0,0,0,.4)); }
 .plate img.pic-art { width: 36px; height: 36px; padding: 0; }
+.plate .pic-text { font-family: var(--py); font-size: 28px; padding: 0; line-height: 1; }
+.node-block .pic-text { font-family: var(--py); font-size: 56px; padding: 0; }
 
 /* ---------- math ---------- */
 .m-frame { padding: 10px; }

@@ -1,5 +1,15 @@
 [
   {
+    "id": "yuwen-jqx",
+    "chapter": 3,
+    "subject": "语文",
+    "title": "拼音秘境",
+    "subtitle": "小 ü 的冒险 · P34–35 听写挑战",
+    "date": "2026-11-01",
+    "block": "letter_j",
+    "path": "levels/yuwen-jqx/level.json"
+  },
+  {
     "id": "math-u2",
     "chapter": 2,
     "subject": "数学",

@@ -74,6 +74,14 @@ export const BLOCKS = {
   honey_block:    { name: '蜂蜜块', rarity: 2, set: 'math', clear: true },
   ...Object.fromEntries([...'0123456789'].map(d => [`num_${d}`, { name: `数字${d}`, rarity: 2, set: 'math' }])),
   golden_apple_block: { name: '金苹果块', rarity: 4, set: 'math', glow: true },
+
+  // 第三大关 · 拼音秘境
+  drum_block:     { name: '鼓面方块', rarity: 1, set: 'jqx' },
+  letter_j:       { name: '字母 j 方块', rarity: 2, set: 'jqx' },
+  letter_q:       { name: '字母 q 方块', rarity: 2, set: 'jqx' },
+  letter_x:       { name: '字母 x 方块', rarity: 2, set: 'jqx' },
+  chess_board:    { name: '棋盘方块', rarity: 3, set: 'jqx' },
+  pinyin_crystal: { name: '拼音水晶', rarity: 4, set: 'jqx', glow: true },
 };
 
 // blocks of a rarity that can drop in an adventure using `set` (base blocks always can)
@@ -279,7 +287,41 @@ function numberBlock(px, d) {
 }
 for (let d = 0; d < 10; d++) PAINT[`num_${d}`] = px => numberBlock(px, d);
 
+const LETTER_GLYPHS = {
+  j: ['00010', '00000', '00010', '00010', '00010', '10010', '01100'],
+  q: ['00000', '01110', '10010', '10010', '01110', '00010', '00011'],
+  x: ['00000', '10001', '01010', '00100', '01010', '10001', '00000'],
+};
+for (const [i, letter] of ['j', 'q', 'x'].entries()) {
+  PAINT[`letter_${letter}`] = px => {
+    const color = [[45, 117, 204], [185, 85, 157], [36, 151, 119]][i];
+    each((x, y) => px(x, y, shade(color, edgeK(x, y))));
+    LETTER_GLYPHS[letter].forEach((row, y) => [...row].forEach((bit, x) => {
+      if (bit === '1') for (let dy = 0; dy < 2; dy++) for (let dx = 0; dx < 2; dx++) px(3 + x * 2 + dx, 1 + y * 2 + dy, '#fff7d5');
+    }));
+  };
+}
+
 Object.assign(PAINT, {
+  drum_block: (px, r) => {
+    metal(px, r, [174, 46, 45]);
+    each((x, y) => {
+      if (y < 2 || y > 13) px(x, y, '#edc66c');
+      else if ((x + y) % 8 === 0 || (x - y + 16) % 8 === 0) px(x, y, '#e8cb9a');
+    });
+  },
+  chess_board: px => each((x, y) => {
+    const border = x < 2 || y < 2 || x > 13 || y > 13;
+    px(x, y, border ? '#795537' : (Math.floor((x - 2) / 3) + Math.floor((y - 2) / 3)) % 2 ? '#3a352f' : '#f1dfab');
+  }),
+  pinyin_crystal: px => {
+    each((x, y) => px(x, y, shade([61, 46, 123], edgeK(x, y))));
+    const glyph = ['10001', '00000', '10001', '10001', '10001', '10001', '01110'];
+    glyph.forEach((row, y) => [...row].forEach((bit, x) => {
+      if (bit === '1') for (let dy = 0; dy < 2; dy++) for (let dx = 0; dx < 2; dx++) px(3 + x * 2 + dx, 1 + y * 2 + dy, y < 2 ? '#ffe59a' : '#8ef4ed');
+    }));
+    px(1, 8, '#fff6b8'); px(14, 5, '#fff6b8');
+  },
   crafting_table: (px, r) => {
     planksOf(px, r, [162, 120, 70]);
     for (let y = 5; y < 13; y++) px(4, y, 'rgb(80,55,30)');                       // saw handle
@@ -311,6 +353,10 @@ Object.assign(PAINT, {
 });
 
 const TOP = {
+  drum_block: px => each((x, y) => {
+    const rim = x < 2 || y < 2 || x > 13 || y > 13;
+    px(x, y, rim ? '#c69544' : (x + y) % 7 === 0 ? '#e8cf9b' : '#f4e2bb');
+  }),
   grass: (px, r) => noise(px, r, [95, 159, 53], 0.18),
   log: (px, r) => rings(px, r, [102, 81, 50], [176, 140, 86]),
   hay: (px, r) => each((x, y) => px(x, y, shade([206, 170, 50], ((x + y) % 3 === 0 ? 0.85 : 1) * (0.92 + r() * 0.16)))),

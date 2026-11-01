@@ -7,6 +7,7 @@ Used by tts_build.py to re-record clips that come out wrong.
 import base64
 import json
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -20,19 +21,28 @@ PROMPT = '''你是小学语文老师，正在检查给一年级小朋友用的�
 请仔细听音频，判断朗读是否和台本完全一致：
 - 每个汉字都读了，读音正确（多音字按语境），没有漏读、多读、读错；
 - 台本里的拼音（带声调的字母，例如 mú、lǎ ba、ü）要按拼音读出来，声母要读成呼读音（如 b 读 bō），声调必须正确，不能读成英文字母；
+- 拼音可以用同音汉字来生成配音，仅比较实际发音，不因同音汉字的字形不同而判错；三声连读、“一”“不”等正常普通话变调不算错误；
 - 语气自然，没有奇怪的杂音或重复。
 只输出 JSON：{{"ok": true/false, "problems": "有问题时用中文简短说明哪里不对"}}'''
 
 
-def check(key, script, path):
+def check(key, script, path, model=CHECK_MODEL):
     path = pathlib.Path(path)
     fmt = {'.wav': 'wav', '.mp3': 'mp3', '.m4a': 'm4a'}[path.suffix]
+    # Some audio checkers confuse Unicode í / ì. State each marked tone explicitly
+    # so a correctly spoken fourth-tone ì isn't rejected as a supposed first-tone i.
+    tones = {c: i for group in ('āáǎà', 'ōóǒò', 'ēéěè', 'īíǐì', 'ūúǔù', 'ǖǘǚǜ') for i, c in enumerate(group, 1)}
+    tokens = re.findall(r'[a-züāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜ]+', script)
+    guide = '；'.join(dict.fromkeys(f'{t}：第{tones[c]}声' for t in tokens for c in t if c in tones))
+    prompt = PROMPT.format(script=script)
+    if guide:
+        prompt += '\n台本拼音的目标声调（按此表核对实际音频）：' + guide
     body = {
-        'model': CHECK_MODEL,
+        'model': model,
         'temperature': 0,
         'response_format': {'type': 'json_object'},
         'messages': [{'role': 'user', 'content': [
-            {'type': 'text', 'text': PROMPT.format(script=script)},
+            {'type': 'text', 'text': prompt},
             {'type': 'input_audio', 'input_audio': {'data': base64.b64encode(path.read_bytes()).decode(), 'format': fmt}},
         ]}],
     }
@@ -41,6 +51,8 @@ def check(key, script, path):
          '-H', f'Authorization: Bearer {key}', '-H', 'Content-Type: application/json', '--data-binary', '@-'],
         input=json.dumps(body).encode(), capture_output=True)
     resp = json.loads(p.stdout)
+    if 'choices' not in resp:
+        raise RuntimeError(str(resp.get('error', 'Audio checker returned no verdict')))
     text = resp['choices'][0]['message']['content']
     text = text[text.find('{'): text.rfind('}') + 1]
     return json.loads(text)

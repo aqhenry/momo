@@ -37,6 +37,8 @@ const blockOf = (rarity, set) => {
 // 1 easy, 2 medium, 3 hard; a level item can set `difficulty` itself.
 export function difficulty(item) {
   if (item.difficulty) return item.difficulty;
+  if (item.type === 'dictation') return 3;
+  if (item.type === 'pinyinLab') return item.parts.length === 3 ? 3 : 2;
   if (item.type === 'spell') return item.word.trim().split(/\s+/).length > 1 ? 3 : 2;
   if (item.type === 'stroke' || item.type === 'tapText') return 3;
   if (item.type === 'blend' || item.type === 'order' || item.type === 'craft' || item.type === 'pattern') return 2;

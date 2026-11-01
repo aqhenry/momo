@@ -10,8 +10,10 @@ the script correctly (pinyin and tones included), re-records failures, and write
     python3 tools/tts_build.py            # record what's missing
     python3 tools/tts_build.py --list     # just print the lines
     python3 tools/tts_build.py --no-check # skip the pronunciation check
+    python3 tools/tts_build.py --fallback # MiniMax + homophones + Qwen audio check, missing lines only
 """
 import concurrent.futures as cf
+import fcntl
 import hashlib
 import json
 import pathlib
@@ -27,6 +29,7 @@ from tts_check import check  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 AUDIO = ROOT / 'audio'
 REPORT = ROOT / 'samples' / 'tts-report.json'
+FALLBACKS = AUDIO / 'fallbacks.json'
 
 MODEL = 'google/gemini-3.8-flash-tts'
 VOICE = 'Leda'
@@ -77,25 +80,35 @@ def clip_id(text):
     return hashlib.sha1(f'{MODEL}|{VOICE}|{INSTRUCTIONS}|{text}'.encode()).hexdigest()[:16]
 
 
-def record(key, text, do_check):
-    """Returns (ok, problems, attempts). Writes audio/<id>.m4a."""
+def record(key, text, do_check, fallback=False):
+    """Returns (ok, problems, attempts, id). Only verified clips are published."""
     problems = ''
+    model, voice, spoken, extra, checker = MODEL, VOICE, text, {'instructions': INSTRUCTIONS}, None
+    target_id = clip_id(text)
+    if fallback:
+        import tts_fallback as fb
+        model, voice, spoken, extra, checker = fb.MODEL, fb.VOICE, fb.spoken_text(text), {'speed': fb.SPEED}, fb.CHECK_MODEL
+        target_id = hashlib.sha1(f'{target_id}|{model}|{voice}|{extra}|{spoken}'.encode()).hexdigest()[:16]
     with tempfile.TemporaryDirectory() as tmp:
-        wav = pathlib.Path(tmp) / 'clip.wav'
         for attempt in range(1, ATTEMPTS + 1):
-            data, _ = synth(key, MODEL, VOICE, {'instructions': INSTRUCTIONS}, text)
-            wav.write_bytes(data)
+            data, fmt = synth(key, model, voice, extra, spoken)
+            source = pathlib.Path(tmp) / f'clip.{fmt}'
+            source.write_bytes(data)
             ok = True
             if do_check:
                 try:
-                    verdict = check(key, text, wav)
+                    verdict = check(key, text, source, **({'model': checker} if checker else {}))
                     ok, problems = bool(verdict.get('ok')), verdict.get('problems', '')
-                except Exception as e:  # checker hiccup: keep the clip, note it
-                    ok, problems = True, f'check failed: {e}'
-            if ok or attempt == ATTEMPTS:
-                subprocess.run(['afconvert', str(wav), str(AUDIO / f'{clip_id(text)}.m4a'),
+                except Exception as e:
+                    # A failed checker cannot approve a new teaching clip.
+                    ok, problems = False, f'check failed: {e}'
+                if not ok:
+                    print(f'  retry {attempt}/{ATTEMPTS}: {text} -- {problems}', flush=True)
+            if ok:
+                subprocess.run(['afconvert', str(source), str(AUDIO / f'{target_id}.m4a'),
                                 '-f', 'm4af', '-d', 'aac', '-b', '48000', '-c', '1'], check=True)
-                return ok, problems, attempt
+                return ok, problems, attempt, target_id
+        return False, problems, ATTEMPTS, None
 
 
 def main():
@@ -104,24 +117,43 @@ def main():
         print('\n'.join(lines))
         print(f'{len(lines)} lines')
         return
+    lock_path = ROOT / '.cache' / 'tts-build.lock'
+    lock_path.parent.mkdir(exist_ok=True)
+    lock = lock_path.open('w')
+    try:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        raise SystemExit('Another TTS build is already running. Wait for it to finish.')
     AUDIO.mkdir(exist_ok=True)
-    todo = [t for t in lines if not (AUDIO / f'{clip_id(t)}.m4a').exists()]
+    fallbacks = json.loads(FALLBACKS.read_text()) if FALLBACKS.exists() else {}
+    def available_id(text):
+        primary = clip_id(text)
+        if (AUDIO / f'{primary}.m4a').exists():
+            return primary
+        other = fallbacks.get(primary)
+        return other if other and (AUDIO / f'{other}.m4a').exists() else None
+    todo = [t for t in lines if not available_id(t)]
     print(f'{len(lines)} lines, {len(todo)} to record')
     key = api_key()
     report = json.loads(REPORT.read_text()) if REPORT.exists() else {}
-    with cf.ThreadPoolExecutor(3) as pool:
-        futs = {pool.submit(record, key, t, '--no-check' not in sys.argv): t for t in todo}
+    with cf.ThreadPoolExecutor(6 if '--fallback' in sys.argv else 3) as pool:
+        futs = {pool.submit(record, key, t, '--no-check' not in sys.argv, '--fallback' in sys.argv): t for t in todo}
         for i, fut in enumerate(cf.as_completed(futs), 1):
             t = futs[fut]
             try:
-                ok, problems, attempts = fut.result()
+                ok, problems, attempts, target_id = fut.result()
                 report[t] = {'ok': ok, 'problems': problems, 'attempts': attempts}
+                if ok and '--fallback' in sys.argv:
+                    fallbacks[clip_id(t)] = target_id
+                    FALLBACKS.write_text(json.dumps(fallbacks, indent=2) + '\n')
+                REPORT.parent.mkdir(exist_ok=True)
+                REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=1))
                 mark = '✓' if ok else '✗'
                 print(f'[{i}/{len(todo)}] {mark} {t}' + (f'  ({attempts}x)' if attempts > 1 else '') + ('' if ok else f'  -- {problems}'), flush=True)
             except Exception as e:
                 print(f'[{i}/{len(todo)}] ERROR {t}: {e}', flush=True)
 
-    manifest = {t: clip_id(t) for t in lines if (AUDIO / f'{clip_id(t)}.m4a').exists()}
+    manifest = {t: available_id(t) for t in lines if available_id(t)}
     (AUDIO / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=0))
     keep = set(manifest.values())
     stale = [f for f in AUDIO.glob('*.m4a') if f.stem not in keep]
@@ -133,6 +165,8 @@ def main():
     print(f'manifest: {len(manifest)}/{len(lines)} clips, removed {len(stale)} stale, {len(bad)} still failing check')
     for t in bad:
         print('  ✗', t, '--', report[t]['problems'])
+    if len(manifest) != len(lines) or any(report.get(t, {}).get('ok') is False for t in todo):
+        raise SystemExit(1)
 
 
 if __name__ == '__main__':

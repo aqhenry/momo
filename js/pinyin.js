@@ -35,6 +35,17 @@ export function split(syl) {
   return { initial: ini, final: syl.slice(ini.length) };
 }
 
+// Join spoken components, preserving tones while applying the j/q/x + ü spelling rule.
+// This is separate from split(), which existing exercises use for written letter tiles.
+export function joinSounds(parts) {
+  const [initial, ...rest] = parts;
+  let final = rest.join('');
+  if (/^[jqx]$/.test(initial)) {
+    final = final.replace(/[üǖǘǚǜ]/g, c => ({ ü: 'u', ǖ: 'ū', ǘ: 'ú', ǚ: 'ǔ', ǜ: 'ù' })[c]);
+  }
+  return initial + final;
+}
+
 // --- 四线三格 ---
 let xhRatio = 0.5;   // x-height / font-size for the pinyin font, measured once fonts load
 export async function measureFont() {
