@@ -53,3 +53,5 @@ Pictures: `art:<name>` from the pixel-art library (preferred — add entries to 
 Progress lives in `localStorage` (`momo.v1`) on the iPad; parent page = long-press the faint ⚙︎ on the home screen.
 
 Fourth adventure: `math-week9` / 矿洞研学记, based on the private 第9周 worksheet (never commit the PDF). Eight stages / 44 items cover correspondence and count comparisons, equal/difference construction, +/- signs, evaluated comparisons, complete picture equations, shape/color classification, row/column and combined position clues, and story/missing-number extensions. `mathExplore` renders original SVG manipulatives and seat diagrams. Uses practice rewards and the approved shared jqx-b voice profile. Ten new unrestricted procedural blocks (coal_ore, iron_ore, redstone_ore, emerald_block, tnt, sea_lantern, magma, end_stone, nether_bricks, beacon) join all adventures' drop pools; they are decorative building blocks, not explosive or electrical mechanics.
+
+Build mode intentionally has no spoken instructions or reminders (parent preference); keep placement/digging sound effects. Learning-adventure speech remains enabled.

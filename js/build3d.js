@@ -6,8 +6,7 @@ import { BLOCKS, faceCanvas, iconEl } from './blocks.js';
 import { store } from './store.js';
 import { h } from './ui.js';
 import { spriteEl } from './sprites.js';
-import { sfx, speak } from './audio.js';
-import { S } from './phrases.js';
+import { sfx } from './audio.js';
 import { burst } from './fx.js';
 
 const HALF = 16;          // build area is x, z in [-16, 15]
@@ -197,7 +196,6 @@ export function mountBuild(root, { onBack, onBook }) {
     mode = m;
     placeBtn.classList.toggle('pressed', m === 'place');
     digBtn.classList.toggle('pressed', m === 'dig');
-    speak(m === 'place' ? S.placeMode : S.digMode);
     paintInv();
   }
   placeBtn.classList.add('pressed');
@@ -257,7 +255,7 @@ export function mountBuild(root, { onBack, onBook }) {
       if (type) { sfx.dig(); burst(type, { x: clientX, y: clientY }, 10); flash(x, y, z); commit(); }
       return;
     }
-    if (!selected) { speak(S.pickBlock); return; }
+    if (!selected) return;
     const n = hit.face.normal;
     const [px, py, pz] = [x + Math.round(n.x), y + Math.round(n.y), z + Math.round(n.z)];
     if (place(px, py, pz, selected)) { sfx.place(); flash(px, py, pz); commit(); }
