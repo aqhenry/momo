@@ -52,7 +52,7 @@ def code_lines():
 
 
 def level_lines(level):
-    out = [level.get('intro')]
+    out = [level.get('intro'), *level.get('speech', {}).values()]
     for stage in level['stages']:
         for it in stage['items']:
             out += [it.get('say'), it.get('after'), it.get('hint'), it.get('read'), (it.get('prompt') or {}).get('picSay')]

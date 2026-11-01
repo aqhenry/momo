@@ -197,6 +197,7 @@ async function screenPlay(levelId, stageId) {
   const level = await loadLevel(levelId);
   const stageIdx = level.stages.findIndex(s => s.id === stageId);
   const stage = level.stages[stageIdx];
+  const practice = level.rewardPolicy === 'practice';
 
   const items = stageItems(stage);
   const say = (text, options = {}) => speak(text, { ...options, profile: level.audioProfile });
@@ -206,8 +207,18 @@ async function screenPlay(levelId, stageId) {
   const xpLevel = h('div.xp-level', '0');
   const xp = h('div.xp', xpFill, h('div.xp-ticks'), xpLevel);
   const body = h('div.item-body');
+  if (practice) app.classList.add('child-practice');
+  // Ignore carry-over taps during a transition and accidental rapid double taps.
+  let tapAfter = 0;
+  body.addEventListener('click', event => {
+    if (!practice || !event.target.closest('button')) return;
+    const now = performance.now();
+    if (now < tapAfter) { event.preventDefault(); event.stopImmediatePropagation(); return; }
+    tapAfter = now + 240;
+  }, true);
   app.append(h('div.screen',
-    topBar(backBtn(`#/level/${levelId}`, 'cross'), h('div.plate', picEl(stage.icon || 'sprite:pickaxe'), stage.title), iconBtn('speaker', () => say(current?.say || ''))),
+    topBar(practice ? iconBtn('back', pause) : backBtn(`#/level/${levelId}`, 'cross'), h('div.plate', picEl(stage.icon || 'sprite:pickaxe'), stage.title),
+      h('button.mc-btn.icon', { 'aria-label': '再听一次', onclick: () => say(current?.say || '') }, spriteEl('speaker'))),
     h('div.play-wrap',
       h('div.mc-panel.play-panel', body),
       h('div.hud', xp, h('div.hotbar', slots)))));
@@ -217,29 +228,50 @@ async function screenPlay(levelId, stageId) {
   let streak = 0;   // first-try answers in a row
   const mistakes = [];
   const earned = [];
+  let paused = false, pendingNext = null;
+
+  function pause() {
+    if (paused) return;
+    paused = true;
+    const overlay = h('div.practice-pause', h('div.mc-panel',
+      h('div.challenge-title', '休息一下？'),
+      h('div.pause-actions',
+        h('button.mc-btn.go', { onclick: () => {
+          paused = false; overlay.remove(); tapAfter = performance.now() + 450;
+          if (pendingNext) { const resume = pendingNext; pendingNext = null; resume(); }
+          else say(current?.say);
+        } }, spriteEl('forward'), '继续玩'),
+        h('button.mc-btn', { onclick: () => go(`#/level/${levelId}`) }, spriteEl('map'), '回地图'))));
+    app.append(overlay);
+    say(level.speech?.pause);
+  }
 
   async function show(i) {
     current = items[i];
+    tapAfter = performance.now() + 450;
     body.innerHTML = '';
-    body.classList.remove('dictation-body', 'lab-body');
+    body.classList.remove('dictation-body', 'lab-body', 'dictation-tones');
     body.classList.remove('enter'); void body.offsetWidth; body.classList.add('enter');
-    if (current.source) body.append(h('div.item-source', current.source));
-    if (stage.note) body.append(h('div.challenge-note', stage.note));
+    if (!practice && current.source) body.append(h('div.item-source', current.source));
+    if (!practice && stage.note) body.append(h('div.challenge-note', stage.note));
     slots.forEach((s, k) => s.classList.toggle('now', k === i));
     let attempts = 0, solved = false;
     const ctx = {
+      practice,
+      speech: level.speech || {},
       say: (t, fallback) => say(t, { fallback }),
       wrong(got, hint) {
         attempts++;
         mistakes.push({ q: current.q || current.say, got: String(got ?? '') });
-        if (hint !== null) { sfx.wrong(); say(hint || retry()); }
+        if (hint !== null) { (practice ? sfx.tap : sfx.wrong)(); say(hint || retry()); }
       },
       async right(after) {
         if (solved || !body.isConnected) return;
         solved = true;
         const first = attempts === 0;
-        if (first) { firstTry++; streak++; } else streak = 0;
-        const block = answerDrop(current, first, level.blockSet);
+        if (first) firstTry++;
+        if (practice || first) streak++; else streak = 0;
+        const block = answerDrop(current, practice || first, level.blockSet);
         const isNew = store.addBlock(block);
         earned.push(block);
         sfx.right();
@@ -255,33 +287,40 @@ async function screenPlay(levelId, stageId) {
           if (isNew) banner(block, `新发现：${BLOCKS[block].name}`);
         });
         const lines = [isNew ? S.newFind : praise(), after];
-        if (first && isCombo(streak)) {
+        if ((practice || first) && isCombo(streak)) {
           const bonus = comboDrop(level.blockSet);
           const bonusNew = store.addBlock(bonus);
           earned.push(bonus);
-          setTimeout(() => { banner(bonus, `三连击！${BLOCKS[bonus].name}${bonusNew ? '（新）' : ''}`); sfx.chest(); }, 900);
-          lines.push(S.combo);
+          setTimeout(() => { if (body.isConnected) { banner(bonus, `${practice ? '又完成三题！' : '三连击！'}${BLOCKS[bonus].name}${bonusNew ? '（新）' : ''}`); sfx.chest(); } }, 900);
+          lines.push(practice ? level.speech.combo : S.combo);
         }
         await say(lines);
         await wait(350);
         if (!body.isConnected || location.hash !== `#/play/${levelId}/${stageId}`) return;
-        if (i + 1 < total) show(i + 1);
-        else finish();
+        const next = () => { if (i + 1 < total) show(i + 1); else finish(); };
+        if (paused) pendingNext = next;
+        else next();
       },
     };
     preload(itemTexts(current), { profile: level.audioProfile });
     ITEM_TYPES[current.type](body, current, ctx);
-    setTimeout(() => { if (body.isConnected && current === items[i]) say(current.say); }, 350);
+    setTimeout(() => {
+      if (!body.isConnected || current !== items[i] || paused) return;
+      const guide = practice && (i === 0 || items[i - 1].type !== current.type)
+        ? current.type === 'dictation' ? level.speech.letters : current.type === 'pinyinLab' ? level.speech.labGuide : null
+        : null;
+      say([current.say, guide]);
+    }, 350);
   }
 
   function finish() {
     const rate = firstTry / total;
-    const stars = rate >= 0.9 ? 3 : rate >= 0.7 ? 2 : 1;
+    const stars = practice ? 3 : rate >= 0.9 ? 3 : rate >= 0.7 ? 2 : 1;
     const replay = !!store.stage(levelId, stageId)?.done;
     store.finishStage(levelId, stageId, { stars, firstTry, total, mistakes });
-    const chest = openChest(stars, replay, level.blockSet);
+    const chest = openChest(stars, practice ? false : replay, level.blockSet);
     const fresh = chest.blocks.map(b => store.addBlock(b));
-    showReward(level, stageIdx, stars, chest, fresh, earned, replay);
+    showReward(level, stageIdx, stars, chest, fresh, earned, practice ? false : replay);
   }
 
   show(0);
@@ -295,13 +334,18 @@ function itemTexts(it) {
 
 function showReward(level, stageIdx, stars, chest, fresh, earned, replay) {
   const next = level.stages[stageIdx + 1];
+  const practice = level.rewardPolicy === 'practice';
   app.innerHTML = '';
   const kind = chest.kind === 'wood' ? 'chest' : `chest_${chest.kind}`;
   const chestIcon = spriteEl(kind, `chest ${chest.kind}`);
   const stars3 = starRow(stars, '.reward-stars');
   const blocks = h('div.reward-blocks');
   const best = Math.max(...chest.blocks.map(b => BLOCKS[b].rarity));
-  const btns = h('div.row-btns',
+  const btns = practice ? h('div.row-btns.reward-actions',
+    h('button.mc-btn.icon', { 'aria-label': '回地图', onclick: () => go(`#/level/${level.id}`) }, spriteEl('map')),
+    h('button.mc-btn.go', { 'aria-label': next ? '下一关' : '去建造', onclick: () => go(next ? `#/play/${level.id}/${next.id}` : '#/build') }, spriteEl(next ? 'forward' : 'bricks')),
+    next ? h('button.mc-btn.icon', { 'aria-label': '去建造', onclick: () => go('#/build') }, spriteEl('bricks')) : null)
+    : h('div.row-btns',
     h('button.mc-btn', { onclick: () => go(`#/level/${level.id}`) }, spriteEl('map'), '回地图'),
     h('button.mc-btn', { onclick: () => go('#/build') }, spriteEl('bricks'), '去建造'),
     next ? h('button.mc-btn.go', { onclick: () => go(`#/play/${level.id}/${next.id}`) }, '下一关') : null);
@@ -397,6 +441,7 @@ async function screenParent() {
     box.append(h('div.mc-panel.p-level',
       h('h2', `${meta.subject} · ${lv.title}`),
       h('div.p-note', lv.note || ''),
+      lv.rewardPolicy === 'practice' ? h('div.p-note', '练习完成并订正即可获得三星；首次答对情况仅供复习参考，重练不减少奖励。') : null,
       rows,
       h('button.mc-btn.small', { onclick: () => { if (confirm('清空这个任务的进度？')) { store.resetLevel(lv.id); route(); } } }, '重置这个任务')));
   }

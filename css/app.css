@@ -342,6 +342,46 @@ svg.grid4 .gl-base { stroke: #e07a7a; }
 .dictation-actions .mc-btn { min-height: 48px; font-size: 24px; }
 .paper-practice { margin: 22px auto; width: 100%; max-width: 940px; display: flex; flex: 1; flex-direction: column; gap: 24px; align-items: center; justify-content: center; }
 .paper-answer { max-width: 100%; overflow-x: auto; }
+/* One task at a time: the jqx practice uses large, separated touch targets. */
+.child-practice .item-body { gap: 12px; }
+.child-practice .topbar .mc-btn.icon { width: 72px; height: 72px; }
+.child-practice .lab-pool { gap: 32px; padding: 18px 8px; }
+.child-practice .lab-pool .tile { margin: 0; min-width: 126px; min-height: 114px; }
+.child-practice .lab-slot.now { box-shadow: 0 0 0 5px #d6a916, 0 8px 0 4px #8d6c12; }
+.child-practice .dictation-body { gap: 10px; }
+.child-practice .dictation-heading .prompt .frame { padding: 4px; }
+.child-practice .dictation-pool { width: 100%; min-height: 96px; display: flex; align-items: center; justify-content: center; }
+.child-practice .dictation-keys.steps { display: grid; grid-template-columns: repeat(8, minmax(72px, 92px)); max-width: 850px; gap: 14px; width: auto; padding: 4px; }
+.child-practice .dictation-keys.steps:has(.letter-key:nth-child(4):last-child) { grid-template-columns: repeat(4, 92px); }
+.child-practice .letter-key { min-width: 72px; height: 80px; font-size: 44px; }
+.child-practice .tone-keys.steps { gap: 24px; }
+.child-practice .tone-key { min-width: 110px; height: 80px; flex-direction: column; gap: 0; }
+.child-practice .tone-key .py { font-size: 40px; line-height: 1.15; }
+.child-practice .tone-key small { font-family: var(--ui); font-size: 14px; }
+.child-practice .tone-key.selected { background: #fff1a8; box-shadow: 0 0 0 4px #c18b12; }
+.child-practice .dictation-actions { width: min(500px, 100%); justify-content: space-between; gap: 60px; }
+.child-practice .dictation-actions .mc-btn { width: 120px; min-height: 72px; }
+.child-practice .dictation-actions .sprite { width: 44px; height: 44px; }
+.child-practice .step-go { width: 160px !important; }
+.input-progress { display: flex; align-items: center; gap: 14px; font-family: var(--ui); }
+.input-dot { width: 26px; height: 26px; display: grid; place-items: center; background: #999; color: #eee; }
+.input-dot.now { background: #477b2c; color: white; outline: 3px solid #cde4ac; }
+.input-path { color: #777; }
+.child-practice .try-again, .child-practice .option.wrong, .child-practice .tile.wrong { background: #f3e0b6; }
+.child-practice .shake { animation: none; }
+.practice-pause { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #0009; padding: 24px; }
+.practice-pause .mc-panel { padding: 36px; }
+.pause-actions { display: flex; gap: 48px; padding-top: 32px; }
+.pause-actions .mc-btn { min-height: 88px; min-width: 170px; }
+.pause-actions .sprite { width: 36px; height: 36px; }
+.child-practice .reward-actions { gap: 32px; }
+.child-practice .reward-actions .mc-btn { min-height: 72px; }
+.child-practice .reward-actions .mc-btn.go { min-width: 160px; }
+.child-practice .reward-actions .sprite { width: 40px; height: 40px; }
+@media (max-width: 850px) {
+  .child-practice .dictation-keys.steps { grid-template-columns: repeat(4, minmax(72px, 92px)); }
+  .child-practice .dictation-pool { min-height: 190px; }
+}
 @media (max-width: 600px) {
   .lab-recipe { gap: 8px; }
   .lab-slot { min-width: 78px; height: 96px; }

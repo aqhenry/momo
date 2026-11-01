@@ -587,21 +587,7 @@
             "label": "打鼓",
             "pic": "art:drum"
           },
-          "phase": "看图拼写",
-          "keys": [
-            "b",
-            "d",
-            "g",
-            "j",
-            "m",
-            "n",
-            "q",
-            "x",
-            "a",
-            "i",
-            "u",
-            "ü"
-          ]
+          "phase": "看图拼写"
         },
         {
           "type": "dictation",
@@ -616,21 +602,7 @@
             "label": "下棋",
             "pic": "block:chess_board"
           },
-          "phase": "看图拼写",
-          "keys": [
-            "b",
-            "d",
-            "g",
-            "j",
-            "m",
-            "n",
-            "q",
-            "x",
-            "a",
-            "i",
-            "u",
-            "ü"
-          ]
+          "phase": "看图拼写"
         },
         {
           "type": "dictation",
@@ -645,21 +617,7 @@
             "label": "搭积木",
             "pic": "block:toy_red"
           },
-          "phase": "看图拼写",
-          "keys": [
-            "b",
-            "d",
-            "g",
-            "j",
-            "m",
-            "n",
-            "q",
-            "x",
-            "a",
-            "i",
-            "u",
-            "ü"
-          ]
+          "phase": "看图拼写"
         },
         {
           "type": "dictation",
@@ -1039,5 +997,14 @@
     }
   ],
   "audioProfile": "jqx-b",
-  "revision": 2
+  "revision": 3,
+  "rewardPolicy": "practice",
+  "speech": {
+    "letters": "先选声母，再选韵母。拼好了，点绿色箭头。",
+    "chooseTone": "现在选一个声调，再点绿色勾勾。",
+    "nextSyllable": "这个音节拼好了，接着拼下一个。",
+    "labGuide": "看亮起来的格子，点一块积木放进去。",
+    "combo": "你又完成了三题，送你一个方块。",
+    "pause": "休息一下吗？点绿色箭头继续玩，点地图回去。"
+  }
 }

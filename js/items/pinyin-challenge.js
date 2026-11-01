@@ -35,157 +35,194 @@ export function renderLab(root, item, ctx) {
   root.classList.add('lab-body');
   const slots = item.parts.map((want, i) => ({
     want, got: null, kind: i === 0 ? 'ini' : i === item.parts.length - 1 ? 'fin' : 'med',
+    options: shuffle(item.choices?.[i] || [want]),
   }));
-  // Shuffle once per question, not after every tap or correction.
-  slots.forEach((slot, i) => { slot.options = shuffle(item.choices?.[i] || options(slot)); });
-  let active = 0, locked = false, submitted = false;
+  let active = 0, locked = false, settling = false;
   const row = h('div.lab-recipe');
   const pool = h('div.lab-pool');
   const result = h('div.lab-result', { hidden: true });
-  const status = h('div.challenge-help', S.labFirst);
-  const next = h('button.mc-btn.go', { hidden: true, onclick: () => {
-    if (submitted || !root.isConnected) return;
-    submitted = true;
-    ctx.right();
-  } }, '记住了！');
-
   slots.forEach((slot, i) => {
     if (i) row.append(h('span.lab-plus', '+'));
-    slot.el = h(`button.lab-slot.${slot.kind}`, { 'aria-label': labels[slot.kind], onclick: () => {
-      if (locked) return;
-      active = i;
-      slot.got = null;
-      paint();
-    } });
+    slot.el = h(`div.lab-slot.${slot.kind}`, { 'aria-label': labels[slot.kind] });
     row.append(h('div.lab-column', h(`span.tag.${slot.kind}`, labels[slot.kind]), slot.el));
   });
-  root.append(h('div.challenge-title', '把拼音积木放上合成台'), row, status, pool, result, next);
+  root.append(h('div.challenge-title', '拼一拼'), row, pool, result);
   paint();
-
-  function options(slot) {
-    if (slot.kind === 'ini') return [...new Set([slot.want, 'j', 'q', 'x', 'n', 'l'])].slice(0, 5);
-    if (slot.kind === 'med') return ['i', 'u', 'ü'];
-    const base = stripTone(slot.want), tone = toneOf(slot.want);
-    const confusable = base === 'ü' ? 'u' : base === 'u' ? 'ü' : base === 'a' ? 'i' : 'a';
-    return [...new Set([slot.want, withTone(confusable, tone),
-      ...[1, 2, 3, 4].filter(t => t !== tone).slice(0, 2).map(t => withTone(base, t))])];
-  }
 
   function paint() {
     slots.forEach((s, i) => {
       s.el.replaceChildren(s.got ? gridSVG(s.got, 30, { minWidth: 70 }) : h('span.qmark', '?'));
       s.el.classList.toggle('now', i === active && !locked);
-      s.el.classList.toggle('wrong', !!s.got && s.got !== s.want);
+      s.el.classList.toggle('right', !!s.got);
     });
     pool.replaceChildren();
     if (locked) return;
     const slot = slots[active];
-    pool.append(h(`span.tag.${slot.kind}`, labels[slot.kind]));
     for (const value of slot.options) {
-      pool.append(h(`button.tile.${slot.kind}`, { onclick: () => put(value) }, gridSVG(value, 26, { minWidth: 64 })));
+      const button = h(`button.tile.${slot.kind}`, { 'aria-label': value, onclick: () => {
+        if (locked || settling || button.disabled) return;
+        if (value !== slot.want) {
+          button.disabled = true;
+          button.classList.add('try-again');
+          ctx.wrong(value, item.hint);
+          return;
+        }
+        settling = true;
+        slot.got = value;
+        sfx.place();
+        slot.el.replaceChildren(gridSVG(value, 30, { minWidth: 70 }));
+        slot.el.classList.add('right');
+        setTimeout(() => {
+          if (!root.isConnected) return;
+          active++;
+          settling = false;
+          locked = active === slots.length;
+          paint();
+          if (!locked) return;
+          pool.hidden = true;
+          const joined = joinSounds(slots.map(s => s.got));
+          result.append(h('span.lab-arrow', '→'), h('div.paper', gridSVG(joined, 32, { minWidth: 180 })));
+          if (/[üǖǘǚǜ]/.test(item.parts.at(-1))) {
+            result.append(h('div.umlaut-note', /^[jqx]$/.test(item.parts[0]) ? '省去两点，声调保留' : '遇到 n、l，两点保留'));
+          }
+          result.hidden = false;
+          ctx.right(item.after);
+        }, 360);
+      } }, gridSVG(value, 30, { minWidth: 84 }));
+      pool.append(button);
     }
-  }
-
-  function put(value) {
-    if (locked) return;
-    slots[active].got = value;
-    sfx.place();
-    const blank = slots.findIndex(s => !s.got);
-    if (blank >= 0) { active = blank; paint(); return; }
-    const bad = slots.findIndex(s => s.got !== s.want);
-    if (bad >= 0) {
-      active = bad;
-      ctx.wrong(slots.map(s => s.got).join(' + '), item.hint);
-      paint();
-      shake(slots[bad].el);
-      return;
-    }
-    locked = true;
-    paint();
-    pool.hidden = true;
-    slots.forEach(s => s.el.classList.add('right'));
-    const joined = joinSounds(slots.map(s => s.got));
-    result.append(h('span.lab-arrow', '→'), h('div.paper', gridSVG(joined, 32, { minWidth: 180 })));
-    const hasUmlaut = /[üǖǘǚǜ]/.test(item.parts.at(-1));
-    if (hasUmlaut) result.append(h('div.umlaut-note', /^[jqx]$/.test(item.parts[0]) ? '省去两点，声调保留' : '遇到 n、l，两点保留'));
-    result.hidden = next.hidden = false;
-    status.textContent = S.labReady;
-    sfx.right();
-    ctx.say(item.after);
-    next.scrollIntoView({ block: 'nearest' });
   }
 }
 
-// The keyboard is identical for every question. It offers both u and ü and never
-// inserts or normalises the correct letters for the child. Tones must be supplied too.
-const LETTERS = ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'a', 'o', 'e', 'i', 'u', 'ü'];
+// A fixed bank for the lesson, split by task rather than by the answer. Both u
+// and ü are always offered; no letters or tones are supplied automatically.
+const INITIALS = ['j', 'q', 'x', 'd', 'g', 'm', 'n', 'l'];
+const VOWELS = ['a', 'i', 'u', 'ü'];
 
 export function renderDictation(root, item, ctx) {
   root.classList.add('dictation-body');
   const want = item.word.normalize('NFC').trim().split(/\s+/);
   const got = want.map(() => '');
-  let active = 0, locked = false;
+  const done = want.map(() => false);
+  let active = 0, locked = false, phase = 'letters', selectedTone = null, lastChecked = '';
   const word = h('div.dictation-word');
-  const help = h('div.challenge-help', S.dictationEdit);
+  const heading = h('div.challenge-title', '拼一拼');
+  const pool = h('div.dictation-pool');
+  const progress = h('div.input-progress', { 'aria-hidden': true },
+    h('span.input-dot.letters', '1'), h('span.input-path', '→'), h('span.input-dot.tones', '2'));
   const slots = want.map((_, i) => {
     const slot = h('button.dictation-slot', { 'aria-label': `第 ${i + 1} 个音节`, onclick: () => {
-      if (locked) return;
+      if (locked || i === active || !done[i]) return;
       active = i;
+      phase = 'letters';
+      selectedTone = null;
+      got[i] = stripTone(got[i]);
+      done[i] = false;
       paint();
     } });
     word.append(h('div.dictation-syllable', h('span.dictation-number', String(i + 1)), slot));
     return slot;
   });
-  const keys = h(`div.dictation-keys${item.keys ? '.guided' : ''}`, (item.keys || LETTERS).map(letter =>
-    h('button.letter-key.py', { 'aria-label': letter, onclick: () => {
-      if (locked || [...got[active]].length >= 6) return;
-      got[active] += letter;
-      edited();
-    } }, letter)));
-  const tones = h('div.tone-keys', [1, 2, 3, 4, 0].map((tone, i) =>
-    h('button.tone-key', { 'aria-label': ['一声', '二声', '三声', '四声', '轻声'][i], onclick: () => {
-      if (locked) return;
-      if (!/[aoeiuü]/.test(stripTone(got[active]))) { ctx.say(S.dictationNoVowel); return; }
-      got[active] = withTone(got[active], tone);
-      edited();
-    } }, h('span.py', ['ā', 'á', 'ǎ', 'à', 'a'][i]), h('small', ['一声', '二声', '三声', '四声', '轻声'][i]))));
-  const actions = h('div.dictation-actions',
-    h('button.mc-btn.small', { onclick: () => { if (!locked) { got[active] = [...got[active]].slice(0, -1).join(''); edited(); } } }, '退一格'),
-    h('button.mc-btn.small', { onclick: () => { if (!locked) { got[active] = ''; edited(); } } }, '重写'),
-    want.length > 1 ? h('button.mc-btn.small', { onclick: () => { if (!locked) { active = (active + 1) % got.length; paint(); } } }, '下一音节') : null,
-    h('button.mc-btn.go', { onclick: check }, '检查'));
-  root.append(h('div.dictation-heading', promptEl(item.prompt, ctx),
-    h('button.mc-btn.small', { onclick: () => { if (!locked) ctx.say(item.say); } }, spriteEl('speaker'), '再听一次')),
-    word, help, keys, tones, actions);
+  const back = h('button.mc-btn.step-back', { 'aria-label': '退回上一步', onclick: () => {
+    if (locked) return;
+    if (phase === 'tones') phase = 'letters';
+    else got[active] = [...stripTone(got[active])].slice(0, -1).join('');
+    got[active] = stripTone(got[active]);
+    selectedTone = null;
+    paint();
+  } }, spriteEl('back'));
+  const submit = h('button.mc-btn.go.step-go', { onclick: () => {
+    if (locked) return;
+    if (phase === 'letters') {
+      if (!hasLetters()) return;
+      phase = 'tones'; selectedTone = null;
+      paint();
+      ctx.say(ctx.speech?.chooseTone || S.dictationNoVowel);
+      return;
+    }
+    if (selectedTone === null) return;
+    check();
+  } });
+  root.append(h('div.dictation-heading', promptEl(item.prompt, ctx), item.prompt ? null : heading), word, progress, pool,
+    h('div.dictation-actions', back, submit));
   paint();
 
+  function hasLetters() { return /^[a-z][aiuü]+$/.test(stripTone(got[active])); }
+
   function paint() {
+    root.classList.toggle('dictation-tones', phase === 'tones');
+    heading.textContent = phase === 'letters' ? '拼一拼' : '选声调';
+    progress.querySelector('.letters').classList.toggle('now', phase === 'letters');
+    progress.querySelector('.tones').classList.toggle('now', phase === 'tones');
     slots.forEach((slot, i) => {
-      slot.replaceChildren(gridSVG(got[i], 28, { minWidth: want.length > 2 ? 132 : 154 }));
+      slot.replaceChildren(gridSVG(got[i], 26, { minWidth: want.length > 2 ? 124 : 154 }));
       slot.classList.toggle('now', i === active && !locked);
+      slot.classList.toggle('right', done[i]);
+      slot.disabled = locked || (i !== active && !done[i]);
     });
-  }
-  function edited() {
-    slots[active].classList.remove('wrong');
-    help.textContent = S.dictationEdit;
-    sfx.tap();
-    paint();
-  }
-  function check() {
+    back.disabled = locked || !got[active];
+    submit.disabled = locked || (phase === 'letters' ? !hasLetters() : selectedTone === null);
+    // Reserve their positions, but show only the action the child can use now.
+    back.style.visibility = back.disabled ? 'hidden' : 'visible';
+    submit.style.visibility = submit.disabled ? 'hidden' : 'visible';
+    back.replaceChildren(spriteEl(phase === 'tones' ? 'back' : 'erase'));
+    submit.setAttribute('aria-label', phase === 'letters' ? '选声调' : '检查');
+    submit.replaceChildren(spriteEl(phase === 'letters' ? 'forward' : 'confirm'));
+    pool.replaceChildren();
     if (locked) return;
-    const bad = want.map((syl, i) => got[i].normalize('NFC') !== syl);
-    if (bad.some(Boolean)) {
-      slots.forEach((slot, i) => slot.classList.toggle('wrong', bad[i]));
-      active = bad.indexOf(true);
+    if (phase === 'letters') {
+      const letters = got[active] ? VOWELS : INITIALS;
+      const keys = h('div.dictation-keys.steps');
+      for (const letter of letters) keys.append(h('button.letter-key.py', {
+        'aria-label': letter, onclick: () => {
+          if (locked || [...got[active]].length >= 4) return;
+          got[active] += letter;
+          selectedTone = null;
+          slots[active].classList.remove('try-again');
+          sfx.place(); paint();
+        },
+      }, letter));
+      pool.append(keys);
+    } else {
+      const tones = [1, 2, 3, 4];
+      if (want.some(s => toneOf(s) === 0)) tones.push(0);
+      pool.append(h('div.tone-keys.steps', tones.map(tone => h(`button.tone-key${selectedTone === tone ? '.selected' : ''}`, {
+        'aria-label': ['轻声', '一声', '二声', '三声', '四声'][tone], onclick: () => {
+          if (locked) return;
+          selectedTone = tone;
+          got[active] = withTone(got[active], tone);
+          slots[active].classList.remove('try-again');
+          sfx.tap(); paint();
+        },
+      }, h('span.py', withTone(got[active], tone)), h('small', String(tone))))));
+    }
+  }
+
+  function check() {
+    if (got[active].normalize('NFC') !== want[active]) {
+      const signature = `${active}:${got[active]}`;
+      if (signature !== lastChecked) {
+        ctx.wrong(got.map(s => s || '空').join(' '), item.hint || S.dictationCheck);
+        lastChecked = signature;
+      }
+      if (stripTone(got[active]) !== stripTone(want[active])) {
+        phase = 'letters'; selectedTone = null; got[active] = stripTone(got[active]);
+      }
       paint();
-      shake(slots[active]);
-      help.textContent = S.dictationCheck;
-      ctx.wrong(got.map(s => s || '空').join(' '), item.hint || S.dictationCheck);
+      slots[active].classList.add('try-again');
+      return;
+    }
+    done[active] = true;
+    const next = done.indexOf(false);
+    if (next >= 0) {
+      active = next; phase = 'letters'; selectedTone = null;
+      sfx.right(); paint();
+      ctx.say(ctx.speech?.nextSyllable || S.dictationEdit);
       return;
     }
     locked = true;
+    paint();
     root.querySelectorAll('button').forEach(button => { button.disabled = true; });
-    slots.forEach(slot => { slot.classList.remove('wrong', 'now'); slot.classList.add('right'); });
     ctx.right(item.after);
   }
 }
