@@ -209,5 +209,8 @@ export const sfx = {
   chest() { [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, i * 0.09, 0.2, 'square', 0.06)); },
 };
 
-export const praise = () => PRAISE[Math.floor(Math.random() * PRAISE.length)];
+export const praise = subject => {
+  const choices = subject === 'math' ? PRAISE.filter(t => t !== '你是拼音小矿工！') : PRAISE;
+  return choices[Math.floor(Math.random() * choices.length)];
+};
 export const retry = () => RETRY[Math.floor(Math.random() * RETRY.length)];

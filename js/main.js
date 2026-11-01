@@ -288,7 +288,7 @@ async function screenPlay(levelId, stageId) {
           sfx.place();
           if (isNew) banner(block, `新发现：${BLOCKS[block].name}`);
         });
-        const lines = [isNew ? S.newFind : praise(), after];
+        const lines = [isNew ? S.newFind : praise(level.blockSet), after];
         if ((practice || first) && isCombo(streak)) {
           const bonus = comboDrop(level.blockSet);
           const bonusNew = store.addBlock(bonus);
