@@ -1,0 +1,812 @@
+{
+  "id": "math-week9",
+  "title": "矿洞研学记",
+  "blockSet": "math",
+  "audioProfile": "jqx-b",
+  "rewardPolicy": "practice",
+  "note": "第9周数学：比较、对应、5以内加减、图形分类与位置；拓展补缺数和组合线索。",
+  "intro": "墨然，欢迎来到矿洞研学营！我们来比数量、拼算式、整理图形，再帮村民找座位。慢慢想，改对了也能拿到三颗星。",
+  "speech": {
+    "combo": "你又完成了三题，送你一个方块。",
+    "pause": "休息一下吗？点绿色箭头继续玩，点地图回去。"
+  },
+  "stages": [
+    {
+      "id": "compare",
+      "title": "比一比",
+      "icon": "sprite:scale",
+      "items": [
+        {
+          "type": "mathExplore",
+          "mode": "compare",
+          "counts": [
+            3,
+            4
+          ],
+          "art": [
+            "apple",
+            "egg"
+          ],
+          "q": "3和4比较",
+          "say": "比一比，上面的苹果和下面的鸡蛋，谁多谁少？",
+          "options": [
+            "上面多",
+            "下面多",
+            "一样多"
+          ],
+          "answer": 1,
+          "hint": "一上一下配成一对，再看看哪边有剩下的。"
+        },
+        {
+          "type": "mathExplore",
+          "mode": "compare",
+          "counts": [
+            5,
+            2
+          ],
+          "art": [
+            "apple",
+            "egg"
+          ],
+          "q": "5和2比较",
+          "say": "比一比，上面的苹果和下面的鸡蛋，谁多谁少？",
+          "options": [
+            "上面多",
+            "下面多",
+            "一样多"
+          ],
+          "answer": 0,
+          "hint": "一上一下配成一对，再看看哪边有剩下的。"
+        },
+        {
+          "type": "mathExplore",
+          "mode": "compare",
+          "counts": [
+            4,
+            4
+          ],
+          "art": [
+            "apple",
+            "egg"
+          ],
+          "q": "4和4比较",
+          "say": "比一比，上面的苹果和下面的鸡蛋，谁多谁少？",
+          "options": [
+            "上面多",
+            "下面多",
+            "一样多"
+          ],
+          "answer": 2,
+          "hint": "一上一下配成一对，再看看哪边有剩下的。"
+        },
+        {
+          "type": "mathExplore",
+          "mode": "compare",
+          "counts": [
+            2,
+            5
+          ],
+          "art": [
+            "apple",
+            "egg"
+          ],
+          "q": "2和5比较",
+          "say": "比一比，上面的苹果和下面的鸡蛋，谁多谁少？",
+          "options": [
+            "上面多",
+            "下面多",
+            "一样多"
+          ],
+          "answer": 1,
+          "hint": "一上一下配成一对，再看看哪边有剩下的。"
+        },
+        {
+          "type": "mathExplore",
+          "mode": "compare",
+          "counts": [
+            6,
+            7
+          ],
+          "art": [
+            "apple",
+            "egg"
+          ],
+          "q": "6和7比较",
+          "say": "比一比，上面的苹果和下面的鸡蛋，谁多谁少？",
+          "options": [
+            "上面多",
+            "下面多",
+            "一样多"
+          ],
+          "answer": 1,
+          "hint": "一上一下配成一对，再看看哪边有剩下的。"
+        },
+        {
+          "type": "mathExplore",
+          "mode": "compare",
+          "counts": [
+            8,
+            6
+          ],
+          "art": [
+            "apple",
+            "egg"
+          ],
+          "q": "8和6比较",
+          "say": "比一比，上面的苹果和下面的鸡蛋，谁多谁少？",
+          "options": [
+            "上面多",
+            "下面多",
+            "一样多"
+          ],
+          "answer": 0,
+          "hint": "一上一下配成一对，再看看哪边有剩下的。"
+        },
+        {
+          "type": "mathExplore",
+          "mode": "extreme",
+          "counts": [
+            6,
+            9,
+            8
+          ],
+          "art": [
+            "bee",
+            "butterfly",
+            "flower"
+          ],
+          "q": "找最多",
+          "say": "哪一组最多？数一数，点那一组。",
+          "answer": 1,
+          "hint": "每组都数一数，再比较数量。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "extreme",
+          "counts": [
+            6,
+            9,
+            8
+          ],
+          "art": [
+            "bee",
+            "butterfly",
+            "flower"
+          ],
+          "q": "找最少",
+          "say": "哪一组最少？数一数，点那一组。",
+          "answer": 0,
+          "hint": "每组都数一数，再比较数量。",
+          "difficulty": 2
+        }
+      ]
+    },
+    {
+      "id": "match",
+      "title": "画出一样多",
+      "icon": "sprite:quill",
+      "items": [
+        {
+          "type": "mathExplore",
+          "mode": "draw",
+          "n": 3,
+          "difference": 0,
+          "q": "画出3个三角形",
+          "say": "上面有三个圆。请点下面的空格，放同样多的三角形。",
+          "hint": "一个圆对应一个三角形。圆多出来的部分，不放三角形。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "draw",
+          "n": 5,
+          "difference": 0,
+          "q": "画出5个三角形",
+          "say": "上面有五个圆。请点下面的空格，放同样多的三角形。",
+          "hint": "一个圆对应一个三角形。圆多出来的部分，不放三角形。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "draw",
+          "n": 7,
+          "difference": 3,
+          "q": "画出4个三角形",
+          "say": "上面有七个圆。圆比三角形多三个。请在下面放三角形。",
+          "hint": "一个圆对应一个三角形。圆多出来的部分，不放三角形。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "draw",
+          "n": 6,
+          "difference": 2,
+          "q": "画出4个三角形",
+          "say": "上面有六个圆。圆比三角形多两个。请在下面放三角形。",
+          "hint": "一个圆对应一个三角形。圆多出来的部分，不放三角形。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "draw",
+          "n": 8,
+          "difference": 3,
+          "q": "画出5个三角形",
+          "say": "上面有八个圆。圆比三角形多三个。请在下面放三角形。",
+          "hint": "一个圆对应一个三角形。圆多出来的部分，不放三角形。",
+          "difficulty": 2
+        }
+      ]
+    },
+    {
+      "id": "operators",
+      "title": "加减机关",
+      "icon": "sprite:target",
+      "items": [
+        {
+          "type": "calc",
+          "q": "4○1=3",
+          "eq": "4○1=3",
+          "say": "四和一之间，放加号还是减号，才能得到三？",
+          "pad": 5,
+          "signs": [
+            "+",
+            "-"
+          ],
+          "hint": "合起来用加法，拿走用减法。"
+        },
+        {
+          "type": "calc",
+          "q": "2○2=4",
+          "eq": "2○2=4",
+          "say": "二和二之间，放什么符号才能得到四？",
+          "pad": 5,
+          "signs": [
+            "+",
+            "-"
+          ],
+          "hint": "合起来用加法，拿走用减法。"
+        },
+        {
+          "type": "calc",
+          "q": "0○5=5",
+          "eq": "0○5=5",
+          "say": "零和五之间，放什么符号才能得到五？",
+          "pad": 5,
+          "signs": [
+            "+",
+            "-"
+          ],
+          "hint": "合起来用加法，拿走用减法。"
+        },
+        {
+          "type": "calc",
+          "q": "3○1=4",
+          "eq": "3○1=4",
+          "say": "三和一之间，放什么符号才能得到四？",
+          "pad": 5,
+          "signs": [
+            "+",
+            "-"
+          ],
+          "hint": "合起来用加法，拿走用减法。"
+        },
+        {
+          "type": "calc",
+          "q": "5○4=1",
+          "eq": "5○4=1",
+          "say": "五和四之间，放什么符号才能得到一？",
+          "pad": 5,
+          "signs": [
+            "+",
+            "-"
+          ],
+          "hint": "合起来用加法，拿走用减法。"
+        },
+        {
+          "type": "calc",
+          "q": "2○3=5",
+          "eq": "2○3=5",
+          "say": "二和三之间，放什么符号才能得到五？",
+          "pad": 5,
+          "signs": [
+            "+",
+            "-"
+          ],
+          "hint": "合起来用加法，拿走用减法。"
+        }
+      ]
+    },
+    {
+      "id": "balance",
+      "title": "算式天平",
+      "icon": "sprite:scale",
+      "items": [
+        {
+          "type": "calc",
+          "q": "0+1○2",
+          "eq": "0+1○2",
+          "say": "先算零加一，再和二比大小。",
+          "pad": 5,
+          "signs": [
+            ">",
+            "<",
+            "="
+          ],
+          "hint": "先把有加减号的那边算出来，再比较。",
+          "difficulty": 2
+        },
+        {
+          "type": "calc",
+          "q": "2+2○3",
+          "eq": "2+2○3",
+          "say": "先算二加二，再和三比大小。",
+          "pad": 5,
+          "signs": [
+            ">",
+            "<",
+            "="
+          ],
+          "hint": "先把有加减号的那边算出来，再比较。",
+          "difficulty": 2
+        },
+        {
+          "type": "calc",
+          "q": "4○5-3",
+          "eq": "4○5-3",
+          "say": "先算五减三，再和四比大小。",
+          "pad": 5,
+          "signs": [
+            ">",
+            "<",
+            "="
+          ],
+          "hint": "先把有加减号的那边算出来，再比较。",
+          "difficulty": 2
+        },
+        {
+          "type": "calc",
+          "q": "3○4-1",
+          "eq": "3○4-1",
+          "say": "先算四减一，再和三比大小。",
+          "pad": 5,
+          "signs": [
+            ">",
+            "<",
+            "="
+          ],
+          "hint": "先把有加减号的那边算出来，再比较。",
+          "difficulty": 2
+        },
+        {
+          "type": "calc",
+          "q": "3-2○0",
+          "eq": "3-2○0",
+          "say": "先算三减二，再和零比大小。",
+          "pad": 5,
+          "signs": [
+            ">",
+            "<",
+            "="
+          ],
+          "hint": "先把有加减号的那边算出来，再比较。",
+          "difficulty": 2
+        },
+        {
+          "type": "calc",
+          "q": "3-1○4",
+          "eq": "3-1○4",
+          "say": "先算三减一，再和四比大小。",
+          "pad": 5,
+          "signs": [
+            ">",
+            "<",
+            "="
+          ],
+          "hint": "先把有加减号的那边算出来，再比较。",
+          "difficulty": 2
+        }
+      ]
+    },
+    {
+      "id": "pictures",
+      "title": "看图小矿工",
+      "icon": "sprite:pickaxe",
+      "items": [
+        {
+          "type": "calc",
+          "q": "3+2=□",
+          "eq": "□○□=□",
+          "say": "看图，三个苹果和两个苹果合起来。请把完整的算式拼出来。",
+          "pad": 5,
+          "scene": {
+            "groups": [
+              {
+                "art": "apple",
+                "n": 3
+              },
+              {
+                "art": "apple",
+                "n": 2
+              }
+            ],
+            "op": "+"
+          },
+          "hint": "把图里的物品数一数。划掉的表示拿走。",
+          "signs": [
+            "+",
+            "-"
+          ],
+          "accept": [
+            "3+2=5",
+            "2+3=5"
+          ],
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "5-2=□",
+          "eq": "□-□=□",
+          "say": "原来有五个蛋，划掉两个。请把减法算式拼完整。",
+          "pad": 5,
+          "scene": {
+            "art": "egg",
+            "n": 5,
+            "cross": 2
+          },
+          "hint": "把图里的物品数一数。划掉的表示拿走。",
+          "accept": [
+            "5-2=3"
+          ],
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "5-3=□",
+          "eq": "5-3=□",
+          "say": "看图，原来有五个，划掉三个，还剩几个？",
+          "pad": 5,
+          "scene": {
+            "art": "fish",
+            "n": 5,
+            "cross": 3
+          },
+          "hint": "把图里的物品数一数。划掉的表示拿走。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "2+3=□",
+          "eq": "2+3=□",
+          "say": "看图，两个和三个合起来，一共有几个？",
+          "pad": 5,
+          "scene": {
+            "groups": [
+              {
+                "art": "chicken",
+                "n": 2
+              },
+              {
+                "art": "chicken",
+                "n": 3
+              }
+            ],
+            "op": "+"
+          },
+          "hint": "把图里的物品数一数。划掉的表示拿走。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "4-1=□",
+          "eq": "4-1=□",
+          "say": "看图，原来有四个，划掉一个，还剩几个？",
+          "pad": 5,
+          "scene": {
+            "art": "cake",
+            "n": 4,
+            "cross": 1
+          },
+          "hint": "把图里的物品数一数。划掉的表示拿走。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "3+0=□",
+          "eq": "3+0=□",
+          "say": "看图，三个和零个合起来，一共有几个？",
+          "pad": 5,
+          "scene": {
+            "groups": [
+              {
+                "art": "apple",
+                "n": 3
+              },
+              {
+                "art": "apple",
+                "n": 0
+              }
+            ],
+            "op": "+"
+          },
+          "hint": "把图里的物品数一数。划掉的表示拿走。",
+          "difficulty": 3
+        }
+      ]
+    },
+    {
+      "id": "sort",
+      "title": "图形整理箱",
+      "icon": "sprite:bricks",
+      "items": [
+        {
+          "type": "mathExplore",
+          "mode": "sort",
+          "shapes": [
+            {
+              "shape": "square",
+              "color": "blue"
+            },
+            {
+              "shape": "triangle",
+              "color": "red"
+            },
+            {
+              "shape": "circle",
+              "color": "blue"
+            },
+            {
+              "shape": "square",
+              "color": "red"
+            },
+            {
+              "shape": "circle",
+              "color": "red"
+            },
+            {
+              "shape": "triangle",
+              "color": "blue"
+            }
+          ],
+          "by": "shape",
+          "target": "square",
+          "q": "找出所有正方形",
+          "say": "把所有正方形放进整理箱，找到一个就点一下。",
+          "hint": "听清楚，这次是按形状找，还是按颜色找。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "sort",
+          "shapes": [
+            {
+              "shape": "square",
+              "color": "blue"
+            },
+            {
+              "shape": "triangle",
+              "color": "red"
+            },
+            {
+              "shape": "circle",
+              "color": "blue"
+            },
+            {
+              "shape": "square",
+              "color": "red"
+            },
+            {
+              "shape": "circle",
+              "color": "red"
+            },
+            {
+              "shape": "triangle",
+              "color": "blue"
+            }
+          ],
+          "by": "shape",
+          "target": "circle",
+          "q": "找出所有圆形",
+          "say": "把所有圆形放进整理箱，找到一个就点一下。",
+          "hint": "听清楚，这次是按形状找，还是按颜色找。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "sort",
+          "shapes": [
+            {
+              "shape": "square",
+              "color": "blue"
+            },
+            {
+              "shape": "triangle",
+              "color": "red"
+            },
+            {
+              "shape": "circle",
+              "color": "blue"
+            },
+            {
+              "shape": "square",
+              "color": "red"
+            },
+            {
+              "shape": "circle",
+              "color": "red"
+            },
+            {
+              "shape": "triangle",
+              "color": "blue"
+            }
+          ],
+          "by": "color",
+          "target": "blue",
+          "q": "找出所有蓝色图形",
+          "say": "把所有蓝色图形放进整理箱，找到一个就点一下。",
+          "hint": "听清楚，这次是按形状找，还是按颜色找。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "sort",
+          "shapes": [
+            {
+              "shape": "square",
+              "color": "blue"
+            },
+            {
+              "shape": "triangle",
+              "color": "red"
+            },
+            {
+              "shape": "circle",
+              "color": "blue"
+            },
+            {
+              "shape": "square",
+              "color": "red"
+            },
+            {
+              "shape": "circle",
+              "color": "red"
+            },
+            {
+              "shape": "triangle",
+              "color": "blue"
+            }
+          ],
+          "by": "shape",
+          "target": "triangle",
+          "q": "找出所有三角形",
+          "say": "把所有三角形放进整理箱，找到一个就点一下。",
+          "hint": "听清楚，这次是按形状找，还是按颜色找。",
+          "difficulty": 2
+        }
+      ]
+    },
+    {
+      "id": "seats",
+      "title": "村民找座位",
+      "icon": "sprite:map",
+      "items": [
+        {
+          "type": "mathExplore",
+          "mode": "seats",
+          "row": 0,
+          "col": 0,
+          "clues": false,
+          "q": "第1排第1个",
+          "say": "请找第一排，从左往右数第一个座位。",
+          "hint": "上面是前排。先找第几排，再从左往右数座位。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "seats",
+          "row": 1,
+          "col": 2,
+          "clues": false,
+          "q": "第2排第3个",
+          "say": "请找第二排，从左往右数第三个座位。",
+          "hint": "上面是前排。先找第几排，再从左往右数座位。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "seats",
+          "row": 0,
+          "col": 3,
+          "clues": false,
+          "q": "第1排第4个",
+          "say": "请找第一排最右边的座位。",
+          "hint": "上面是前排。先找第几排，再从左往右数座位。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "seats",
+          "row": 2,
+          "col": 1,
+          "clues": false,
+          "q": "第3排第2个",
+          "say": "请找第三排，从左往右数第二个座位。",
+          "hint": "上面是前排。先找第几排，再从左往右数座位。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "seats",
+          "row": 1,
+          "col": 1,
+          "clues": true,
+          "q": "第2排第2个",
+          "say": "小兔在第二排第三个座位，小熊在第三排第二个座位。小羊坐在小兔左边、小熊前面。请帮小羊找座位。",
+          "hint": "上面是前排。先找第几排，再从左往右数座位。",
+          "difficulty": 3
+        }
+      ]
+    },
+    {
+      "id": "quest",
+      "title": "研学藏宝箱",
+      "icon": "sprite:chest_gold",
+      "items": [
+        {
+          "type": "calc",
+          "q": "5-4=□",
+          "eq": "5-4=□",
+          "say": "有五个篮子，四个小朋友每人拿一个，还多几个篮子？",
+          "pad": 5,
+          "scene": {
+            "art": "basket",
+            "n": 5,
+            "cross": 4
+          },
+          "hint": "从五个篮子里，划掉分出去的四个。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "5-3=□",
+          "eq": "5-3=□",
+          "say": "五只蝴蝶，每只要停在一朵花上。现在只有三朵花，还差几朵花？",
+          "pad": 5,
+          "scene": {
+            "pairs": [
+              {
+                "art": "butterfly",
+                "n": 5
+              },
+              {
+                "art": "flower",
+                "n": 3
+              }
+            ]
+          },
+          "hint": "一只蝴蝶配一朵花，看看有几只蝴蝶还没有花。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "2+□=5",
+          "eq": "2+□=5",
+          "say": "箱子里有两个宝石，再放几个，就有五个？",
+          "pad": 5,
+          "hint": "可以从二开始，接着数到五。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "5-□=2",
+          "eq": "5-□=2",
+          "say": "五个宝石，拿走几个，还剩两个？",
+          "pad": 5,
+          "hint": "想一想，五可以分成二和几。",
+          "difficulty": 3
+        }
+      ]
+    }
+  ]
+}

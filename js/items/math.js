@@ -4,12 +4,12 @@
 //   craft   — number bonds on a crafting table: a + b → total, one of them missing.
 //   pattern — boxes that grow by a rule (crops each day); fill in the next one.
 import { h, shake, promptEl, wait } from '../ui.js';
-import { artEl } from '../pics.js';
 import { sfx } from '../audio.js';
+import { mathArt } from './math-explore.js';
 
 // ---------- pictures ----------
 function icon(name) {
-  return name === 'circle' ? h('span.m-circle') : artEl(name, 'm-art');
+  return name === 'circle' ? h('span.m-circle') : mathArt(name);
 }
 
 function groupEl(art, n, { cross = 0, gone = 0, goneArt, tap = false, size } = {}) {

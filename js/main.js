@@ -16,9 +16,11 @@ import * as stroke from './items/stroke.js';
 import * as order from './items/order.js';
 import { renderRead, renderTap } from './items/text.js';
 import { renderCalc, renderCraft, renderPattern } from './items/math.js';
+import { render as renderMathExplore } from './items/math-explore.js';
 import { renderHunt, renderLab, renderDictation, mountPaper } from './items/pinyin-challenge.js';
 
 const ITEM_TYPES = {
+  mathExplore: renderMathExplore,
   choice: choice.render,
   blend: blend.render,
   spell: spell.render,
@@ -250,7 +252,7 @@ async function screenPlay(levelId, stageId) {
     current = items[i];
     tapAfter = performance.now() + 450;
     body.innerHTML = '';
-    body.classList.remove('dictation-body', 'lab-body', 'dictation-tones');
+    body.classList.remove('dictation-body', 'lab-body', 'dictation-tones', 'math-explore');
     body.classList.remove('enter'); void body.offsetWidth; body.classList.add('enter');
     if (!practice && current.source) body.append(h('div.item-source', current.source));
     if (!practice && stage.note) body.append(h('div.challenge-note', stage.note));

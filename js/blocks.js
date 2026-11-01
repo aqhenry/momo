@@ -12,6 +12,18 @@ export const RARITY = [
 // keys are stored in saved inventories/worlds, so never rename one.
 // `set`: blocks that only drop in adventures with that blockSet (each new adventure brings its own).
 export const BLOCKS = {
+  // 通用探索方块：所有冒险都可掉落，贴图均为原创。
+  coal_ore: { name: '煤矿石', rarity: 0 },
+  iron_ore: { name: '铁矿石', rarity: 1 },
+  redstone_ore: { name: '红石矿石', rarity: 2 },
+  emerald_block: { name: '绿宝石块', rarity: 3 },
+  tnt: { name: 'TNT 方块', rarity: 2 },
+  sea_lantern: { name: '海晶灯', rarity: 3, glow: true },
+  magma: { name: '岩浆块', rarity: 2, glow: true },
+  end_stone: { name: '末地石', rarity: 1 },
+  nether_bricks: { name: '下界砖', rarity: 1 },
+  beacon: { name: '信标方块', rarity: 4, glow: true, clear: true },
+
   grass:   { name: '草方块', rarity: 0 },
   dirt:    { name: '泥土', rarity: 0 },
   stone:   { name: '石头', rarity: 0 },
@@ -352,7 +364,21 @@ Object.assign(PAINT, {
   },
 });
 
+Object.assign(PAINT, {
+ coal_ore: (px,r)=>ore(px,r,[38,39,43]),
+ iron_ore: (px,r)=>ore(px,r,[208,160,124]),
+ redstone_ore: (px,r)=>ore(px,r,[224,38,36],[82,83,89]),
+ emerald_block: (px,r)=>{metal(px,r,[36,181,105]);each((x,y)=>{if(x===2||y===2||x===13||y===13)px(x,y,'#087d4e');if(Math.abs(x-7.5)+Math.abs(y-7.5)<4)px(x,y,shade([105,244,157],1+(7-y)*.025));});},
+ tnt: (px,r)=>{each((x,y)=>px(x,y,y>=5&&y<=10?'#efdfbc':shade([197,45,35],x%4===0?.65:1)));const glyphs={T:['111','010','010','010','010'],N:['101','111','111','111','101']};[...'TNT'].forEach((c,i)=>glyphs[c].forEach((row,y)=>[...row].forEach((bit,x)=>{if(bit==='1')px(2+i*4+x,y+5,'#292c30');})));},
+ sea_lantern: (px,r)=>{each((x,y)=>{const edge=x<2||y<2||x>13||y>13;px(x,y,edge?'#518e8b':(x+y)%5===0?'#c4efda':'#e8ffe8');});},
+ magma: (px,r)=>{noise(px,r,[246,106,27],.2);each((x,y)=>{if((x+2*y)%7>1&&(2*x-y+32)%9>1)px(x,y,shade([75,39,34],.8+r()*.4));});},
+ end_stone: (px,r)=>{noise(px,r,[220,219,157],.1);for(let i=0;i<16;i++){let x=Math.floor(r()*15),y=Math.floor(r()*15);px(x,y,'#a6a777');px(x+1,y,'#eeedbd');}},
+ nether_bricks: (px,r)=>each((x,y)=>px(x,y,y%4===3||(x+((y>>2)%2)*4)%8===7?'#27151e':shade([72,34,44],.8+r()*.4))),
+ beacon: px=>{clearPane(px,'#86dae4','rgba(145,227,237,.55)');each((x,y)=>{if(x>3&&x<12&&y>3&&y<12)px(x,y,Math.abs(x-7.5)+Math.abs(y-7.5)<5?'#f7ffd5':'#54c5c5');if(y>12)px(x,y,'#3c4d60');});},
+});
+
 const TOP = {
+  tnt: (px,r)=>{noise(px,r,[184,43,35],.06);each((x,y)=>{if(x%4===0)px(x,y,'#7a2623');if(y===7||y===8)px(x,y,'#c8aa75');});},
   drum_block: px => each((x, y) => {
     const rim = x < 2 || y < 2 || x > 13 || y > 13;
     px(x, y, rim ? '#c69544' : (x + y) % 7 === 0 ? '#e8cf9b' : '#f4e2bb');

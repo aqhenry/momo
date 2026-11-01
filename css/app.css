@@ -611,3 +611,41 @@ img.pic-art.big { width: clamp(110px, 17vh, 150px); height: clamp(110px, 17vh, 1
   .blend-row { gap: 6px; }
   .brick { min-width: 100px; }
 }
+
+/* Week-nine visual mathematics. */
+.math-explore { gap: 24px; }
+.explore-pairs { display: flex; flex-direction: column; gap: 12px; }
+.explore-pair-row, .explore-draw-row { display: flex; justify-content: center; gap: 10px; }
+.explore-cell { width: 76px; height: 76px; display: grid; place-items: center; background: #ddd2b5; }
+.explore-cell .m-art { width: 60px; height: 60px; }
+.explore-answers { display: flex; gap: 28px; padding: 12px; }
+.relation-row { display: flex; align-items: center; gap: 8px; font-size: 48px; }
+.relation-row .m-art { width: 48px; height: 48px; }
+.relation { min-width: 180px; min-height: 96px; }
+.math-shape { width: 64px; height: 64px; flex-shrink: 0; }
+.draw-cell { width: 76px; height: 80px; background: var(--paper); border: 3px dashed #877751; font-size: 32px; }
+.draw-cell[aria-pressed="true"] { border-style: solid; background: #e4ffd6; }
+.explore-submit { min-width: 144px; min-height: 76px; }
+.explore-submit .sprite { width: 44px; height: 44px; }
+.shape-sort { display: grid; grid-template-columns: repeat(3, 130px); gap: 28px; }
+.shape-cell { position: relative; min-height: 110px; background: var(--paper); border: 4px solid #897450; }
+.shape-cell.right { background: #e4ffd6; }
+.shape-cell .sprite { position: absolute; right: 4px; bottom: 4px; }
+.seat-grid { display: grid; grid-template-columns: 32px repeat(4, 110px); gap: 18px; align-items: center; }
+.seat-cell { position: relative; height: 92px; background: #e4d1a8; border: 4px solid #795638; }
+.seat-cell .m-art { width: 68px; height: 68px; }
+.seat-cell .sprite { width: 44px; height: 44px; }
+.seat-row-number, .seat-direction, .seat-front { font: 24px var(--kai); }
+.seat-front { display:flex; align-items:center; gap:12px; }
+.extreme-groups { display:flex; gap:24px; }
+.extreme-group { display:grid; grid-template-columns:repeat(3,50px); gap:8px; padding:16px; border:4px solid #897450; background:var(--paper); }
+.extreme-group .m-art { width:50px; height:50px; }
+.child-practice .m-pad.off { display: none; }
+@media(max-width:850px) {
+ .explore-cell { width:60px; height:64px; }
+ .explore-cell .m-art { width:50px; height:50px; }
+ .explore-pair-row,.explore-draw-row { gap:6px; }
+ .draw-cell { width:64px; }
+ .math-shape { width:52px; height:52px; }
+ .relation { min-width:150px; }
+}
