@@ -32,6 +32,18 @@ export const shuffle = arr => {
   return a;
 };
 
+// Keep the learning phases in order while varying the word order within each phase.
+export function stageItems(stage) {
+  if (stage.shuffle) return shuffle(stage.items);
+  if (!stage.shuffleWithinPhase) return stage.items;
+  const phases = new Map();
+  for (const item of stage.items) {
+    if (!phases.has(item.phase)) phases.set(item.phase, []);
+    phases.get(item.phase).push(item);
+  }
+  return [...phases.values()].flatMap(shuffle);
+}
+
 export const wait = ms => new Promise(r => setTimeout(r, ms));
 
 export function shake(el) {

@@ -1,4 +1,4 @@
-import { h, wait, shuffle } from './ui.js';
+import { h, wait, stageItems } from './ui.js';
 import { store } from './store.js';
 import { speak, stopSpeaking, preload, warmCache, sfx, praise, retry } from './audio.js';
 import { S, PRAISE, stageDone } from './phrases.js';
@@ -189,7 +189,7 @@ async function screenLevel(id) {
   const onResize = () => { if (board.isConnected) layout(); else removeEventListener('resize', onResize); };
   addEventListener('resize', onResize);
   nodes[nextIdx]?.scrollIntoView({ block: 'center' });
-  if (nextIdx === 0 && level.intro) setTimeout(() => speak(level.intro), 300);
+  if (nextIdx === 0 && level.intro) setTimeout(() => { if (board.isConnected) speak(level.intro, { profile: level.audioProfile }); }, 300);
 }
 
 // ---------- play ----------
@@ -198,7 +198,8 @@ async function screenPlay(levelId, stageId) {
   const stageIdx = level.stages.findIndex(s => s.id === stageId);
   const stage = level.stages[stageIdx];
 
-  const items = stage.shuffle ? shuffle(stage.items) : stage.items;
+  const items = stageItems(stage);
+  const say = (text, options = {}) => speak(text, { ...options, profile: level.audioProfile });
   const total = items.length;
   const slots = stage.items.map(() => h('div.hb-slot'));
   const xpFill = h('div.xp-fill');
@@ -206,7 +207,7 @@ async function screenPlay(levelId, stageId) {
   const xp = h('div.xp', xpFill, h('div.xp-ticks'), xpLevel);
   const body = h('div.item-body');
   app.append(h('div.screen',
-    topBar(backBtn(`#/level/${levelId}`, 'cross'), h('div.plate', picEl(stage.icon || 'sprite:pickaxe'), stage.title), iconBtn('speaker', () => speak(current?.say || ''))),
+    topBar(backBtn(`#/level/${levelId}`, 'cross'), h('div.plate', picEl(stage.icon || 'sprite:pickaxe'), stage.title), iconBtn('speaker', () => say(current?.say || ''))),
     h('div.play-wrap',
       h('div.mc-panel.play-panel', body),
       h('div.hud', xp, h('div.hotbar', slots)))));
@@ -227,11 +228,11 @@ async function screenPlay(levelId, stageId) {
     slots.forEach((s, k) => s.classList.toggle('now', k === i));
     let attempts = 0, solved = false;
     const ctx = {
-      say: (t, fallback) => speak(t, { fallback }),
+      say: (t, fallback) => say(t, { fallback }),
       wrong(got, hint) {
         attempts++;
         mistakes.push({ q: current.q || current.say, got: String(got ?? '') });
-        if (hint !== null) { sfx.wrong(); speak(hint || retry()); }
+        if (hint !== null) { sfx.wrong(); say(hint || retry()); }
       },
       async right(after) {
         if (solved || !body.isConnected) return;
@@ -261,16 +262,16 @@ async function screenPlay(levelId, stageId) {
           setTimeout(() => { banner(bonus, `三连击！${BLOCKS[bonus].name}${bonusNew ? '（新）' : ''}`); sfx.chest(); }, 900);
           lines.push(S.combo);
         }
-        await speak(lines);
+        await say(lines);
         await wait(350);
         if (!body.isConnected || location.hash !== `#/play/${levelId}/${stageId}`) return;
         if (i + 1 < total) show(i + 1);
         else finish();
       },
     };
-    preload(itemTexts(current));
+    preload(itemTexts(current), { profile: level.audioProfile });
     ITEM_TYPES[current.type](body, current, ctx);
-    setTimeout(() => { if (body.isConnected && current === items[i]) speak(current.say); }, 350);
+    setTimeout(() => { if (body.isConnected && current === items[i]) say(current.say); }, 350);
   }
 
   function finish() {
@@ -318,7 +319,7 @@ function showReward(level, stageIdx, stars, chest, fresh, earned, replay) {
       btns)));
   const lines = [stageDone(stars)];
   if (replay) lines.push(S.replayChest);
-  speak(lines);
+  speak(lines, { profile: level.audioProfile });
   for (let k = 0; k < stars; k++) setTimeout(() => sfx.tap(), 200 + k * 250);
 
   // chest shakes, pops open, blocks drop into slots (rarest last)
@@ -337,7 +338,7 @@ function showReward(level, stageIdx, stars, chest, fresh, earned, replay) {
         h('div.rb-name', { style: { color: RARITY[rar].color } }, BLOCKS[b].name)));
     });
     btns.style.visibility = '';
-    if (best >= 3) setTimeout(() => speak(best === 4 ? S.legendFind : S.epicFind), 500);
+    if (best >= 3) setTimeout(() => { if (blocks.isConnected) speak(best === 4 ? S.legendFind : S.epicFind, { profile: level.audioProfile }); }, 500);
   }, 1300);
 }
 
@@ -355,7 +356,7 @@ async function screenPaper(levelId) {
   const body = h('div.mc-panel.paper-practice');
   app.append(h('div.screen',
     topBar(backBtn(`#/level/${levelId}`), h('div.plate', spriteEl('book'), '纸上听写'), ''), body));
-  mountPaper(body, stage.items);
+  mountPaper(body, stage.items, { profile: level.audioProfile });
 }
 
 // ---------- collection book ----------

@@ -11,6 +11,7 @@ the script correctly (pinyin and tones included), re-records failures, and write
     python3 tools/tts_build.py --list     # just print the lines
     python3 tools/tts_build.py --no-check # skip the pronunciation check
     python3 tools/tts_build.py --fallback # MiniMax + homophones + Qwen audio check, missing lines only
+    python3 tools/tts_build.py --profile jqx-b # approved Fish voice for its configured levels + shared feedback
 """
 import concurrent.futures as cf
 import fcntl
@@ -67,7 +68,9 @@ def level_lines(level):
 def all_lines():
     lines = code_lines()
     for meta in json.loads((ROOT / 'levels' / 'index.json').read_text()):
-        lines += level_lines(json.loads((ROOT / meta['path']).read_text()))
+        level = json.loads((ROOT / meta['path']).read_text())
+        if not level.get('audioProfile'):
+            lines += level_lines(level)
     seen, out = set(), []
     for t in lines:
         if t and t.strip() and t not in seen:
@@ -112,6 +115,10 @@ def record(key, text, do_check, fallback=False):
 
 
 def main():
+    if '--profile' in sys.argv:
+        from tts_profile import build
+        build(sys.argv[sys.argv.index('--profile') + 1])
+        return
     lines = all_lines()
     if '--list' in sys.argv:
         print('\n'.join(lines))
@@ -156,9 +163,13 @@ def main():
     manifest = {t: available_id(t) for t in lines if available_id(t)}
     (AUDIO / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=0))
     keep = set(manifest.values())
+    for profile in (AUDIO / 'profiles').glob('*.json'):
+        keep.update(json.loads(profile.read_text()).values())
     stale = [f for f in AUDIO.glob('*.m4a') if f.stem not in keep]
     for f in stale:
         f.unlink()
+    if FALLBACKS.exists():
+        FALLBACKS.write_text(json.dumps({k: v for k, v in fallbacks.items() if v in keep}, indent=2) + '\n')
     REPORT.parent.mkdir(exist_ok=True)
     REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=1))
     bad = [t for t in lines if report.get(t, {}).get('ok') is False]

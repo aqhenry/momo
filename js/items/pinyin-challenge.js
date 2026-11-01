@@ -36,6 +36,8 @@ export function renderLab(root, item, ctx) {
   const slots = item.parts.map((want, i) => ({
     want, got: null, kind: i === 0 ? 'ini' : i === item.parts.length - 1 ? 'fin' : 'med',
   }));
+  // Shuffle once per question, not after every tap or correction.
+  slots.forEach((slot, i) => { slot.options = shuffle(item.choices?.[i] || options(slot)); });
   let active = 0, locked = false, submitted = false;
   const row = h('div.lab-recipe');
   const pool = h('div.lab-pool');
@@ -61,12 +63,12 @@ export function renderLab(root, item, ctx) {
   paint();
 
   function options(slot) {
-    if (slot.kind === 'ini') return shuffle([...new Set([slot.want, 'j', 'q', 'x', 'n', 'l'])].slice(0, 5));
-    if (slot.kind === 'med') return shuffle(['i', 'u', 'ü']);
+    if (slot.kind === 'ini') return [...new Set([slot.want, 'j', 'q', 'x', 'n', 'l'])].slice(0, 5);
+    if (slot.kind === 'med') return ['i', 'u', 'ü'];
     const base = stripTone(slot.want), tone = toneOf(slot.want);
     const confusable = base === 'ü' ? 'u' : base === 'u' ? 'ü' : base === 'a' ? 'i' : 'a';
-    return shuffle([...new Set([slot.want, withTone(confusable, tone),
-      ...[1, 2, 3, 4].filter(t => t !== tone).slice(0, 2).map(t => withTone(base, t))])]);
+    return [...new Set([slot.want, withTone(confusable, tone),
+      ...[1, 2, 3, 4].filter(t => t !== tone).slice(0, 2).map(t => withTone(base, t))])];
   }
 
   function paint() {
@@ -79,7 +81,7 @@ export function renderLab(root, item, ctx) {
     if (locked) return;
     const slot = slots[active];
     pool.append(h(`span.tag.${slot.kind}`, labels[slot.kind]));
-    for (const value of options(slot)) {
+    for (const value of slot.options) {
       pool.append(h(`button.tile.${slot.kind}`, { onclick: () => put(value) }, gridSVG(value, 26, { minWidth: 64 })));
     }
   }
@@ -134,7 +136,7 @@ export function renderDictation(root, item, ctx) {
     word.append(h('div.dictation-syllable', h('span.dictation-number', String(i + 1)), slot));
     return slot;
   });
-  const keys = h('div.dictation-keys', LETTERS.map(letter =>
+  const keys = h(`div.dictation-keys${item.keys ? '.guided' : ''}`, (item.keys || LETTERS).map(letter =>
     h('button.letter-key.py', { 'aria-label': letter, onclick: () => {
       if (locked || [...got[active]].length >= 6) return;
       got[active] += letter;
@@ -152,8 +154,8 @@ export function renderDictation(root, item, ctx) {
     h('button.mc-btn.small', { onclick: () => { if (!locked) { got[active] = ''; edited(); } } }, '重写'),
     want.length > 1 ? h('button.mc-btn.small', { onclick: () => { if (!locked) { active = (active + 1) % got.length; paint(); } } }, '下一音节') : null,
     h('button.mc-btn.go', { onclick: check }, '检查'));
-  root.append(promptEl(item.prompt, ctx),
-    h('button.mc-btn.small', { onclick: () => { if (!locked) ctx.say(item.say); } }, spriteEl('speaker'), '再听一次'),
+  root.append(h('div.dictation-heading', promptEl(item.prompt, ctx),
+    h('button.mc-btn.small', { onclick: () => { if (!locked) ctx.say(item.say); } }, spriteEl('speaker'), '再听一次')),
     word, help, keys, tones, actions);
   paint();
 
@@ -188,14 +190,15 @@ export function renderDictation(root, item, ctx) {
   }
 }
 
-export function mountPaper(root, items) {
+export function mountPaper(root, items, { profile } = {}) {
+  const say = text => speak(text, { profile });
   const order = shuffle(items);
   let i = 0;
   const heading = h('div.challenge-title', '拿出纸和笔，先听再写');
   const note = h('div.challenge-help', '写完再揭晓，和家长一起核对。纸上练习不计星星。');
   const progress = h('div.counter');
   const answer = h('div.paper.paper-answer', { hidden: true });
-  const listen = h('button.mc-btn.big', { onclick: () => speak(order[i].say) }, spriteEl('speaker'), '听题目');
+  const listen = h('button.mc-btn.big', { onclick: () => say(order[i].say) }, spriteEl('speaker'), '听题目');
   const reveal = h('button.mc-btn.go', { onclick: () => {
     answer.replaceChildren(gridSVG(order[i].word, 32, { minWidth: 220 }));
     answer.hidden = false;
@@ -208,14 +211,14 @@ export function mountPaper(root, items) {
     if (i === order.length) {
       root.replaceChildren(h('div.challenge-title', '纸上听写完成啦！'),
         h('div.challenge-help', '和家长一起看看：小 i、两点、声调，都写对了吗？'),
-        h('button.mc-btn.go', { onclick: () => mountPaper(root, items) }, '再练一轮'));
+        h('button.mc-btn.go', { onclick: () => mountPaper(root, items, { profile }) }, '再练一轮'));
       return;
     }
     show();
   } }, '下一题');
   root.replaceChildren(heading, note, progress, listen, answer, h('div.row-btns', reveal, next));
   show();
-  speak(S.paperIntro);
+  say(S.paperIntro);
 
   function show() {
     progress.textContent = `第 ${i + 1} / ${order.length} 题`;

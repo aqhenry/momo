@@ -1,0 +1,17 @@
+{
+  "model": "fish-audio/drama-3",
+  "voice": "160ebd05eb704f5cb8a0878289faa8c4",
+  "instructions": "保持原有的成年女性音色，像一位亲切自然的中文老师。整体语气比平静朗读稍微明快一点，带一点微笑和鼓励，句子有轻微的抑扬顿挫。讲拼音时清楚、准确，适当停顿；说到 Good job 和读对啦时自然地露出一点喜悦。整体克制、自然，不用童声、娃娃音、撒娇或夸张表演。按原文朗读拼音和英文。",
+  "levels": [
+    "yuwen-jqx"
+  ],
+  "check_models": [
+    "qwen/qwen3.8-omni-flash",
+    "xiaomi/mimo-v2.6-flash"
+  ],
+  "pronunciation": {
+    "找齐啦！x。": "找齐啦！<|phoneme_start|>xi1<|phoneme_end|>。",
+    "看图，拼出打鼓的拼音。听一遍，dǎ gǔ。": "看图，拼出打鼓的拼音。听一遍，<|phoneme_start|>da3<|phoneme_end|><|phoneme_start|>gu3<|phoneme_end|>。",
+    "请拼出绿色的绿，lǜ。和 l 相拼，两点还要吗？": "请拼出绿色的绿，<|phoneme_start|>lv4<|phoneme_end|>。和 <|phoneme_start|>le1<|phoneme_end|> 相拼，两点还要吗？"
+  }
+}

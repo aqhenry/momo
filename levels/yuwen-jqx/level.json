@@ -3,7 +3,7 @@
   "title": "拼音秘境",
   "blockSet": "jqx",
   "note": "小 ü 的冒险 · 人教版一年级上 P34–35 · 两拼、三拼与音节词听写",
-  "intro": "墨然，欢迎来到拼音秘境！和 j、q、x 一起闯关吧。记住，小 ü 见到 j、q、x，去掉两点还读 ü。最后还有听写宝箱等着你！",
+  "intro": "墨然，欢迎来到拼音秘境！今天先认声母，再拼音节，最后挑战听写宝箱。记住，小 ü 见到 j、q、x，去掉两点还读 ü。我们出发吧！",
   "paperStage": "dictation",
   "stages": [
     {
@@ -81,7 +81,8 @@
           "after": "找齐啦！x。",
           "hint": "看清字母的形状，再找找。"
         }
-      ]
+      ],
+      "shuffle": true
     },
     {
       "id": "bridge",
@@ -116,16 +117,16 @@
             "ì",
             "qì"
           ],
-          "missing": 0,
+          "missing": 2,
           "options": [
-            "q",
-            "j",
-            "x"
+            "qì",
+            "qī",
+            "xì"
           ],
           "source": "课本 P34",
           "say": "拼一拼，qì。把缺少的积木补上。",
           "after": "q，ì，qì。",
-          "hint": "先听清声调，一声平，二声扬，三声拐弯，四声降。"
+          "hint": "听清开头的声母，再听声调。气，第四声。"
         },
         {
           "type": "blend",
@@ -135,11 +136,11 @@
             "ī",
             "xī"
           ],
-          "missing": 1,
+          "missing": 2,
           "options": [
-            "ī",
-            "í",
-            "ǐ"
+            "xī",
+            "xǐ",
+            "qī"
           ],
           "source": "课本 P34",
           "say": "拼一拼，xī。把缺少的积木补上。",
@@ -192,11 +193,11 @@
             "ī",
             "qī"
           ],
-          "missing": 1,
+          "missing": 0,
           "options": [
-            "ī",
-            "ì",
-            "í"
+            "q",
+            "j",
+            "x"
           ],
           "source": "四声加练",
           "say": "拼一拼，qī。把缺少的积木补上。",
@@ -206,108 +207,10 @@
       ]
     },
     {
-      "id": "mine",
-      "title": "三拼矿车",
-      "icon": "sprite:pickaxe",
-      "note": "三块积木拼一个音节，别漏小 i。",
-      "items": [
-        {
-          "type": "pinyinLab",
-          "q": "拼合 jiā",
-          "word": "jiā",
-          "parts": [
-            "j",
-            "i",
-            "ā"
-          ],
-          "say": "请拼出 jiā。依次放入声母、介母和韵母。",
-          "after": "j，i，ā，jiā。中间的小 i 不能少。",
-          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
-          "source": "课本 P34",
-          "difficulty": 3
-        },
-        {
-          "type": "pinyinLab",
-          "q": "拼合 qiā",
-          "word": "qiā",
-          "parts": [
-            "q",
-            "i",
-            "ā"
-          ],
-          "say": "请拼出 qiā。依次放入声母、介母和韵母。",
-          "after": "q，i，ā，qiā。中间的小 i 不能少。",
-          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
-          "source": "课本 P34",
-          "difficulty": 3
-        },
-        {
-          "type": "pinyinLab",
-          "q": "拼合 xiá",
-          "word": "xiá",
-          "parts": [
-            "x",
-            "i",
-            "á"
-          ],
-          "say": "请拼出 xiá。依次放入声母、介母和韵母。",
-          "after": "x，i，á，xiá。中间的小 i 不能少。",
-          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
-          "source": "课本 P34",
-          "difficulty": 3
-        },
-        {
-          "type": "pinyinLab",
-          "q": "拼合 jiǎ",
-          "word": "jiǎ",
-          "parts": [
-            "j",
-            "i",
-            "ǎ"
-          ],
-          "say": "请拼出 jiǎ。依次放入声母、介母和韵母。",
-          "after": "j，i，ǎ，jiǎ。中间的小 i 不能少。",
-          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
-          "source": "四声加练",
-          "difficulty": 3
-        },
-        {
-          "type": "pinyinLab",
-          "q": "拼合 qià",
-          "word": "qià",
-          "parts": [
-            "q",
-            "i",
-            "à"
-          ],
-          "say": "请拼出 qià。依次放入声母、介母和韵母。",
-          "after": "q，i，à，qià。中间的小 i 不能少。",
-          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
-          "source": "四声加练",
-          "difficulty": 3
-        },
-        {
-          "type": "pinyinLab",
-          "q": "拼合 xià",
-          "word": "xià",
-          "parts": [
-            "x",
-            "i",
-            "à"
-          ],
-          "say": "请拼出 xià。依次放入声母、介母和韵母。",
-          "after": "x，i，à，xià。中间的小 i 不能少。",
-          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
-          "source": "四声加练",
-          "difficulty": 3
-        }
-      ]
-    },
-    {
       "id": "gate",
       "title": "小 ü 变身门",
       "icon": "text:ü",
-      "note": "去掉两点还读 ü，拆开时两点回来。",
+      "note": "先拼起来，再拆开看：两点省去，声调留下。",
       "items": [
         {
           "type": "pinyinLab",
@@ -318,10 +221,22 @@
             "ǖ"
           ],
           "say": "把声母 j 和 ǖ 拼在一起，会变成什么？请放好两块积木。",
-          "after": "j，ǖ，jū。小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "after": "jū。两点省去，第一声保留。",
           "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
           "source": "课本 P34",
-          "difficulty": 2
+          "difficulty": 2,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "ū",
+              "ǖ",
+              "ī"
+            ]
+          ]
         },
         {
           "type": "pinyinLab",
@@ -332,10 +247,22 @@
             "ǖ"
           ],
           "say": "把声母 q 和 ǖ 拼在一起，会变成什么？请放好两块积木。",
-          "after": "q，ǖ，qū。小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "after": "qū。两点省去，第一声保留。",
           "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
           "source": "课本 P34",
-          "difficulty": 2
+          "difficulty": 2,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "ū",
+              "ǖ",
+              "ī"
+            ]
+          ]
         },
         {
           "type": "pinyinLab",
@@ -346,10 +273,48 @@
             "ǖ"
           ],
           "say": "把声母 x 和 ǖ 拼在一起，会变成什么？请放好两块积木。",
-          "after": "x，ǖ，xū。小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "after": "xū。两点省去，第一声保留。",
           "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
           "source": "课本 P34",
-          "difficulty": 2
+          "difficulty": 2,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "ū",
+              "ǖ",
+              "ī"
+            ]
+          ]
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 qù",
+          "word": "qù",
+          "parts": [
+            "q",
+            "ǜ"
+          ],
+          "say": "请拼出 qù。看看两点和声调会怎样变化。",
+          "after": "q，ǜ，qù。两点省去，第四声留下。",
+          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "source": "四声加练",
+          "difficulty": 2,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "ǜ",
+              "ù",
+              "ǚ"
+            ]
+          ]
         },
         {
           "type": "choice",
@@ -358,22 +323,23 @@
           "source": "课本 P34",
           "options": [
             {
+              "py": "ī",
+              "grid": true
+            },
+            {
               "py": "ǖ",
               "grid": true
             },
             {
               "py": "ū",
               "grid": true
-            },
-            {
-              "py": "ī",
-              "grid": true
             }
           ],
-          "answer": 0,
+          "answer": 1,
           "cols": 3,
           "after": "jū 拆开，是 j 和 ǖ。拆开以后，两点要回来。",
-          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。"
+          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "fixed": false
         },
         {
           "type": "choice",
@@ -397,49 +363,208 @@
           "answer": 0,
           "cols": 3,
           "after": "qù 拆开，是 q 和 ǜ。拆开以后，两点要回来。",
-          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。"
+          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "fixed": false
+        }
+      ]
+    },
+    {
+      "id": "mine",
+      "title": "三拼矿车",
+      "icon": "sprite:pickaxe",
+      "note": "三块积木拼一个音节，别漏小 i。",
+      "items": [
+        {
+          "type": "pinyinLab",
+          "q": "拼合 jiā",
+          "word": "jiā",
+          "parts": [
+            "j",
+            "i",
+            "ā"
+          ],
+          "say": "请拼出 jiā。依次放入声母、介母和韵母。",
+          "after": "j，i，ā，jiā。中间的小 i 不能少。",
+          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
+          "source": "课本 P34",
+          "difficulty": 3,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "ā",
+              "á",
+              "à"
+            ]
+          ]
         },
         {
           "type": "pinyinLab",
-          "q": "拼合 qù",
-          "word": "qù",
+          "q": "拼合 qiā",
+          "word": "qiā",
           "parts": [
             "q",
-            "ǜ"
+            "i",
+            "ā"
           ],
-          "say": "请拼出 qù。看看两点和声调会怎样变化。",
-          "after": "q，ǜ，qù。两点省去，第四声留下。",
-          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "say": "请拼出 qiā。依次放入声母、介母和韵母。",
+          "after": "q，i，ā，qiā。中间的小 i 不能少。",
+          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
+          "source": "课本 P34",
+          "difficulty": 3,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "ā",
+              "á",
+              "à"
+            ]
+          ]
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 xiá",
+          "word": "xiá",
+          "parts": [
+            "x",
+            "i",
+            "á"
+          ],
+          "say": "请拼出 xiá。依次放入声母、介母和韵母。",
+          "after": "x，i，á，xiá。中间的小 i 不能少。",
+          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
+          "source": "课本 P34",
+          "difficulty": 3,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "ǎ",
+              "ā",
+              "á"
+            ]
+          ]
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 jiǎ",
+          "word": "jiǎ",
+          "parts": [
+            "j",
+            "i",
+            "ǎ"
+          ],
+          "say": "请拼出 jiǎ。依次放入声母、介母和韵母。",
+          "after": "j，i，ǎ，jiǎ。中间的小 i 不能少。",
+          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
           "source": "四声加练",
-          "difficulty": 2
+          "difficulty": 3,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "á",
+              "ǎ",
+              "à"
+            ]
+          ]
         },
         {
           "type": "pinyinLab",
-          "q": "拼合 nǚ",
-          "word": "nǚ",
+          "q": "拼合 qià",
+          "word": "qià",
           "parts": [
-            "n",
-            "ǚ"
+            "q",
+            "i",
+            "à"
           ],
-          "say": "请拼出女孩的女，nǚ。两点还要吗？",
-          "after": "n，ǚ，nǚ。小 ü 见到 n，两点要保留。",
-          "hint": "女孩的女，绿色的绿，拼音里的两点都要保留。",
-          "source": "易错对照",
-          "difficulty": 2
+          "say": "请拼出 qià。依次放入声母、介母和韵母。",
+          "after": "q，i，à，qià。中间的小 i 不能少。",
+          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
+          "source": "四声加练",
+          "difficulty": 3,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "à",
+              "ǎ",
+              "ā"
+            ]
+          ]
         },
         {
           "type": "pinyinLab",
-          "q": "拼合 lǜ",
-          "word": "lǜ",
+          "q": "拼合 xià",
+          "word": "xià",
           "parts": [
-            "l",
-            "ǜ"
+            "x",
+            "i",
+            "à"
           ],
-          "say": "请拼出绿色的绿，lǜ。和 l 相拼，两点还要吗？",
-          "after": "l，ǜ，lǜ。小 ü 见到 l，两点要保留。",
-          "hint": "女孩的女，绿色的绿，拼音里的两点都要保留。",
-          "source": "易错对照",
-          "difficulty": 2
+          "say": "请拼出 xià。依次放入声母、介母和韵母。",
+          "after": "x，i，à，xià。中间的小 i 不能少。",
+          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
+          "source": "四声加练",
+          "difficulty": 3,
+          "choices": [
+            [
+              "j",
+              "q",
+              "x"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "à",
+              "ǎ",
+              "ā"
+            ]
+          ]
         }
       ]
     },
@@ -447,87 +572,136 @@
       "id": "words",
       "title": "词语合成台",
       "icon": "sprite:bricks",
-      "note": "打鼓、下棋、搭积木，先看图再听音。",
+      "note": "先看图练习，再撤掉图片。每轮词语顺序都会变化。",
       "items": [
         {
           "type": "dictation",
           "q": "词语 dǎ gǔ",
           "word": "dǎ gǔ",
-          "say": "请拼出打鼓的拼音。dǎ gǔ。",
-          "after": "dǎ gǔ。写对啦！",
+          "say": "看图，拼出打鼓的拼音。听一遍，dǎ gǔ。",
+          "after": "对了，是 dǎ gǔ。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35 · 看图练习",
           "difficulty": 3,
           "prompt": {
             "label": "打鼓",
             "pic": "art:drum"
-          }
+          },
+          "phase": "看图拼写",
+          "keys": [
+            "b",
+            "d",
+            "g",
+            "j",
+            "m",
+            "n",
+            "q",
+            "x",
+            "a",
+            "i",
+            "u",
+            "ü"
+          ]
         },
         {
           "type": "dictation",
           "q": "词语 xià qí",
           "word": "xià qí",
-          "say": "请拼出下棋的拼音。xià qí。",
-          "after": "xià qí。写对啦！",
+          "say": "看图，拼出下棋的拼音。听一遍，xià qí。",
+          "after": "对了，是 xià qí。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35 · 看图练习",
           "difficulty": 3,
           "prompt": {
             "label": "下棋",
             "pic": "block:chess_board"
-          }
+          },
+          "phase": "看图拼写",
+          "keys": [
+            "b",
+            "d",
+            "g",
+            "j",
+            "m",
+            "n",
+            "q",
+            "x",
+            "a",
+            "i",
+            "u",
+            "ü"
+          ]
         },
         {
           "type": "dictation",
           "q": "词语 dā jī mù",
           "word": "dā jī mù",
-          "say": "请拼出搭积木的拼音。dā jī mù。",
-          "after": "dā jī mù。写对啦！",
+          "say": "看图，拼出搭积木的拼音。听一遍，dā jī mù。",
+          "after": "对了，是 dā jī mù。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35 · 看图练习",
           "difficulty": 3,
           "prompt": {
             "label": "搭积木",
             "pic": "block:toy_red"
-          }
+          },
+          "phase": "看图拼写",
+          "keys": [
+            "b",
+            "d",
+            "g",
+            "j",
+            "m",
+            "n",
+            "q",
+            "x",
+            "a",
+            "i",
+            "u",
+            "ü"
+          ]
         },
         {
           "type": "dictation",
           "q": "听写 dǎ gǔ",
           "word": "dǎ gǔ",
           "say": "听词语，拼拼音。打鼓。再听一遍，打鼓。",
-          "after": "dǎ gǔ。写对啦！",
+          "after": "对了，是 dǎ gǔ。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35 · 撤掉图片",
-          "difficulty": 3
+          "difficulty": 3,
+          "phase": "听音拼写"
         },
         {
           "type": "dictation",
           "q": "听写 xià qí",
           "word": "xià qí",
           "say": "听词语，拼拼音。下棋。再听一遍，下棋。",
-          "after": "xià qí。写对啦！",
+          "after": "对了，是 xià qí。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35 · 撤掉图片",
-          "difficulty": 3
+          "difficulty": 3,
+          "phase": "听音拼写"
         },
         {
           "type": "dictation",
           "q": "听写 dā jī mù",
           "word": "dā jī mù",
           "say": "听词语，拼拼音。搭积木。再听一遍，搭积木。",
-          "after": "dā jī mù。写对啦！",
+          "after": "对了，是 dā jī mù。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35 · 撤掉图片",
-          "difficulty": 3
+          "difficulty": 3,
+          "phase": "听音拼写"
         }
-      ]
+      ],
+      "shuffleWithinPhase": true
     },
     {
       "id": "repair",
       "title": "错字修理铺",
       "icon": "sprite:book",
-      "note": "找出漏 i、多两点和声调错误。",
+      "note": "把省点、保留两点、小 i 和声调放在一起练。",
       "items": [
         {
           "type": "choice",
@@ -536,22 +710,23 @@
           "source": "课本 P34",
           "options": [
             {
-              "py": "jū",
-              "grid": true
-            },
-            {
               "py": "jǖ",
               "grid": true
             },
             {
               "py": "ju",
               "grid": true
+            },
+            {
+              "py": "jū",
+              "grid": true
             }
           ],
-          "answer": 0,
+          "answer": 2,
           "cols": 3,
           "after": "jū，去掉两点，第一声要留下。",
-          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。"
+          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "fixed": false
         },
         {
           "type": "choice",
@@ -560,22 +735,23 @@
           "source": "四声加练",
           "options": [
             {
+              "py": "qǔ",
+              "grid": true
+            },
+            {
               "py": "qù",
               "grid": true
             },
             {
               "py": "qǜ",
               "grid": true
-            },
-            {
-              "py": "qǔ",
-              "grid": true
             }
           ],
-          "answer": 0,
+          "answer": 1,
           "cols": 3,
           "after": "qù，去掉两点，第四声要留下。",
-          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。"
+          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "fixed": false
         },
         {
           "type": "choice",
@@ -599,7 +775,8 @@
           "answer": 0,
           "cols": 3,
           "after": "xū，去掉两点，第一声要留下。",
-          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。"
+          "hint": "小 ü 见到 j、q、x，去掉两点还读 ü。声调要保留。",
+          "fixed": false
         },
         {
           "type": "choice",
@@ -608,22 +785,23 @@
           "source": "课本 P34",
           "options": [
             {
-              "py": "jiā",
-              "grid": true
-            },
-            {
               "py": "jā",
               "grid": true
             },
             {
               "py": "jī",
               "grid": true
+            },
+            {
+              "py": "jiā",
+              "grid": true
             }
           ],
-          "answer": 0,
+          "answer": 2,
           "cols": 3,
           "after": "j，i，ā，jiā。三拼音节不要漏掉 i。",
-          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。"
+          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
+          "fixed": false
         },
         {
           "type": "choice",
@@ -632,48 +810,103 @@
           "source": "课本 P34",
           "options": [
             {
+              "py": "xá",
+              "grid": true
+            },
+            {
               "py": "xiá",
               "grid": true
             },
             {
               "py": "xià",
               "grid": true
-            },
-            {
-              "py": "xá",
-              "grid": true
             }
           ],
-          "answer": 0,
+          "answer": 1,
           "cols": 3,
           "after": "xiá。第二声，往上扬。三拼音节，中间的小 i 不能少。",
-          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。"
+          "hint": "三拼音节有三个部分，中间的小 i 不要漏掉。声调标在 a 上。",
+          "fixed": false
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 nǚ",
+          "word": "nǚ",
+          "parts": [
+            "n",
+            "ǚ"
+          ],
+          "say": "请拼出女孩的女，nǚ。两点还要吗？",
+          "after": "n，ǚ，nǚ。小 ü 见到 n，两点要保留。",
+          "hint": "女孩的女，绿色的绿，拼音里的两点都要保留。",
+          "source": "易错对照",
+          "difficulty": 2,
+          "choices": [
+            [
+              "n",
+              "l",
+              "j"
+            ],
+            [
+              "ǔ",
+              "ǚ",
+              "ǜ"
+            ]
+          ]
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 lǜ",
+          "word": "lǜ",
+          "parts": [
+            "l",
+            "ǜ"
+          ],
+          "say": "请拼出绿色的绿，lǜ。和 l 相拼，两点还要吗？",
+          "after": "l，ǜ，lǜ。小 ü 见到 l，两点要保留。",
+          "hint": "女孩的女，绿色的绿，拼音里的两点都要保留。",
+          "source": "易错对照",
+          "difficulty": 2,
+          "choices": [
+            [
+              "n",
+              "l",
+              "j"
+            ],
+            [
+              "ǜ",
+              "ù",
+              "ǚ"
+            ]
+          ]
         },
         {
           "type": "choice",
-          "q": "修理 nǚ",
-          "say": "听一听，女孩的女，nǚ。哪一张卡片写对了？",
+          "q": "对照 lǜ 和 lù",
+          "say": "听一听，绿色的绿，lǜ。选出正确的拼音。",
           "source": "易错对照",
           "options": [
             {
-              "py": "nǚ",
+              "py": "lü",
               "grid": true
             },
             {
-              "py": "nǔ",
+              "py": "lù",
               "grid": true
             },
             {
-              "py": "nü",
+              "py": "lǜ",
               "grid": true
             }
           ],
-          "answer": 0,
+          "answer": 2,
           "cols": 3,
-          "after": "nǚ，跟 n 相拼，两点和声调都要保留。",
-          "hint": "女孩的女，绿色的绿，拼音里的两点都要保留。"
+          "after": "lǜ。这里要保留两点，第四声也要写上。",
+          "hint": "绿色的绿，韵母是 ü，两点要保留。",
+          "fixed": false
         }
-      ]
+      ],
+      "shuffle": true
     },
     {
       "id": "dictation",
@@ -686,7 +919,7 @@
           "q": "听写 jī",
           "word": "jī",
           "say": "听写：jī。再听一遍，jī。",
-          "after": "jī。写对啦！",
+          "after": "对了，是 jī。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -696,7 +929,7 @@
           "q": "听写 qì",
           "word": "qì",
           "say": "听写：qì。再听一遍，qì。",
-          "after": "qì。写对啦！",
+          "after": "对了，是 qì。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -706,7 +939,7 @@
           "q": "听写 xī",
           "word": "xī",
           "say": "听写：xī。再听一遍，xī。",
-          "after": "xī。写对啦！",
+          "after": "对了，是 xī。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -716,7 +949,7 @@
           "q": "听写 jiā",
           "word": "jiā",
           "say": "听写：jiā。再听一遍，jiā。",
-          "after": "jiā。写对啦！",
+          "after": "对了，是 jiā。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -726,7 +959,7 @@
           "q": "听写 qiā",
           "word": "qiā",
           "say": "听写：qiā。再听一遍，qiā。",
-          "after": "qiā。写对啦！",
+          "after": "对了，是 qiā。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -736,7 +969,7 @@
           "q": "听写 xiá",
           "word": "xiá",
           "say": "听写：xiá。再听一遍，xiá。",
-          "after": "xiá。写对啦！",
+          "after": "对了，是 xiá。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -746,7 +979,7 @@
           "q": "听写 jū",
           "word": "jū",
           "say": "听写：jū。再听一遍，jū。",
-          "after": "jū。写对啦！",
+          "after": "对了，是 jū。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -756,7 +989,7 @@
           "q": "听写 qū",
           "word": "qū",
           "say": "听写：qū。再听一遍，qū。",
-          "after": "qū。写对啦！",
+          "after": "对了，是 qū。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -766,7 +999,7 @@
           "q": "听写 xū",
           "word": "xū",
           "say": "听写：xū。再听一遍，xū。",
-          "after": "xū。写对啦！",
+          "after": "对了，是 xū。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P34",
           "difficulty": 3
@@ -776,7 +1009,7 @@
           "q": "听写 dǎ gǔ",
           "word": "dǎ gǔ",
           "say": "听写词语：打鼓。再听一遍，打鼓。",
-          "after": "dǎ gǔ。写对啦！",
+          "after": "对了，是 dǎ gǔ。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35",
           "difficulty": 3
@@ -786,7 +1019,7 @@
           "q": "听写 xià qí",
           "word": "xià qí",
           "say": "听写词语：下棋。再听一遍，下棋。",
-          "after": "xià qí。写对啦！",
+          "after": "对了，是 xià qí。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35",
           "difficulty": 3
@@ -796,7 +1029,7 @@
           "q": "听写 dā jī mù",
           "word": "dā jī mù",
           "say": "听写词语：搭积木。再听一遍，搭积木。",
-          "after": "dā jī mù。写对啦！",
+          "after": "对了，是 dā jī mù。",
           "hint": "再听一次，检查字母、两点和声调。",
           "source": "课本 P35",
           "difficulty": 3
@@ -804,5 +1037,7 @@
       ],
       "shuffle": true
     }
-  ]
+  ],
+  "audioProfile": "jqx-b",
+  "revision": 2
 }

@@ -20,7 +20,7 @@ PROMPT = '''你是小学语文老师，正在检查给一年级小朋友用的�
 台本：「{script}」
 请仔细听音频，判断朗读是否和台本完全一致：
 - 每个汉字都读了，读音正确（多音字按语境），没有漏读、多读、读错；
-- 台本里的拼音（带声调的字母，例如 mú、lǎ ba、ü）要按拼音读出来，声母要读成呼读音（如 b 读 bō），声调必须正确，不能读成英文字母；
+- 台本里的完整拼音音节（例如 mú、lǎ ba、dǎ gǔ）要整体读出，不要逐字母拆读。只有单独出现的声母才读呼读音（如 b 读 bō）；单独韵母按它的声调朗读，不能读成英文字母；
 - 拼音可以用同音汉字来生成配音，仅比较实际发音，不因同音汉字的字形不同而判错；三声连读、“一”“不”等正常普通话变调不算错误；
 - 语气自然，没有奇怪的杂音或重复。
 只输出 JSON：{{"ok": true/false, "problems": "有问题时用中文简短说明哪里不对"}}'''
@@ -37,6 +37,12 @@ def check(key, script, path, model=CHECK_MODEL):
     prompt = PROMPT.format(script=script)
     if guide:
         prompt += '\n台本拼音的目标声调（按此表核对实际音频）：' + guide
+    sounds = {'j': 'jī（鸡）', 'q': 'qī（七），不是英文字母 Q，也不是 qiū',
+              'x': 'xī（西）', 'n': 'nē（讷）', 'l': 'lē（勒）',
+              'i': 'ī（衣）', 'u': 'ū（乌）', 'ü': 'ǖ（迂）'}
+    isolated = [f'{t} 读 {sounds[t]}' for t in dict.fromkeys(tokens) if t in sounds]
+    if isolated:
+        prompt += '\n本台本中单独字母的教学呼读音：' + '；'.join(isolated)
     body = {
         'model': model,
         'temperature': 0,
@@ -53,9 +59,21 @@ def check(key, script, path, model=CHECK_MODEL):
     resp = json.loads(p.stdout)
     if 'choices' not in resp:
         raise RuntimeError(str(resp.get('error', 'Audio checker returned no verdict')))
-    text = resp['choices'][0]['message']['content']
-    text = text[text.find('{'): text.rfind('}') + 1]
-    return json.loads(text)
+    text = resp['choices'][0]['message']['content'] or ''
+    # Some providers wrap JSON in prose or fences, or emit more than one object.
+    # Accept only an explicit boolean verdict; an explanation alone cannot pass.
+    decoder = json.JSONDecoder()
+    verdicts = []
+    for match in re.finditer(r'\{', text):
+        try:
+            value, _ = decoder.raw_decode(text[match.start():])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(value, dict) and isinstance(value.get('ok'), bool):
+            verdicts.append(value)
+    if not verdicts:
+        raise RuntimeError('Audio checker returned no boolean verdict')
+    return verdicts[-1]
 
 
 if __name__ == '__main__':

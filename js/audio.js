@@ -22,8 +22,19 @@ export const audioReady = fetch('audio/manifest.json')
   .catch(() => {});
 
 const buffers = new Map();   // clip id -> Promise<AudioBuffer|null>
-function clip(text) {
-  const id = manifest[text];
+const profiles = new Map();
+async function voiceProfile(profile) {
+  if (!profile) return null;
+  if (!profiles.has(profile)) {
+    profiles.set(profile, fetch(`audio/profiles/${encodeURIComponent(profile)}.json`)
+      .then(r => { if (!r.ok) throw new Error('Missing voice profile'); return r.json(); })
+      .catch(() => { profiles.delete(profile); return null; }));
+  }
+  return profiles.get(profile);
+}
+
+function clip(text, overrides) {
+  const id = overrides?.[text] || manifest[text];
   if (!id) return null;
   if (!buffers.has(id)) {
     buffers.set(id, fetch(`audio/${id}.m4a`)
@@ -37,14 +48,19 @@ function clip(text) {
 // Quietly download every clip once so the service worker has them for offline play.
 export async function warmCache() {
   await audioReady;
-  for (const id of new Set(Object.values(manifest))) {
+  const catalog = await fetch('levels/index.json').then(r => r.json()).catch(() => []);
+  const maps = await Promise.all([...new Set(catalog.map(m => m.audioProfile).filter(Boolean))].map(voiceProfile));
+  const ids = [...maps.filter(Boolean).flatMap(m => Object.values(m)), ...Object.values(manifest)];
+  for (const id of new Set(ids)) {
     try { await fetch(`audio/${id}.m4a`); } catch (e) { return; }
   }
 }
 
 // Start fetching/decoding clips ahead of time (e.g. everything an item may say).
-export function preload(texts) {
-  for (const t of texts) if (t) clip(t);
+export async function preload(texts, { profile } = {}) {
+  await audioReady;
+  const overrides = await voiceProfile(profile);
+  for (const t of texts) if (t) clip(t, overrides);
 }
 
 let current = null;   // { stop() } for whatever is speaking now
@@ -91,15 +107,17 @@ function sayBuiltIn(text, rate = 0.85) {
 
 // speak('一句话') or speak(['太棒了！', '讲解…']). Resolves when finished or interrupted.
 // `fallback` is what the built-in voice says if there is no clip (e.g. a character instead of its pinyin).
-export async function speak(text, { fallback } = {}) {
+export async function speak(text, { fallback, profile } = {}) {
   stopSpeaking();
   const mine = ++token;
   await audioReady;
+  const overrides = await voiceProfile(profile);
+  if (mine !== token) return;
   const parts = (Array.isArray(text) ? text : [text]).filter(Boolean);
-  parts.forEach(clip);
+  parts.forEach(part => clip(part, overrides));
   for (const part of parts) {
     if (mine !== token) return;
-    const buf = await clip(part);
+    const buf = await clip(part, overrides);
     if (mine !== token) return;
     if (buf) await playBuffer(buf);
     else await sayBuiltIn(parts.length === 1 && fallback ? fallback : part);
