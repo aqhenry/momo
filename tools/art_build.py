@@ -12,6 +12,7 @@ style on a magenta background, then normalises it so every picture matches:
 import base64
 import concurrent.futures as cf
 import io
+import os
 import json
 import pathlib
 import subprocess
@@ -27,7 +28,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 ART = ROOT / 'art'
 LIB = ART / 'library.json'
 RAW = ROOT / 'samples' / 'art-raw'
-MODEL = 'google/gemini-3.1-flash-image'
+MODEL = os.environ.get('ART_MODEL', 'google/gemini-3.1-flash-image')
 SIZE = 32          # pixels per side of every picture
 COLORS = 24        # max colours per picture
 

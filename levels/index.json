@@ -1,5 +1,16 @@
 [
   {
+    "id": "review-ch5",
+    "chapter": 5,
+    "subject": "语文+英语",
+    "title": "村庄图书馆",
+    "subtitle": "ai ei ui · 背古诗 · 英语指读",
+    "date": "2026-11-08",
+    "block": "chiseled_bookshelf",
+    "path": "levels/review-ch5/level.json",
+    "audioProfile": "jqx-b"
+  },
+  {
     "id": "math-week9",
     "chapter": 4,
     "subject": "数学",

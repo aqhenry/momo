@@ -3,10 +3,10 @@ import { store } from './store.js';
 import { speak, stopSpeaking, preload, warmCache, sfx, praise, retry } from './audio.js';
 import { S, PRAISE, stageDone } from './phrases.js';
 import { BLOCKS, RARITY, blockURL, iconEl } from './blocks.js';
-import { answerDrop, isCombo, comboDrop, openChest, CHESTS } from './rewards.js';
+import { answerXP, COMBO_XP, isCombo, levelOf, levelUpDrop, openChest, CHESTS } from './rewards.js';
 import { spriteEl, spriteURL } from './sprites.js';
 import { picEl } from './pics.js';
-import { burst, orbs, flyTo, banner } from './fx.js';
+import { burst, orbs, banner } from './fx.js';
 import { initScene } from './scene.js';
 import { measureFont } from './pinyin.js';
 import * as choice from './items/choice.js';
@@ -14,7 +14,8 @@ import * as blend from './items/blend.js';
 import * as spell from './items/spell.js';
 import * as stroke from './items/stroke.js';
 import * as order from './items/order.js';
-import { renderRead, renderTap } from './items/text.js';
+import { renderRead, renderTap, renderRecite } from './items/text.js';
+import { renderPointRead } from './items/english.js';
 import { renderCalc, renderCraft, renderPattern } from './items/math.js';
 import { render as renderMathExplore } from './items/math-explore.js';
 import { renderHunt, renderLab, renderDictation, mountPaper } from './items/pinyin-challenge.js';
@@ -34,6 +35,8 @@ const ITEM_TYPES = {
   letterHunt: renderHunt,
   pinyinLab: renderLab,
   dictation: renderDictation,
+  recite: renderRecite,
+  pointRead: renderPointRead,
 };
 
 const app = document.getElementById('app');
@@ -75,6 +78,7 @@ async function route() {
     else if (name === 'play') await screenPlay(a, b);
     else if (name === 'build') await screenBuild();
     else if (name === 'book') screenBook();
+    else if (name === 'craft') await screenCraft();
     else if (name === 'parent') await screenParent();
     else if (name === 'paper') await screenPaper(a);
     else await screenHome();
@@ -96,8 +100,14 @@ function invCount() {
   return Object.values(store.state.inventory).reduce((a, b) => a + b, 0);
 }
 
+// Player level from all XP ever earned (Minecraft-style level number over a green bar).
+function playerXP() {
+  const { level, into, need } = levelOf(store.state.xp || 0);
+  return h('div.home-xp', h('div.xp', h('div.xp-fill', { style: { width: `${(into / need) * 100}%` } }), h('div.xp-ticks'), h('div.xp-level', String(level))));
+}
+
 // ---------- home ----------
-const SPLASHES = ['拼音小矿工！', '答对就有方块！', '钻石在等你！', '今天也要加油！', '方块越多越好玩！', '声调要读准！'];
+const SPLASHES = ['拼音小矿工！', '攒经验，开宝箱！', '钻石在等你！', '今天也要加油！', '方块越多越好玩！', '声调要读准！'];
 
 async function screenHome() {
   const levels = await loadIndex();
@@ -137,8 +147,10 @@ async function screenHome() {
           h('div.mc-panel',
             h('div.build-preview', preview.map(t => iconEl(t))),
             h('div.inv-count', `背包 ${invCount()} 个方块`),
+            playerXP(),
             h('div.row-btns',
               h('button.mc-btn', { onclick: () => { sfx.tap(); go('#/build'); } }, '我的建造'),
+              h('button.mc-btn', { onclick: () => { sfx.tap(); go('#/craft'); } }, '工作台'),
               h('button.mc-btn', { onclick: () => { sfx.tap(); go('#/book'); } }, '图鉴')))))));
 }
 
@@ -207,6 +219,12 @@ async function screenPlay(levelId, stageId) {
   const slots = stage.items.map(() => h('div.hb-slot'));
   const xpFill = h('div.xp-fill');
   const xpLevel = h('div.xp-level', '0');
+  const paintXP = () => {
+    const { level: lv, into, need } = levelOf(store.state.xp || 0);
+    xpFill.style.width = `${(into / need) * 100}%`;
+    xpLevel.textContent = String(lv);
+  };
+  paintXP();
   const xp = h('div.xp', xpFill, h('div.xp-ticks'), xpLevel);
   const body = h('div.item-body');
   if (practice) app.classList.add('child-practice');
@@ -273,29 +291,34 @@ async function screenPlay(levelId, stageId) {
         const first = attempts === 0;
         if (first) firstTry++;
         if (practice || first) streak++; else streak = 0;
-        const block = answerDrop(current, practice || first, level.blockSet);
-        const isNew = store.addBlock(block);
-        earned.push(block);
-        sfx.right();
-        burst(block);
-        orbs(xp);
-        flyTo(block, slots[i]).then(() => {
-          slots[i].innerHTML = '';
-          slots[i].className = `hb-slot r${BLOCKS[block].rarity}`;
-          slots[i].append(iconEl(block));
-          xpFill.style.width = `${((i + 1) / total) * 100}%`;
-          xpLevel.textContent = String(earned.length);
-          sfx.place();
-          if (isNew) banner(block, `新发现：${BLOCKS[block].name}`);
-        });
-        const lines = [isNew ? S.newFind : praise(level.blockSet), after];
-        if ((practice || first) && isCombo(streak)) {
-          const bonus = comboDrop(level.blockSet);
-          const bonusNew = store.addBlock(bonus);
-          earned.push(bonus);
-          setTimeout(() => { if (body.isConnected) { banner(bonus, `${practice ? '又完成三题！' : '三连击！'}${BLOCKS[bonus].name}${bonusNew ? '（新）' : ''}`); sfx.chest(); } }, 900);
-          lines.push(practice ? level.speech.combo : S.combo);
+        // XP instead of a block per answer; a full XP bar (level-up) gives one block.
+        let gain = answerXP(current, practice || first);
+        const combo = (practice || first) && isCombo(streak);
+        if (combo) gain += COMBO_XP;
+        const before = levelOf(store.state.xp || 0).level;
+        store.addXP(gain);
+        const nowLevel = levelOf(store.state.xp).level;
+        const ups = [];
+        for (let k = before; k < nowLevel; k++) {
+          const block = levelUpDrop(level.blockSet);
+          ups.push({ block, isNew: store.addBlock(block) });
+          earned.push(block);
         }
+        sfx.right();
+        orbs(xp, undefined, 4 + gain * 2);
+        slots[i].innerHTML = '';
+        slots[i].className = 'hb-slot xp-done';
+        slots[i].append(spriteEl('orb'), h('span.xp-gain', `+${gain}`));
+        setTimeout(() => { paintXP(); sfx.place(); }, 750);
+        ups.forEach(({ block, isNew }, k) => setTimeout(() => {
+          if (!body.isConnected) return;
+          sfx.chest();
+          burst(block, undefined, 18);
+          banner(block, `升级啦！${BLOCKS[block].name}${isNew ? '（新）' : ''}`);
+        }, 900 + k * 1400));
+        const lines = [praise(level.blockSet), after];
+        if (combo) lines.push(practice ? level.speech.combo : S.combo);
+        if (ups.length) lines.push(S.levelUp);
         await say(lines);
         await wait(350);
         if (!body.isConnected || location.hash !== `#/play/${levelId}/${stageId}`) return;
@@ -322,7 +345,11 @@ async function screenPlay(levelId, stageId) {
     store.finishStage(levelId, stageId, { stars, firstTry, total, mistakes });
     const chest = openChest(stars, practice ? false : replay, level.blockSet);
     const fresh = chest.blocks.map(b => store.addBlock(b));
-    showReward(level, stageIdx, stars, chest, fresh, earned, practice ? false : replay);
+    // one-time achievement blocks: every listed stage of this adventure finished
+    const achieved = (level.achievements || [])
+      .filter(a => a.stages.every(id => store.stage(levelId, id)?.done) && store.achieve(a.id))
+      .map(a => ({ ...a, isNew: store.addBlock(a.block) }));
+    showReward(level, stageIdx, stars, chest, fresh, earned, practice ? false : replay, achieved);
   }
 
   show(0);
@@ -334,7 +361,7 @@ function itemTexts(it) {
   return [it.say, it.after, it.hint, it.prompt?.picSay, it.read, ...(it.strokes || []), ...(it.pieces || []), ...opts, ...PRAISE];
 }
 
-function showReward(level, stageIdx, stars, chest, fresh, earned, replay) {
+function showReward(level, stageIdx, stars, chest, fresh, earned, replay, achieved = []) {
   const next = level.stages[stageIdx + 1];
   const practice = level.rewardPolicy === 'practice';
   app.innerHTML = '';
@@ -361,7 +388,10 @@ function showReward(level, stageIdx, stars, chest, fresh, earned, replay) {
       h('div.chest-wrap', h('div.rays'), chestIcon),
       h('div.chest-name', CHESTS[chest.kind].name + (replay ? '（重玩）' : '')),
       blocks,
-      h('div.reward-sub', `这一关一共得到 ${earned.length + chest.blocks.length} 个方块`),
+      achieved.length ? h('div.reward-ach', achieved.map(a => h('div.ach-card.got',
+        h(`div.inv-slot.r${BLOCKS[a.block].rarity}`, iconEl(a.block)),
+        h('div.ach-text', h('div.craft-name', { style: { color: RARITY[BLOCKS[a.block].rarity].color } }, BLOCKS[a.block].name), h('div.ach-title', `成就：${a.title}`))))) : null,
+      h('div.reward-sub', `这一关一共得到 ${earned.length + chest.blocks.length + achieved.length} 个方块`),
       btns)));
   const lines = [stageDone(stars)];
   if (replay) lines.push(S.replayChest);
@@ -384,8 +414,20 @@ function showReward(level, stageIdx, stars, chest, fresh, earned, replay) {
         h('div.rb-name', { style: { color: RARITY[rar].color } }, BLOCKS[b].name)));
     });
     btns.style.visibility = '';
-    if (best >= 3) setTimeout(() => { if (blocks.isConnected) speak(best === 4 ? S.legendFind : S.epicFind, { profile: level.audioProfile }); }, 500);
+    if (achieved.length) {
+      setTimeout(() => {
+        if (!blocks.isConnected) return;
+        achieved.forEach((a, k) => setTimeout(() => { banner(a.block, `成就达成：${BLOCKS[a.block].name}`); sfx.chest(); }, k * 1500));
+        speak(S.achieve, { profile: level.audioProfile });
+      }, 600);
+    } else if (best >= 3) setTimeout(() => { if (blocks.isConnected) speak(best === 4 ? S.legendFind : S.epicFind, { profile: level.audioProfile }); }, 500);
   }, 1300);
+}
+
+// ---------- workbench ----------
+async function screenCraft() {
+  const { mountCraft } = await import('./craft.js');
+  mountCraft(app, { onBack: () => history.length > 1 ? history.back() : go('#/') });
 }
 
 // ---------- build ----------
@@ -449,7 +491,8 @@ async function screenParent() {
   }
   box.append(h('div.mc-panel',
     h('h2', '方块'),
-    h('div', `背包 ${invCount()} 个，累计获得 ${store.state.totalBlocks} 个`),
+    h('div', `背包 ${invCount()} 个，累计获得 ${store.state.totalBlocks} 个；经验等级 ${levelOf(store.state.xp || 0).level}（共 ${store.state.xp || 0} 点经验）`),
+    h('div.p-note', '每题只得经验，经验条满一次得到 1 个方块；每关结束开宝箱（木 1 / 铁 2 / 金 3 个）。合成和背诵成就可得到专属方块。'),
     h('div.row-btns',
       h('button.mc-btn.small', { onclick: () => { ['diamond', 'gold', 'toy_red', 'toy_blue', 'toy_yellow'].forEach(b => store.addBlock(b, 2)); route(); } }, '奖励 10 个方块'),
       h('button.mc-btn.small', { onclick: () => { Object.keys(BLOCKS).forEach(b => store.addBlock(b, 5)); route(); } }, '试玩：每种方块送 5 个'),

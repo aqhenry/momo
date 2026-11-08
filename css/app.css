@@ -649,3 +649,55 @@ img.pic-art.big { width: clamp(110px, 17vh, 150px); height: clamp(110px, 17vh, 1
  .math-shape { width:52px; height:52px; }
  .relation { min-width:150px; }
 }
+
+/* ---------- XP economy: hotbar orbs, home level bar ---------- */
+.hb-slot.xp-done { background: rgba(128,255,32,.18); }
+.hb-slot.xp-done .sprite { width: 34px; height: 34px; animation: pop .35s; }
+.hb-slot .xp-gain { position: absolute; right: 2px; bottom: 0; font-family: var(--ui); font-size: 16px; color: var(--green); text-shadow: 2px 2px 0 #000; }
+.home-xp { margin: 30px auto 6px; width: 90%; }
+.home-xp .xp { width: 100%; }
+
+/* ---------- workbench ---------- */
+.screen.craft { overflow-y: auto; }
+.craft-panel { margin: 12px auto; width: min(980px, calc(100% - 32px)); }
+.craft-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 12px; }
+.craft-card { display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(0,0,0,.08); box-shadow: inset 0 0 0 2px rgba(0,0,0,.2); }
+.craft-card.ready { background: rgba(128,255,32,.16); box-shadow: inset 0 0 0 3px #5ab414; }
+.craft-in { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+.craft-need { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.craft-need .inv-slot .icon { width: 40px; height: 40px; }
+.craft-count { font-family: var(--ui); font-size: 18px; color: #7a2a2a; }
+.craft-count.enough { color: #1e7a1e; }
+.craft-arrow { font-size: 28px; color: var(--gui-ink); }
+.craft-out { display: flex; flex-direction: column; align-items: center; width: 110px; }
+.craft-name { font-family: var(--ui); font-size: 16px; text-align: center; text-shadow: 1px 1px 0 #000; }
+.craft-go { min-width: 64px; min-height: 64px; }
+.craft-go .sprite { width: 36px; height: 36px; }
+.craft-go:disabled { opacity: .35; filter: grayscale(1); }
+.craft-ach, .reward-ach { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.ach-card { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: rgba(0,0,0,.1); }
+.ach-card.got { background: rgba(200,112,255,.2); box-shadow: inset 0 0 0 2px #c870ff; }
+.ach-title { font-family: var(--ui); font-size: 15px; color: var(--gui-ink); }
+.reward-ach { margin: 8px 0; }
+.reward-ach .ach-title { color: #fff; }
+@media (max-width: 700px) { .craft-list { grid-template-columns: 1fr; } }
+
+/* ---------- recite: characters hidden under blocks ---------- */
+.ruby.covered { background: var(--cover) center / cover; image-rendering: pixelated; box-shadow: inset 0 0 0 2px rgba(0,0,0,.35); margin: 2px; }
+.ruby.covered .rp, .ruby.covered .rc { visibility: hidden; }
+
+/* ---------- English point-and-read ---------- */
+.en-frame { display: flex; justify-content: center; }
+.en-pics { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 560px; }
+.en-pics .pic-art { width: 84px; height: 84px; }
+.en-board { background: var(--paper); padding: 18px 20px; box-shadow: 0 0 0 3px #6b5a3a, inset 0 0 0 3px var(--paper-edge); display: flex; flex-direction: column; gap: 14px; margin-top: 12px; max-width: 100%; }
+.en-line { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 10px; }
+.en-word { position: relative; font-family: var(--py); font-size: clamp(34px, 5vh, 46px); padding: 10px 16px 6px; min-height: 72px; color: var(--ink); background: #fff; border: 0; box-shadow: 0 4px 0 #c9bb92, inset 0 0 0 2px #e3d6ae; touch-action: manipulation; }
+.en-word.now { box-shadow: 0 4px 0 #c9bb92, inset 0 0 0 4px var(--fin); }
+.en-word.read { background: #dff7cf; color: #1e5a1e; box-shadow: 0 4px 0 #8fc47a, inset 0 0 0 2px #8fc47a; }
+.en-punct { font-family: var(--py); font-size: 40px; color: var(--ink); margin-left: -8px; }
+.en-finger { position: absolute; left: 50%; bottom: -34px; width: 32px; height: 32px; transform: translateX(-50%); animation: bob 1s ease-in-out infinite; pointer-events: none; }
+@keyframes bob { 50% { transform: translate(-50%, -6px); } }
+.frame.multi { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 560px; }
+.frame.multi .pic-art { width: clamp(84px, 13vh, 112px); height: clamp(84px, 13vh, 112px); }
+.en-pics .pic-art.big { width: clamp(120px, 18vh, 150px); height: clamp(120px, 18vh, 150px); }

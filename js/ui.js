@@ -76,7 +76,7 @@ export function promptEl(p = {}, ctx) {
   const box = h('div.prompt');
   if (p.card) box.append(h('div.card', p.card.map(line => h('div', line))));
   if (p.pic) {
-    const frame = h('div.frame', picEl(p.pic, 'big'));
+    const frame = p.n > 1 ? h('div.frame.multi', Array.from({ length: p.n }, () => picEl(p.pic))) : h('div.frame', picEl(p.pic, 'big'));
     if (p.picSay) {
       frame.classList.add('tappable');
       frame.addEventListener('click', () => ctx.say(p.picSay));

@@ -9,6 +9,8 @@ const fresh = () => ({
   world3d: null,  // "x,y,z" -> blockType
   pity: 0,        // gold chests since the last legendary
   totalBlocks: 0,
+  xp: 0,          // all XP ever earned (player level comes from this, see rewards.js levelOf)
+  achievements: {},  // achievement id -> date
 });
 
 let state = load();
@@ -78,6 +80,26 @@ export const store = {
     state.inventory[type]--;
     save();
     return true;
+  },
+
+  addXP(n) {
+    state.xp = (state.xp || 0) + n;
+    save();
+  },
+
+  // one-time rewards; returns false if already earned
+  achieve(id) {
+    if (state.achievements[id]) return false;
+    state.achievements[id] = new Date().toISOString();
+    save();
+    return true;
+  },
+
+  // crafting: take every input, give the output. null if something is missing, else whether the output is new.
+  craft(inputs, out) {
+    if (Object.entries(inputs).some(([t, n]) => (state.inventory[t] || 0) < n)) return null;
+    for (const [t, n] of Object.entries(inputs)) state.inventory[t] -= n;
+    return this.addBlock(out);
   },
 
   setWorld3d(world) {

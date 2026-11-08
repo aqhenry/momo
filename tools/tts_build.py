@@ -59,7 +59,9 @@ def level_lines(level):
             out += it.get('strokes', []) + it.get('pieces', [])
             if it.get('listen'):
                 out += [o if isinstance(o, str) else o.get('say') or o.get('text') for o in it['options']]
-            if it['type'] == 'read':   # tapping a character says its pinyin
+            if it['type'] == 'pointRead':   # tapping an English word reads it (see js/items/english.js)
+                out += [w for w in (re.sub(r"[^A-Za-z']", '', t).strip("'") for l in it['lines'] for t in l.split()) if w]
+            if it['type'] in ('read', 'recite'):   # tapping a character says its pinyin
                 over = it.get('tapSay', {})
                 out += [over.get(p, p) for p in ' '.join(it['py']).split()]
     return out

@@ -1,0 +1,1534 @@
+{
+  "id": "review-ch5",
+  "title": "村庄图书馆",
+  "blockSet": "ch5",
+  "audioProfile": "jqx-b",
+  "rewardPolicy": "practice",
+  "note": "语文 P45–46（ai ei ui、蔬菜水果、洗手歌）· 背诵《敕勒歌》《咏柳》· 英语 Unit 1–3 Ready Go 指读",
+  "intro": "墨然，欢迎来到村庄图书馆！今天复习韵母 āi、ēi、uī，读《洗手歌》，背两首古诗，还要用手指着读英语。背会古诗，能得到专属方块哦！",
+  "speech": {
+    "labGuide": "看亮起来的格子，点一块积木放进去。",
+    "combo": "你又完成了三题，经验加倍！",
+    "pause": "休息一下吗？点绿色箭头继续玩，点地图回去。"
+  },
+  "achievements": [
+    {
+      "id": "chile",
+      "block": "sky_terracotta",
+      "title": "会背《敕勒歌》",
+      "stages": [
+        "chile"
+      ]
+    },
+    {
+      "id": "yongliu",
+      "block": "jade_terracotta",
+      "title": "会背《咏柳》",
+      "stages": [
+        "yongliu"
+      ]
+    },
+    {
+      "id": "readygo",
+      "block": "jukebox",
+      "title": "英语 Ready Go 三单元指读",
+      "stages": [
+        "en1",
+        "en2",
+        "en3"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "finals",
+      "title": "认识 ai ei ui",
+      "icon": "text:ai",
+      "items": [
+        {
+          "type": "letterHunt",
+          "q": "找出所有 ai",
+          "title": "找一找韵母",
+          "target": "ai",
+          "letters": [
+            "ai",
+            "ai",
+            "ai",
+            "ai",
+            "ia",
+            "ei",
+            "ui",
+            "iu",
+            "ao",
+            "ei",
+            "ia",
+            "ui"
+          ],
+          "source": "课本 P45",
+          "say": "请找到所有的韵母 āi，找到一个就点一下。",
+          "after": "找齐啦！āi。",
+          "hint": "看清两个字母的顺序，再找一找。"
+        },
+        {
+          "type": "letterHunt",
+          "q": "找出所有 ei",
+          "title": "找一找韵母",
+          "target": "ei",
+          "letters": [
+            "ei",
+            "ei",
+            "ei",
+            "ie",
+            "ie",
+            "ai",
+            "ui",
+            "iu",
+            "ai",
+            "ie",
+            "ue",
+            "ui"
+          ],
+          "source": "课本 P45",
+          "say": "请找到所有的韵母 ēi，找到一个就点一下。",
+          "after": "找齐啦！ēi。",
+          "hint": "看清两个字母的顺序，再找一找。"
+        },
+        {
+          "type": "letterHunt",
+          "q": "找出所有 ui",
+          "title": "找一找韵母",
+          "target": "ui",
+          "letters": [
+            "ui",
+            "ui",
+            "ui",
+            "iu",
+            "iu",
+            "iu",
+            "ei",
+            "ai",
+            "ei",
+            "ue",
+            "ai",
+            "un"
+          ],
+          "source": "课本 P45",
+          "say": "请找到所有的韵母 uī，找到一个就点一下。",
+          "after": "找齐啦！uī。",
+          "hint": "看清两个字母的顺序，再找一找。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 ài",
+          "source": "课本 P45",
+          "say": "听一听：ài，爱心的爱。它在哪里？",
+          "prompt": {},
+          "options": [
+            {
+              "py": "āi",
+              "grid": true
+            },
+            {
+              "py": "ái",
+              "grid": true
+            },
+            {
+              "py": "ǎi",
+              "grid": true
+            },
+            {
+              "py": "ài",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 3,
+          "after": "ài，爱心的爱。",
+          "hint": "声调符号标在哪个字母上，再看一看。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 ēi",
+          "source": "课本 P45",
+          "say": "听一听：ēi，第一声。它在哪里？",
+          "prompt": {},
+          "options": [
+            {
+              "py": "ēi",
+              "grid": true
+            },
+            {
+              "py": "éi",
+              "grid": true
+            },
+            {
+              "py": "ěi",
+              "grid": true
+            },
+            {
+              "py": "èi",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 0,
+          "after": "ēi，第一声。",
+          "hint": "声调符号标在哪个字母上，再看一看。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 uǐ",
+          "source": "课本 P45",
+          "say": "听一听：uǐ，第三声。它在哪里？",
+          "prompt": {},
+          "options": [
+            {
+              "py": "uī",
+              "grid": true
+            },
+            {
+              "py": "uí",
+              "grid": true
+            },
+            {
+              "py": "uǐ",
+              "grid": true
+            },
+            {
+              "py": "uì",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 2,
+          "after": "uǐ，第三声。",
+          "hint": "声调符号标在哪个字母上，再看一看。"
+        }
+      ]
+    },
+    {
+      "id": "pinyin",
+      "title": "拼音合成台",
+      "icon": "sprite:bricks",
+      "items": [
+        {
+          "type": "pinyinLab",
+          "q": "拼合 gāi",
+          "word": "gāi",
+          "parts": [
+            "g",
+            "āi"
+          ],
+          "choices": [
+            [
+              "g",
+              "k",
+              "h"
+            ],
+            [
+              "āi",
+              "ēi",
+              "uī"
+            ]
+          ],
+          "source": "课本 P45",
+          "say": "拼一拼：gāi，应该的该。请把积木一块一块放好。",
+          "after": "gāi，应该的该！",
+          "hint": "听清楚，再看看亮起来的格子要放什么。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 guāi",
+          "word": "guāi",
+          "parts": [
+            "g",
+            "u",
+            "āi"
+          ],
+          "choices": [
+            [
+              "g",
+              "k",
+              "h"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "āi",
+              "ēi",
+              "uī"
+            ]
+          ],
+          "source": "课本 P45",
+          "say": "拼一拼：guāi，乖乖的乖。请把积木一块一块放好。",
+          "after": "guāi，乖乖的乖！",
+          "hint": "听清楚，再看看亮起来的格子要放什么。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 lèi",
+          "word": "lèi",
+          "parts": [
+            "l",
+            "èi"
+          ],
+          "choices": [
+            [
+              "l",
+              "n",
+              "d"
+            ],
+            [
+              "èi",
+              "ài",
+              "uì"
+            ]
+          ],
+          "source": "课本 P45",
+          "say": "拼一拼：lèi，累了的累。请把积木一块一块放好。",
+          "after": "lèi，累了的累！",
+          "hint": "听清楚，再看看亮起来的格子要放什么。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 tuǐ",
+          "word": "tuǐ",
+          "parts": [
+            "t",
+            "uǐ"
+          ],
+          "choices": [
+            [
+              "t",
+              "d",
+              "f"
+            ],
+            [
+              "uǐ",
+              "ěi",
+              "ǎi"
+            ]
+          ],
+          "source": "课本 P45",
+          "say": "拼一拼：tuǐ，大腿的腿。请把积木一块一块放好。",
+          "after": "tuǐ，大腿的腿！",
+          "hint": "听清楚，再看看亮起来的格子要放什么。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 kuài",
+          "word": "kuài",
+          "parts": [
+            "k",
+            "u",
+            "ài"
+          ],
+          "choices": [
+            [
+              "k",
+              "g",
+              "h"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "ài",
+              "èi",
+              "uì"
+            ]
+          ],
+          "source": "课本 P45",
+          "say": "拼一拼：kuài，快乐的快。请把积木一块一块放好。",
+          "after": "kuài，快乐的快！",
+          "hint": "听清楚，再看看亮起来的格子要放什么。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 fēi",
+          "word": "fēi",
+          "parts": [
+            "f",
+            "ēi"
+          ],
+          "choices": [
+            [
+              "f",
+              "h",
+              "t"
+            ],
+            [
+              "ēi",
+              "āi",
+              "uī"
+            ]
+          ],
+          "source": "课本 P45",
+          "say": "拼一拼：fēi，飞机的飞。请把积木一块一块放好。",
+          "after": "fēi，飞机的飞！",
+          "hint": "听清楚，再看看亮起来的格子要放什么。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 chuī",
+          "word": "chuī",
+          "parts": [
+            "ch",
+            "uī"
+          ],
+          "choices": [
+            [
+              "ch",
+              "zh",
+              "sh"
+            ],
+            [
+              "uī",
+              "ēi",
+              "āi"
+            ]
+          ],
+          "source": "课本 P45",
+          "say": "拼一拼：chuī，吹风的吹。请把积木一块一块放好。",
+          "after": "chuī，吹风的吹！",
+          "hint": "听清楚，再看看亮起来的格子要放什么。"
+        },
+        {
+          "type": "choice",
+          "q": "排队 声调位置",
+          "source": "课本 P45",
+          "say": "排队的队，声调应该标在哪里？",
+          "prompt": {
+            "text": "排队",
+            "label": "排队的队"
+          },
+          "options": [
+            {
+              "py": "duì",
+              "grid": true
+            },
+            {
+              "py": "dùi",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 0,
+          "after": "i 和 u 在一起，声调标在后面。duì。",
+          "hint": "i 和 u 在一起，声调标在后面那个字母上。"
+        },
+        {
+          "type": "choice",
+          "q": "排队 拼音",
+          "source": "课本 P45",
+          "say": "排队，哪一个拼音写对了？",
+          "prompt": {
+            "text": "排队"
+          },
+          "options": [
+            {
+              "py": "pái duì",
+              "grid": true
+            },
+            {
+              "py": "bái duì",
+              "grid": true
+            },
+            {
+              "py": "pái dùi",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "after": "pái duì，排队。",
+          "hint": "排是 p 开头，队的声调标在后面。"
+        }
+      ]
+    },
+    {
+      "id": "veggies",
+      "title": "蔬菜和水果",
+      "icon": "art:cabbage",
+      "items": [
+        {
+          "type": "choice",
+          "q": "萝卜 分类",
+          "source": "课本 P46",
+          "say": "萝卜，是蔬菜还是水果？",
+          "prompt": {
+            "pic": "art:radish",
+            "text": "萝卜",
+            "py": "luó bo"
+          },
+          "options": [
+            {
+              "text": "蔬菜",
+              "py": "shū cài"
+            },
+            {
+              "text": "水果",
+              "py": "shuǐ guǒ"
+            }
+          ],
+          "fixed": true,
+          "answer": 0,
+          "after": "萝卜是蔬菜。",
+          "hint": "想一想，它是做菜吃的，还是饭后吃的？"
+        },
+        {
+          "type": "choice",
+          "q": "白菜 分类",
+          "source": "课本 P46",
+          "say": "白菜，是蔬菜还是水果？",
+          "prompt": {
+            "pic": "art:cabbage",
+            "text": "白菜",
+            "py": "bái cài"
+          },
+          "options": [
+            {
+              "text": "蔬菜",
+              "py": "shū cài"
+            },
+            {
+              "text": "水果",
+              "py": "shuǐ guǒ"
+            }
+          ],
+          "fixed": true,
+          "answer": 0,
+          "after": "白菜是蔬菜。",
+          "hint": "想一想，它是做菜吃的，还是饭后吃的？"
+        },
+        {
+          "type": "choice",
+          "q": "鸭梨 分类",
+          "source": "课本 P46",
+          "say": "鸭梨，是蔬菜还是水果？",
+          "prompt": {
+            "pic": "art:pear",
+            "text": "鸭梨",
+            "py": "yā lí"
+          },
+          "options": [
+            {
+              "text": "蔬菜",
+              "py": "shū cài"
+            },
+            {
+              "text": "水果",
+              "py": "shuǐ guǒ"
+            }
+          ],
+          "fixed": true,
+          "answer": 1,
+          "after": "鸭梨是水果。",
+          "hint": "想一想，它是做菜吃的，还是饭后吃的？"
+        },
+        {
+          "type": "choice",
+          "q": "西瓜 分类",
+          "source": "课本 P46",
+          "say": "西瓜，是蔬菜还是水果？",
+          "prompt": {
+            "pic": "art:melon_slice",
+            "text": "西瓜",
+            "py": "xī guā"
+          },
+          "options": [
+            {
+              "text": "蔬菜",
+              "py": "shū cài"
+            },
+            {
+              "text": "水果",
+              "py": "shuǐ guǒ"
+            }
+          ],
+          "fixed": true,
+          "answer": 1,
+          "after": "西瓜是水果。",
+          "hint": "想一想，它是做菜吃的，还是饭后吃的？"
+        },
+        {
+          "type": "choice",
+          "q": "认字 白",
+          "source": "课本 P46",
+          "say": "白菜的白，是哪个字？",
+          "options": [
+            {
+              "text": "白",
+              "big": true
+            },
+            {
+              "text": "菜",
+              "big": true
+            },
+            {
+              "text": "西",
+              "big": true
+            },
+            {
+              "text": "瓜",
+              "big": true
+            },
+            {
+              "text": "果",
+              "big": true
+            }
+          ],
+          "cols": 5,
+          "answer": 0,
+          "after": "对，白菜的白。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 菜",
+          "source": "课本 P46",
+          "say": "蔬菜的菜，是哪个字？",
+          "options": [
+            {
+              "text": "白",
+              "big": true
+            },
+            {
+              "text": "菜",
+              "big": true
+            },
+            {
+              "text": "西",
+              "big": true
+            },
+            {
+              "text": "瓜",
+              "big": true
+            },
+            {
+              "text": "果",
+              "big": true
+            }
+          ],
+          "cols": 5,
+          "answer": 1,
+          "after": "对，蔬菜的菜。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 西",
+          "source": "课本 P46",
+          "say": "西瓜的西，是哪个字？",
+          "options": [
+            {
+              "text": "白",
+              "big": true
+            },
+            {
+              "text": "菜",
+              "big": true
+            },
+            {
+              "text": "西",
+              "big": true
+            },
+            {
+              "text": "瓜",
+              "big": true
+            },
+            {
+              "text": "果",
+              "big": true
+            }
+          ],
+          "cols": 5,
+          "answer": 2,
+          "after": "对，西瓜的西。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 瓜",
+          "source": "课本 P46",
+          "say": "西瓜的瓜，是哪个字？",
+          "options": [
+            {
+              "text": "白",
+              "big": true
+            },
+            {
+              "text": "菜",
+              "big": true
+            },
+            {
+              "text": "西",
+              "big": true
+            },
+            {
+              "text": "瓜",
+              "big": true
+            },
+            {
+              "text": "果",
+              "big": true
+            }
+          ],
+          "cols": 5,
+          "answer": 3,
+          "after": "对，西瓜的瓜。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 果",
+          "source": "课本 P46",
+          "say": "水果的果，是哪个字？",
+          "options": [
+            {
+              "text": "白",
+              "big": true
+            },
+            {
+              "text": "菜",
+              "big": true
+            },
+            {
+              "text": "西",
+              "big": true
+            },
+            {
+              "text": "瓜",
+              "big": true
+            },
+            {
+              "text": "果",
+              "big": true
+            }
+          ],
+          "cols": 5,
+          "answer": 4,
+          "after": "对，水果的果。",
+          "hint": "再看看字的样子。"
+        }
+      ]
+    },
+    {
+      "id": "xishou",
+      "title": "洗手歌",
+      "icon": "art:soap",
+      "items": [
+        {
+          "type": "read",
+          "q": "读洗手歌",
+          "source": "课本 P46",
+          "title": "洗手歌",
+          "lines": [
+            "排着队，向前走，",
+            "做什么？去洗手。",
+            "肥皂用来搓搓手，",
+            "清水帮我冲冲手，",
+            "毛巾给我擦擦手。",
+            "小手洗得真干净，",
+            "大家一起笑开口。"
+          ],
+          "py": [
+            "pái zhe duì xiàng qián zǒu",
+            "zuò shén me qù xǐ shǒu",
+            "féi zào yòng lái cuō cuo shǒu",
+            "qīng shuǐ bāng wǒ chōng chong shǒu",
+            "máo jīn gěi wǒ cā ca shǒu",
+            "xiǎo shǒu xǐ de zhēn gān jìng",
+            "dà jiā yì qǐ xiào kāi kǒu"
+          ],
+          "read": "洗手歌。排着队，向前走，做什么？去洗手。肥皂用来搓搓手，清水帮我冲冲手，毛巾给我擦擦手。小手洗得真干净，大家一起笑开口。",
+          "tapSay": {
+            "zhe": "排着队的着。",
+            "cā": "擦，擦手的擦。",
+            "me": "么，什么的么。",
+            "cuo": "搓，搓搓手的第二个搓，读轻声。",
+            "chong": "冲，冲冲手的第二个冲，读轻声。",
+            "ca": "擦，擦擦手的第二个擦，读轻声。",
+            "de": "得，洗得真干净的得。"
+          },
+          "say": "听一听《洗手歌》，跟着读一读。点一个字，能听它的读音。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "tapText",
+          "q": "找 ai ei ui 音节",
+          "source": "课本 P46",
+          "lines": [
+            "排着队，向前走，",
+            "做什么？去洗手。",
+            "肥皂用来搓搓手，",
+            "清水帮我冲冲手，",
+            "毛巾给我擦擦手。",
+            "小手洗得真干净，",
+            "大家一起笑开口。"
+          ],
+          "py": [
+            "pái zhe duì xiàng qián zǒu",
+            "zuò shén me qù xǐ shǒu",
+            "féi zào yòng lái cuō cuo shǒu",
+            "qīng shuǐ bāng wǒ chōng chong shǒu",
+            "máo jīn gěi wǒ cā ca shǒu",
+            "xiǎo shǒu xǐ de zhēn gān jìng",
+            "dà jiā yì qǐ xiào kāi kǒu"
+          ],
+          "rule": {
+            "finals": [
+              "ai",
+              "ei",
+              "ui"
+            ]
+          },
+          "prompt": {
+            "label": "找出带 ai ei ui 的音节"
+          },
+          "say": "在《洗手歌》里，找出所有带 āi、ēi、uī 的音节。找完了，点找完了。"
+        },
+        {
+          "type": "choice",
+          "q": "肥皂用来__手，",
+          "say": "肥皂用来怎么洗手？",
+          "prompt": {
+            "pic": "art:soap",
+            "context": "肥皂用来▢▢手，"
+          },
+          "options": [
+            "搓搓",
+            "冲冲",
+            "擦擦"
+          ],
+          "answer": 0,
+          "after": "肥皂用来搓搓手。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "清水帮我__手，",
+          "say": "清水帮我怎么洗手？",
+          "prompt": {
+            "pic": "art:water_splash",
+            "context": "清水帮我▢▢手，"
+          },
+          "options": [
+            "冲冲",
+            "搓搓",
+            "擦擦"
+          ],
+          "answer": 0,
+          "after": "清水帮我冲冲手。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "毛巾给我__手。",
+          "say": "毛巾给我怎么样？",
+          "prompt": {
+            "pic": "art:towel",
+            "context": "毛巾给我▢▢手。"
+          },
+          "options": [
+            "擦擦",
+            "冲冲",
+            "搓搓"
+          ],
+          "answer": 0,
+          "after": "毛巾给我擦擦手。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "order",
+          "q": "洗手歌排序",
+          "pieces": [
+            "排着队，向前走，",
+            "做什么？去洗手。",
+            "肥皂用来搓搓手，",
+            "清水帮我冲冲手，",
+            "毛巾给我擦擦手。",
+            "小手洗得真干净，",
+            "大家一起笑开口。"
+          ],
+          "say": "把《洗手歌》按顺序排一排，从第一句开始点。",
+          "after": "小手洗得真干净，大家一起笑开口！"
+        }
+      ]
+    },
+    {
+      "id": "chile",
+      "title": "背《敕勒歌》",
+      "icon": "art:yurt",
+      "items": [
+        {
+          "type": "read",
+          "q": "读敕勒歌",
+          "source": "背诵",
+          "title": "敕勒歌 · 北朝民歌",
+          "lines": [
+            "敕勒川，阴山下。",
+            "天似穹庐，笼盖四野。",
+            "天苍苍，野茫茫，",
+            "风吹草低见牛羊。"
+          ],
+          "py": [
+            "chì lè chuān yīn shān xià",
+            "tiān sì qióng lú lǒng gài sì yě",
+            "tiān cāng cāng yě máng máng",
+            "fēng chuī cǎo dī xiàn niú yáng"
+          ],
+          "read": "敕勒歌，北朝民歌。敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。",
+          "say": "这是北朝民歌《敕勒歌》。先听一听，再跟着读。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "天似__，笼盖四野。",
+          "say": "天似什么，笼盖四野？穹庐就是圆顶的大帐篷。",
+          "prompt": {
+            "pic": "art:yurt",
+            "context": "天似▢▢，笼盖四野。"
+          },
+          "options": [
+            "穹庐",
+            "草原",
+            "阴山"
+          ],
+          "answer": 0,
+          "after": "天似穹庐，笼盖四野。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "天__，野茫茫，",
+          "say": "天什么，野茫茫？",
+          "prompt": {
+            "context": "天▢▢，野茫茫，"
+          },
+          "options": [
+            "苍苍",
+            "茫茫",
+            "青青"
+          ],
+          "answer": 0,
+          "after": "天苍苍，野茫茫。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "风吹草低见__。",
+          "say": "风吹草低，看见了什么？",
+          "prompt": {
+            "pic": "art:sheep",
+            "context": "风吹草低见▢▢。"
+          },
+          "options": [
+            "牛羊",
+            "小鸟",
+            "马儿"
+          ],
+          "answer": 0,
+          "after": "风吹草低见牛羊。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "order",
+          "q": "敕勒歌排序",
+          "pieces": [
+            "敕勒川，",
+            "阴山下。",
+            "天似穹庐，",
+            "笼盖四野。",
+            "天苍苍，",
+            "野茫茫，",
+            "风吹草低见牛羊。"
+          ],
+          "say": "按顺序把诗句排一排。",
+          "after": "敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。"
+        },
+        {
+          "type": "recite",
+          "q": "背诵敕勒歌",
+          "source": "背诵",
+          "title": "敕勒歌",
+          "lines": [
+            "敕勒川，阴山下。",
+            "天似穹庐，笼盖四野。",
+            "天苍苍，野茫茫，",
+            "风吹草低见牛羊。"
+          ],
+          "py": [
+            "chì lè chuān yīn shān xià",
+            "tiān sì qióng lú lǒng gài sì yě",
+            "tiān cāng cāng yě máng máng",
+            "fēng chuī cǎo dī xiàn niú yáng"
+          ],
+          "showFirst": true,
+          "cover": "grass",
+          "say": "现在不看书，大声背一背《敕勒歌》！想不起来，就点方块，挖开看一看。背完点我背好了。",
+          "after": "背得真好！敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。"
+        }
+      ]
+    },
+    {
+      "id": "yongliu",
+      "title": "背《咏柳》",
+      "icon": "art:willow",
+      "items": [
+        {
+          "type": "read",
+          "q": "读咏柳",
+          "source": "背诵",
+          "title": "咏柳 · 唐 · 贺知章",
+          "lines": [
+            "碧玉妆成一树高，",
+            "万条垂下绿丝绦。",
+            "不知细叶谁裁出，",
+            "二月春风似剪刀。"
+          ],
+          "py": [
+            "bì yù zhuāng chéng yí shù gāo",
+            "wàn tiáo chuí xià lǜ sī tāo",
+            "bù zhī xì yè shéi cái chū",
+            "èr yuè chūn fēng sì jiǎn dāo"
+          ],
+          "read": "咏柳，唐，贺知章。碧玉妆成一树高，万条垂下绿丝绦。不知细叶谁裁出，二月春风似剪刀。",
+          "say": "这是唐代诗人贺知章写的《咏柳》。先听一听，再跟着读。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "__妆成一树高，",
+          "say": "什么妆成一树高？柳树绿绿的，像碧绿的玉。",
+          "prompt": {
+            "pic": "art:willow",
+            "context": "▢▢妆成一树高，"
+          },
+          "options": [
+            "碧玉",
+            "白玉",
+            "黄金"
+          ],
+          "answer": 0,
+          "after": "碧玉妆成一树高。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "万条垂下绿__。",
+          "say": "万条垂下绿什么？丝绦就是丝带。",
+          "prompt": {
+            "pic": "art:willow",
+            "context": "万条垂下绿▢▢。"
+          },
+          "options": [
+            "丝绦",
+            "柳枝",
+            "叶子"
+          ],
+          "answer": 0,
+          "after": "万条垂下绿丝绦。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "二月春风似__。",
+          "say": "二月春风像什么？",
+          "prompt": {
+            "pic": "art:scissors",
+            "context": "二月春风似▢▢。"
+          },
+          "options": [
+            "剪刀",
+            "小刀",
+            "梳子"
+          ],
+          "answer": 0,
+          "after": "二月春风似剪刀。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "order",
+          "q": "咏柳排序",
+          "pieces": [
+            "碧玉妆成一树高，",
+            "万条垂下绿丝绦。",
+            "不知细叶谁裁出，",
+            "二月春风似剪刀。"
+          ],
+          "say": "按顺序把诗句排一排。",
+          "after": "碧玉妆成一树高，万条垂下绿丝绦。不知细叶谁裁出，二月春风似剪刀。"
+        },
+        {
+          "type": "recite",
+          "q": "背诵咏柳",
+          "source": "背诵",
+          "title": "咏柳",
+          "lines": [
+            "碧玉妆成一树高，",
+            "万条垂下绿丝绦。",
+            "不知细叶谁裁出，",
+            "二月春风似剪刀。"
+          ],
+          "py": [
+            "bì yù zhuāng chéng yí shù gāo",
+            "wàn tiáo chuí xià lǜ sī tāo",
+            "bù zhī xì yè shéi cái chū",
+            "èr yuè chūn fēng sì jiǎn dāo"
+          ],
+          "showFirst": true,
+          "cover": "leaves",
+          "say": "现在不看书，大声背一背《咏柳》！想不起来，就点方块，挖开看一看。背完点我背好了。",
+          "after": "背得真好！碧玉妆成一树高，万条垂下绿丝绦。不知细叶谁裁出，二月春风似剪刀。"
+        }
+      ]
+    },
+    {
+      "id": "en1",
+      "title": "My family",
+      "icon": "art:grandma",
+      "items": [
+        {
+          "type": "choice",
+          "q": "指认 grandma",
+          "source": "英语 P3",
+          "say": "听一听：grandma。grandma 在哪里？",
+          "options": [
+            {
+              "pic": "art:grandma"
+            },
+            {
+              "pic": "art:grandpa"
+            },
+            {
+              "pic": "art:mom"
+            },
+            {
+              "pic": "art:girl"
+            }
+          ],
+          "answer": 0,
+          "after": "grandma，奶奶。",
+          "hint": "再听一遍：grandma。"
+        },
+        {
+          "type": "choice",
+          "q": "指认 grandpa",
+          "source": "英语 P3",
+          "say": "听一听：grandpa。grandpa 在哪里？",
+          "options": [
+            {
+              "pic": "art:grandpa"
+            },
+            {
+              "pic": "art:grandma"
+            },
+            {
+              "pic": "art:dad"
+            },
+            {
+              "pic": "art:kid"
+            }
+          ],
+          "answer": 0,
+          "after": "grandpa，爷爷。",
+          "hint": "再听一遍：grandpa。"
+        },
+        {
+          "type": "choice",
+          "q": "指认 mum",
+          "source": "英语 P3",
+          "say": "听一听：mum。mum 在哪里？",
+          "options": [
+            {
+              "pic": "art:mom"
+            },
+            {
+              "pic": "art:dad"
+            },
+            {
+              "pic": "art:grandma"
+            },
+            {
+              "pic": "art:girl"
+            }
+          ],
+          "answer": 0,
+          "after": "mum，妈妈。",
+          "hint": "再听一遍：mum。"
+        },
+        {
+          "type": "choice",
+          "q": "指认 brother",
+          "source": "英语 P3",
+          "say": "听一听：brother。brother 在哪里？",
+          "options": [
+            {
+              "pic": "art:kid"
+            },
+            {
+              "pic": "art:girl"
+            },
+            {
+              "pic": "art:dad"
+            },
+            {
+              "pic": "art:grandpa"
+            }
+          ],
+          "answer": 0,
+          "after": "brother，哥哥或弟弟。",
+          "hint": "再听一遍：brother。"
+        },
+        {
+          "type": "choice",
+          "q": "指认 sister",
+          "source": "英语 P3",
+          "say": "听一听：sister。sister 在哪里？",
+          "options": [
+            {
+              "pic": "art:girl"
+            },
+            {
+              "pic": "art:kid"
+            },
+            {
+              "pic": "art:mom"
+            },
+            {
+              "pic": "art:grandma"
+            }
+          ],
+          "answer": 0,
+          "after": "sister，姐姐或妹妹。",
+          "hint": "再听一遍：sister。"
+        },
+        {
+          "type": "pointRead",
+          "q": "This is my dad.",
+          "lines": [
+            "This is my dad."
+          ],
+          "pic": "art:dad",
+          "say": "听一听：This is my dad. 现在用手指着，一个词一个词点着读。",
+          "after": "This is my dad.",
+          "source": "英语 P3"
+        },
+        {
+          "type": "pointRead",
+          "q": "This is my mum.",
+          "lines": [
+            "This is my mum."
+          ],
+          "pic": "art:mom",
+          "say": "This is my mum. 指着读一读。",
+          "after": "This is my mum.",
+          "source": "英语 P3"
+        },
+        {
+          "type": "pointRead",
+          "q": "This is my grandma.",
+          "lines": [
+            "This is my grandma."
+          ],
+          "pic": "art:grandma",
+          "say": "This is my grandma. 指着读一读。",
+          "after": "This is my grandma.",
+          "source": "英语 P3"
+        },
+        {
+          "type": "pointRead",
+          "q": "I'm Tim. This is my sister, Ann.",
+          "lines": [
+            "I'm Tim.",
+            "This is my sister, Ann."
+          ],
+          "pic": "art:girl",
+          "say": "I'm Tim. This is my sister, Ann. 指着读一读。",
+          "after": "I'm Tim. This is my sister, Ann.",
+          "source": "英语 P3"
+        }
+      ]
+    },
+    {
+      "id": "en2",
+      "title": "How are you?",
+      "icon": "art:kid_cold",
+      "items": [
+        {
+          "type": "choice",
+          "q": "指认 I'm cold",
+          "source": "英语 P11",
+          "say": "听一听：I'm cold. 哪个小朋友在说这句话？",
+          "options": [
+            {
+              "pic": "art:kid_cold"
+            },
+            {
+              "pic": "art:kid_hot"
+            },
+            {
+              "pic": "art:kid_thirsty"
+            },
+            {
+              "pic": "art:kid_hungry"
+            }
+          ],
+          "answer": 0,
+          "after": "I'm cold. 好冷。",
+          "hint": "再听一遍：I'm cold."
+        },
+        {
+          "type": "choice",
+          "q": "指认 I'm hot",
+          "source": "英语 P11",
+          "say": "听一听：I'm hot. 哪个小朋友在说这句话？",
+          "options": [
+            {
+              "pic": "art:kid_hot"
+            },
+            {
+              "pic": "art:kid_cold"
+            },
+            {
+              "pic": "art:kid_thirsty"
+            },
+            {
+              "pic": "art:kid_hungry"
+            }
+          ],
+          "answer": 0,
+          "after": "I'm hot. 好热。",
+          "hint": "再听一遍：I'm hot."
+        },
+        {
+          "type": "choice",
+          "q": "指认 I'm thirsty",
+          "source": "英语 P11",
+          "say": "听一听：I'm thirsty. 哪个小朋友在说这句话？",
+          "options": [
+            {
+              "pic": "art:kid_thirsty"
+            },
+            {
+              "pic": "art:kid_cold"
+            },
+            {
+              "pic": "art:kid_hot"
+            },
+            {
+              "pic": "art:kid_hungry"
+            }
+          ],
+          "answer": 0,
+          "after": "I'm thirsty. 口渴。",
+          "hint": "再听一遍：I'm thirsty."
+        },
+        {
+          "type": "choice",
+          "q": "指认 I'm hungry",
+          "source": "英语 P11",
+          "say": "听一听：I'm hungry. 哪个小朋友在说这句话？",
+          "options": [
+            {
+              "pic": "art:kid_hungry"
+            },
+            {
+              "pic": "art:kid_cold"
+            },
+            {
+              "pic": "art:kid_hot"
+            },
+            {
+              "pic": "art:kid_thirsty"
+            }
+          ],
+          "answer": 0,
+          "after": "I'm hungry. 饿了。",
+          "hint": "再听一遍：I'm hungry."
+        },
+        {
+          "type": "pointRead",
+          "q": "How are you? I'm cold.",
+          "lines": [
+            "How are you?",
+            "I'm cold."
+          ],
+          "pic": "art:kid_cold",
+          "say": "听一听：How are you? I'm cold. 现在用手指着，一个词一个词点着读。",
+          "after": "How are you? I'm cold.",
+          "source": "英语 P11"
+        },
+        {
+          "type": "pointRead",
+          "q": "How are you? I'm hot.",
+          "lines": [
+            "How are you?",
+            "I'm hot."
+          ],
+          "pic": "art:kid_hot",
+          "say": "How are you? I'm hot. 指着读一读。",
+          "after": "How are you? I'm hot.",
+          "source": "英语 P11"
+        },
+        {
+          "type": "pointRead",
+          "q": "I'm thirsty.",
+          "lines": [
+            "I'm thirsty."
+          ],
+          "pic": "art:kid_thirsty",
+          "say": "I'm thirsty. 指着读一读。",
+          "after": "I'm thirsty.",
+          "source": "英语 P11"
+        },
+        {
+          "type": "pointRead",
+          "q": "I'm hungry.",
+          "lines": [
+            "I'm hungry."
+          ],
+          "pic": "art:kid_hungry",
+          "say": "I'm hungry. 指着读一读。",
+          "after": "I'm hungry.",
+          "source": "英语 P11"
+        }
+      ]
+    },
+    {
+      "id": "en3",
+      "title": "What do you see?",
+      "icon": "art:pencil_case",
+      "items": [
+        {
+          "type": "choice",
+          "q": "数一数 I see three pencils.",
+          "source": "英语 P19",
+          "listen": true,
+          "say": "Look! What do you see? 数一数，点句子听一听，选出对的那句。",
+          "prompt": {
+            "pic": "art:pencil",
+            "n": 3
+          },
+          "options": [
+            "I see three pencils.",
+            "I see two pencils.",
+            "I see four pencils."
+          ],
+          "answer": 0,
+          "after": "I see three pencils.",
+          "hint": "再数一数有几个。"
+        },
+        {
+          "type": "choice",
+          "q": "数一数 I see two erasers.",
+          "source": "英语 P19",
+          "listen": true,
+          "say": "Look! What do you see? 数一数，点句子听一听，选出对的那句。",
+          "prompt": {
+            "pic": "art:eraser",
+            "n": 2
+          },
+          "options": [
+            "I see two erasers.",
+            "I see one eraser.",
+            "I see three erasers."
+          ],
+          "answer": 0,
+          "after": "I see two erasers.",
+          "hint": "再数一数有几个。"
+        },
+        {
+          "type": "choice",
+          "q": "数一数 I see four rulers.",
+          "source": "英语 P19",
+          "listen": true,
+          "say": "Look! What do you see? 数一数，点句子听一听，选出对的那句。",
+          "prompt": {
+            "pic": "art:ruler",
+            "n": 4
+          },
+          "options": [
+            "I see four rulers.",
+            "I see three rulers.",
+            "I see two rulers."
+          ],
+          "answer": 0,
+          "after": "I see four rulers.",
+          "hint": "再数一数有几个。"
+        },
+        {
+          "type": "choice",
+          "q": "数一数 I see one pencil case.",
+          "source": "英语 P19",
+          "listen": true,
+          "say": "Look! What do you see? 数一数，点句子听一听，选出对的那句。",
+          "prompt": {
+            "pic": "art:pencil_case",
+            "n": 1
+          },
+          "options": [
+            "I see one pencil case.",
+            "I see two pencils.",
+            "I see one ruler."
+          ],
+          "answer": 0,
+          "after": "I see one pencil case.",
+          "hint": "再数一数有几个。"
+        },
+        {
+          "type": "pointRead",
+          "q": "Look! What do you see?",
+          "lines": [
+            "Look!",
+            "What do you see?"
+          ],
+          "pic": "art:pencil_case",
+          "say": "听一听：Look! What do you see? 现在用手指着，一个词一个词点着读。",
+          "after": "Look! What do you see?",
+          "source": "英语 P19"
+        },
+        {
+          "type": "pointRead",
+          "q": "I see one pencil case.",
+          "lines": [
+            "I see one pencil case."
+          ],
+          "pic": "art:pencil_case",
+          "say": "I see one pencil case. 指着读一读。",
+          "after": "I see one pencil case.",
+          "source": "英语 P19"
+        },
+        {
+          "type": "pointRead",
+          "q": "I see two erasers.",
+          "lines": [
+            "I see two erasers."
+          ],
+          "pic": "art:eraser",
+          "say": "I see two erasers. 指着读一读。",
+          "after": "I see two erasers.",
+          "n": 2,
+          "source": "英语 P19"
+        },
+        {
+          "type": "pointRead",
+          "q": "I see three pencils.",
+          "lines": [
+            "I see three pencils."
+          ],
+          "pic": "art:pencil",
+          "say": "I see three pencils. 指着读一读。",
+          "after": "I see three pencils.",
+          "n": 3,
+          "source": "英语 P19"
+        }
+      ]
+    }
+  ]
+}

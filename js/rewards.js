@@ -1,4 +1,6 @@
-// What drops when: harder questions, first-try answers, streaks and 3-star stages roll rarer blocks.
+// What drops when. Answers give XP, not blocks: filling the XP bar (a player level) gives one block, and each
+// finished stage opens a chest. Rarer blocks come from gold chests, level-ups, crafting (js/craft.js) and
+// achievements (finishing a recitation etc.), so blocks stay worth something.
 import { blocksOfRarity } from './blocks.js';
 import { store } from './store.js';
 
@@ -7,17 +9,16 @@ const TABLES = {
   easy:   [70, 25, 5, 0, 0],
   medium: [50, 35, 13, 2, 0],
   hard:   [35, 38, 20, 6, 1],
-  retry:  [80, 20, 0, 0, 0],
-  combo:  [0, 45, 40, 13, 2],
+  levelup: [0, 40, 42, 15, 3],
   wood:   [55, 35, 10, 0, 0],
   iron:   [20, 42, 30, 8, 0],
   gold:   [0, 22, 43, 27, 8],
 };
 
 export const CHESTS = {
-  wood: { name: '木箱', count: 3 },
-  iron: { name: '铁箱', count: 4 },
-  gold: { name: '金箱', count: 5 },
+  wood: { name: '木箱', count: 1 },
+  iron: { name: '铁箱', count: 2 },
+  gold: { name: '金箱', count: 3 },
 };
 
 const pick = arr => arr[Math.floor(Math.random() * arr.length)];
@@ -50,22 +51,29 @@ export function difficulty(item) {
   return 1;
 }
 
-export function answerDrop(item, firstTry, set) {
-  if (!firstTry) return blockOf(rollRarity(TABLES.retry), set);
-  return blockOf(rollRarity(TABLES[['easy', 'medium', 'hard'][difficulty(item) - 1]]), set);
-}
+// XP for one answer: harder questions give more; a retried answer still gives 1.
+export const answerXP = (item, firstTry) => (firstTry ? difficulty(item) : 1);
+export const COMBO_XP = 3;
 
 // every third first-try answer in a row
 export const isCombo = streak => streak > 0 && streak % 3 === 0;
-export const comboDrop = set => blockOf(rollRarity(TABLES.combo), set);
 
-// Stage chest: stars pick the chest; replaying an already-finished stage gives one chest lower and one block fewer,
+// XP needed to go from player level L to L+1 grows slowly, so level-ups stay roughly one every 1–2 stages.
+export const xpToNext = level => 20 + 4 * Math.min(level, 10);
+export function levelOf(xp) {
+  let level = 0;
+  while (xp >= xpToNext(level)) { xp -= xpToNext(level); level++; }
+  return { level, into: xp, need: xpToNext(level) };
+}
+export const levelUpDrop = set => blockOf(rollRarity(TABLES.levelup), set);
+
+// Stage chest: stars pick the chest; replaying an already-finished stage gives one chest lower (never fewer than one block),
 // so new homework stays the best source of rare blocks. Gold chests always hold something rare or better,
 // and a legendary is guaranteed after 6 gold chests without one.
 export function openChest(stars, replay, set) {
   let kind = stars >= 3 ? 'gold' : stars === 2 ? 'iron' : 'wood';
   if (replay) kind = kind === 'gold' ? 'iron' : 'wood';
-  const n = CHESTS[kind].count - (replay ? 1 : 0);
+  const n = CHESTS[kind].count;
   const out = [];
   for (let i = 0; i < n; i++) out.push(blockOf(rollRarity(TABLES[kind], kind === 'gold' && i === 0 ? 2 : 0), set));
   if (kind === 'gold') {

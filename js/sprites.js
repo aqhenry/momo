@@ -184,6 +184,14 @@ const DRAW = {
   check(g) { g.line(2, 8, 6, 12, '#5fe05f', 2); g.line(6, 12, 13, 3, '#5fe05f', 2); },
   confirm(g) { g.line(2, 8, 6, 12, '#f4f4f4', 2); g.line(6, 12, 13, 3, '#f4f4f4', 2); },
   heart(g) { g.disc(5, 5.5, 3.7, '#e23b3b'); g.disc(11, 5.5, 3.7, '#e23b3b'); g.poly([[1.4, 6.5], [14.6, 6.5], [8, 14.2]], '#e23b3b'); g.px(4, 4, '#ff9a9a'); },
+  hammer(g) { g.line(4, 13, 10, 7, '#8a5a2b', 2); g.poly([[7, 3], [11, 1], [15, 5], [13, 7], [11, 5], [9, 7]], '#bdbdbd'); },
+  orb(g) { g.disc(8, 8, 5.5, '#7cff2a'); g.disc(8, 8, 3, '#d8ff7a'); g.px(6, 6, '#ffffff'); },
+  finger(g) {
+    g.rect(6, 1, 3, 8, '#f3c79a');
+    g.rect(4, 7, 9, 7, '#f3c79a');
+    g.rect(9, 6, 2, 2, '#f3c79a'); g.rect(11, 7, 2, 2, '#f3c79a');
+    g.px(7, 2, '#ffe6cf');
+  },
   apple(g) { g.disc(8, 9.5, 5.5, '#d63030'); g.rect(8, 2, 1, 3, '#6a4020'); g.rect(9, 3, 3, 2, '#4caf50'); },
 };
 

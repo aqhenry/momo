@@ -94,10 +94,22 @@ export const BLOCKS = {
   letter_x:       { name: '字母 x 方块', rarity: 2, set: 'jqx' },
   chess_board:    { name: '棋盘方块', rarity: 3, set: 'jqx' },
   pinyin_crystal: { name: '拼音水晶', rarity: 4, set: 'jqx', glow: true },
+
+  // 第五大关 · 村庄图书馆（语文 + 英语）
+  moss_block:    { name: '苔藓块', rarity: 1, set: 'ch5' },
+  cherry_leaves: { name: '樱花树叶', rarity: 1, set: 'ch5' },
+  loom:          { name: '织布机', rarity: 2, set: 'ch5' },
+  note_block:    { name: '音符盒', rarity: 2, set: 'ch5' },
+  // `obtain`: never drops from questions or chests — only crafting or an achievement gives one.
+  jade_terracotta:    { name: '碧玉带釉陶瓦', rarity: 3, obtain: 'achieve' },
+  sky_terracotta:     { name: '苍天带釉陶瓦', rarity: 3, obtain: 'achieve' },
+  jukebox:            { name: '唱片机', rarity: 3, obtain: 'achieve' },
+  chiseled_bookshelf: { name: '雕纹书架', rarity: 3, obtain: 'craft' },
+  enchanting_table:   { name: '附魔台', rarity: 4, obtain: 'craft', glow: true },
 };
 
 // blocks of a rarity that can drop in an adventure using `set` (base blocks always can)
-export const blocksOfRarity = (r, set) => Object.keys(BLOCKS).filter(k => BLOCKS[k].rarity === r && (!BLOCKS[k].set || BLOCKS[k].set === set));
+export const blocksOfRarity = (r, set) => Object.keys(BLOCKS).filter(k => BLOCKS[k].rarity === r && !BLOCKS[k].obtain && (!BLOCKS[k].set || BLOCKS[k].set === set));
 
 function rng(seed) {
   let s = seed >>> 0;
@@ -377,7 +389,66 @@ Object.assign(PAINT, {
  beacon: px=>{clearPane(px,'#86dae4','rgba(145,227,237,.55)');each((x,y)=>{if(x>3&&x<12&&y>3&&y<12)px(x,y,Math.abs(x-7.5)+Math.abs(y-7.5)<5?'#f7ffd5':'#54c5c5');if(y>12)px(x,y,'#3c4d60');});},
 });
 
+// 第五大关
+function glazed(px, base, ink, light) {
+  // a quarter motif rotated four times, like glazed terracotta
+  each((x, y) => {
+    const qx = x < 8 ? x : 15 - x, qy = y < 8 ? y : 15 - y;
+    const swirl = (qx + qy) % 5 === 0 || (qx === 2 && qy > 1) || (qy === 2 && qx > 1);
+    const dot = qx > 4 && qy > 4;
+    px(x, y, dot ? light : swirl ? ink : shade(base, edgeK(x, y)));
+  });
+}
+Object.assign(PAINT, {
+  moss_block: (px, r) => each((x, y) => px(x, y, r() < 0.12 ? 'rgb(140,170,70)' : shade([89, 117, 44], 0.82 + r() * 0.3))),
+  cherry_leaves: (px, r) => each((x, y) => px(x, y, r() < 0.14 ? 'rgb(150,70,100)' : r() < 0.08 ? '#fff0f6' : shade([236, 160, 190], 0.8 + r() * 0.35))),
+  loom: (px, r) => {
+    planksOf(px, r, [150, 110, 70]);
+    for (let x = 2; x < 14; x++) for (let y = 3; y < 11; y++) if (x % 2 === 0) px(x, y, y % 3 === 0 ? '#c33' : '#f2eadb');
+    for (let x = 1; x < 15; x++) { px(x, 2, 'rgb(90,60,35)'); px(x, 11, 'rgb(90,60,35)'); }
+  },
+  note_block: (px, r) => {
+    each((x, y) => px(x, y, shade([110, 70, 50], edgeK(x, y) * (0.9 + r() * 0.15))));
+    const note = ['....111', '....1.1', '....1..', '....1..', '.111...', '1111...', '.11....'];
+    note.forEach((row, y) => [...row].forEach((c, x) => { if (c === '1') { px(4 + x, 4 + y, '#2a1a10'); } }));
+  },
+  jade_terracotta: (px, r) => glazed(px, [70, 170, 120], '#e9f7c8', '#2e7d5b'),
+  sky_terracotta: (px, r) => glazed(px, [90, 160, 220], '#f4fbff', '#e6c45a'),
+  jukebox: (px, r) => {
+    each((x, y) => {
+      const edge = x < 2 || y < 2 || x > 13 || y > 13;
+      px(x, y, edge ? shade([70, 45, 30], 0.9 + r() * 0.15) : shade([120, 80, 55], 0.9 + r() * 0.15));
+    });
+    for (let x = 4; x < 12; x++) { px(x, 7, '#3a2618'); px(x, 8, '#3a2618'); }
+  },
+  chiseled_bookshelf: (px, r) => {
+    planksOf(px, r, [162, 130, 78]);
+    const colors = ['#a33', '#36a', '#3a5', '#c93', '#83a', '#2a8'];
+    for (const y0 of [2, 9]) for (const x0 of [1, 6, 11]) {
+      for (let y = y0; y < y0 + 5; y++) for (let x = x0; x < x0 + 4; x++) px(x, y, '#3b2a18');
+      if (r() < 0.75) for (let y = y0 + 1; y < y0 + 5; y++) for (let x = x0; x < x0 + 4; x++) px(x, y, x % 2 ? colors[(x0 + y0) % 6] : colors[(x0 + y0 + 2) % 6]);
+    }
+  },
+  enchanting_table: (px, r) => {
+    each((x, y) => px(x, y, y < 4 ? shade([170, 30, 40], 0.9 + r() * 0.15) : r() < 0.08 ? 'rgb(110,60,160)' : shade([24, 16, 38], 0.8 + r() * 0.5)));
+    for (let x = 0; x < 16; x++) px(x, 4, '#e6c45a');
+  },
+});
+
 const TOP = {
+  loom: (px, r) => { planksOf(px, r, [176, 132, 80]); for (let x = 2; x < 14; x++) px(x, 7, '#f2eadb'); },
+  note_block: (px, r) => each((x, y) => px(x, y, shade([110, 70, 50], edgeK(x, y) * (0.9 + r() * 0.15)))),
+  jukebox: (px, r) => {
+    each((x, y) => px(x, y, shade([95, 62, 42], edgeK(x, y) * (0.9 + r() * 0.15))));
+    for (let x = 3; x < 13; x++) { px(x, 7, '#1d140d'); px(x, 8, '#1d140d'); }
+  },
+  chiseled_bookshelf: (px, r) => planksOf(px, r, [162, 130, 78]),
+  enchanting_table: (px, r) => {
+    each((x, y) => px(x, y, shade([170, 30, 40], edgeK(x, y) * (0.9 + r() * 0.15))));
+    for (const [x, y] of [[1, 1], [14, 1], [1, 14], [14, 14]]) { px(x, y, '#7ff0f0'); }
+    for (let y = 5; y < 11; y++) for (let x = 4; x < 12; x++) px(x, y, x === 7 || x === 8 ? '#6b3b1d' : '#f1e6c8');
+    for (let x = 5; x < 11; x++) if (x !== 7 && x !== 8) { px(x, 7, '#9a8a70'); px(x, 9, '#9a8a70'); }
+  },
   tnt: (px,r)=>{noise(px,r,[184,43,35],.06);each((x,y)=>{if(x%4===0)px(x,y,'#7a2623');if(y===7||y===8)px(x,y,'#c8aa75');});},
   drum_block: px => each((x, y) => {
     const rim = x < 2 || y < 2 || x > 13 || y > 13;
@@ -400,7 +471,7 @@ const TOP = {
   furnace: (px, r) => noise(px, r, [125, 125, 125], 0.12),
   bee_nest: (px, r) => planksOf(px, r, [196, 150, 80]),
 };
-const BOTTOM = { grass: PAINT.dirt, bookshelf: TOP.bookshelf, log: TOP.log, hay: TOP.hay };
+const BOTTOM = { enchanting_table: PAINT.obsidian, jukebox: TOP.note_block, grass: PAINT.dirt, bookshelf: TOP.bookshelf, log: TOP.log, hay: TOP.hay };
 
 const canvases = {};
 // face: 'side' | 'top' | 'bottom'

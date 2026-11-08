@@ -26,7 +26,7 @@ export function renderHunt(root, item, ctx) {
     } }, gridSVG(letter, 24, { minWidth: 64 }));
     grid.append(button);
   }
-  root.append(h('div.challenge-title', '听声音，挖出藏好的声母'), counter, grid);
+  root.append(h('div.challenge-title', item.title || '听声音，挖出藏好的声母'), counter, grid);
 }
 
 const labels = { ini: '声母', med: '介母', fin: '韵母' };

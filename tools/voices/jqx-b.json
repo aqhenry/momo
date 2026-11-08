@@ -4,7 +4,8 @@
   "instructions": "保持原有的成年女性音色，像一位亲切自然的中文老师。整体语气比平静朗读稍微明快一点，带一点微笑和鼓励，句子有轻微的抑扬顿挫。讲拼音时清楚、准确，适当停顿；说到 Good job 和读对啦时自然地露出一点喜悦。整体克制、自然，不用童声、娃娃音、撒娇或夸张表演。按原文朗读拼音和英文。",
   "levels": [
     "yuwen-jqx",
-    "math-week9"
+    "math-week9",
+    "review-ch5"
   ],
   "check_models": [
     "qwen/qwen3.8-omni-flash",
@@ -13,6 +14,13 @@
   "pronunciation": {
     "找齐啦！x。": "找齐啦！<|phoneme_start|>xi1<|phoneme_end|>。",
     "看图，拼出打鼓的拼音。听一遍，dǎ gǔ。": "看图，拼出打鼓的拼音。听一遍，<|phoneme_start|>da3<|phoneme_end|><|phoneme_start|>gu3<|phoneme_end|>。",
-    "请拼出绿色的绿，lǜ。和 l 相拼，两点还要吗？": "请拼出绿色的绿，<|phoneme_start|>lv4<|phoneme_end|>。和 <|phoneme_start|>le1<|phoneme_end|> 相拼，两点还要吗？"
+    "请拼出绿色的绿，lǜ。和 l 相拼，两点还要吗？": "请拼出绿色的绿，<|phoneme_start|>lv4<|phoneme_end|>。和 <|phoneme_start|>le1<|phoneme_end|> 相拼，两点还要吗？",
+    "敕勒歌，北朝民歌。敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。": "敕勒歌，北朝民歌。敕勒川，阴山下。天似穹庐，<|phoneme_start|>long3<|phoneme_end|>盖四野。天苍苍，野茫茫，风吹草低<|phoneme_start|>xian4<|phoneme_end|>牛羊。",
+    "天似什么，笼盖四野？穹庐就是圆顶的大帐篷。": "天似什么，<|phoneme_start|>long3<|phoneme_end|>盖四野？穹庐就是圆顶的大帐篷。",
+    "天似穹庐，笼盖四野。": "天似穹庐，<|phoneme_start|>long3<|phoneme_end|>盖四野。",
+    "风吹草低见牛羊。": "风吹草低<|phoneme_start|>xian4<|phoneme_end|>牛羊。",
+    "敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。": "敕勒川，阴山下。天似穹庐，<|phoneme_start|>long3<|phoneme_end|>盖四野。天苍苍，野茫茫，风吹草低<|phoneme_start|>xian4<|phoneme_end|>牛羊。",
+    "笼盖四野。": "<|phoneme_start|>long3<|phoneme_end|>盖四野。",
+    "背得真好！敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。": "背得真好！敕勒川，阴山下。天似穹庐，<|phoneme_start|>long3<|phoneme_end|>盖四野。天苍苍，野茫茫，风吹草低<|phoneme_start|>xian4<|phoneme_end|>牛羊。"
   }
 }

@@ -1,7 +1,9 @@
 // Reading items over a passage with pinyin above each character.
 //   type 'read'    : listen + read along, then tap "我读好了"
-//   type 'tapText' : tap every syllable that matches a rule, e.g. {base:'da'} or {final:'e'}
+//   type 'tapText' : tap every syllable that matches a rule, e.g. {base:'da'}, {final:'e'} or {finals:['ai','ei']}
+//   type 'recite'  : the passage is hidden under blocks; he recites aloud and can dig a block to peek
 import { h, shake, promptEl } from '../ui.js';
+import { blockURL } from '../blocks.js';
 import { split, stripTone } from '../pinyin.js';
 import { sfx } from '../audio.js';
 import { S, tapMissing, tapTotal } from '../phrases.js';
@@ -38,6 +40,7 @@ function matches(rule, p) {
   if (!p) return false;
   if (rule.base) return stripTone(p) === rule.base;
   if (rule.final) return stripTone(split(p).final) === rule.final;
+  if (rule.finals) return rule.finals.includes(stripTone(split(p).final));
   return false;
 }
 
@@ -79,4 +82,28 @@ export function renderTap(root, item, ctx) {
     const hint = wrongPicks.length ? S.tapWrong : tapMissing(missed.length);
     ctx.wrong(`选了${picked.size + wrongPicks.length}个，应为${all.length}个`, hint);
   }
+}
+
+export function renderRecite(root, item, ctx) {
+  let finished = false;
+  const { wrap, rows } = passage(item, (cell, el) => {
+    if (finished || !el.classList.contains('covered')) return ctx.say(item.tapSay?.[cell.p] || cell.p, cell.c);
+    sfx.dig();
+    el.classList.remove('covered');
+    ctx.say(item.tapSay?.[cell.p] || cell.p, cell.c);
+  });
+  rows.forEach(row => row.forEach((cell, k) => {
+    if (!cell.p || (item.showFirst && k === 0)) return;
+    cell.el.classList.add('covered');
+    cell.el.style.setProperty('--cover', `url(${blockURL(item.cover || 'grass')})`);
+  }));
+  const done = h('button.mc-btn.go', { onclick: () => {
+    if (finished) return;
+    finished = true;
+    done.disabled = true;
+    rows.flat().forEach(c => c.el.classList.remove('covered'));
+    ctx.right(item.after);
+  } }, '我背好了！');
+  if (item.title) root.append(h('div.ptitle', item.title));
+  root.append(wrap, h('div.row-btns', done));
 }

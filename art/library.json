@@ -254,5 +254,69 @@
   "dam": {
     "zh": "大坝",
     "prompt": "huge concrete river dam with water flowing through its gates"
+  },
+  "grandma": {
+    "zh": "奶奶",
+    "prompt": "smiling grandma with grey hair in a bun and a purple cardigan, upper body"
+  },
+  "cabbage": {
+    "zh": "白菜",
+    "prompt": "Chinese napa cabbage standing upright, white stem and light green leaves"
+  },
+  "pear": {
+    "zh": "鸭梨",
+    "prompt": "yellow Chinese pear with a short brown stem"
+  },
+  "soap": {
+    "zh": "肥皂",
+    "prompt": "bar of pink soap with a few white bubbles"
+  },
+  "towel": {
+    "zh": "毛巾",
+    "prompt": "folded blue towel"
+  },
+  "kid_cold": {
+    "zh": "好冷",
+    "prompt": "child shivering in a woolly hat, scarf and puffy coat, feeling cold, full body"
+  },
+  "kid_hot": {
+    "zh": "好热",
+    "prompt": "child in a T-shirt wiping sweat from the forehead under a hot sun, feeling hot, full body"
+  },
+  "kid_thirsty": {
+    "zh": "口渴",
+    "prompt": "child drinking from a water bottle, feeling thirsty, full body"
+  },
+  "kid_hungry": {
+    "zh": "饿了",
+    "prompt": "child holding the tummy and thinking of a bowl of rice, feeling hungry, full body"
+  },
+  "pencil": {
+    "zh": "铅笔",
+    "prompt": "yellow pencil with a pink eraser end, lying diagonally"
+  },
+  "eraser": {
+    "zh": "橡皮",
+    "prompt": "small white and blue rectangular eraser"
+  },
+  "ruler": {
+    "zh": "尺子",
+    "prompt": "straight yellow ruler with black marks, lying horizontally"
+  },
+  "pencil_case": {
+    "zh": "笔袋",
+    "prompt": "blue zipped pencil case"
+  },
+  "willow": {
+    "zh": "柳树",
+    "prompt": "weeping willow tree with long hanging green branches"
+  },
+  "scissors": {
+    "zh": "剪刀",
+    "prompt": "pair of scissors with red handles, open"
+  },
+  "yurt": {
+    "zh": "蒙古包",
+    "prompt": "round white yurt tent with a domed roof and a small door, on green grass"
   }
 }
