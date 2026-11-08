@@ -324,6 +324,50 @@ def kid_hungry():
     return kid_with(extra)
 
 
+@pic
+def bun():
+    p = Pic()
+    p.ellipse((3, 10, 28, 28), '#f6f0e2')
+    p.ellipse((9, 6, 22, 18), '#fbf7ee')
+    for a, b in (((16, 7), (16, 14)), ((12, 9), (15, 14)), ((20, 9), (17, 14))):
+        p.line([a, b], '#d9ccb0')
+    return p.finish()
+
+
+@pic
+def dolphin():
+    p = Pic()
+    p.ellipse((3, 10, 25, 22), '#6aa8d8')
+    p.poly([(22, 13), (30, 8), (29, 17), (24, 18)], '#6aa8d8')     # tail
+    p.poly([(11, 11), (15, 4), (17, 11)], '#4f8fc4')                 # fin
+    p.poly([(1, 16), (5, 14), (5, 18)], '#6aa8d8')                   # nose
+    p.ellipse((5, 16, 18, 22), '#dceefa', bevel=False)               # belly
+    p.px([(7, 14)], '#1d2a3a')
+    return p.finish()
+
+
+@pic
+def lollipop():
+    p = Pic()
+    p.rect((15, 17, 16, 30), '#f4f4f4')
+    p.ellipse((6, 2, 25, 21), '#ff6f9a')
+    for box in ((9, 5, 22, 18), (12, 8, 19, 15)):
+        p.ellipse(box, '#ffe3ec' if box[0] == 9 else '#ff6f9a', bevel=False)
+    p.ellipse((14, 10, 17, 13), '#ffe3ec', bevel=False)
+    return p.finish()
+
+
+@pic
+def peach():
+    p = Pic()
+    p.ellipse((5, 8, 27, 29), '#ffb38a')
+    p.ellipse((7, 10, 18, 24), '#ff8f8f', bevel=False)
+    p.line([(16, 10), (14, 26)], '#e8786a')
+    p.poly([(16, 9), (22, 2), (25, 6)], '#5aaa3a')
+    p.poly([(15, 9), (9, 3), (8, 7)], '#4f9a30')
+    return p.finish()
+
+
 def main():
     names = sys.argv[1:] or [n for n in DRAW if not (ART / f'{n}.png').exists()]
     for n in names:

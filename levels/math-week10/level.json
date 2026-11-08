@@ -1,0 +1,978 @@
+{
+  "id": "math-week10",
+  "title": "海底神殿",
+  "blockSet": "ocean",
+  "audioProfile": "jqx-b",
+  "rewardPolicy": "practice",
+  "note": "第10周数学：10以内口算、求未知数、等式与不等式、7的分与合、数的顺序（前后、相邻、之间）、看图列式（求部分/求总数）、上下左右。",
+  "intro": "墨然，欢迎来到海底神殿！我们要算口算、找数字邻居、看图列算式，还要帮小动物找位置。闯过全部关卡，能得到神殿的潮涌核心哦！",
+  "speech": {
+    "combo": "你又完成了三题，经验加倍！",
+    "pause": "休息一下吗？点绿色箭头继续玩，点地图回去。"
+  },
+  "achievements": [
+    {
+      "id": "temple",
+      "block": "conduit",
+      "title": "闯过海底神殿全部关卡",
+      "stages": [
+        "mental",
+        "missing",
+        "balance",
+        "neighbors",
+        "pictures",
+        "position",
+        "treasure"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "mental",
+      "title": "口算热身",
+      "icon": "sprite:target",
+      "items": [
+        {
+          "type": "calc",
+          "q": "3+5=□",
+          "eq": "3+5=□",
+          "pad": 9,
+          "say": "三加五等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        },
+        {
+          "type": "calc",
+          "q": "7-4=□",
+          "eq": "7-4=□",
+          "pad": 9,
+          "say": "七减四等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        },
+        {
+          "type": "calc",
+          "q": "1+6=□",
+          "eq": "1+6=□",
+          "pad": 9,
+          "say": "一加六等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        },
+        {
+          "type": "calc",
+          "q": "2+6=□",
+          "eq": "2+6=□",
+          "pad": 9,
+          "say": "二加六等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        },
+        {
+          "type": "calc",
+          "q": "8-5=□",
+          "eq": "8-5=□",
+          "pad": 9,
+          "say": "八减五等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        },
+        {
+          "type": "calc",
+          "q": "4+3=□",
+          "eq": "4+3=□",
+          "pad": 9,
+          "say": "四加三等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        },
+        {
+          "type": "calc",
+          "q": "4+4=□",
+          "eq": "4+4=□",
+          "pad": 9,
+          "say": "四加四等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        },
+        {
+          "type": "calc",
+          "q": "6-3=□",
+          "eq": "6-3=□",
+          "pad": 9,
+          "say": "六减三等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        }
+      ]
+    },
+    {
+      "id": "missing",
+      "title": "找缺的数",
+      "icon": "sprite:magnifier",
+      "items": [
+        {
+          "type": "calc",
+          "q": "2+□=8",
+          "eq": "2+□=8",
+          "pad": 9,
+          "say": "二加几等于八？",
+          "after": "二加六等于八。",
+          "hint": "想一想，八可以分成二和几？"
+        },
+        {
+          "type": "calc",
+          "q": "7-□=3",
+          "eq": "7-□=3",
+          "pad": 9,
+          "say": "七减几等于三？",
+          "after": "七减四等于三。",
+          "hint": "七可以分成三和几？"
+        },
+        {
+          "type": "calc",
+          "q": "□+2=7",
+          "eq": "□+2=7",
+          "pad": 9,
+          "say": "几加二等于七？",
+          "after": "五加二等于七。",
+          "hint": "七可以分成几和二？"
+        },
+        {
+          "type": "calc",
+          "q": "6-□=1",
+          "eq": "6-□=1",
+          "pad": 9,
+          "say": "六减几等于一？",
+          "after": "六减五等于一。",
+          "hint": "六可以分成一和几？"
+        },
+        {
+          "type": "calc",
+          "q": "2+□=6",
+          "eq": "2+□=6",
+          "pad": 9,
+          "say": "二加几等于六？",
+          "after": "二加四等于六。",
+          "hint": "六可以分成二和几？"
+        },
+        {
+          "type": "calc",
+          "q": "□-3=3",
+          "eq": "□-3=3",
+          "pad": 9,
+          "say": "几减三等于三？",
+          "after": "六减三等于三。",
+          "hint": "想一想，三加三等于几？"
+        }
+      ]
+    },
+    {
+      "id": "balance",
+      "title": "两边一样多",
+      "icon": "sprite:scale",
+      "items": [
+        {
+          "type": "calc",
+          "q": "5+2=□-1",
+          "eq": "5+2=□-1",
+          "pad": 9,
+          "say": "先算五加二。几减一，才和它一样多？",
+          "difficulty": 3,
+          "after": "五加二等于七，八减一也等于七。",
+          "hint": "等号两边要一样多。先算左边，再想右边。"
+        },
+        {
+          "type": "calc",
+          "q": "3+□=6+2",
+          "eq": "3+□=6+2",
+          "pad": 9,
+          "say": "先算六加二。三加几，才和它一样多？",
+          "difficulty": 3,
+          "after": "六加二等于八，三加五也等于八。",
+          "hint": "等号两边要一样多。先算右边是几。"
+        },
+        {
+          "type": "calc",
+          "q": "7>□>5",
+          "eq": "7>□>5",
+          "pad": 9,
+          "say": "七大于几，几又大于五？",
+          "accept": [
+            "7>6>5"
+          ],
+          "difficulty": 3,
+          "after": "七大于六，六大于五。",
+          "hint": "这个数比七小，又比五大。"
+        },
+        {
+          "type": "calc",
+          "q": "8<□<10",
+          "eq": "8<□<10",
+          "pad": 9,
+          "say": "八小于几，几又小于十？",
+          "accept": [
+            "8<9<10"
+          ],
+          "difficulty": 3,
+          "after": "八小于九，九小于十。",
+          "hint": "这个数比八大，又比十小。"
+        },
+        {
+          "type": "craft",
+          "q": "3+?=7",
+          "a": 3,
+          "b": 4,
+          "total": 7,
+          "blank": "b",
+          "art": "fish",
+          "pad": 9,
+          "say": "合成台上，三条鱼和几条鱼，合成七条鱼？",
+          "after": "三和四合成七。",
+          "hint": "七可以分成三和几？"
+        },
+        {
+          "type": "craft",
+          "q": "?+2=7",
+          "a": 5,
+          "b": 2,
+          "total": 7,
+          "blank": "a",
+          "art": "fish",
+          "pad": 9,
+          "say": "几条鱼和两条鱼，合成七条鱼？",
+          "after": "五和二合成七。",
+          "hint": "七可以分成几和二？"
+        },
+        {
+          "type": "calc",
+          "q": "□+□=7",
+          "eq": "□+□=7",
+          "pad": 9,
+          "say": "写一个加法算式，让它等于七。哪两个数合起来是七？",
+          "difficulty": 2,
+          "after": "对！合起来正好是七。",
+          "hint": "七可以分成一和六、二和五、三和四……选一种写。"
+        }
+      ]
+    },
+    {
+      "id": "neighbors",
+      "title": "数字邻居",
+      "icon": "text:7",
+      "items": [
+        {
+          "type": "mathExplore",
+          "mode": "track",
+          "q": "从小到大数，九前面的一个数是几？点一点。",
+          "mark": [
+            9
+          ],
+          "answer": [
+            8
+          ],
+          "say": "从小到大数，九前面的一个数是几？点一点。",
+          "after": "九前面是八。",
+          "hint": "从左往右，数越来越大。前面的数小一，后面的数大一。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "track",
+          "q": "从小到大数，九后面的一个数是几？点一点。",
+          "mark": [
+            9
+          ],
+          "answer": [
+            10
+          ],
+          "say": "从小到大数，九后面的一个数是几？点一点。",
+          "after": "九后面是十。",
+          "hint": "从左往右，数越来越大。前面的数小一，后面的数大一。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "track",
+          "q": "和七相邻的两个数是几和几？点出两个数。",
+          "mark": [
+            7
+          ],
+          "answer": [
+            6,
+            8
+          ],
+          "say": "和七相邻的两个数是几和几？点出两个数。",
+          "after": "和七相邻的是六和八。",
+          "hint": "相邻就是紧挨着的，前面一个，后面一个。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "track",
+          "q": "比六大，又比九小的数，有哪两个？点出来。",
+          "mark": [
+            6,
+            9
+          ],
+          "answer": [
+            7,
+            8
+          ],
+          "say": "比六大，又比九小的数，有哪两个？点出来。",
+          "after": "比六大、比九小的是七和八。",
+          "hint": "在六和九中间找一找。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "track",
+          "q": "从小到大数，五后面的一个数是几？",
+          "mark": [
+            5
+          ],
+          "answer": [
+            6
+          ],
+          "say": "从小到大数，五后面的一个数是几？",
+          "after": "五后面是六。",
+          "hint": "从左往右，数越来越大。前面的数小一，后面的数大一。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "track",
+          "q": "从小到大数，三前面的一个数是几？",
+          "mark": [
+            3
+          ],
+          "answer": [
+            2
+          ],
+          "say": "从小到大数，三前面的一个数是几？",
+          "after": "三前面是二。",
+          "hint": "从左往右，数越来越大。前面的数小一，后面的数大一。",
+          "difficulty": 2
+        }
+      ]
+    },
+    {
+      "id": "pictures",
+      "title": "看图列式",
+      "icon": "art:dolphin",
+      "items": [
+        {
+          "type": "calc",
+          "q": "7-3=4",
+          "eq": "□○□=□",
+          "signs": [
+            "+",
+            "-"
+          ],
+          "pad": 9,
+          "scene": {
+            "groups": [
+              {
+                "art": "bun",
+                "hide": true
+              },
+              {
+                "art": "bun",
+                "n": 3
+              }
+            ],
+            "total": "7个"
+          },
+          "accept": [
+            "7-3=4"
+          ],
+          "say": "一共有七个包子，阿姨端走了三个。还剩几个？请把算式写完整。",
+          "after": "七减三等于四，还剩四个。",
+          "hint": "知道一共有多少和其中一部分，求另一部分用减法；两部分合起来用加法。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "6-4=2",
+          "eq": "□○□=□",
+          "signs": [
+            "+",
+            "-"
+          ],
+          "pad": 9,
+          "scene": {
+            "groups": [
+              {
+                "art": "dolphin",
+                "n": 4
+              },
+              {
+                "art": "dolphin",
+                "hide": true
+              }
+            ],
+            "total": "6只"
+          },
+          "accept": [
+            "6-4=2"
+          ],
+          "say": "一共有六只海豚，水面上有四只。水里还有几只？",
+          "after": "六减四等于二，水里有两只。",
+          "hint": "知道一共有多少和其中一部分，求另一部分用减法；两部分合起来用加法。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "10-3=7",
+          "eq": "□○□=□",
+          "signs": [
+            "+",
+            "-"
+          ],
+          "pad": 10,
+          "scene": {
+            "groups": [
+              {
+                "art": "lollipop",
+                "hide": true
+              },
+              {
+                "art": "lollipop",
+                "n": 3
+              }
+            ],
+            "total": "10支"
+          },
+          "accept": [
+            "10-3=7"
+          ],
+          "say": "一共有十支棒棒糖，外面有三支。盒子里有几支？",
+          "after": "十减三等于七，盒子里有七支。",
+          "hint": "知道一共有多少和其中一部分，求另一部分用减法；两部分合起来用加法。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "8-3=5",
+          "eq": "□○□=□",
+          "signs": [
+            "+",
+            "-"
+          ],
+          "pad": 9,
+          "scene": {
+            "groups": [
+              {
+                "art": "pencil",
+                "n": 3
+              },
+              {
+                "art": "pencil",
+                "hide": true
+              }
+            ],
+            "total": "8支"
+          },
+          "accept": [
+            "8-3=5"
+          ],
+          "say": "一共有八支铅笔，外面有三支。笔盒里有几支？",
+          "after": "八减三等于五，笔盒里有五支。",
+          "hint": "知道一共有多少和其中一部分，求另一部分用减法；两部分合起来用加法。",
+          "difficulty": 3
+        },
+        {
+          "type": "calc",
+          "q": "6+3=9",
+          "eq": "□○□=□",
+          "signs": [
+            "+",
+            "-"
+          ],
+          "pad": 9,
+          "scene": {
+            "groups": [
+              {
+                "art": "peach",
+                "n": 6
+              },
+              {
+                "art": "peach",
+                "n": 3
+              }
+            ],
+            "total": "?个"
+          },
+          "accept": [
+            "6+3=9",
+            "3+6=9"
+          ],
+          "say": "篮子里有六个桃，外面有三个。一共有几个？",
+          "after": "六加三等于九，一共九个。",
+          "hint": "知道一共有多少和其中一部分，求另一部分用减法；两部分合起来用加法。",
+          "difficulty": 3
+        }
+      ]
+    },
+    {
+      "id": "position",
+      "title": "动物公寓",
+      "icon": "art:monkey_happy",
+      "items": [
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            0,
+            1
+          ],
+          "b": [
+            1,
+            1
+          ],
+          "names": [
+            "猴子",
+            "奶牛"
+          ],
+          "answer": "上面",
+          "q": "猴子在奶牛的上面",
+          "say": "黄色格子里的猴子，在蓝色格子里奶牛的哪一边？",
+          "after": "猴子在奶牛的上面。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            1,
+            0
+          ],
+          "b": [
+            0,
+            0
+          ],
+          "names": [
+            "小鸡",
+            "兔子"
+          ],
+          "answer": "下面",
+          "q": "小鸡在兔子的下面",
+          "say": "黄色格子里的小鸡，在蓝色格子里兔子的哪一边？",
+          "after": "小鸡在兔子的下面。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            0,
+            3
+          ],
+          "b": [
+            0,
+            2
+          ],
+          "names": [
+            "熊猫",
+            "小猫"
+          ],
+          "answer": "右边",
+          "q": "熊猫在小猫的右边",
+          "say": "黄色格子里的熊猫，在蓝色格子里小猫的哪一边？",
+          "after": "熊猫在小猫的右边。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            1,
+            2
+          ],
+          "b": [
+            1,
+            1
+          ],
+          "names": [
+            "青蛙",
+            "奶牛"
+          ],
+          "answer": "右边",
+          "q": "青蛙在奶牛的右边",
+          "say": "黄色格子里的青蛙，在蓝色格子里奶牛的哪一边？",
+          "after": "青蛙在奶牛的右边。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            2,
+            0
+          ],
+          "b": [
+            1,
+            0
+          ],
+          "names": [
+            "小羊",
+            "小鸡"
+          ],
+          "answer": "下面",
+          "q": "小羊在小鸡的下面",
+          "say": "黄色格子里的小羊，在蓝色格子里小鸡的哪一边？",
+          "after": "小羊在小鸡的下面。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            2,
+            2
+          ],
+          "b": [
+            2,
+            3
+          ],
+          "names": [
+            "小猪",
+            "小鱼"
+          ],
+          "answer": "左边",
+          "q": "小猪在小鱼的左边",
+          "say": "黄色格子里的小猪，在蓝色格子里小鱼的哪一边？",
+          "after": "小猪在小鱼的左边。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            1,
+            3
+          ],
+          "b": [
+            2,
+            3
+          ],
+          "names": [
+            "小马",
+            "小鱼"
+          ],
+          "answer": "上面",
+          "q": "小马在小鱼的上面",
+          "say": "黄色格子里的小马，在蓝色格子里小鱼的哪一边？",
+          "after": "小马在小鱼的上面。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        },
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            0,
+            0
+          ],
+          "b": [
+            0,
+            1
+          ],
+          "names": [
+            "兔子",
+            "猴子"
+          ],
+          "answer": "左边",
+          "q": "兔子在猴子的左边",
+          "say": "黄色格子里的兔子，在蓝色格子里猴子的哪一边？",
+          "after": "兔子在猴子的左边。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        }
+      ]
+    },
+    {
+      "id": "treasure",
+      "title": "神殿宝藏",
+      "icon": "sprite:chest_gold",
+      "shuffle": true,
+      "items": [
+        {
+          "type": "calc",
+          "q": "9-4=□",
+          "eq": "9-4=□",
+          "pad": 9,
+          "say": "九减四等于几？",
+          "hint": "可以数一数手指，或者想一想数的分与合。"
+        },
+        {
+          "type": "calc",
+          "q": "□+5=9",
+          "eq": "□+5=9",
+          "pad": 9,
+          "say": "几加五等于九？",
+          "after": "四加五等于九。",
+          "hint": "九可以分成几和五？"
+        },
+        {
+          "type": "calc",
+          "q": "6<□<8",
+          "eq": "6<□<8",
+          "pad": 9,
+          "say": "六小于几，几又小于八？",
+          "accept": [
+            "6<7<8"
+          ],
+          "difficulty": 3,
+          "after": "六小于七，七小于八。",
+          "hint": "这个数比六大，又比八小。"
+        },
+        {
+          "type": "mathExplore",
+          "mode": "track",
+          "q": "从小到大数，十前面的一个数是几？",
+          "mark": [
+            10
+          ],
+          "answer": [
+            9
+          ],
+          "say": "从小到大数，十前面的一个数是几？",
+          "after": "十前面是九。",
+          "hint": "从左往右，数越来越大。前面的数小一，后面的数大一。",
+          "difficulty": 2
+        },
+        {
+          "type": "calc",
+          "q": "9-5=4",
+          "eq": "□○□=□",
+          "signs": [
+            "+",
+            "-"
+          ],
+          "pad": 9,
+          "scene": {
+            "groups": [
+              {
+                "art": "dolphin",
+                "n": 5
+              },
+              {
+                "art": "dolphin",
+                "hide": true
+              }
+            ],
+            "total": "9只"
+          },
+          "accept": [
+            "9-5=4"
+          ],
+          "say": "一共有九只海豚，水面上有五只。水里还有几只？",
+          "after": "九减五等于四，水里有四只。",
+          "hint": "知道一共有多少和其中一部分，求另一部分用减法；两部分合起来用加法。",
+          "difficulty": 3
+        },
+        {
+          "type": "mathExplore",
+          "mode": "grid",
+          "grid": [
+            [
+              "rabbit",
+              "monkey_happy",
+              "cat",
+              "panda"
+            ],
+            [
+              "chicken",
+              "cow",
+              "frog",
+              "horse"
+            ],
+            [
+              "sheep",
+              "goose",
+              "pig",
+              "fish"
+            ]
+          ],
+          "a": [
+            2,
+            1
+          ],
+          "b": [
+            2,
+            0
+          ],
+          "names": [
+            "大鹅",
+            "小羊"
+          ],
+          "answer": "右边",
+          "q": "大鹅在小羊的右边",
+          "say": "黄色格子里的大鹅，在蓝色格子里小羊的哪一边？",
+          "after": "大鹅在小羊的右边。",
+          "hint": "先找到蓝色格子，再看黄色格子在它的上、下、左、右哪一边。",
+          "difficulty": 2
+        }
+      ]
+    }
+  ]
+}

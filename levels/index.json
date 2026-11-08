@@ -1,5 +1,16 @@
 [
   {
+    "id": "math-week10",
+    "chapter": 6,
+    "subject": "数学",
+    "title": "海底神殿",
+    "subtitle": "第10周 · 10以内加减、数的顺序、看图列式、位置",
+    "date": "2026-11-08",
+    "block": "tube_coral",
+    "path": "levels/math-week10/level.json",
+    "audioProfile": "jqx-b"
+  },
+  {
     "id": "review-ch5",
     "chapter": 5,
     "subject": "语文+英语",

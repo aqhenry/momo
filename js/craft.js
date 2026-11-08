@@ -18,6 +18,7 @@ export const RECIPES = [
   { out: 'note_block', in: { planks: 8, redstone_ore: 1 } },
   { out: 'chiseled_bookshelf', in: { bookshelf: 3, planks: 3 } },
   { out: 'enchanting_table', in: { bookshelf: 1, diamond: 2, obsidian: 4 } },
+  { out: 'sea_lantern', in: { dark_prismarine: 4, lamp: 1 } },
 ];
 
 // Achievement blocks, shown on the workbench page so he can see what he's working towards.
@@ -25,6 +26,7 @@ export const ACHIEVEMENTS = [
   { id: 'chile', block: 'sky_terracotta', title: '会背《敕勒歌》' },
   { id: 'yongliu', block: 'jade_terracotta', title: '会背《咏柳》' },
   { id: 'readygo', block: 'jukebox', title: '英语 Ready Go 三单元指读' },
+  { id: 'temple', block: 'conduit', title: '闯过海底神殿全部关卡' },
 ];
 
 const have = t => store.state.inventory[t] || 0;

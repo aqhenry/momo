@@ -106,6 +106,13 @@ export const BLOCKS = {
   jukebox:            { name: '唱片机', rarity: 3, obtain: 'achieve' },
   chiseled_bookshelf: { name: '雕纹书架', rarity: 3, obtain: 'craft' },
   enchanting_table:   { name: '附魔台', rarity: 4, obtain: 'craft', glow: true },
+
+  // 第六大关 · 海底神殿（数学）
+  sponge:          { name: '海绵', rarity: 1, set: 'ocean' },
+  dried_kelp:      { name: '干海带块', rarity: 1, set: 'ocean' },
+  tube_coral:      { name: '管珊瑚块', rarity: 2, set: 'ocean' },
+  dark_prismarine: { name: '暗海晶石', rarity: 2, set: 'ocean' },
+  conduit:         { name: '潮涌核心', rarity: 4, obtain: 'achieve', glow: true, clear: true },
 };
 
 // blocks of a rarity that can drop in an adventure using `set` (base blocks always can)
@@ -432,6 +439,27 @@ Object.assign(PAINT, {
   enchanting_table: (px, r) => {
     each((x, y) => px(x, y, y < 4 ? shade([170, 30, 40], 0.9 + r() * 0.15) : r() < 0.08 ? 'rgb(110,60,160)' : shade([24, 16, 38], 0.8 + r() * 0.5)));
     for (let x = 0; x < 16; x++) px(x, 4, '#e6c45a');
+  },
+});
+
+Object.assign(PAINT, {
+  sponge: (px, r) => each((x, y) => px(x, y, (x * 7 + y * 5) % 9 === 0 || r() < 0.06 ? 'rgb(150,140,40)' : shade([206, 196, 72], 0.88 + r() * 0.2))),
+  dried_kelp: (px, r) => each((x, y) => px(x, y, (y === 2 || y === 13) ? '#2b2a1a' : shade([60, 70, 40], (x % 4 === 1 ? 0.75 : 1) * (0.88 + r() * 0.2)))),
+  tube_coral: (px, r) => each((x, y) => {
+    const ring = ((x % 5 - 2) ** 2 + (y % 5 - 2) ** 2) <= 1;
+    px(x, y, ring ? '#a8d0ff' : shade([50, 90, 220], 0.85 + r() * 0.25));
+  }),
+  dark_prismarine: (px, r) => each((x, y) => {
+    const seam = x === 0 || y === 0 || x === 15 || y === 15 || x === 8 || y === 8;
+    px(x, y, seam ? '#1b3b33' : shade([52, 92, 76], 0.85 + r() * 0.25));
+  }),
+  conduit: px => {
+    clearPane(px, '#9fe6e6', 'rgba(140,220,230,0.25)');
+    each((x, y) => {
+      const d = Math.max(Math.abs(x - 7.5), Math.abs(y - 7.5));
+      if (d < 5.5 && d > 3.5) px(x, y, (x + y) % 3 ? '#b88a4a' : '#7a5530');
+      if (d < 2.5) px(x, y, d < 1.5 ? '#ffffff' : '#5fe0f0');
+    });
   },
 });
 

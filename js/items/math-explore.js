@@ -67,6 +67,33 @@ export function render(root, item, ctx) {
         found.add(i); b.disabled=true; b.classList.add('right'); b.append(spriteEl('check'));sfx.place();if(found.size===total)right();
       }},shapeEl(s.shape,s.color));grid.append(b);
     });root.append(grid);
+  } else if (item.mode === 'track') {
+    // number track: tap the number(s) asked for; `mark` numbers are lit up as clues
+    const want = new Set(item.answer), found = new Set();
+    const track = h('div.num-track');
+    for (let n = item.from ?? 0; n <= (item.to ?? 10); n++) {
+      const marked = (item.mark || []).includes(n);
+      const b = h(`button.num-tile${marked ? '.marked' : ''}`, { 'aria-label': String(n), onclick: () => {
+        if (locked || marked || found.has(n)) return;
+        if (!want.has(n)) { wrong(n); return; }
+        found.add(n); b.classList.add('right'); sfx.place();
+        if (found.size === want.size) right();
+      } }, String(n));
+      track.append(b);
+    }
+    root.append(track, h('div.seat-direction', '小 → 大'));
+  } else if (item.mode === 'grid') {
+    // animal flats: which way is A (yellow) from B (blue)?
+    const grid = h('div.pos-grid');
+    item.grid.forEach((row, r) => row.forEach((art, c) => {
+      const tag = r === item.a[0] && c === item.a[1] ? '.pos-a' : r === item.b[0] && c === item.b[1] ? '.pos-b' : '';
+      grid.append(h(`div.pos-cell${tag}`, mathArt(art)));
+    }));
+    const names = ['上面', '下面', '左边', '右边'], arrows = ['↑', '↓', '←', '→'];
+    const choices = h('div.explore-answers', names.map((name, i) => h('button.mc-btn.pos-btn', { onclick: () => {
+      if (locked) return; if (name === item.answer) right(); else wrong(name);
+    } }, h('span.pos-arrow', arrows[i]), name)));
+    root.append(h('div.pos-question', h('span.pos-a-tag', item.names[0]), ' 在 ', h('span.pos-b-tag', item.names[1]), ' 的？'), h('div.pos-house', h('div.pos-roof'), grid), choices);
   } else if(item.mode === 'seats') {
     root.append(h('div.seat-front',spriteEl('compass'),'前面'));
     const grid=h('div.seat-grid');

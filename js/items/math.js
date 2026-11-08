@@ -32,12 +32,14 @@ function groupEl(art, n, { cross = 0, gone = 0, goneArt, tap = false, size } = {
 export function sceneEl(sc) {
   if (!sc) return null;
   if (sc.groups) {
+    // a group with `hide` is a closed box with "?" (the unknown part); `total` labels the whole under a brace
     const row = h('div.m-scene');
     sc.groups.forEach((gr, i) => {
-      if (i) row.append(h('div.m-op', sc.op || '+'));
-      row.append(groupEl(gr.art, gr.n, gr));
+      if (i && sc.op) row.append(h('div.m-op', sc.op));
+      row.append(gr.hide ? h('div.m-group.m-unknown', icon(gr.art), h('span.m-q', '?')) : groupEl(gr.art, gr.n, gr));
     });
-    return row;
+    if (sc.total === undefined) return row;
+    return h('div.m-whole', row, h('div.m-brace'), h('div.m-total', String(sc.total)));
   }
   if (sc.pairs) {
     const max = Math.max(...sc.pairs.map(p => p.n));

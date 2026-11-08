@@ -5,7 +5,8 @@
   "levels": [
     "yuwen-jqx",
     "math-week9",
-    "review-ch5"
+    "review-ch5",
+    "math-week10"
   ],
   "check_models": [
     "qwen/qwen3.8-omni-flash",

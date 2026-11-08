@@ -318,5 +318,21 @@
   "yurt": {
     "zh": "蒙古包",
     "prompt": "round white yurt tent with a domed roof and a small door, on green grass"
+  },
+  "bun": {
+    "zh": "包子",
+    "prompt": "steamed white bun"
+  },
+  "dolphin": {
+    "zh": "海豚",
+    "prompt": "friendly blue dolphin, side view"
+  },
+  "lollipop": {
+    "zh": "棒棒糖",
+    "prompt": "round pink swirl lollipop"
+  },
+  "peach": {
+    "zh": "桃子",
+    "prompt": "pink peach with two green leaves"
   }
 }
