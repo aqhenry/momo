@@ -28,6 +28,7 @@ export const S = {
   combo: '三连击！经验加倍！',
   levelUp: '经验满啦，升级！送你一个方块！',
   achieve: '成就达成！你得到了一个专属方块！',
+  writeConfirm: '是这个数吗？对就点它，不对就擦掉重写。',
   pointNext: '从左往右，一个词一个词地点。',
   epicFind: '哇，开到了紫色的宝贝方块！',
   legendFind: '太厉害了，传说方块！',

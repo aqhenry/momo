@@ -3,6 +3,8 @@ import { h } from '../ui.js';
 import { artEl } from '../pics.js';
 import { spriteEl } from '../sprites.js';
 import { sfx } from '../audio.js';
+import { writePad } from '../writepad.js';
+import { S } from '../phrases.js';
 
 export function mathArt(name) {
   const drawings = {
@@ -23,6 +25,7 @@ function shapeEl(shape, color = 'blue') {
   for (const [k, v] of Object.entries(props)) el.setAttribute(k, v);
   el.setAttribute('fill', color === 'blue' ? '#3277bf' : '#cc4840'); el.setAttribute('stroke', '#253542'); el.setAttribute('stroke-width', '3'); svg.append(el); return svg;
 }
+const shakeEl = el => { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); };
 export function render(root, item, ctx) {
   root.classList.add('math-explore');
   let locked = false;
@@ -71,6 +74,32 @@ export function render(root, item, ctx) {
     // number track: tap the number(s) asked for; `mark` numbers are lit up as clues
     const want = new Set(item.answer), found = new Set();
     const track = h('div.num-track');
+    if (ctx.write) {
+      // the asked-for tiles are "?" boxes, filled left to right by writing
+      const holes = [];
+      for (let n = item.from ?? 0; n <= (item.to ?? 10); n++) {
+        const marked = (item.mark || []).includes(n), hole = want.has(n);
+        const t = h(`div.num-tile${marked ? '.marked' : ''}${hole ? '.hole' : ''}`, hole ? '?' : String(n));
+        if (hole) holes.push({ n, t });
+        track.append(t);
+      }
+      holes[0].t.classList.add('now');
+      let k = 0;
+      const pad = writePad(v => {
+        if (locked || v === 'back') return;
+        const hole = holes[k];
+        if (Number(v) !== hole.n) {
+          hole.t.textContent = v; hole.t.classList.add('wrong'); shakeEl(hole.t); wrong(v);
+          setTimeout(() => { hole.t.textContent = '?'; hole.t.classList.remove('wrong'); }, 900);
+          return;
+        }
+        hole.t.textContent = v; hole.t.classList.remove('now'); hole.t.classList.add('right'); sfx.place();
+        if (++k === holes.length) right(); else holes[k].t.classList.add('now');
+      }, { expect: () => [String(holes[k]?.n)], say: () => ctx.say(S.writeConfirm) });
+      root.classList.add('write-body');
+      root.append(h('div.m-write', h('div.m-write-left', track, h('div.seat-direction', '小 → 大')), pad));
+      return;
+    }
     for (let n = item.from ?? 0; n <= (item.to ?? 10); n++) {
       const marked = (item.mark || []).includes(n);
       const b = h(`button.num-tile${marked ? '.marked' : ''}`, { 'aria-label': String(n), onclick: () => {

@@ -6,6 +6,8 @@
 import { h, shake, promptEl, wait } from '../ui.js';
 import { sfx } from '../audio.js';
 import { mathArt } from './math-explore.js';
+import { writePad } from '../writepad.js';
+import { S } from '../phrases.js';
 
 // ---------- pictures ----------
 function icon(name) {
@@ -94,17 +96,39 @@ export function renderCalc(root, item, ctx) {
   });
   const hasSign = blanks.some(b => b.kind === 'sign');
   const signs = item.signs || (tokens.includes('=') ? ['>', '<', '='] : ['+', '-']);
-  const numPad = blanks.some(b => b.kind === 'num') ? numpad(item.pad ?? 5, key) : null;
+  const hasNum = blanks.some(b => b.kind === 'num');
+  const numPad = !hasNum ? null : ctx.write ? writePad(key, { expect: expectHere, say: () => ctx.say(S.writeConfirm) }) : numpad(item.pad ?? 5, key);
   const sgnPad = hasSign ? signpad(signs, key) : null;
 
   const scene = sceneEl(item.scene);
-  root.append(promptEl(item.prompt, ctx));
-  if (scene) root.append(h('div.frame.m-frame', scene));
-  root.append(eqEl, h('div.m-pads', sgnPad, numPad));
+  if (ctx.write && numPad) {
+    // writing layout: picture + equation on the left, the big writing box on the right
+    root.classList.add('write-body');
+    root.append(h('div.m-write', h('div.m-write-left', promptEl(item.prompt, ctx), scene ? h('div.frame.m-frame', scene) : null, eqEl, sgnPad), numPad));
+  } else {
+    root.append(promptEl(item.prompt, ctx));
+    if (scene) root.append(h('div.frame.m-frame', scene));
+    root.append(eqEl, h('div.m-pads', sgnPad, numPad));
+  }
   let busy = false;
   paint();
 
   function next() { return blanks.find(b => b.val === ''); }
+  // values that would be right in the current blank (lets the writing pad trust a so-so read of the right answer)
+  function expectHere() {
+    const n = next();
+    if (!n || n.kind !== 'num') return null;
+    const filledAt = v => tokens.map((t, i) => (i === n.i ? v : blanks.find(b => b.i === i)?.val || t));
+    if (blanks.filter(b => b.val === '').length === 1) {
+      const vals = [];
+      for (let v = 0; v <= 20; v++) {
+        const f = filledAt(String(v));
+        if (item.accept ? item.accept.includes(f.join('')) : isTrue(f)) vals.push(String(v));
+      }
+      return vals;
+    }
+    return item.accept ? [...new Set(item.accept.map(a => a.match(TOKEN)[n.i]))] : null;
+  }
   function paint() {
     const n = next();
     blanks.forEach(b => {
@@ -167,7 +191,12 @@ export function renderCraft(root, item, ctx) {
     h('div.m-arrow', '➜'),
     st);
   const target = { a: sa, b: sb, total: st }[item.blank];
-  root.append(promptEl(item.prompt, ctx), h('div.mc-panel.m-table', h('div.panel-title', '合成台'), table), numpad(item.pad ?? 5, key));
+  const table2 = h('div.mc-panel.m-table', h('div.panel-title', '合成台'), table);
+  if (ctx.write) {
+    root.classList.add('write-body');
+    root.append(h('div.m-write', h('div.m-write-left', promptEl(item.prompt, ctx), table2),
+      writePad(key, { expect: () => [String(want)], say: () => ctx.say(S.writeConfirm) })));
+  } else root.append(promptEl(item.prompt, ctx), table2, numpad(item.pad ?? 5, key));
   let busy = false;
 
   async function key(k) {

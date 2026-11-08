@@ -278,6 +278,7 @@ async function screenPlay(levelId, stageId) {
     let attempts = 0, solved = false;
     const ctx = {
       practice,
+      write: level.inputMode === 'write',
       speech: level.speech || {},
       say: (t, fallback) => say(t, { fallback }),
       wrong(got, hint) {
@@ -332,7 +333,8 @@ async function screenPlay(levelId, stageId) {
     setTimeout(() => {
       if (!body.isConnected || current !== items[i] || paused) return;
       const guide = practice && (i === 0 || items[i - 1].type !== current.type)
-        ? current.type === 'dictation' ? level.speech.letters : current.type === 'pinyinLab' ? level.speech.labGuide : null
+        ? current.type === 'dictation' ? level.speech.letters : current.type === 'pinyinLab' ? level.speech.labGuide
+          : level.inputMode === 'write' && i === 0 && ['calc', 'craft'].includes(current.type) ? level.speech.write : null
         : null;
       say([current.say, guide]);
     }, 350);
