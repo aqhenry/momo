@@ -11,6 +11,11 @@ const fresh = () => ({
   totalBlocks: 0,
   xp: 0,          // all XP ever earned (player level comes from this, see rewards.js levelOf)
   achievements: {},  // achievement id -> date
+  items: {},      // workbench materials (stick, iron_ingot) -> count
+  tools: {},      // pickaxes owned -> date (they unlock recipe tiers)
+  furnace: null,  // { job: index into SMELT, start: xp when loaded }
+  trophies: {},   // trophy id -> tiers claimed (0..3)
+  stats: { crafted: 0, smelted: 0 },
 });
 
 let state = load();
@@ -20,6 +25,7 @@ function load() {
     const raw = localStorage.getItem(KEY);
     if (raw) {
       const s = { ...fresh(), ...JSON.parse(raw) };
+      s.stats = { crafted: 0, smelted: 0, ...s.stats };
       // anything already owned counts as found
       for (const t of Object.keys(s.inventory)) s.found[t] ||= new Date().toISOString();
       return s;
@@ -95,12 +101,27 @@ export const store = {
     return true;
   },
 
-  // crafting: take every input, give the output. null if something is missing, else whether the output is new.
-  craft(inputs, out) {
-    if (Object.entries(inputs).some(([t, n]) => (state.inventory[t] || 0) < n)) return null;
-    for (const [t, n] of Object.entries(inputs)) state.inventory[t] -= n;
-    return this.addBlock(out);
+  // workbench: inputs/outputs are block types or material keys (anything not a block lives in `items`)
+  count(t, isBlock) {
+    return (isBlock ? state.inventory[t] : state.items[t]) || 0;
   },
+  // take every input; false (and nothing taken) if something is missing
+  spend(inputs, isBlock) {
+    if (Object.entries(inputs).some(([t, n]) => this.count(t, isBlock(t)) < n)) return false;
+    for (const [t, n] of Object.entries(inputs)) {
+      if (isBlock(t)) state.inventory[t] -= n; else state.items[t] -= n;
+    }
+    save();
+    return true;
+  },
+  gainItem(t, n = 1) {
+    state.items[t] = (state.items[t] || 0) + n;
+    save();
+  },
+  setTool(id) { state.tools[id] = new Date().toISOString(); save(); },
+  setFurnace(f) { state.furnace = f; save(); },
+  bump(stat, n = 1) { state.stats[stat] = (state.stats[stat] || 0) + n; save(); },
+  claimTrophy(id) { state.trophies[id] = (state.trophies[id] || 0) + 1; save(); },
 
   setWorld3d(world) {
     state.world3d = world;

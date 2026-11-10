@@ -1,4 +1,5 @@
 // 写汉字: trace the character stroke by stroke in a 田字格 (Hanzi Writer quiz mode).
+// `outline: false` is 听写: nothing is shown, he writes from memory; a wrong stroke twice flashes a hint.
 import { h, promptEl } from '../ui.js';
 
 const loader = (char, done, fail) =>
@@ -15,13 +16,13 @@ export function render(root, item, ctx) {
 
   const names = item.strokes || [];
   const status = h('div.stroke-status', names.length ? `一共 ${names.length} 笔` : '');
-  const demoBtn = h('button.mc-btn.small', { onclick: demo }, '看示范');
+  const demoBtn = h('button.mc-btn.small', { onclick: demo }, item.outline === false ? '提示' : '看示范');
 
   root.append(promptEl(item.prompt, ctx), h('div.stroke-area', box, h('div.stroke-side', status, demoBtn)));
 
   const writer = window.HanziWriter.create(target, item.char, {
     width: size, height: size, padding: 10,
-    showCharacter: false, showOutline: true,
+    showCharacter: false, showOutline: item.outline !== false,
     strokeColor: '#222', outlineColor: '#d8d8d8', drawingColor: '#1d6fe0', highlightColor: '#5aa83a',
     drawingWidth: 28, showHintAfterMisses: 2, strokeAnimationSpeed: 1, delayBetweenStrokes: 400,
     charDataLoader: loader,

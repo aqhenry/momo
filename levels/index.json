@@ -1,5 +1,16 @@
 [
   {
+    "id": "yuwen-u12",
+    "chapter": 7,
+    "subject": "语文",
+    "title": "冰雪拼音堡",
+    "subtitle": "第一二单元 · 拼音、音节词、认字写字",
+    "date": "2026-11-10",
+    "block": "blue_ice",
+    "path": "levels/yuwen-u12/level.json",
+    "audioProfile": "jqx-b"
+  },
+  {
     "id": "math-week10",
     "chapter": 6,
     "subject": "数学",

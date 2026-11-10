@@ -1,0 +1,1763 @@
+{
+  "id": "yuwen-u12",
+  "title": "冰雪拼音堡",
+  "blockSet": "snow",
+  "audioProfile": "jqx-b",
+  "rewardPolicy": "practice",
+  "note": "语文第一、二单元知识清单：单韵母和声母（认读+听写）、音节词（认读+听写，注意轻声）、会认字、会写字（听写）",
+  "intro": "墨然，欢迎来到冰雪拼音堡！今天复习第一、二单元：认韵母和声母，读写音节词，还要认字、写字。会听写的字，能换来城堡里的宝贝方块哦！",
+  "dictation": {
+    "initials": [
+      "b",
+      "p",
+      "m",
+      "f",
+      "d",
+      "t",
+      "n",
+      "l"
+    ],
+    "vowels": [
+      "a",
+      "o",
+      "e",
+      "i",
+      "u",
+      "ü"
+    ],
+    "bare": true
+  },
+  "paperStage": "words-write",
+  "speech": {
+    "letters": "先选声母，再选韵母。拼好了，点绿色箭头。",
+    "chooseTone": "现在选一个声调，再点绿色勾勾。",
+    "nextSyllable": "这个音节拼好了，接着拼下一个。",
+    "combo": "你又完成了三题，经验加倍！",
+    "pause": "休息一下吗？点绿色箭头继续玩，点地图回去。"
+  },
+  "achievements": [
+    {
+      "id": "u12-pinyin",
+      "block": "lodestone",
+      "title": "拼音听写过关",
+      "stages": [
+        "finals-write",
+        "words-write"
+      ]
+    },
+    {
+      "id": "u12-hanzi",
+      "block": "respawn_anchor",
+      "title": "十八个字全会写",
+      "stages": [
+        "hanzi-dict1",
+        "hanzi-dict2"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "finals-read",
+      "title": "认单韵母",
+      "icon": "text:ɑ",
+      "items": [
+        {
+          "type": "choice",
+          "q": "认读 ǎ",
+          "source": "单韵母 · 会认读",
+          "say": "听一听：ǎ。它是哪一个？",
+          "options": [
+            {
+              "py": "ā",
+              "grid": true
+            },
+            {
+              "py": "á",
+              "grid": true
+            },
+            {
+              "py": "ǎ",
+              "grid": true
+            },
+            {
+              "py": "à",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 2,
+          "after": "ǎ，第三声。",
+          "hint": "听声调：一声平，二声扬，三声拐弯，四声降。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 ó",
+          "source": "单韵母 · 会认读",
+          "say": "听一听：ó。它是哪一个？",
+          "options": [
+            {
+              "py": "ō",
+              "grid": true
+            },
+            {
+              "py": "ó",
+              "grid": true
+            },
+            {
+              "py": "ǒ",
+              "grid": true
+            },
+            {
+              "py": "ò",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 1,
+          "after": "ó，第二声。",
+          "hint": "听声调：一声平，二声扬，三声拐弯，四声降。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 è",
+          "source": "单韵母 · 会认读",
+          "say": "听一听：è。它是哪一个？",
+          "options": [
+            {
+              "py": "ē",
+              "grid": true
+            },
+            {
+              "py": "é",
+              "grid": true
+            },
+            {
+              "py": "ě",
+              "grid": true
+            },
+            {
+              "py": "è",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 3,
+          "after": "è，第四声。",
+          "hint": "听声调：一声平，二声扬，三声拐弯，四声降。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 ī",
+          "source": "单韵母 · 会认读",
+          "say": "听一听：ī。它是哪一个？",
+          "options": [
+            {
+              "py": "ī",
+              "grid": true
+            },
+            {
+              "py": "í",
+              "grid": true
+            },
+            {
+              "py": "ǐ",
+              "grid": true
+            },
+            {
+              "py": "ì",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 0,
+          "after": "ī，第一声。",
+          "hint": "听声调：一声平，二声扬，三声拐弯，四声降。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 ǔ",
+          "source": "单韵母 · 会认读",
+          "say": "听一听：ǔ。它是哪一个？",
+          "options": [
+            {
+              "py": "ū",
+              "grid": true
+            },
+            {
+              "py": "ú",
+              "grid": true
+            },
+            {
+              "py": "ǔ",
+              "grid": true
+            },
+            {
+              "py": "ù",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 2,
+          "after": "ǔ，第三声。",
+          "hint": "听声调：一声平，二声扬，三声拐弯，四声降。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 ǜ",
+          "source": "单韵母 · 会认读",
+          "say": "听一听：ǜ。它是哪一个？",
+          "options": [
+            {
+              "py": "ǖ",
+              "grid": true
+            },
+            {
+              "py": "ǘ",
+              "grid": true
+            },
+            {
+              "py": "ǚ",
+              "grid": true
+            },
+            {
+              "py": "ǜ",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 3,
+          "after": "ǜ，第四声。",
+          "hint": "听声调：一声平，二声扬，三声拐弯，四声降。"
+        }
+      ]
+    },
+    {
+      "id": "finals-write",
+      "title": "听写单韵母",
+      "icon": "sprite:speaker",
+      "shuffle": true,
+      "items": [
+        {
+          "type": "dictation",
+          "q": "听写 ǎ",
+          "word": "ǎ",
+          "source": "单韵母 · 会听写",
+          "say": "听写单韵母：ǎ。",
+          "hint": "再听一次，先找到韵母，再选声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 ó",
+          "word": "ó",
+          "source": "单韵母 · 会听写",
+          "say": "听写单韵母：ó。",
+          "hint": "再听一次，先找到韵母，再选声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 è",
+          "word": "è",
+          "source": "单韵母 · 会听写",
+          "say": "听写单韵母：è。",
+          "hint": "再听一次，先找到韵母，再选声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 ī",
+          "word": "ī",
+          "source": "单韵母 · 会听写",
+          "say": "听写单韵母：ī。",
+          "hint": "再听一次，先找到韵母，再选声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 ù",
+          "word": "ù",
+          "source": "单韵母 · 会听写",
+          "say": "听写单韵母：ù。",
+          "hint": "再听一次，先找到韵母，再选声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 ǚ",
+          "word": "ǚ",
+          "source": "单韵母 · 会听写",
+          "say": "听写单韵母：ǚ。",
+          "hint": "再听一次，先找到韵母，再选声调。"
+        }
+      ]
+    },
+    {
+      "id": "initials",
+      "title": "声母 b p m f d t n l",
+      "icon": "text:b",
+      "items": [
+        {
+          "type": "letterHunt",
+          "q": "找出所有 b",
+          "title": "找一找声母",
+          "target": "b",
+          "letters": [
+            "b",
+            "b",
+            "b",
+            "d",
+            "d",
+            "p",
+            "q",
+            "p",
+            "d",
+            "b",
+            "q",
+            "p"
+          ],
+          "source": "声母 · 会认读",
+          "say": "请找到所有读 bō 的声母，找到一个就点一下。",
+          "after": "找齐啦！bō。",
+          "hint": "看清圆圈在左边还是右边，竖线在上面还是下面。"
+        },
+        {
+          "type": "letterHunt",
+          "q": "找出所有 d",
+          "title": "找一找声母",
+          "target": "d",
+          "letters": [
+            "d",
+            "d",
+            "d",
+            "b",
+            "b",
+            "p",
+            "q",
+            "b",
+            "p",
+            "q",
+            "d",
+            "b"
+          ],
+          "source": "声母 · 会认读",
+          "say": "请找到所有读 dē 的声母，找到一个就点一下。",
+          "after": "找齐啦！dē。",
+          "hint": "看清圆圈在左边还是右边，竖线在上面还是下面。"
+        },
+        {
+          "type": "letterHunt",
+          "q": "找出所有 p",
+          "title": "找一找声母",
+          "target": "p",
+          "letters": [
+            "p",
+            "p",
+            "p",
+            "q",
+            "b",
+            "d",
+            "q",
+            "b",
+            "d",
+            "q",
+            "b",
+            "d"
+          ],
+          "source": "声母 · 会认读",
+          "say": "请找到所有读 pō 的声母，找到一个就点一下。",
+          "after": "找齐啦！pō。",
+          "hint": "看清圆圈在左边还是右边，竖线在上面还是下面。"
+        },
+        {
+          "type": "choice",
+          "q": "听写声母 m",
+          "source": "声母 · 会听写",
+          "say": "听写声母，听：mō。是哪一个？",
+          "options": [
+            {
+              "py": "b",
+              "grid": true
+            },
+            {
+              "py": "p",
+              "grid": true
+            },
+            {
+              "py": "m",
+              "grid": true
+            },
+            {
+              "py": "f",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 2,
+          "after": "对啦，就是这个声母！",
+          "hint": "再听一次：mō。"
+        },
+        {
+          "type": "choice",
+          "q": "听写声母 f",
+          "source": "声母 · 会听写",
+          "say": "听写声母，听：fō。是哪一个？",
+          "options": [
+            {
+              "py": "b",
+              "grid": true
+            },
+            {
+              "py": "p",
+              "grid": true
+            },
+            {
+              "py": "m",
+              "grid": true
+            },
+            {
+              "py": "f",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 3,
+          "after": "对啦，就是这个声母！",
+          "hint": "再听一次：fō。"
+        },
+        {
+          "type": "choice",
+          "q": "听写声母 t",
+          "source": "声母 · 会听写",
+          "say": "听写声母，听：tē。是哪一个？",
+          "options": [
+            {
+              "py": "d",
+              "grid": true
+            },
+            {
+              "py": "t",
+              "grid": true
+            },
+            {
+              "py": "n",
+              "grid": true
+            },
+            {
+              "py": "l",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 1,
+          "after": "对啦，就是这个声母！",
+          "hint": "再听一次：tē。"
+        },
+        {
+          "type": "choice",
+          "q": "听写声母 n",
+          "source": "声母 · 会听写",
+          "say": "听写声母，听：nē。是哪一个？",
+          "options": [
+            {
+              "py": "d",
+              "grid": true
+            },
+            {
+              "py": "t",
+              "grid": true
+            },
+            {
+              "py": "n",
+              "grid": true
+            },
+            {
+              "py": "l",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 2,
+          "after": "对啦，就是这个声母！",
+          "hint": "再听一次：nē。"
+        }
+      ]
+    },
+    {
+      "id": "qingsheng",
+      "title": "轻声词",
+      "icon": "sprite:bell",
+      "items": [
+        {
+          "type": "choice",
+          "q": "认读 bà ba",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "bà ba"
+          },
+          "options": [
+            {
+              "text": "爸爸",
+              "big": true
+            },
+            {
+              "text": "妈妈",
+              "big": true
+            },
+            {
+              "text": "婆婆",
+              "big": true
+            },
+            {
+              "text": "伯伯",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "爸爸！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 pó po",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "pó po"
+          },
+          "options": [
+            {
+              "text": "婆婆",
+              "big": true
+            },
+            {
+              "text": "伯伯",
+              "big": true
+            },
+            {
+              "text": "爸爸",
+              "big": true
+            },
+            {
+              "text": "弟弟",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "婆婆！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 dì di",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "dì di"
+          },
+          "options": [
+            {
+              "text": "弟弟",
+              "big": true
+            },
+            {
+              "text": "哥哥",
+              "big": true
+            },
+            {
+              "text": "地图",
+              "big": true
+            },
+            {
+              "text": "大地",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "弟弟！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 lǎ ba",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "lǎ ba"
+          },
+          "options": [
+            {
+              "text": "喇叭",
+              "big": true
+            },
+            {
+              "text": "枇杷",
+              "big": true
+            },
+            {
+              "text": "蜡笔",
+              "big": true
+            },
+            {
+              "text": "打靶",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "喇叭！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "爸爸 轻声",
+          "source": "音节词 · 注意轻声",
+          "say": "爸爸的拼音，哪个写对了？第二个爸读得轻轻的。",
+          "prompt": {
+            "text": "爸爸"
+          },
+          "options": [
+            {
+              "py": "bà ba",
+              "grid": true
+            },
+            {
+              "py": "bà bà",
+              "grid": true
+            },
+            {
+              "py": "bā ba",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "after": "bà ba。轻声不标声调。",
+          "hint": "第二个字读得又轻又短，不标声调。"
+        },
+        {
+          "type": "choice",
+          "q": "哥哥 轻声",
+          "source": "音节词 · 注意轻声",
+          "say": "哥哥的拼音，哪个写对了？",
+          "prompt": {
+            "text": "哥哥"
+          },
+          "options": [
+            {
+              "py": "gē ge",
+              "grid": true
+            },
+            {
+              "py": "gē gē",
+              "grid": true
+            },
+            {
+              "py": "gé ge",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "after": "gē ge。第二个哥读轻声。",
+          "hint": "第二个哥读得轻轻的，轻声不标声调。"
+        }
+      ]
+    },
+    {
+      "id": "words-read",
+      "title": "读音节词",
+      "icon": "sprite:book",
+      "items": [
+        {
+          "type": "choice",
+          "q": "认读 là bǐ",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "là bǐ"
+          },
+          "options": [
+            {
+              "text": "蜡笔",
+              "big": true
+            },
+            {
+              "text": "大米",
+              "big": true
+            },
+            {
+              "text": "理发",
+              "big": true
+            },
+            {
+              "text": "皮肤",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "là bǐ，蜡笔。",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 fú tī",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "fú tī"
+          },
+          "options": [
+            {
+              "text": "扶梯",
+              "big": true
+            },
+            {
+              "text": "父母",
+              "big": true
+            },
+            {
+              "text": "抚摸",
+              "big": true
+            },
+            {
+              "text": "地图",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "fú tī，扶梯。",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 mǎ lù",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "mǎ lù"
+          },
+          "options": [
+            {
+              "text": "马路",
+              "big": true
+            },
+            {
+              "text": "木马",
+              "big": true
+            },
+            {
+              "text": "母女",
+              "big": true
+            },
+            {
+              "text": "抹布",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "mǎ lù，马路。",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 ní tǔ",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "ní tǔ"
+          },
+          "options": [
+            {
+              "text": "泥土",
+              "big": true
+            },
+            {
+              "text": "题目",
+              "big": true
+            },
+            {
+              "text": "徒弟",
+              "big": true
+            },
+            {
+              "text": "大地",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "ní tǔ，泥土。",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 pù bù",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "pù bù"
+          },
+          "options": [
+            {
+              "text": "瀑布",
+              "big": true
+            },
+            {
+              "text": "爬坡",
+              "big": true
+            },
+            {
+              "text": "皮肤",
+              "big": true
+            },
+            {
+              "text": "抹布",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "pù bù，瀑布。",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 mǔ nǚ",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "mǔ nǚ"
+          },
+          "options": [
+            {
+              "text": "母女",
+              "big": true
+            },
+            {
+              "text": "父母",
+              "big": true
+            },
+            {
+              "text": "木马",
+              "big": true
+            },
+            {
+              "text": "马路",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "mǔ nǚ，母女。",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 mì mì",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "mì mì"
+          },
+          "options": [
+            {
+              "text": "秘密",
+              "big": true
+            },
+            {
+              "text": "枇杷",
+              "big": true
+            },
+            {
+              "text": "木马",
+              "big": true
+            },
+            {
+              "text": "大米",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "mì mì，秘密。",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 dǎ bǎ",
+          "source": "音节词 · 会认读",
+          "say": "读一读上面的拼音，它是哪个词？",
+          "prompt": {
+            "py": "dǎ bǎ"
+          },
+          "options": [
+            {
+              "text": "打靶",
+              "big": true
+            },
+            {
+              "text": "爬坡",
+              "big": true
+            },
+            {
+              "text": "喇叭",
+              "big": true
+            },
+            {
+              "text": "大地",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "dǎ bǎ，打靶。",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        }
+      ]
+    },
+    {
+      "id": "words-write",
+      "title": "听写音节词",
+      "icon": "sprite:quill",
+      "shuffleWithinPhase": true,
+      "items": [
+        {
+          "type": "dictation",
+          "q": "听写 爸爸",
+          "word": "bà ba",
+          "phase": 1,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：爸爸。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 妈妈",
+          "word": "mā ma",
+          "phase": 1,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：妈妈。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 弟弟",
+          "word": "dì di",
+          "phase": 1,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：弟弟。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 喇叭",
+          "word": "lǎ ba",
+          "phase": 1,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：喇叭。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 蜡笔",
+          "word": "là bǐ",
+          "phase": 2,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：蜡笔。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 大米",
+          "word": "dà mǐ",
+          "phase": 2,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：大米。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 泥土",
+          "word": "ní tǔ",
+          "phase": 2,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：泥土。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 木马",
+          "word": "mù mǎ",
+          "phase": 2,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：木马。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 瀑布",
+          "word": "pù bù",
+          "phase": 2,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：瀑布。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 理发",
+          "word": "lǐ fà",
+          "phase": 2,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：理发。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 母女",
+          "word": "mǔ nǚ",
+          "phase": 2,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：母女。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 爬坡",
+          "word": "pá pō",
+          "phase": 2,
+          "source": "音节词 · 会听写",
+          "say": "听写词语：爬坡。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        }
+      ]
+    },
+    {
+      "id": "hanzi-read",
+      "title": "认一认",
+      "icon": "sprite:eye",
+      "items": [
+        {
+          "type": "read",
+          "q": "读识字1-4",
+          "source": "会认字",
+          "title": "识字 1–4",
+          "lines": [
+            "天地人你我他",
+            "一二三四五上下",
+            "口耳目手足站坐",
+            "日月山川水火田禾"
+          ],
+          "py": [
+            "tiān dì rén nǐ wǒ tā",
+            "yī èr sān sì wǔ shàng xià",
+            "kǒu ěr mù shǒu zú zhàn zuò",
+            "rì yuè shān chuān shuǐ huǒ tián hé"
+          ],
+          "read": "天地人你我他一二三四五上下口耳目手足站坐日月山川水火田禾",
+          "say": "读一读这些字。不会读的，点一下听一听。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "read",
+          "q": "读园地和汉语拼音",
+          "source": "会认字",
+          "title": "语文园地 · 汉语拼音",
+          "lines": [
+            "六七八九十",
+            "爸妈大马路土",
+            "本学校班级姓名王"
+          ],
+          "py": [
+            "liù qī bā jiǔ shí",
+            "bà mā dà mǎ lù tǔ",
+            "běn xué xiào bān jí xìng míng wáng"
+          ],
+          "read": "六七八九十爸妈大马路土本学校班级姓名王",
+          "tapSay": {
+            "mǎ": "马，小马的马。"
+          },
+          "say": "再读一读这些字。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "认字 站",
+          "source": "会认字",
+          "say": "哪个是站字？站起来的站。",
+          "options": [
+            {
+              "text": "站",
+              "big": true
+            },
+            {
+              "text": "坐",
+              "big": true
+            },
+            {
+              "text": "足",
+              "big": true
+            },
+            {
+              "text": "立",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "对，站起来的站。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 坐",
+          "source": "会认字",
+          "say": "哪个是坐字？坐下的坐。",
+          "options": [
+            {
+              "text": "坐",
+              "big": true
+            },
+            {
+              "text": "站",
+              "big": true
+            },
+            {
+              "text": "生",
+              "big": true
+            },
+            {
+              "text": "土",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "对，坐下的坐。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 川",
+          "source": "会认字",
+          "say": "哪个是川字？山川的川。",
+          "options": [
+            {
+              "text": "川",
+              "big": true
+            },
+            {
+              "text": "山",
+              "big": true
+            },
+            {
+              "text": "三",
+              "big": true
+            },
+            {
+              "text": "水",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "对，山川的川。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 禾",
+          "source": "会认字",
+          "say": "哪个是禾字？禾苗的禾。",
+          "options": [
+            {
+              "text": "禾",
+              "big": true
+            },
+            {
+              "text": "木",
+              "big": true
+            },
+            {
+              "text": "米",
+              "big": true
+            },
+            {
+              "text": "田",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "对，禾苗的禾。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 我",
+          "source": "会认字",
+          "say": "哪个是我字？我们的我。",
+          "options": [
+            {
+              "text": "我",
+              "big": true
+            },
+            {
+              "text": "你",
+              "big": true
+            },
+            {
+              "text": "他",
+              "big": true
+            },
+            {
+              "text": "找",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "对，我们的我。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 校",
+          "source": "会认字",
+          "say": "哪个是校字？学校的校。",
+          "options": [
+            {
+              "text": "校",
+              "big": true
+            },
+            {
+              "text": "班",
+              "big": true
+            },
+            {
+              "text": "级",
+              "big": true
+            },
+            {
+              "text": "姓",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "对，学校的校。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 名",
+          "source": "会认字",
+          "say": "哪个是名字？名字的名。",
+          "options": [
+            {
+              "text": "名",
+              "big": true
+            },
+            {
+              "text": "各",
+              "big": true
+            },
+            {
+              "text": "姓",
+              "big": true
+            },
+            {
+              "text": "本",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "对，名字的名。",
+          "hint": "再看看字的样子。"
+        },
+        {
+          "type": "choice",
+          "q": "认字 路",
+          "source": "会认字",
+          "say": "哪个是路字？马路的路。",
+          "options": [
+            {
+              "text": "路",
+              "big": true
+            },
+            {
+              "text": "足",
+              "big": true
+            },
+            {
+              "text": "土",
+              "big": true
+            },
+            {
+              "text": "马",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "after": "对，马路的路。",
+          "hint": "再看看字的样子。"
+        }
+      ]
+    },
+    {
+      "id": "hanzi-trace",
+      "title": "描一描",
+      "icon": "sprite:quill",
+      "items": [
+        {
+          "type": "stroke",
+          "q": "描 耳",
+          "char": "耳",
+          "strokes": [
+            "横",
+            "竖",
+            "竖",
+            "横",
+            "横",
+            "提"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "ěr"
+          },
+          "say": "描一描：耳朵的耳。一共六笔，跟着灰色的笔画写。",
+          "after": "写好啦，耳！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 目",
+          "char": "目",
+          "strokes": [
+            "竖",
+            "横折",
+            "横",
+            "横",
+            "横"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "mù"
+          },
+          "say": "描一描：目光的目。一共五笔，跟着灰色的笔画写。",
+          "after": "写好啦，目！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 手",
+          "char": "手",
+          "strokes": [
+            "撇",
+            "横",
+            "横",
+            "竖钩"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "shǒu"
+          },
+          "say": "描一描：小手的手。一共四笔，跟着灰色的笔画写。",
+          "after": "写好啦，手！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 火",
+          "char": "火",
+          "strokes": [
+            "点",
+            "撇",
+            "撇",
+            "点"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "huǒ"
+          },
+          "say": "描一描：火车的火。一共四笔，跟着灰色的笔画写。",
+          "after": "写好啦，火！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 禾",
+          "char": "禾",
+          "strokes": [
+            "撇",
+            "横",
+            "竖",
+            "撇",
+            "点"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "hé"
+          },
+          "say": "描一描：禾苗的禾。一共五笔，跟着灰色的笔画写。",
+          "after": "写好啦，禾！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 六",
+          "char": "六",
+          "strokes": [
+            "点",
+            "横",
+            "撇",
+            "点"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "liù"
+          },
+          "say": "描一描：六个的六。一共四笔，跟着灰色的笔画写。",
+          "after": "写好啦，六！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 七",
+          "char": "七",
+          "strokes": [
+            "横",
+            "竖弯钩"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "qī"
+          },
+          "say": "描一描：七个的七。一共二笔，跟着灰色的笔画写。",
+          "after": "写好啦，七！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 九",
+          "char": "九",
+          "strokes": [
+            "撇",
+            "横折弯钩"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "jiǔ"
+          },
+          "say": "描一描：九个的九。一共二笔，跟着灰色的笔画写。",
+          "after": "写好啦，九！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 王",
+          "char": "王",
+          "strokes": [
+            "横",
+            "横",
+            "竖",
+            "横"
+          ],
+          "source": "会写字",
+          "prompt": {
+            "py": "wáng"
+          },
+          "say": "描一描：大王的王。一共四笔，跟着灰色的笔画写。",
+          "after": "写好啦，王！"
+        }
+      ]
+    },
+    {
+      "id": "hanzi-dict1",
+      "title": "听写汉字一",
+      "icon": "sprite:target",
+      "shuffle": true,
+      "items": [
+        {
+          "type": "stroke",
+          "q": "听写 一",
+          "char": "一",
+          "strokes": [
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：一二三的一。在田字格里写出来。",
+          "after": "写对了，一！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 二",
+          "char": "二",
+          "strokes": [
+            "横",
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：一二三的二。在田字格里写出来。",
+          "after": "写对了，二！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 三",
+          "char": "三",
+          "strokes": [
+            "横",
+            "横",
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：一二三的三。在田字格里写出来。",
+          "after": "写对了，三！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 上",
+          "char": "上",
+          "strokes": [
+            "竖",
+            "横",
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：上下的上。在田字格里写出来。",
+          "after": "写对了，上！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 口",
+          "char": "口",
+          "strokes": [
+            "竖",
+            "横折",
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：口水的口。在田字格里写出来。",
+          "after": "写对了，口！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 耳",
+          "char": "耳",
+          "strokes": [
+            "横",
+            "竖",
+            "竖",
+            "横",
+            "横",
+            "提"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：耳朵的耳。在田字格里写出来。",
+          "after": "写对了，耳！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 目",
+          "char": "目",
+          "strokes": [
+            "竖",
+            "横折",
+            "横",
+            "横",
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：目光的目。在田字格里写出来。",
+          "after": "写对了，目！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 手",
+          "char": "手",
+          "strokes": [
+            "撇",
+            "横",
+            "横",
+            "竖钩"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：小手的手。在田字格里写出来。",
+          "after": "写对了，手！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 日",
+          "char": "日",
+          "strokes": [
+            "竖",
+            "横折",
+            "横",
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：日子的日。在田字格里写出来。",
+          "after": "写对了，日！",
+          "difficulty": 3
+        }
+      ]
+    },
+    {
+      "id": "hanzi-dict2",
+      "title": "听写汉字二",
+      "icon": "sprite:chest_gold",
+      "shuffle": true,
+      "items": [
+        {
+          "type": "stroke",
+          "q": "听写 火",
+          "char": "火",
+          "strokes": [
+            "点",
+            "撇",
+            "撇",
+            "点"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：火车的火。在田字格里写出来。",
+          "after": "写对了，火！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 田",
+          "char": "田",
+          "strokes": [
+            "竖",
+            "横折",
+            "横",
+            "竖",
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：田地的田。在田字格里写出来。",
+          "after": "写对了，田！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 禾",
+          "char": "禾",
+          "strokes": [
+            "撇",
+            "横",
+            "竖",
+            "撇",
+            "点"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：禾苗的禾。在田字格里写出来。",
+          "after": "写对了，禾！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 六",
+          "char": "六",
+          "strokes": [
+            "点",
+            "横",
+            "撇",
+            "点"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：六个的六。在田字格里写出来。",
+          "after": "写对了，六！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 七",
+          "char": "七",
+          "strokes": [
+            "横",
+            "竖弯钩"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：七个的七。在田字格里写出来。",
+          "after": "写对了，七！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 八",
+          "char": "八",
+          "strokes": [
+            "撇",
+            "捺"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：八个的八。在田字格里写出来。",
+          "after": "写对了，八！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 十",
+          "char": "十",
+          "strokes": [
+            "横",
+            "竖"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：十个的十。在田字格里写出来。",
+          "after": "写对了，十！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 九",
+          "char": "九",
+          "strokes": [
+            "撇",
+            "横折弯钩"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：九个的九。在田字格里写出来。",
+          "after": "写对了，九！",
+          "difficulty": 3
+        },
+        {
+          "type": "stroke",
+          "q": "听写 王",
+          "char": "王",
+          "strokes": [
+            "横",
+            "横",
+            "竖",
+            "横"
+          ],
+          "outline": false,
+          "source": "会写字 · 会听写",
+          "say": "听写：大王的王。在田字格里写出来。",
+          "after": "写对了，王！",
+          "difficulty": 3
+        }
+      ]
+    }
+  ]
+}

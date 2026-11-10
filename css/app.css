@@ -749,3 +749,55 @@ div.num-tile { display: flex; align-items: center; justify-content: center; }
 .write-body .num-track { gap: 4px; flex-wrap: nowrap; }
 .write-body .num-tile { width: 44px; height: 64px; font-size: 26px; flex: 0 0 auto; }
 .write-body .m-cell .m-art { width: clamp(48px, 7vh, 64px); height: clamp(48px, 7vh, 64px); }
+
+/* ---------- workbench v2: tabs, tools, tiers, furnace, trophies ---------- */
+.craft-tabs { display: flex; gap: 10px; justify-content: center; margin: 10px 16px 0; }
+.craft-tab { position: relative; min-height: 64px; min-width: 150px; font-size: 24px; gap: 8px; }
+.craft-tab .sprite { width: 32px; height: 32px; }
+.craft-tab.on { outline: 4px solid #fff; outline-offset: -2px; }
+.alert-dot { position: absolute; top: -8px; right: -8px; width: 28px; height: 28px; border-radius: 50%; background: #e5484d; color: #fff; font-family: var(--ui); font-size: 20px; line-height: 28px; text-align: center; box-shadow: 0 0 0 3px #000; animation: pop 1s infinite; }
+.has-alert { position: relative; }
+.craft-bag { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 10px 16px 0; }
+.bag-tool, .bag-mat { display: flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(0,0,0,.45); color: #ddd; font-family: var(--ui); font-size: 18px; box-shadow: inset 0 0 0 2px #000; }
+.bag-tool .sprite, .bag-mat .sprite { width: 30px; height: 30px; }
+.bag-tool:not(.got) { opacity: .55; }
+.bag-tool.got { background: rgba(90,180,20,.5); color: #fff; }
+.tier-head { display: flex; align-items: center; gap: 10px; font-family: var(--ui); font-size: 22px; color: var(--gui-ink); margin-bottom: 10px; }
+.tier-head .sprite, .tier-head .icon { width: 34px; height: 34px; }
+.craft-panel.locked .craft-card { opacity: .45; }
+.tool-slot { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; }
+.tool-slot .sprite { width: 40px; height: 40px; }
+.craft-need .tool-slot { width: 40px; height: 40px; }
+.craft-need .tool-slot .sprite { width: 32px; height: 32px; }
+.craft-card.owned { opacity: .6; }
+.craft-done .sprite { width: 40px; height: 40px; }
+.smelt-machine { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 10px 0 16px; }
+.smelt-machine .inv-slot.empty { width: 64px; height: 64px; }
+.smelt-fire { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.smelt-fire .sprite { width: 48px; height: 48px; }
+.smelt-bar { width: 200px; height: 18px; background: #1c1c1c; box-shadow: 0 0 0 2px #000; }
+.smelt-fill { height: 100%; background: linear-gradient(#ffe066, #ff8a20); transition: width .5s; }
+.smelt-take { margin: 0 auto; display: flex; min-height: 70px; font-size: 26px; gap: 8px; }
+.smelt-xp { display: flex; align-items: center; gap: 4px; font-family: var(--ui); color: #1e7a1e; }
+.smelt-xp .sprite { width: 20px; height: 20px; }
+.smelt-note, .smelt-need { display: flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--ui); font-size: 20px; color: var(--gui-ink); }
+.smelt-note .sprite { width: 28px; height: 28px; }
+.trophy-list { display: flex; flex-direction: column; gap: 10px; }
+.trophy-card { display: flex; align-items: center; gap: 14px; padding: 10px 14px; background: rgba(0,0,0,.08); box-shadow: inset 0 0 0 2px rgba(0,0,0,.2); }
+.trophy-card.ready { background: rgba(255,210,58,.3); box-shadow: inset 0 0 0 3px #c9a020; }
+.trophy-icon .sprite { width: 44px; height: 44px; }
+.trophy-text { flex: 1; }
+.trophy-name { font-family: var(--ui); font-size: 22px; color: var(--gui-ink); }
+.trophy-bar { position: relative; height: 20px; background: #1c1c1c; box-shadow: 0 0 0 2px #000; margin-top: 4px; }
+.trophy-fill { height: 100%; background: linear-gradient(#b8ff5a, #5ab414); }
+.trophy-bar span { position: absolute; inset: 0; text-align: center; font-family: var(--ui); font-size: 15px; color: #fff; text-shadow: 1px 1px 0 #000; }
+.trophy-max { font-family: var(--ui); color: #c9a020; }
+.trophy-cups { display: flex; gap: 4px; }
+.trophy-cups .sprite { width: 34px; height: 34px; }
+.trophy-cups .sprite:not(.got) { opacity: .4; }
+.trophy-claim { min-height: 60px; font-size: 22px; }
+.toast-ico { width: 44px; height: 44px; }
+/* two key rows (initials, then finals) when a dictation allows bare finals */
+.child-practice .dictation-pool { flex-direction: column; gap: 10px; }
+.child-practice .dictation-keys.steps.vowels { grid-template-columns: repeat(6, minmax(72px, 92px)); }
+.child-practice .dictation-keys.steps.vowels .letter-key { background: #fff1e4; box-shadow: 0 4px 0 #e0a070, inset 0 0 0 3px var(--fin); }

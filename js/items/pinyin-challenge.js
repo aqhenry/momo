@@ -101,6 +101,10 @@ const VOWELS = ['a', 'i', 'u', 'ü'];
 
 export function renderDictation(root, item, ctx) {
   root.classList.add('dictation-body');
+  // a level can bring its own letter bank (`dictation: {initials, vowels, bare}`); `bare` allows syllables
+  // without an initial (single finals like ǎ), so both rows are offered before anything is written
+  const bank = { ...ctx.dictation, ...item.bank };
+  const initials = bank.initials || INITIALS, vowels = bank.vowels || VOWELS, bare = !!bank.bare;
   const want = item.word.normalize('NFC').trim().split(/\s+/);
   const got = want.map(() => '');
   const done = want.map(() => false);
@@ -147,7 +151,10 @@ export function renderDictation(root, item, ctx) {
     h('div.dictation-actions', back, submit));
   paint();
 
-  function hasLetters() { return /^[a-z][aiuü]+$/.test(stripTone(got[active])); }
+  function hasLetters() {
+    const s = stripTone(got[active]);
+    return /[aoeiuü]$/.test(s) && (bare ? /^[a-z]*[aoeiuü]+$/.test(s) : /^[^aoeiuü][aoeiuü]+$/.test(s));
+  }
 
   function paint() {
     root.classList.toggle('dictation-tones', phase === 'tones');
@@ -171,8 +178,9 @@ export function renderDictation(root, item, ctx) {
     pool.replaceChildren();
     if (locked) return;
     if (phase === 'letters') {
-      const letters = got[active] ? VOWELS : INITIALS;
-      const keys = h('div.dictation-keys.steps');
+      const rows = got[active] ? [vowels] : bare ? [initials, vowels] : [initials];
+      for (const letters of rows) {
+      const keys = h(`div.dictation-keys.steps${letters === vowels && rows.length > 1 ? '.vowels' : ''}`);
       for (const letter of letters) keys.append(h('button.letter-key.py', {
         'aria-label': letter, onclick: () => {
           if (locked || [...got[active]].length >= 4) return;
@@ -183,6 +191,7 @@ export function renderDictation(root, item, ctx) {
         },
       }, letter));
       pool.append(keys);
+      }
     } else {
       const tones = [1, 2, 3, 4];
       if (want.some(s => toneOf(s) === 0)) tones.push(0);

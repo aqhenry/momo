@@ -113,6 +113,17 @@ export const BLOCKS = {
   tube_coral:      { name: '管珊瑚块', rarity: 2, set: 'ocean' },
   dark_prismarine: { name: '暗海晶石', rarity: 2, set: 'ocean' },
   conduit:         { name: '潮涌核心', rarity: 4, obtain: 'achieve', glow: true, clear: true },
+
+  // 第七大关 · 冰雪拼音堡（语文第一二单元）
+  packed_ice:     { name: '浮冰', rarity: 1, set: 'snow', clear: true },
+  powder_snow:    { name: '细雪', rarity: 1, set: 'snow' },
+  calcite:        { name: '方解石', rarity: 2, set: 'snow' },
+  blue_ice:       { name: '蓝冰', rarity: 2, set: 'snow', clear: true },
+  lodestone:      { name: '磁石', rarity: 3, obtain: 'achieve' },
+  respawn_anchor: { name: '重生锚', rarity: 4, obtain: 'achieve', glow: true },
+  // 工作台进阶：只能用钻石镐合成
+  netherite_block: { name: '下界合金块', rarity: 4, obtain: 'craft' },
+  gold_block_craft: { name: '金砖墙', rarity: 3, obtain: 'craft' },
 };
 
 // blocks of a rarity that can drop in an adventure using `set` (base blocks always can)
@@ -461,6 +472,34 @@ Object.assign(PAINT, {
       if (d < 2.5) px(x, y, d < 1.5 ? '#ffffff' : '#5fe0f0');
     });
   },
+});
+
+Object.assign(PAINT, {
+  packed_ice: (px, r) => each((x, y) => px(x, y, (x * 3 + y * 7) % 11 === 0 ? 'rgba(235,245,255,0.95)' : shade([140, 180, 240], 0.9 + r() * 0.15))),
+  powder_snow: (px, r) => each((x, y) => px(x, y, r() < 0.1 ? '#d8e6f2' : shade([246, 250, 255], 0.95 + r() * 0.05))),
+  calcite: (px, r) => each((x, y) => px(x, y, r() < 0.12 ? '#c8c8c0' : shade([224, 226, 220], 0.92 + r() * 0.1))),
+  blue_ice: (px, r) => each((x, y) => {
+    const crack = (x + 2 * y) % 9 === 0 || (2 * x - y + 20) % 13 === 0;
+    px(x, y, crack ? '#c8ecff' : shade([90, 160, 240], 0.88 + r() * 0.18));
+  }),
+  lodestone: (px, r) => {
+    noise(px, r, [120, 122, 128], 0.1);
+    each((x, y) => { if (x === 0 || y === 0 || x === 15 || y === 15) px(x, y, '#555a60'); });
+    for (let x = 4; x < 12; x++) { px(x, 6, '#3a3d44'); px(x, 9, '#3a3d44'); }
+    for (const x of [4, 11]) for (let y = 6; y < 10; y++) px(x, y, '#3a3d44');
+  },
+  respawn_anchor: (px, r) => {
+    each((x, y) => px(x, y, r() < 0.1 ? 'rgb(110,60,160)' : shade([30, 20, 45], 0.8 + r() * 0.5)));
+    each((x, y) => { if (Math.abs(x - 7.5) + Math.abs(y - 7.5) < 3.5) px(x, y, (x + y) % 2 ? '#ff7ad9' : '#c84dff'); });
+  },
+  netherite_block: (px, r) => each((x, y) => {
+    const seam = x === 0 || y === 0 || x === 15 || y === 15 || (y % 5 === 0 && x % 7 !== 3);
+    px(x, y, seam ? '#2a2526' : shade([70, 62, 64], 0.85 + r() * 0.3));
+  }),
+  gold_block_craft: (px, r) => each((x, y) => {
+    const row = y >> 2, mortar = y % 4 === 3 || (x + (row % 2 ? 4 : 0)) % 8 === 7;
+    px(x, y, mortar ? '#a8781a' : shade([246, 206, 70], 0.92 + r() * 0.12));
+  }),
 });
 
 const TOP = {

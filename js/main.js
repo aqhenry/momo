@@ -6,6 +6,7 @@ import { BLOCKS, RARITY, blockURL, iconEl } from './blocks.js';
 import { answerXP, COMBO_XP, isCombo, levelOf, levelUpDrop, openChest, CHESTS } from './rewards.js';
 import { spriteEl, spriteURL } from './sprites.js';
 import { picEl } from './pics.js';
+import { furnaceStatus, workbenchAlert } from './craft.js';
 import { burst, orbs, banner } from './fx.js';
 import { initScene } from './scene.js';
 import { measureFont } from './pinyin.js';
@@ -150,7 +151,7 @@ async function screenHome() {
             playerXP(),
             h('div.row-btns',
               h('button.mc-btn', { onclick: () => { sfx.tap(); go('#/build'); } }, '我的建造'),
-              h('button.mc-btn', { onclick: () => { sfx.tap(); go('#/craft'); } }, '工作台'),
+              h('button.mc-btn.has-alert', { onclick: () => { sfx.tap(); go('#/craft'); } }, '工作台', workbenchAlert() ? h('span.alert-dot', '!') : null),
               h('button.mc-btn', { onclick: () => { sfx.tap(); go('#/book'); } }, '图鉴')))))));
 }
 
@@ -279,6 +280,7 @@ async function screenPlay(levelId, stageId) {
     const ctx = {
       practice,
       write: level.inputMode === 'write',
+      dictation: level.dictation,
       speech: level.speech || {},
       say: (t, fallback) => say(t, { fallback }),
       wrong(got, hint) {
@@ -297,7 +299,9 @@ async function screenPlay(levelId, stageId) {
         const combo = (practice || first) && isCombo(streak);
         if (combo) gain += COMBO_XP;
         const before = levelOf(store.state.xp || 0).level;
+        const smelting = furnaceStatus() && !furnaceStatus().ready;
         store.addXP(gain);
+        if (smelting && furnaceStatus().ready) setTimeout(() => { if (body.isConnected) { banner('furnace', '熔炉烧好啦！去工作台取出来'); sfx.chest(); } }, 1600);
         const nowLevel = levelOf(store.state.xp).level;
         const ups = [];
         for (let k = before; k < nowLevel; k++) {
