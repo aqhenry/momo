@@ -251,7 +251,7 @@ async function screenPlay(levelId, stageId) {
   }, true);
   app.append(h('div.screen',
     topBar(kid ? iconBtn('back', pause) : backBtn(`#/level/${levelId}`, 'cross'), h('div.plate', picEl(stage.icon || 'sprite:pickaxe'), stage.title),
-      h('button.mc-btn.icon', { 'aria-label': '再听一次', onclick: () => say(current?.say || '') }, spriteEl('speaker'))),
+      h('button.mc-btn.icon', { 'aria-label': '再听一次', onclick: () => say(current?._ask || current?.say || '') }, spriteEl('speaker'))),
     h('div.play-wrap',
       h('div.mc-panel.play-panel', body),
       h('div.hud', challenge ? heartRow : null, xp, hotbar))));
@@ -291,11 +291,15 @@ async function screenPlay(levelId, stageId) {
     slots.forEach((s, k) => s.classList.toggle('now', k === i));
     let attempts = 0, solved = false;
     const limit = triesFor(current);
+    // the syllable a tone question is about, played on its own and clearly shaped (see tools/tone_build.py)
+    const snd = level.toneSounds && current.sound ? `♪${current.sound}` : null;
+    current._ask = [current.say, snd, snd];
     const ctx = {
       practice,
       challenge,
       write: level.inputMode === 'write',
       dictation: level.dictation,
+      toneSounds: !!level.toneSounds,
       speech: level.speech || {},
       say: (t, fallback) => say(t, { fallback }),
       wrong(got, hint) {
@@ -303,7 +307,7 @@ async function screenPlay(levelId, stageId) {
         attempts++;
         mistakes.push({ q: current.q || current.say, got: String(got ?? '') });
         if (!challenge) {
-          if (hint !== null) { (practice ? sfx.tap : sfx.wrong)(); say(hint || retry()); }
+          if (hint !== null) { (practice ? sfx.tap : sfx.wrong)(); say([hint || retry(), snd]); }
           return;
         }
         sfx.wrong();
@@ -313,7 +317,7 @@ async function screenPlay(levelId, stageId) {
         heartRow.classList.remove('hurt'); void heartRow.offsetWidth; heartRow.classList.add('hurt');
         if (hearts <= 0) { solved = true; fail(); return; }
         if (attempts >= limit) reveal();
-        else say(hint || retry());
+        else say([hint || retry(), snd]);
       },
       async right(after) {
         if (solved || !body.isConnected) return;
@@ -349,7 +353,7 @@ async function screenPlay(levelId, stageId) {
           burst(block, undefined, 18);
           banner(block, `升级啦！${BLOCKS[block].name}${isNew ? '（新）' : ''}`);
         }, 900 + k * 1400));
-        const lines = [praise(level.blockSet), after];
+        const lines = [praise(level.blockSet), snd, after];
         if (combo) lines.push(practice ? level.speech.combo : S.combo);
         if (ups.length) lines.push(S.levelUp);
         await say(lines);
@@ -372,7 +376,7 @@ async function screenPlay(levelId, stageId) {
         slots.push(slot);
         hotbar.append(slot);
       }
-      await say([again ? S.reveal : S.revealLast, current.after]);
+      await say([again ? S.reveal : S.revealLast, snd, current.after]);
       await wait(600);
       if (!body.isConnected || location.hash !== `#/play/${levelId}/${stageId}`) return;
       advance(i);
@@ -381,13 +385,13 @@ async function screenPlay(levelId, stageId) {
     ITEM_TYPES[current.type](body, current, ctx);
     setTimeout(() => {
       if (!body.isConnected || current !== items[i] || paused) return;
-      if (challenge && i === 0) { say([S.challengeIntro, current.say]); return; }
-      if (current._redo && !items[i - 1]?._redo) { say([S.redo, current.say]); return; }
+      if (challenge && i === 0) { say([S.challengeIntro, ...current._ask]); return; }
+      if (current._redo && !items[i - 1]?._redo) { say([S.redo, ...current._ask]); return; }
       const guide = kid && (i === 0 || items[i - 1].type !== current.type)
         ? current.type === 'dictation' ? level.speech.letters : current.type === 'pinyinLab' ? level.speech.labGuide
           : level.inputMode === 'write' && i === 0 && ['calc', 'craft'].includes(current.type) ? level.speech.write : null
         : null;
-      say([current.say, guide]);
+      say([...current._ask, guide]);
     }, 350);
   }
 
@@ -430,7 +434,7 @@ async function screenPlay(levelId, stageId) {
 // Everything an item might say, so its clips are fetched before they're needed.
 function itemTexts(it) {
   const opts = (it.options || []).map(o => (typeof o === 'string' ? o : o.say || o.text));
-  return [it.say, it.after, it.hint, it.prompt?.picSay, it.read, ...(it.strokes || []), ...(it.pieces || []), ...opts, ...PRAISE];
+  return [it.say, it.after, it.hint, it.prompt?.picSay, it.read, it.sound && `♪${it.sound}`, ...(it.strokes || []), ...(it.pieces || []), ...opts, ...PRAISE];
 }
 
 // How many wrong tries a question gets in challenge mode before its answer is shown. A choice never gets

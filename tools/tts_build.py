@@ -170,6 +170,8 @@ def main():
     keep = set(manifest.values())
     for profile in (AUDIO / 'profiles').glob('*.json'):
         keep.update(json.loads(profile.read_text()).values())
+    if (AUDIO / 'tones.json').exists():
+        keep.update(json.loads((AUDIO / 'tones.json').read_text()).values())
     stale = [f for f in AUDIO.glob('*.m4a') if f.stem not in keep]
     for f in stale:
         f.unlink()

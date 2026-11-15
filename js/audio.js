@@ -16,10 +16,12 @@ if ('speechSynthesis' in window) {
 }
 
 let manifest = {};
-export const audioReady = fetch('audio/manifest.json')
-  .then(r => (r.ok ? r.json() : {}))
-  .then(m => { manifest = m; })
-  .catch(() => {});
+// "♪è" lines: clear, textbook-shaped single syllables (tools/tone_build.py), for levels with toneSounds
+let tones = {};
+export const audioReady = Promise.all([
+  fetch('audio/manifest.json').then(r => (r.ok ? r.json() : {})).then(m => { manifest = m; }),
+  fetch('audio/tones.json').then(r => (r.ok ? r.json() : {})).then(m => { tones = m; }),
+]).catch(() => {});
 
 const buffers = new Map();   // clip id -> Promise<AudioBuffer|null>
 const profiles = new Map();
@@ -34,7 +36,7 @@ async function voiceProfile(profile) {
 }
 
 function clip(text, overrides) {
-  const id = overrides?.[text] || manifest[text];
+  const id = text.startsWith('♪') ? tones[text] : overrides?.[text] || manifest[text];
   if (!id) return null;
   if (!buffers.has(id)) {
     buffers.set(id, fetch(`audio/${id}.m4a`)
@@ -50,7 +52,7 @@ export async function warmCache() {
   await audioReady;
   const catalog = await fetch('levels/index.json').then(r => r.json()).catch(() => []);
   const maps = await Promise.all([...new Set(catalog.map(m => m.audioProfile).filter(Boolean))].map(voiceProfile));
-  const ids = [...maps.filter(Boolean).flatMap(m => Object.values(m)), ...Object.values(manifest)];
+  const ids = [...maps.filter(Boolean).flatMap(m => Object.values(m)), ...Object.values(manifest), ...Object.values(tones)];
   for (const id of new Set(ids)) {
     try { await fetch(`audio/${id}.m4a`); } catch (e) { return; }
   }
@@ -127,8 +129,10 @@ export async function speak(text, { fallback, profile } = {}) {
     if (mine !== token) return;
     const buf = await clip(part, overrides);
     if (mine !== token) return;
+    if (part.startsWith('♪') && part !== parts[0]) await new Promise(r => setTimeout(r, 300));   // let the syllable stand apart
+    if (mine !== token) return;
     if (buf) await playBuffer(buf, maxSeconds(part));
-    else await sayBuiltIn(parts.length === 1 && fallback ? fallback : part);
+    else await sayBuiltIn(parts.length === 1 && fallback ? fallback : part.replace(/^♪/, ''));
   }
 }
 

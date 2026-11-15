@@ -45,7 +45,9 @@ function matches(rule, p) {
 }
 
 export function renderRead(root, item, ctx) {
-  const { wrap } = passage(item, cell => ctx.say(item.tapSay?.[cell.p] || cell.p, cell.c));
+  // toneSounds levels say the tapped syllable with its clear, textbook-shaped clip
+  const tap = cell => ctx.say(item.tapSay?.[cell.p] || (ctx.toneSounds ? `♪${cell.p}` : cell.p), cell.c);
+  const { wrap } = passage(item, cell => tap(cell));
   const again = h('button.mc-btn.small', { onclick: () => ctx.say(item.read || item.lines.join('')) }, '再听一遍');
   const done = h('button.mc-btn.go', { onclick: () => { done.disabled = true; ctx.right(item.after); } }, '我读好了！');
   if (item.title) root.append(h('div.ptitle', item.title));
@@ -88,10 +90,11 @@ export function renderTap(root, item, ctx) {
 export function renderRecite(root, item, ctx) {
   let finished = false;
   const { wrap, rows } = passage(item, (cell, el) => {
-    if (finished || !el.classList.contains('covered')) return ctx.say(item.tapSay?.[cell.p] || cell.p, cell.c);
+    const sayIt = () => ctx.say(item.tapSay?.[cell.p] || (ctx.toneSounds ? `♪${cell.p}` : cell.p), cell.c);
+    if (finished || !el.classList.contains('covered')) return sayIt();
     sfx.dig();
     el.classList.remove('covered');
-    ctx.say(item.tapSay?.[cell.p] || cell.p, cell.c);
+    sayIt();
   });
   rows.forEach(row => row.forEach((cell, k) => {
     if (!cell.p || (item.showFirst && k === 0)) return;
