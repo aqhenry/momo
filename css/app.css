@@ -814,3 +814,28 @@ div.num-tile { display: flex; align-items: center; justify-content: center; }
 .fail-panel { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .fail-hearts { display: flex; gap: 6px; }
 .fail-hearts .sprite { width: 44px; height: 44px; }
+
+/* ---------- 连加连减 middle step, 一图四式 ---------- */
+.m-mid { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 26px; color: var(--ink); margin-top: 4px; }
+.m-mid-tag { background: #fff3c0; padding: 2px 10px; box-shadow: inset 0 0 0 2px #c9a020; font-size: 20px; }
+.m-mid-label { font-size: 30px; letter-spacing: 2px; }
+.four-rows { display: grid; grid-template-columns: auto; gap: 6px; }
+.four-row { flex-wrap: nowrap; gap: 4px; opacity: .55; }
+.four-row .m-box { width: 50px; height: 58px; font-size: 30px; }
+.four-row .m-sign { font-size: 28px; }
+.four-body .m-scene, .four-body .m-group { flex-wrap: nowrap; max-width: none; }
+.four-body .m-cell .m-art { width: 38px; height: 38px; }
+.four-body .m-frame { padding: 6px; }
+.four-row.active { opacity: 1; }
+.four-row:has(.right) { opacity: 1; }
+/* long content (a whole poem) can scroll instead of being cut off */
+.play-panel { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.passage.long { gap: 2px; padding: 10px 18px; }
+.passage.long .ruby { padding: 1px 1px; min-width: 1.9em; }
+.passage.long .ruby .rp { font-size: 15px; }
+.passage.long .ruby .rc { font-size: clamp(26px, 3.8vh, 34px); }
+.order-built.long .order-slot, .order-pool.long .order-piece { font-size: 24px; padding: 6px 12px; min-height: 0; }
+.order-built.long { gap: 4px; }
+.order-pool.long { gap: 8px; }
+.order-built.long { grid-template-columns: minmax(0, 520px); }
+.order-built.long .order-slot { min-height: 42px; }

@@ -64,6 +64,9 @@ export const ACHIEVEMENTS = [
   { id: 'temple', block: 'conduit', title: '闯过海底神殿全部关卡' },
   { id: 'u12-pinyin', block: 'lodestone', title: '拼音听写过关' },
   { id: 'u12-hanzi', block: 'respawn_anchor', title: '十八个字全会写' },
+  { id: 'w11-all', block: 'froglight', title: '闯过丛林算术营' },
+  { id: 'feng', block: 'wind_block', title: '会背《风》' },
+  { id: 'changge', block: 'sunflower_block', title: '会背《长歌行》' },
 ];
 
 const stagesDone = s => Object.values(s.progress).reduce((a, lv) => a + Object.values(lv).filter(x => x.done).length, 0);

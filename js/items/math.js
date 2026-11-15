@@ -94,6 +94,14 @@ export function renderCalc(root, item, ctx) {
     } else if (/\d/.test(t)) eqEl.append(h('span.m-box', t));
     else eqEl.append(h('span.m-sign', t));
   });
+  // `mid`: 连加连减 — write the result of the first two numbers first (the box under them on the worksheet)
+  const midB = item.mid ? { i: 2.5, kind: 'num', mid: true, el: h('span.m-box.blank.num'), val: '' } : null;
+  const midLabel = h('span.m-mid-label');
+  if (midB) { blanks.push(midB); blanks.sort((a, b) => a.i - b.i); }
+  const midRow = midB ? h('div.m-mid', h('span.m-mid-tag', '先算'), midLabel, midB.el) : null;
+  const valAt = i => blanks.find(b => b.i === i)?.val || tokens[i];
+  const midValue = () => (/^\d+$/.test(valAt(0)) && /^\d+$/.test(valAt(2)) ? sideValue([valAt(0), valAt(1), valAt(2)]) : null);
+  let revealed = false;
   const hasSign = blanks.some(b => b.kind === 'sign');
   const signs = item.signs || (tokens.includes('=') ? ['>', '<', '='] : ['+', '-']);
   const hasNum = blanks.some(b => b.kind === 'num');
@@ -104,25 +112,31 @@ export function renderCalc(root, item, ctx) {
   if (ctx.write && numPad) {
     // writing layout: picture + equation on the left, the big writing box on the right
     root.classList.add('write-body');
-    root.append(h('div.m-write', h('div.m-write-left', promptEl(item.prompt, ctx), scene ? h('div.frame.m-frame', scene) : null, eqEl, sgnPad), numPad));
+    root.append(h('div.m-write', h('div.m-write-left', promptEl(item.prompt, ctx), scene ? h('div.frame.m-frame', scene) : null, eqEl, midRow, sgnPad), numPad));
   } else {
     root.append(promptEl(item.prompt, ctx));
     if (scene) root.append(h('div.frame.m-frame', scene));
-    root.append(eqEl, h('div.m-pads', sgnPad, numPad));
+    root.append(eqEl, midRow, h('div.m-pads', sgnPad, numPad));
   }
   let busy = false;
   paint();
   ctx.reveal = () => {
-    busy = true;
+    busy = revealed = true;
     const answer = item.accept?.[0]?.match(TOKEN) || solveAll();
-    if (answer) blanks.forEach(b => { b.val = answer[b.i]; b.el.textContent = b.val; b.el.classList.remove('wrong', 'now'); b.el.classList.add('right'); });
+    if (!answer) return;
+    blanks.forEach(b => {
+      b.val = b.mid ? String(sideValue(answer.slice(0, 3))) : answer[b.i];
+      b.el.textContent = b.val; b.el.classList.remove('wrong', 'now'); b.el.classList.add('right');
+    });
+    if (midB) midLabel.textContent = `${answer[0]}${answer[1]}${answer[2]}=`;
   };
   // one true filling of all blanks (for showing the answer); numbers 0..20, signs from the sign pad
   function solveAll() {
     const choicesFor = b => (b.kind === 'num' ? Array.from({ length: 21 }, (_, v) => String(v)) : signs);
+    const real = blanks.filter(b => !b.mid);
     const fill = (k, cur) => {
-      if (k === blanks.length) return isTrue(cur) ? cur : null;
-      for (const v of choicesFor(blanks[k])) { const c = [...cur]; c[blanks[k].i] = v; const r = fill(k + 1, c); if (r) return r; }
+      if (k === real.length) return isTrue(cur) ? cur : null;
+      for (const v of choicesFor(real[k])) { const c = [...cur]; c[real[k].i] = v; const r = fill(k + 1, c); if (r) return r; }
       return null;
     };
     return fill(0, [...tokens]);
@@ -133,6 +147,7 @@ export function renderCalc(root, item, ctx) {
   function expectHere() {
     const n = next();
     if (!n || n.kind !== 'num') return null;
+    if (n.mid) return midValue() === null ? null : [String(midValue())];
     const filledAt = v => tokens.map((t, i) => (i === n.i ? v : blanks.find(b => b.i === i)?.val || t));
     if (blanks.filter(b => b.val === '').length === 1) {
       const vals = [];
@@ -150,6 +165,7 @@ export function renderCalc(root, item, ctx) {
       b.el.textContent = b.val;
       b.el.classList.toggle('now', b === n);
     });
+    if (midB && !revealed) midLabel.textContent = `${valAt(0) === '□' ? '?' : valAt(0)}${valAt(1)}${valAt(2) === '□' ? '?' : valAt(2)}=`;
     numPad?.classList.toggle('off', !n || n.kind !== 'num');
     sgnPad?.classList.toggle('off', !n || n.kind !== 'sign');
   }
@@ -171,7 +187,8 @@ export function renderCalc(root, item, ctx) {
   async function check() {
     const filled = tokens.map((t, i) => blanks.find(b => b.i === i)?.val ?? t);
     const str = filled.join('');
-    const ok = item.accept ? item.accept.includes(str) : isTrue(filled);
+    const midOk = !midB || Number(midB.val) === midValue();
+    const ok = midOk && (item.accept ? item.accept.includes(str) : isTrue(filled));
     if (ok) {
       busy = true;
       blanks.forEach(b => b.el.classList.add('right'));
@@ -183,6 +200,7 @@ export function renderCalc(root, item, ctx) {
     shake(eqEl);
     ctx.wrong(str, item.hint);
     await wait(1000);
+    if (revealed) return;                 // the answer is showing now (challenge mode)
     blanks.forEach(b => { b.val = ''; b.el.classList.remove('wrong'); });
     busy = false;
     paint();
@@ -212,9 +230,9 @@ export function renderCraft(root, item, ctx) {
     root.append(h('div.m-write', h('div.m-write-left', promptEl(item.prompt, ctx), table2),
       writePad(key, { expect: () => [String(want)], say: () => ctx.say(S.writeConfirm) })));
   } else root.append(promptEl(item.prompt, ctx), table2, numpad(item.pad ?? 5, key));
-  let busy = false;
+  let busy = false, revealed = false;
   ctx.reveal = () => {
-    busy = true;
+    busy = revealed = true;
     target.querySelector('.m-slot-num').textContent = String(want);
     target.classList.remove('missing', 'wrong');
     target.classList.add('right');
@@ -242,6 +260,7 @@ export function renderCraft(root, item, ctx) {
       shake(target);
       ctx.wrong(k, item.hint);
       await wait(900);
+      if (revealed) return;
       target.classList.remove('wrong');
       num.textContent = '?';
       busy = false;
@@ -284,4 +303,90 @@ export function renderPattern(root, item, ctx) {
       busy = false;
     }
   }
+}
+
+// ---------- four: 一图四式 ----------
+// One picture, several equation rows to fill (`eqs`, e.g. two additions and two subtractions); every row
+// must be a different one of `answers` (any order within the same sign). Rows are checked as they are finished.
+export function renderFour(root, item, ctx) {
+  const rows = item.eqs.map(eq => {
+    const tokens = eq.match(TOKEN), el = h('div.m-eq.four-row'), blanks = [];
+    tokens.forEach((t, i) => {
+      if (t === '□') { const b = { i, el: h('span.m-box.blank.num'), val: '' }; blanks.push(b); el.append(b.el); }
+      else el.append(/\d/.test(t) ? h('span.m-box', t) : h('span.m-sign', t));
+    });
+    return { tokens, el, blanks, done: false };
+  });
+  const used = new Set();
+  let busy = false, revealed = false;
+  const cur = () => rows.find(r => !r.done);
+  const nextBlank = () => cur()?.blanks.find(b => b.val === '');
+  const rowStr = r => r.tokens.map((t, i) => r.blanks.find(b => b.i === i)?.val || t).join('');
+  const candidates = r => item.answers.filter(a => !used.has(a) && a.match(TOKEN).length === r.tokens.length && a.match(TOKEN).every((t, i) => r.tokens[i] === '□' || r.tokens[i] === t));
+  function expectHere() {
+    const r = cur(), b = nextBlank();
+    if (!b) return null;
+    const fits = candidates(r).filter(a => { const at = a.match(TOKEN); return r.blanks.every(x => x.val === '' || x.val === at[x.i]); });
+    return [...new Set(fits.map(a => a.match(TOKEN)[b.i]))];
+  }
+  const pad = ctx.write ? writePad(key, { expect: expectHere, say: () => ctx.say(S.writeConfirm) }) : numpad(item.pad ?? 9, key);
+  const scene = sceneEl(item.scene);
+  const eqs = h('div.four-rows', rows.map(r => r.el));
+  root.classList.add('four-body');
+  if (ctx.write) {
+    root.classList.add('write-body');
+    root.append(h('div.m-write', h('div.m-write-left', promptEl(item.prompt, ctx), scene ? h('div.frame.m-frame', scene) : null, eqs), pad));
+  } else root.append(promptEl(item.prompt, ctx), scene ? h('div.frame.m-frame', scene) : null, eqs, pad);
+  paint();
+
+  function paint() {
+    const b = nextBlank();
+    rows.forEach(r => {
+      r.blanks.forEach(x => { x.el.textContent = x.val; x.el.classList.toggle('now', x === b); });
+      r.el.classList.toggle('active', r === cur());
+    });
+  }
+  async function key(k) {
+    if (busy) return;
+    if (k === 'back') {
+      const f = cur()?.blanks.filter(x => x.val !== '');
+      if (f?.length) { f.at(-1).val = ''; sfx.dig(); paint(); }
+      return;
+    }
+    const b = nextBlank();
+    if (!b) return;
+    b.val = k; sfx.tap(); paint();
+    if (!nextBlank()) await checkRow();
+  }
+  async function checkRow() {
+    const r = cur(), str = rowStr(r);
+    if (candidates(r).includes(str)) {
+      used.add(str); r.done = true;
+      r.blanks.forEach(x => x.el.classList.add('right'));
+      sfx.place();
+      if (!cur()) { busy = true; ctx.right(item.after); } else paint();
+      return;
+    }
+    busy = true;
+    r.blanks.forEach(x => x.el.classList.add('wrong'));
+    shake(r.el);
+    ctx.wrong(str, item.hint);
+    await wait(1000);
+    if (revealed) return;
+    r.blanks.forEach(x => { x.val = ''; x.el.classList.remove('wrong'); });
+    busy = false;
+    paint();
+  }
+  ctx.reveal = () => {
+    busy = revealed = true;
+    rows.forEach(r => {
+      if (r.done) return;
+      const a = candidates(r)[0];
+      if (!a) return;
+      used.add(a);
+      const at = a.match(TOKEN);
+      r.blanks.forEach(x => { x.val = at[x.i]; x.el.textContent = x.val; x.el.classList.remove('wrong', 'now'); x.el.classList.add('right'); });
+      r.done = true;
+    });
+  };
 }

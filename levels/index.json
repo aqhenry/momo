@@ -1,5 +1,27 @@
 [
   {
+    "id": "yuwen-poems2",
+    "chapter": 9,
+    "subject": "语文",
+    "title": "风吹竹林",
+    "subtitle": "背《风》《长歌行》· 拼音巩固",
+    "date": "2026-11-15",
+    "block": "bamboo_block",
+    "path": "levels/yuwen-poems2/level.json",
+    "audioProfile": "jqx-b"
+  },
+  {
+    "id": "math-week11",
+    "chapter": 8,
+    "subject": "数学",
+    "title": "丛林算术营",
+    "subtitle": "第11周 · 连加连减、一图四式、看图列式",
+    "date": "2026-11-15",
+    "block": "jungle_log",
+    "path": "levels/math-week11/level.json",
+    "audioProfile": "jqx-b"
+  },
+  {
     "id": "yuwen-u12",
     "chapter": 7,
     "subject": "语文",

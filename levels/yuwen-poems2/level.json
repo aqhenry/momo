@@ -1,0 +1,1373 @@
+{
+  "id": "yuwen-poems2",
+  "title": "风吹竹林",
+  "blockSet": "bamboo",
+  "audioProfile": "jqx-b",
+  "rewardPolicy": "challenge",
+  "note": "背诵《风》（唐·李峤）《长歌行》（汉乐府）；诗中字书写；拼音巩固：看拼音认词、标调规则、两拼三拼、听写词语。",
+  "intro": "墨然，欢迎来到风吹竹林！今天背两首古诗，《风》和《长歌行》，再写一写诗里的字，最后巩固拼音。背会古诗，能得到专属方块哦！",
+  "dictation": {
+    "initials": [
+      "b",
+      "p",
+      "m",
+      "f",
+      "d",
+      "t",
+      "n",
+      "l"
+    ],
+    "vowels": [
+      "a",
+      "o",
+      "e",
+      "i",
+      "u",
+      "ü"
+    ]
+  },
+  "paperStage": "pinyin-dict",
+  "speech": {
+    "letters": "先选声母，再选韵母。拼好了，点绿色箭头。",
+    "chooseTone": "现在选一个声调，再点绿色勾勾。",
+    "nextSyllable": "这个音节拼好了，接着拼下一个。",
+    "labGuide": "看亮起来的格子，点一块积木放进去。",
+    "combo": "你又完成了三题，经验加倍！",
+    "pause": "休息一下吗？点绿色箭头继续玩，点地图回去。"
+  },
+  "achievements": [
+    {
+      "id": "feng",
+      "block": "wind_block",
+      "title": "会背《风》",
+      "stages": [
+        "feng"
+      ]
+    },
+    {
+      "id": "changge",
+      "block": "sunflower_block",
+      "title": "会背《长歌行》",
+      "stages": [
+        "changge-recite"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "feng",
+      "title": "背《风》",
+      "icon": "art:willow",
+      "items": [
+        {
+          "type": "read",
+          "q": "读《风》",
+          "title": "风 · 唐 · 李峤",
+          "lines": [
+            "解落三秋叶，",
+            "能开二月花。",
+            "过江千尺浪，",
+            "入竹万竿斜。"
+          ],
+          "py": [
+            "jiě luò sān qiū yè",
+            "néng kāi èr yuè huā",
+            "guò jiāng qiān chǐ làng",
+            "rù zhú wàn gān xié"
+          ],
+          "read": "风，唐，李峤。解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。",
+          "say": "这首诗叫《风》，是唐代诗人李峤写的。先听一听，再跟着读。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "这首诗写的是什么",
+          "prompt": {
+            "text": "解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。"
+          },
+          "options": [
+            {
+              "text": "风",
+              "big": true
+            },
+            {
+              "text": "雨",
+              "big": true
+            },
+            {
+              "text": "雪",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "say": "这首诗里一个风字也没有，可它写的是什么？",
+          "after": "是风！风吹落树叶，吹开花朵，吹起大浪，吹斜竹子。",
+          "hint": "想一想，是什么能吹落叶子、吹开花、吹弯竹子？"
+        },
+        {
+          "type": "choice",
+          "q": "__三秋叶，",
+          "prompt": {
+            "context": "▢▢三秋叶，"
+          },
+          "options": [
+            "解落",
+            "吹落",
+            "飘落"
+          ],
+          "answer": 0,
+          "say": "什么三秋叶？",
+          "after": "解落三秋叶。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "过江千尺_，",
+          "prompt": {
+            "context": "过江千尺▢，"
+          },
+          "options": [
+            "浪",
+            "水",
+            "船"
+          ],
+          "answer": 0,
+          "say": "风吹过江面，掀起千尺高的什么？",
+          "after": "过江千尺浪。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "入竹万竿_。",
+          "prompt": {
+            "context": "入竹万竿▢。"
+          },
+          "options": [
+            "斜",
+            "直",
+            "高"
+          ],
+          "answer": 0,
+          "say": "风吹进竹林，竹子都怎么样了？",
+          "after": "入竹万竿斜。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "order",
+          "q": "《风》排序",
+          "pieces": [
+            "解落三秋叶，",
+            "能开二月花。",
+            "过江千尺浪，",
+            "入竹万竿斜。"
+          ],
+          "say": "按顺序把诗句排一排。",
+          "after": "解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。"
+        },
+        {
+          "type": "recite",
+          "q": "背《风》",
+          "title": "风",
+          "lines": [
+            "解落三秋叶，",
+            "能开二月花。",
+            "过江千尺浪，",
+            "入竹万竿斜。"
+          ],
+          "py": [
+            "jiě luò sān qiū yè",
+            "néng kāi èr yuè huā",
+            "guò jiāng qiān chǐ làng",
+            "rù zhú wàn gān xié"
+          ],
+          "showFirst": true,
+          "cover": "bamboo_block",
+          "say": "现在不看书，大声背一背《风》！想不起来，就点方块挖开看一看。背完点我背好了。",
+          "after": "背得真好！解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。"
+        }
+      ]
+    },
+    {
+      "id": "changge1",
+      "title": "长歌行（上）",
+      "icon": "sprite:book",
+      "items": [
+        {
+          "type": "read",
+          "q": "读《长歌行》上",
+          "title": "长歌行（上）· 汉乐府",
+          "lines": [
+            "青青园中葵，朝露待日晞。",
+            "阳春布德泽，万物生光辉。",
+            "常恐秋节至，焜黄华叶衰。"
+          ],
+          "py": [
+            "qīng qīng yuán zhōng kuí zhāo lù dài rì xī",
+            "yáng chūn bù dé zé wàn wù shēng guāng huī",
+            "cháng kǒng qiū jié zhì kūn huáng huā yè shuāi"
+          ],
+          "read": "长歌行，汉乐府。青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。",
+          "say": "这首诗叫《长歌行》，是汉乐府里的诗，有点长，我们分两半学。先读前三句。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "青青园中_，",
+          "prompt": {
+            "context": "青青园中▢，"
+          },
+          "options": [
+            "葵",
+            "花",
+            "草"
+          ],
+          "answer": 0,
+          "say": "青青园中什么？葵就是园子里的葵菜。",
+          "after": "青青园中葵。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "朝露待日_。",
+          "prompt": {
+            "context": "朝露待日▢。"
+          },
+          "options": [
+            "晞",
+            "出",
+            "落"
+          ],
+          "answer": 0,
+          "say": "早上的露水，等着太阳把它晒干。朝露待日什么？",
+          "after": "朝露待日晞。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "万物生__。",
+          "prompt": {
+            "context": "万物生▢▢。"
+          },
+          "options": [
+            "光辉",
+            "光明",
+            "开心"
+          ],
+          "answer": 0,
+          "say": "春天来了，万物生什么？",
+          "after": "万物生光辉。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "order",
+          "q": "《长歌行》上排序",
+          "pieces": [
+            "青青园中葵，朝露待日晞。",
+            "阳春布德泽，万物生光辉。",
+            "常恐秋节至，焜黄华叶衰。"
+          ],
+          "say": "按顺序排一排前三句。",
+          "after": "青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。"
+        }
+      ]
+    },
+    {
+      "id": "changge2",
+      "title": "长歌行（下）",
+      "icon": "sprite:book",
+      "items": [
+        {
+          "type": "read",
+          "q": "读《长歌行》下",
+          "title": "长歌行（下）",
+          "lines": [
+            "百川东到海，何时复西归？",
+            "少壮不努力，老大徒伤悲！"
+          ],
+          "py": [
+            "bǎi chuān dōng dào hǎi hé shí fù xī guī",
+            "shào zhuàng bù nǔ lì lǎo dà tú shāng bēi"
+          ],
+          "read": "百川东到海，何时复西归？少壮不努力，老大徒伤悲！",
+          "say": "再读后两句。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "百川东到_，",
+          "prompt": {
+            "context": "百川东到▢，"
+          },
+          "options": [
+            "海",
+            "河",
+            "山"
+          ],
+          "answer": 0,
+          "say": "千百条河流向东流到哪里？",
+          "after": "百川东到海。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "少壮不__，",
+          "prompt": {
+            "context": "少壮不▢▢，"
+          },
+          "options": [
+            "努力",
+            "学习",
+            "玩耍"
+          ],
+          "answer": 0,
+          "say": "年少的时候不怎么样？",
+          "after": "少壮不努力。",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "老大徒__！",
+          "prompt": {
+            "context": "老大徒▢▢！"
+          },
+          "options": [
+            "伤悲",
+            "开心",
+            "生气"
+          ],
+          "answer": 0,
+          "say": "长大了，老了，只能怎么样？",
+          "after": "老大徒伤悲！",
+          "hint": "再读一读这一句，想想原文怎么说。"
+        },
+        {
+          "type": "choice",
+          "q": "长歌行告诉我们什么",
+          "options": [
+            {
+              "text": "要珍惜时间，努力学习"
+            },
+            {
+              "text": "长大了再努力也不晚"
+            },
+            {
+              "text": "每天多玩一会儿"
+            }
+          ],
+          "answer": 0,
+          "say": "少壮不努力，老大徒伤悲。这两句告诉我们什么？",
+          "after": "对！要珍惜时间，从小努力。",
+          "hint": "河水流到海里，就不会再流回来了。时间也是这样。"
+        },
+        {
+          "type": "order",
+          "q": "《长歌行》下排序",
+          "pieces": [
+            "百川东到海，何时复西归？",
+            "少壮不努力，老大徒伤悲！"
+          ],
+          "say": "按顺序排一排后两句。",
+          "after": "百川东到海，何时复西归？少壮不努力，老大徒伤悲！"
+        }
+      ]
+    },
+    {
+      "id": "changge-recite",
+      "title": "背《长歌行》",
+      "icon": "sprite:star",
+      "items": [
+        {
+          "type": "order",
+          "q": "《长歌行》全诗排序",
+          "pieces": [
+            "青青园中葵，朝露待日晞。",
+            "阳春布德泽，万物生光辉。",
+            "常恐秋节至，焜黄华叶衰。",
+            "百川东到海，何时复西归？",
+            "少壮不努力，老大徒伤悲！"
+          ],
+          "say": "把整首《长歌行》按顺序排一排。",
+          "after": "青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。百川东到海，何时复西归？少壮不努力，老大徒伤悲！"
+        },
+        {
+          "type": "recite",
+          "q": "背《长歌行》",
+          "title": "长歌行",
+          "lines": [
+            "青青园中葵，朝露待日晞。",
+            "阳春布德泽，万物生光辉。",
+            "常恐秋节至，焜黄华叶衰。",
+            "百川东到海，何时复西归？",
+            "少壮不努力，老大徒伤悲！"
+          ],
+          "py": [
+            "qīng qīng yuán zhōng kuí zhāo lù dài rì xī",
+            "yáng chūn bù dé zé wàn wù shēng guāng huī",
+            "cháng kǒng qiū jié zhì kūn huáng huā yè shuāi",
+            "bǎi chuān dōng dào hǎi hé shí fù xī guī",
+            "shào zhuàng bù nǔ lì lǎo dà tú shāng bēi"
+          ],
+          "showFirst": true,
+          "cover": "azalea_leaves",
+          "say": "现在不看书，大声背一背整首《长歌行》！想不起来，就点方块挖开看一看。背完点我背好了。",
+          "after": "背得真好！青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。百川东到海，何时复西归？少壮不努力，老大徒伤悲！"
+        }
+      ]
+    },
+    {
+      "id": "hanzi",
+      "title": "写诗里的字",
+      "icon": "sprite:quill",
+      "items": [
+        {
+          "type": "stroke",
+          "q": "描 月",
+          "char": "月",
+          "strokes": [
+            "撇",
+            "横折钩",
+            "横",
+            "横"
+          ],
+          "prompt": {
+            "py": "yuè"
+          },
+          "say": "描一描：二月花的月。跟着灰色的笔画写。",
+          "after": "写好啦，月！"
+        },
+        {
+          "type": "stroke",
+          "q": "听写 月",
+          "char": "月",
+          "strokes": [
+            "撇",
+            "横折钩",
+            "横",
+            "横"
+          ],
+          "outline": false,
+          "difficulty": 3,
+          "say": "听写：二月花的月。在田字格里写出来。",
+          "after": "写对了，月！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 万",
+          "char": "万",
+          "strokes": [
+            "横",
+            "横折钩",
+            "撇"
+          ],
+          "prompt": {
+            "py": "wàn"
+          },
+          "say": "描一描：万竿斜的万。跟着灰色的笔画写。",
+          "after": "写好啦，万！"
+        },
+        {
+          "type": "stroke",
+          "q": "听写 万",
+          "char": "万",
+          "strokes": [
+            "横",
+            "横折钩",
+            "撇"
+          ],
+          "outline": false,
+          "difficulty": 3,
+          "say": "听写：万竿斜的万。在田字格里写出来。",
+          "after": "写对了，万！"
+        },
+        {
+          "type": "stroke",
+          "q": "描 不",
+          "char": "不",
+          "strokes": [
+            "横",
+            "撇",
+            "竖",
+            "点"
+          ],
+          "prompt": {
+            "py": "bù"
+          },
+          "say": "描一描：少壮不努力的不。跟着灰色的笔画写。",
+          "after": "写好啦，不！"
+        },
+        {
+          "type": "stroke",
+          "q": "听写 不",
+          "char": "不",
+          "strokes": [
+            "横",
+            "撇",
+            "竖",
+            "点"
+          ],
+          "outline": false,
+          "difficulty": 3,
+          "say": "听写：少壮不努力的不。在田字格里写出来。",
+          "after": "写对了，不！"
+        },
+        {
+          "type": "stroke",
+          "q": "听写 大",
+          "char": "大",
+          "strokes": [
+            "横",
+            "撇",
+            "捺"
+          ],
+          "outline": false,
+          "difficulty": 3,
+          "say": "听写：老大的大。在田字格里写出来。",
+          "after": "写对了，大！"
+        },
+        {
+          "type": "stroke",
+          "q": "听写 千",
+          "char": "千",
+          "strokes": [
+            "撇",
+            "横",
+            "竖"
+          ],
+          "outline": false,
+          "difficulty": 3,
+          "say": "听写：千尺浪的千。在田字格里写出来。",
+          "after": "写对了，千！"
+        },
+        {
+          "type": "stroke",
+          "q": "听写 力",
+          "char": "力",
+          "strokes": [
+            "横折钩",
+            "撇"
+          ],
+          "outline": false,
+          "difficulty": 3,
+          "say": "听写：努力的力。在田字格里写出来。",
+          "after": "写对了，力！"
+        }
+      ]
+    },
+    {
+      "id": "pinyin-read",
+      "title": "看拼音认词",
+      "icon": "sprite:eye",
+      "shuffle": true,
+      "items": [
+        {
+          "type": "choice",
+          "q": "认读 fēi jī",
+          "prompt": {
+            "py": "fēi jī"
+          },
+          "options": [
+            {
+              "text": "飞机",
+              "big": true
+            },
+            {
+              "text": "西瓜",
+              "big": true
+            },
+            {
+              "text": "开会",
+              "big": true
+            },
+            {
+              "text": "火车",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "say": "读一读上面的拼音，它是哪个词？",
+          "after": "飞机！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 pái duì",
+          "prompt": {
+            "py": "pái duì"
+          },
+          "options": [
+            {
+              "text": "排队",
+              "big": true
+            },
+            {
+              "text": "白菜",
+              "big": true
+            },
+            {
+              "text": "开会",
+              "big": true
+            },
+            {
+              "text": "奶奶",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "say": "读一读上面的拼音，它是哪个词？",
+          "after": "排队！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 mèi mei",
+          "prompt": {
+            "py": "mèi mei"
+          },
+          "options": [
+            {
+              "text": "妹妹",
+              "big": true
+            },
+            {
+              "text": "奶奶",
+              "big": true
+            },
+            {
+              "text": "飞机",
+              "big": true
+            },
+            {
+              "text": "排队",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "say": "读一读上面的拼音，它是哪个词？",
+          "after": "妹妹！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 huǒ chē",
+          "prompt": {
+            "py": "huǒ chē"
+          },
+          "options": [
+            {
+              "text": "火车",
+              "big": true
+            },
+            {
+              "text": "飞机",
+              "big": true
+            },
+            {
+              "text": "西瓜",
+              "big": true
+            },
+            {
+              "text": "水果",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "say": "读一读上面的拼音，它是哪个词？",
+          "after": "火车！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 shuǐ guǒ",
+          "prompt": {
+            "py": "shuǐ guǒ"
+          },
+          "options": [
+            {
+              "text": "水果",
+              "big": true
+            },
+            {
+              "text": "火车",
+              "big": true
+            },
+            {
+              "text": "柜子",
+              "big": true
+            },
+            {
+              "text": "西瓜",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "say": "读一读上面的拼音，它是哪个词？",
+          "after": "水果！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 zì jǐ",
+          "prompt": {
+            "py": "zì jǐ"
+          },
+          "options": [
+            {
+              "text": "自己",
+              "big": true
+            },
+            {
+              "text": "日记",
+              "big": true
+            },
+            {
+              "text": "西瓜",
+              "big": true
+            },
+            {
+              "text": "开会",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "say": "读一读上面的拼音，它是哪个词？",
+          "after": "自己！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 rì jì",
+          "prompt": {
+            "py": "rì jì"
+          },
+          "options": [
+            {
+              "text": "日记",
+              "big": true
+            },
+            {
+              "text": "自己",
+              "big": true
+            },
+            {
+              "text": "飞机",
+              "big": true
+            },
+            {
+              "text": "白菜",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "say": "读一读上面的拼音，它是哪个词？",
+          "after": "日记！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        },
+        {
+          "type": "choice",
+          "q": "认读 guì zi",
+          "prompt": {
+            "py": "guì zi"
+          },
+          "options": [
+            {
+              "text": "柜子",
+              "big": true
+            },
+            {
+              "text": "开会",
+              "big": true
+            },
+            {
+              "text": "水果",
+              "big": true
+            },
+            {
+              "text": "妹妹",
+              "big": true
+            }
+          ],
+          "answer": 0,
+          "cols": 4,
+          "say": "读一读上面的拼音，它是哪个词？",
+          "after": "柜子！",
+          "hint": "一个音节一个音节地拼，再连起来读。"
+        }
+      ]
+    },
+    {
+      "id": "pinyin-rule",
+      "title": "标调规则",
+      "icon": "sprite:target",
+      "shuffle": true,
+      "items": [
+        {
+          "type": "choice",
+          "q": "标调 飞",
+          "prompt": {
+            "text": "飞"
+          },
+          "options": [
+            {
+              "py": "fēi",
+              "grid": true
+            },
+            {
+              "py": "feī",
+              "grid": true
+            },
+            {
+              "py": "fěi",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "飞的拼音，声调标在哪里？哪个写对了？",
+          "after": "飞，fēi。有 e 标在 e 上。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 柜",
+          "prompt": {
+            "text": "柜"
+          },
+          "options": [
+            {
+              "py": "guì",
+              "grid": true
+            },
+            {
+              "py": "gùi",
+              "grid": true
+            },
+            {
+              "py": "guī",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "柜的拼音，声调标在哪里？哪个写对了？",
+          "after": "柜，guì。i 和 u 在一起，标在后面。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 妹",
+          "prompt": {
+            "text": "妹"
+          },
+          "options": [
+            {
+              "py": "mèi",
+              "grid": true
+            },
+            {
+              "py": "meì",
+              "grid": true
+            },
+            {
+              "py": "mài",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "妹的拼音，声调标在哪里？哪个写对了？",
+          "after": "妹，mèi。有 e 标在 e 上。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 来",
+          "prompt": {
+            "text": "来"
+          },
+          "options": [
+            {
+              "py": "lái",
+              "grid": true
+            },
+            {
+              "py": "laí",
+              "grid": true
+            },
+            {
+              "py": "léi",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "来的拼音，声调标在哪里？哪个写对了？",
+          "after": "来，lái。有 a 不放过。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 画",
+          "prompt": {
+            "text": "画"
+          },
+          "options": [
+            {
+              "py": "huà",
+              "grid": true
+            },
+            {
+              "py": "hùa",
+              "grid": true
+            },
+            {
+              "py": "huā",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "画的拼音，声调标在哪里？哪个写对了？",
+          "after": "画，huà。声调标在 a 上。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 多",
+          "prompt": {
+            "text": "多"
+          },
+          "options": [
+            {
+              "py": "duō",
+              "grid": true
+            },
+            {
+              "py": "dūo",
+              "grid": true
+            },
+            {
+              "py": "dōu",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "多的拼音，声调标在哪里？哪个写对了？",
+          "after": "多，duō。没有 a，o 来标。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 去",
+          "prompt": {
+            "text": "去"
+          },
+          "options": [
+            {
+              "py": "qù",
+              "grid": true
+            },
+            {
+              "py": "qǜ",
+              "grid": true
+            },
+            {
+              "py": "qì",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "去的拼音，声调标在哪里？哪个写对了？",
+          "after": "去，qù。小 ü 见了 q，去掉两点还读 ü。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        }
+      ]
+    },
+    {
+      "id": "pinyin-lab",
+      "title": "拼音合成",
+      "icon": "sprite:bricks",
+      "items": [
+        {
+          "type": "pinyinLab",
+          "q": "拼合 guā",
+          "word": "guā",
+          "parts": [
+            "g",
+            "u",
+            "ā"
+          ],
+          "choices": [
+            [
+              "g",
+              "k",
+              "h"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "ā",
+              "ō",
+              "ē"
+            ]
+          ],
+          "say": "拼一拼：guā，西瓜的瓜。请把积木一块一块放好。",
+          "after": "guā，西瓜的瓜！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 huā",
+          "word": "huā",
+          "parts": [
+            "h",
+            "u",
+            "ā"
+          ],
+          "choices": [
+            [
+              "h",
+              "f",
+              "k"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "ā",
+              "ē",
+              "ī"
+            ]
+          ],
+          "say": "拼一拼：huā，花朵的花。请把积木一块一块放好。",
+          "after": "huā，花朵的花！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 kuài",
+          "word": "kuài",
+          "parts": [
+            "k",
+            "u",
+            "ài"
+          ],
+          "choices": [
+            [
+              "k",
+              "g",
+              "h"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "ài",
+              "èi",
+              "uì"
+            ]
+          ],
+          "say": "拼一拼：kuài，快乐的快。请把积木一块一块放好。",
+          "after": "kuài，快乐的快！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 shuǐ",
+          "word": "shuǐ",
+          "parts": [
+            "sh",
+            "uǐ"
+          ],
+          "choices": [
+            [
+              "sh",
+              "s",
+              "zh"
+            ],
+            [
+              "uǐ",
+              "ǔ",
+              "ǐ"
+            ]
+          ],
+          "say": "拼一拼：shuǐ，水果的水。请把积木一块一块放好。",
+          "after": "shuǐ，水果的水！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 chuī",
+          "word": "chuī",
+          "parts": [
+            "ch",
+            "uī"
+          ],
+          "choices": [
+            [
+              "ch",
+              "c",
+              "sh"
+            ],
+            [
+              "uī",
+              "ēi",
+              "ū"
+            ]
+          ],
+          "say": "拼一拼：chuī，吹风的吹。请把积木一块一块放好。",
+          "after": "chuī，吹风的吹！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 zuǐ",
+          "word": "zuǐ",
+          "parts": [
+            "z",
+            "uǐ"
+          ],
+          "choices": [
+            [
+              "z",
+              "zh",
+              "c"
+            ],
+            [
+              "uǐ",
+              "ǔ",
+              "ěi"
+            ]
+          ],
+          "say": "拼一拼：zuǐ，嘴巴的嘴。请把积木一块一块放好。",
+          "after": "zuǐ，嘴巴的嘴！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        }
+      ]
+    },
+    {
+      "id": "pinyin-dict",
+      "title": "听写词语",
+      "icon": "sprite:chest_gold",
+      "shuffleWithinPhase": true,
+      "items": [
+        {
+          "type": "dictation",
+          "q": "听写 飞机",
+          "word": "fēi jī",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "f",
+              "h",
+              "j",
+              "q",
+              "x",
+              "b"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：飞机。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 白菜",
+          "word": "bái cài",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "b",
+              "p",
+              "c",
+              "s",
+              "z",
+              "d"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：白菜。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 排队",
+          "word": "pái duì",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "p",
+              "b",
+              "d",
+              "t",
+              "g",
+              "k"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：排队。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 西瓜",
+          "word": "xī guā",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "x",
+              "j",
+              "q",
+              "g",
+              "k",
+              "h"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：西瓜。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 火车",
+          "word": "huǒ chē",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "h",
+              "f",
+              "ch",
+              "sh",
+              "zh",
+              "k"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：火车。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 开会",
+          "word": "kāi huì",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "k",
+              "g",
+              "h",
+              "f",
+              "d",
+              "t"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：开会。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 妹妹",
+          "word": "mèi mei",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "m",
+              "n",
+              "l",
+              "f",
+              "b",
+              "p"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：妹妹。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 奶奶",
+          "word": "nǎi nai",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "n",
+              "l",
+              "m",
+              "d",
+              "t",
+              "b"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：奶奶。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。轻声不标调。"
+        }
+      ]
+    }
+  ]
+}

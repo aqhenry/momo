@@ -124,6 +124,19 @@ export const BLOCKS = {
   // 工作台进阶：只能用钻石镐合成
   netherite_block: { name: '下界合金块', rarity: 4, obtain: 'craft' },
   gold_block_craft: { name: '金砖墙', rarity: 3, obtain: 'craft' },
+
+  // 第八大关 · 丛林算术营（数学）
+  jungle_log:      { name: '丛林原木', rarity: 1, set: 'jungle' },
+  jungle_leaves:   { name: '丛林树叶', rarity: 1, set: 'jungle' },
+  mangrove_planks: { name: '红树林木板', rarity: 2, set: 'jungle' },
+  melon_block2:    { name: '可可豆块', rarity: 2, set: 'jungle' },
+  froglight:       { name: '赭黄蛙明灯', rarity: 4, obtain: 'achieve', glow: true },
+  // 第九大关 · 风吹竹林（语文）
+  bamboo_block:    { name: '竹块', rarity: 1, set: 'bamboo' },
+  azalea_leaves:   { name: '盛开的杜鹃树叶', rarity: 1, set: 'bamboo' },
+  bamboo_mosaic:   { name: '竹马赛克', rarity: 2, set: 'bamboo' },
+  wind_block:      { name: '旋风方块', rarity: 3, obtain: 'achieve' },
+  sunflower_block: { name: '向日葵方块', rarity: 3, obtain: 'achieve', glow: true },
 };
 
 // blocks of a rarity that can drop in an adventure using `set` (base blocks always can)
@@ -499,6 +512,38 @@ Object.assign(PAINT, {
   gold_block_craft: (px, r) => each((x, y) => {
     const row = y >> 2, mortar = y % 4 === 3 || (x + (row % 2 ? 4 : 0)) % 8 === 7;
     px(x, y, mortar ? '#a8781a' : shade([246, 206, 70], 0.92 + r() * 0.12));
+  }),
+});
+
+Object.assign(PAINT, {
+  jungle_log: (px, r) => each((x, y) => px(x, y, shade(x % 3 === 0 ? [90, 70, 35] : [120, 95, 45], (y % 5 === 0 ? 0.85 : 1) * (0.9 + r() * 0.2)))),
+  jungle_leaves: (px, r) => each((x, y) => px(x, y, r() < 0.12 ? 'rgb(30,70,20)' : r() < 0.05 ? '#b8e060' : shade([48, 130, 30], 0.75 + r() * 0.45))),
+  mangrove_planks: (px, r) => planksOf(px, r, [120, 50, 45]),
+  melon_block2: (px, r) => each((x, y) => {
+    const pod = ((x - 4) ** 2) / 9 + ((y - 7) ** 2) / 25 < 1 || ((x - 11) ** 2) / 9 + ((y - 9) ** 2) / 25 < 1;
+    px(x, y, pod ? shade([170, 90, 40], 0.85 + r() * 0.2) : shade([100, 70, 40], 0.85 + r() * 0.2));
+  }),
+  froglight: px => each((x, y) => {
+    const edge = x < 2 || y < 2 || x > 13 || y > 13;
+    px(x, y, edge ? '#c9a64a' : (x * 3 + y * 5) % 7 === 0 ? '#fff6c8' : '#f6e08a');
+  }),
+  bamboo_block: (px, r) => each((x, y) => {
+    const node = y % 6 === 0, stripe = x % 4 === 0;
+    px(x, y, shade(node ? [150, 160, 50] : [110, 160, 50], (stripe ? 0.8 : 1) * (0.92 + r() * 0.12)));
+  }),
+  azalea_leaves: (px, r) => each((x, y) => px(x, y, r() < 0.12 ? '#e070c0' : r() < 0.1 ? 'rgb(40,80,25)' : shade([90, 140, 50], 0.75 + r() * 0.4))),
+  bamboo_mosaic: (px, r) => each((x, y) => {
+    const cell = ((x >> 2) + (y >> 2)) % 2, seam = x % 4 === 0 || y % 4 === 0;
+    px(x, y, seam ? '#8a7a30' : shade(cell ? [220, 200, 100] : [200, 180, 80], 0.95 + r() * 0.08));
+  }),
+  wind_block: px => each((x, y) => {
+    const d = Math.hypot(x - 7.5, y - 7.5), a = Math.atan2(y - 7.5, x - 7.5);
+    const swirl = Math.sin(a * 2 + d * 0.9) > 0.55;
+    px(x, y, x === 0 || y === 0 || x === 15 || y === 15 ? '#6aa8c8' : swirl ? '#ffffff' : '#bfe6f4');
+  }),
+  sunflower_block: px => each((x, y) => {
+    const d = Math.hypot(x - 7.5, y - 7.5);
+    px(x, y, d < 3.2 ? ((x + y) % 2 ? '#6a4020' : '#4a2a10') : d < 7 ? '#ffcc20' : '#5aa030');
   }),
 });
 

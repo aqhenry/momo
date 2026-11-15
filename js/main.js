@@ -19,7 +19,7 @@ import * as stroke from './items/stroke.js';
 import * as order from './items/order.js';
 import { renderRead, renderTap, renderRecite } from './items/text.js';
 import { renderPointRead } from './items/english.js';
-import { renderCalc, renderCraft, renderPattern } from './items/math.js';
+import { renderCalc, renderCraft, renderPattern, renderFour } from './items/math.js';
 import { render as renderMathExplore } from './items/math-explore.js';
 import { renderHunt, renderLab, renderDictation, mountPaper } from './items/pinyin-challenge.js';
 
@@ -39,6 +39,7 @@ const ITEM_TYPES = {
   pinyinLab: renderLab,
   dictation: renderDictation,
   recite: renderRecite,
+  four: renderFour,
   pointRead: renderPointRead,
 };
 
@@ -441,7 +442,7 @@ function itemTexts(it) {
 // so many that eliminating options would leave only the right one.
 function triesFor(it) {
   if (it.type === 'choice') return Math.max(1, Math.min(2, it.options.length - 2));
-  if (['letterHunt', 'dictation', 'pointRead', 'order'].includes(it.type)) return 3;
+  if (['letterHunt', 'dictation', 'pointRead', 'order', 'four'].includes(it.type)) return 3;
   return 2;
 }
 

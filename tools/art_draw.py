@@ -368,6 +368,67 @@ def peach():
     return p.finish()
 
 
+@pic
+def mushroom():
+    p = Pic()
+    p.rect((12, 16, 19, 28), '#f4ecd8')
+    p.layer(lambda d, c: d.pieslice((2, 3, 29, 28), 180, 360, fill=c), '#e0353a')
+    for box in ((7, 8, 11, 12), (15, 5, 18, 8), (21, 9, 25, 13)):
+        p.ellipse(box, '#ffffff', bevel=False)
+    return p.finish()
+
+
+@pic
+def tomato():
+    p = Pic()
+    p.ellipse((3, 7, 28, 29), '#e33a2e')
+    p.ellipse((7, 11, 12, 16), '#ff8a7a', bevel=False)
+    p.poly([(16, 4), (11, 9), (16, 8), (21, 9)], '#4f9a30')
+    p.line([(16, 2), (16, 6)], '#3f7a25', width=2)
+    return p.finish()
+
+
+@pic
+def bird():
+    p = Pic()
+    p.ellipse((5, 10, 24, 26), '#5ab0e8')
+    p.ellipse((16, 5, 27, 16), '#5ab0e8')
+    p.poly([(27, 9), (31, 11), (27, 13)], '#ffb020')
+    p.poly([(6, 14), (15, 16), (8, 22)], '#3f8fc8')
+    p.poly([(3, 18), (7, 15), (7, 22)], '#3f8fc8')
+    p.px([(23, 9)], '#1d2a3a')
+    return p.finish()
+
+
+@pic
+def banana():
+    p = Pic()
+    p.layer(lambda d, c: d.arc((3, 0, 29, 26), 30, 160, fill=c, width=7), '#ffd23a')
+    p.line([(26, 16), (29, 13)], '#6a4a20', width=2)
+    p.px([(4, 16), (4, 17)], '#6a4a20')
+    return p.finish()
+
+
+@pic
+def books():
+    p = Pic()
+    for k, (col, y) in enumerate((('#d6343a', 22), ('#3f8fd8', 16), ('#4f9a30', 10))):
+        x0 = 4 + (k % 2) * 2
+        p.rect((x0, y, x0 + 22, y + 5), col)
+        p.rect((x0 + 2, y + 1, x0 + 20, y + 1), '#f8f4e8', bevel=False)
+    return p.finish()
+
+
+@pic
+def schoolbag():
+    p = Pic()
+    p.layer(lambda d, c: d.rounded_rectangle((5, 8, 26, 29), radius=5, fill=c), '#e0353a')
+    p.layer(lambda d, c: d.rounded_rectangle((8, 18, 23, 27), radius=3, fill=c), '#c22a30')
+    p.layer(lambda d, c: d.arc((10, 2, 21, 14), 180, 360, fill=c, width=3), '#7a2020')
+    p.rect((14, 21, 17, 23), '#ffd23a')
+    return p.finish()
+
+
 def main():
     names = sys.argv[1:] or [n for n in DRAW if not (ART / f'{n}.png').exists()]
     for n in names:

@@ -20,7 +20,8 @@ function cells(lines, py) {
 }
 
 function passage(item, onTap) {
-  const wrap = h('div.passage');
+  // a long poem (5+ rows) uses smaller type so the whole thing and its button fit on screen
+  const wrap = h(`div.passage${item.lines.length >= 5 ? '.long' : ''}`);
   const rows = cells(item.lines, item.py);
   rows.forEach(row => {
     const line = h('div.pline');

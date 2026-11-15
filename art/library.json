@@ -334,5 +334,29 @@
   "peach": {
     "zh": "桃子",
     "prompt": "pink peach with two green leaves"
+  },
+  "mushroom": {
+    "zh": "蘑菇",
+    "prompt": "蘑菇 (drawn in tools/art_draw.py)"
+  },
+  "tomato": {
+    "zh": "番茄",
+    "prompt": "番茄 (drawn in tools/art_draw.py)"
+  },
+  "bird": {
+    "zh": "小鸟",
+    "prompt": "小鸟 (drawn in tools/art_draw.py)"
+  },
+  "banana": {
+    "zh": "香蕉",
+    "prompt": "香蕉 (drawn in tools/art_draw.py)"
+  },
+  "books": {
+    "zh": "一摞书",
+    "prompt": "一摞书 (drawn in tools/art_draw.py)"
+  },
+  "schoolbag": {
+    "zh": "书包",
+    "prompt": "书包 (drawn in tools/art_draw.py)"
   }
 }

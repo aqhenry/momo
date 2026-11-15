@@ -5,8 +5,9 @@ import { S } from '../phrases.js';
 
 export function render(root, item, ctx) {
   const pieces = item.pieces.map((text, i) => ({ text, i }));
-  const built = h('div.order-built');
-  const pool = h('div.order-pool');
+  const long = item.pieces.some(p => p.length > 8);
+  const built = h(`div.order-built${long ? '.long' : ''}`);
+  const pool = h(`div.order-pool${long ? '.long' : ''}`);
   let next = 0;
   let firstMiss = true;
 

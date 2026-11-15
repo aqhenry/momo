@@ -7,7 +7,9 @@
     "math-week9",
     "review-ch5",
     "math-week10",
-    "yuwen-u12"
+    "yuwen-u12",
+    "math-week11",
+    "yuwen-poems2"
   ],
   "check_models": [
     "qwen/qwen3.8-omni-flash",
@@ -23,6 +25,27 @@
     "风吹草低见牛羊。": "风吹草低<|phoneme_start|>xian4<|phoneme_end|>牛羊。",
     "敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。": "敕勒川，阴山下。天似穹庐，<|phoneme_start|>long3<|phoneme_end|>盖四野。天苍苍，野茫茫，风吹草低<|phoneme_start|>xian4<|phoneme_end|>牛羊。",
     "笼盖四野。": "<|phoneme_start|>long3<|phoneme_end|>盖四野。",
-    "背得真好！敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。": "背得真好！敕勒川，阴山下。天似穹庐，<|phoneme_start|>long3<|phoneme_end|>盖四野。天苍苍，野茫茫，风吹草低<|phoneme_start|>xian4<|phoneme_end|>牛羊。"
+    "背得真好！敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。": "背得真好！敕勒川，阴山下。天似穹庐，<|phoneme_start|>long3<|phoneme_end|>盖四野。天苍苍，野茫茫，风吹草低<|phoneme_start|>xian4<|phoneme_end|>牛羊。",
+    "风，唐，李峤。解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。": "风，唐，李峤。解落三秋叶，能开二月花。过江千尺浪，入竹万竿<|phoneme_start|>xie2<|phoneme_end|>。",
+    "是风！风吹落树叶，吹开花朵，吹起大浪，吹斜竹子。": "是风！风吹落树叶，吹开花朵，吹起大浪，吹<|phoneme_start|>xie2<|phoneme_end|>竹子。",
+    "入竹万竿斜。": "入竹万竿<|phoneme_start|>xie2<|phoneme_end|>。",
+    "解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。": "解落三秋叶，能开二月花。过江千尺浪，入竹万竿<|phoneme_start|>xie2<|phoneme_end|>。",
+    "背得真好！解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。": "背得真好！解落三秋叶，能开二月花。过江千尺浪，入竹万竿<|phoneme_start|>xie2<|phoneme_end|>。",
+    "这首诗叫《长歌行》，是汉乐府里的诗，有点长，我们分两半学。先读前三句。读完点我读好了。": "这首诗叫《长歌行》，是汉<|phoneme_start|>yue4<|phoneme_end|>府里的诗，有点长，我们分两半学。先读前三句。读完点我读好了。",
+    "长歌行，汉乐府。青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。": "长歌行，汉<|phoneme_start|>yue4<|phoneme_end|>府。青青园中葵，<|phoneme_start|>zhao1<|phoneme_end|>露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄<|phoneme_start|>hua1<|phoneme_end|>叶<|phoneme_start|>shuai1<|phoneme_end|>。",
+    "早上的露水，等着太阳把它晒干。朝露待日什么？": "早上的露水，等着太阳把它晒干。<|phoneme_start|>zhao1<|phoneme_end|>露待日什么？",
+    "朝露待日晞。": "<|phoneme_start|>zhao1<|phoneme_end|>露待日晞。",
+    "青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。": "青青园中葵，<|phoneme_start|>zhao1<|phoneme_end|>露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄<|phoneme_start|>hua1<|phoneme_end|>叶<|phoneme_start|>shuai1<|phoneme_end|>。",
+    "焜黄华叶衰。": "焜黄<|phoneme_start|>hua1<|phoneme_end|>叶<|phoneme_start|>shuai1<|phoneme_end|>。",
+    "百川东到海，何时复西归？少壮不努力，老大徒伤悲！": "百川东到海，何时复西归？<|phoneme_start|>shao4<|phoneme_end|>壮不努力，老大徒伤悲！",
+    "少壮不努力。": "<|phoneme_start|>shao4<|phoneme_end|>壮不努力。",
+    "少壮不努力，老大徒伤悲。这两句告诉我们什么？": "<|phoneme_start|>shao4<|phoneme_end|>壮不努力，老大徒伤悲。这两句告诉我们什么？",
+    "少壮不努力，": "<|phoneme_start|>shao4<|phoneme_end|>壮不努力，",
+    "青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。百川东到海，何时复西归？少壮不努力，老大徒伤悲！": "青青园中葵，<|phoneme_start|>zhao1<|phoneme_end|>露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄<|phoneme_start|>hua1<|phoneme_end|>叶<|phoneme_start|>shuai1<|phoneme_end|>。百川东到海，何时复西归？<|phoneme_start|>shao4<|phoneme_end|>壮不努力，老大徒伤悲！",
+    "背得真好！青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。百川东到海，何时复西归？少壮不努力，老大徒伤悲！": "背得真好！青青园中葵，<|phoneme_start|>zhao1<|phoneme_end|>露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄<|phoneme_start|>hua1<|phoneme_end|>叶<|phoneme_start|>shuai1<|phoneme_end|>。百川东到海，何时复西归？<|phoneme_start|>shao4<|phoneme_end|>壮不努力，老大徒伤悲！",
+    "描一描：万竿斜的万。跟着灰色的笔画写。": "描一描：万竿<|phoneme_start|>xie2<|phoneme_end|>的万。跟着灰色的笔画写。",
+    "听写：万竿斜的万。在田字格里写出来。": "听写：万竿<|phoneme_start|>xie2<|phoneme_end|>的万。在田字格里写出来。",
+    "描一描：少壮不努力的不。跟着灰色的笔画写。": "描一描：<|phoneme_start|>shao4<|phoneme_end|>壮不努力的不。跟着灰色的笔画写。",
+    "听写：少壮不努力的不。在田字格里写出来。": "听写：<|phoneme_start|>shao4<|phoneme_end|>壮不努力的不。在田字格里写出来。"
   }
 }

@@ -101,7 +101,7 @@ export function render(root, item, ctx) {
         const hole = holes[k];
         if (Number(v) !== hole.n) {
           hole.t.textContent = v; hole.t.classList.add('wrong'); shakeEl(hole.t); wrong(v);
-          setTimeout(() => { hole.t.textContent = '?'; hole.t.classList.remove('wrong'); }, 900);
+          setTimeout(() => { if (locked) return; hole.t.textContent = '?'; hole.t.classList.remove('wrong'); }, 900);
           return;
         }
         hole.t.textContent = v; hole.t.classList.remove('now'); hole.t.classList.add('right'); sfx.place();
