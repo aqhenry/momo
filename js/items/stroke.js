@@ -31,14 +31,15 @@ export function render(root, item, ctx) {
   let misses = 0;
   function quiz() {
     writer.quiz({
-      onMistake: () => { misses++; },
+      // challenge mode: every third wrong stroke is one mistake (costs a heart)
+      onMistake: () => { misses++; if (ctx.challenge && misses % 3 === 0) ctx.wrong(`写错 ${misses} 笔`, item.hint); },
       onCorrectStroke: ({ strokeNum, strokesRemaining }) => {
         const name = names[strokeNum];
         status.textContent = name ? `第${strokeNum + 1}笔：${name}` : `还剩 ${strokesRemaining} 笔`;
         if (name) ctx.say(name);
       },
       onComplete: () => {
-        if (misses >= 3) ctx.wrong(`写错 ${misses} 次`, null);
+        if (misses >= 3 && !ctx.challenge) ctx.wrong(`写错 ${misses} 次`, null);
         ctx.right(item.after);
       },
     });
@@ -51,5 +52,6 @@ export function render(root, item, ctx) {
     writer.animateCharacter({ onComplete: () => { writer.hideCharacter(); quiz(); } });
   }
 
+  ctx.reveal = () => { writer.cancelQuiz(); writer.showCharacter(); demoBtn.disabled = true; };
   quiz();
 }

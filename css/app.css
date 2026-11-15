@@ -801,3 +801,16 @@ div.num-tile { display: flex; align-items: center; justify-content: center; }
 .child-practice .dictation-pool { flex-direction: column; gap: 10px; }
 .child-practice .dictation-keys.steps.vowels { grid-template-columns: repeat(6, minmax(72px, 92px)); }
 .child-practice .dictation-keys.steps.vowels .letter-key { background: #fff1e4; box-shadow: 0 4px 0 #e0a070, inset 0 0 0 3px var(--fin); }
+
+/* ---------- challenge mode ---------- */
+.hearts { display: flex; gap: 4px; margin-bottom: 6px; }
+.hearts .sprite { width: 34px; height: 34px; }
+.hearts.hurt { animation: shake .4s; }
+.hb-slot.missed { background: rgba(229,72,77,.35); }
+.hb-slot.missed .sprite { width: 30px; height: 30px; }
+.hb-slot.redo { box-shadow: inset 0 0 0 3px #e0a020, inset 0 0 0 6px #373737; }
+.item-body.revealed { pointer-events: none; }
+.option.reveal, .pos-btn.reveal, .relation.reveal, .extreme-group.reveal { animation: pop .6s 2; outline: 5px solid var(--right); outline-offset: 2px; }
+.fail-panel { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.fail-hearts { display: flex; gap: 6px; }
+.fail-hearts .sprite { width: 44px; height: 44px; }

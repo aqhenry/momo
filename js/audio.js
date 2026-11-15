@@ -66,7 +66,14 @@ export async function preload(texts, { profile } = {}) {
 let current = null;   // { stop() } for whatever is speaking now
 let token = 0;
 
-async function playBuffer(buf) {
+// Longest a clip may play for its text: a voice model once appended an invented story to a short hint.
+// The builders reject such clips; this keeps a bad one from ever playing on.
+function maxSeconds(text) {
+  const units = (text.match(/[\u4e00-\u9fff]/g) || []).length + (text.match(/[A-Za-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü']+/g) || []).length;
+  return 3 + 0.7 * units;
+}
+
+async function playBuffer(buf, limit = Infinity) {
   const c = ac();
   if (!c) return;
   // after an interruption the context only comes back on a tap; until then skip the clip
@@ -81,8 +88,9 @@ async function playBuffer(buf) {
     src.buffer = buf;
     src.connect(c.destination);
     // safety net: the clock freezes if the audio gets interrupted mid-clip
-    const timer = setTimeout(resolve, buf.duration * 1000 + 1500);
-    const done = () => { clearTimeout(timer); resolve(); };
+    const timer = setTimeout(resolve, Math.min(buf.duration, limit) * 1000 + 1500);
+    const cut = buf.duration > limit ? setTimeout(() => { try { src.stop(); } catch (e) {} }, limit * 1000) : null;
+    const done = () => { clearTimeout(timer); clearTimeout(cut); resolve(); };
     src.onended = done;
     current = { stop: () => { try { src.stop(); } catch (e) {} done(); } };
     src.start();
@@ -119,7 +127,7 @@ export async function speak(text, { fallback, profile } = {}) {
     if (mine !== token) return;
     const buf = await clip(part, overrides);
     if (mine !== token) return;
-    if (buf) await playBuffer(buf);
+    if (buf) await playBuffer(buf, maxSeconds(part));
     else await sayBuiltIn(parts.length === 1 && fallback ? fallback : part);
   }
 }

@@ -8,7 +8,7 @@ import subprocess
 import tempfile
 
 from tts_build import ROOT, AUDIO, code_lines, level_lines
-from tts_check import check
+from tts_check import check, too_long
 from tts_samples import api_key
 
 
@@ -56,6 +56,10 @@ def build(name):
                 generation = next((s.split(':', 1)[1].strip() for s in headers.read_text().splitlines()
                                    if s.lower().startswith('x-generation-id:')), None)
                 verdicts = []
+                if too_long(text, raw):
+                    attempts.append({'generation': generation, 'checks': [{'ok': False, 'problems': 'clip far longer than the script'}]})
+                    print(f'  retry {attempt}: {text} -- too long', flush=True)
+                    continue
                 for model in config['check_models']:
                     try:
                         verdict = check(key, text, raw, model=model)

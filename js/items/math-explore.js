@@ -30,6 +30,17 @@ export function render(root, item, ctx) {
   root.classList.add('math-explore');
   let locked = false;
   const right = () => { if (!locked) { locked = true; root.querySelectorAll('button').forEach(b => b.disabled = true); ctx.right(item.after); } };
+  ctx.reveal = () => {
+    locked = true;
+    root.querySelectorAll('button').forEach(b => { b.disabled = true; });
+    if (item.mode === 'track') root.querySelectorAll('.num-tile').forEach(t => {
+      const n = Number(t.getAttribute('aria-label') ?? NaN);
+      if (item.answer.includes(n)) t.classList.add('right');
+      if (t.classList.contains('hole')) { t.textContent = t.dataset.n; t.classList.add('right'); }
+    });
+    if (item.mode === 'grid') root.querySelectorAll('.pos-btn').forEach(b => { if (b.textContent.includes(item.answer)) b.classList.add('reveal'); });
+    if (['compare', 'extreme'].includes(item.mode)) root.querySelectorAll('.relation, .extreme-group')[item.answer]?.classList.add('reveal');
+  };
   const wrong = got => ctx.wrong(got, item.hint);
   if (item.mode === 'compare') {
     const pairs = h('div.explore-pairs');
@@ -79,7 +90,7 @@ export function render(root, item, ctx) {
       const holes = [];
       for (let n = item.from ?? 0; n <= (item.to ?? 10); n++) {
         const marked = (item.mark || []).includes(n), hole = want.has(n);
-        const t = h(`div.num-tile${marked ? '.marked' : ''}${hole ? '.hole' : ''}`, hole ? '?' : String(n));
+        const t = h(`div.num-tile${marked ? '.marked' : ''}${hole ? '.hole' : ''}`, { 'data-n': hole ? n : null }, hole ? '?' : String(n));
         if (hole) holes.push({ n, t });
         track.append(t);
       }

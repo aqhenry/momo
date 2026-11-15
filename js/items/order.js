@@ -16,6 +16,10 @@ export function render(root, item, ctx) {
     pool.append(btn);
   }
   root.append(promptEl(item.prompt, ctx), built, pool);
+  ctx.reveal = () => {
+    item.pieces.forEach((t, k) => { built.children[k].textContent = t; built.children[k].classList.add('filled'); });
+    pool.querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.add('used'); });
+  };
 
   function tap(p, btn) {
     if (btn.disabled) return;

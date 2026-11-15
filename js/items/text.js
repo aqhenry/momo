@@ -67,6 +67,7 @@ export function renderTap(root, item, ctx) {
   const all = rows.flat().filter(c => matches(item.rule, c.p));
   const check = h('button.mc-btn.go', { onclick: submit }, '找完了！');
   root.append(promptEl(item.prompt, ctx), wrap, h('div.row-btns', counter, check));
+  ctx.reveal = () => { finished = true; all.forEach(c => c.el.classList.add('right')); check.disabled = true; };
 
   function submit() {
     const wrongPicks = [...picked].filter(c => !matches(item.rule, c.p));

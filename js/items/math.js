@@ -112,6 +112,21 @@ export function renderCalc(root, item, ctx) {
   }
   let busy = false;
   paint();
+  ctx.reveal = () => {
+    busy = true;
+    const answer = item.accept?.[0]?.match(TOKEN) || solveAll();
+    if (answer) blanks.forEach(b => { b.val = answer[b.i]; b.el.textContent = b.val; b.el.classList.remove('wrong', 'now'); b.el.classList.add('right'); });
+  };
+  // one true filling of all blanks (for showing the answer); numbers 0..20, signs from the sign pad
+  function solveAll() {
+    const choicesFor = b => (b.kind === 'num' ? Array.from({ length: 21 }, (_, v) => String(v)) : signs);
+    const fill = (k, cur) => {
+      if (k === blanks.length) return isTrue(cur) ? cur : null;
+      for (const v of choicesFor(blanks[k])) { const c = [...cur]; c[blanks[k].i] = v; const r = fill(k + 1, c); if (r) return r; }
+      return null;
+    };
+    return fill(0, [...tokens]);
+  }
 
   function next() { return blanks.find(b => b.val === ''); }
   // values that would be right in the current blank (lets the writing pad trust a so-so read of the right answer)
@@ -198,6 +213,12 @@ export function renderCraft(root, item, ctx) {
       writePad(key, { expect: () => [String(want)], say: () => ctx.say(S.writeConfirm) })));
   } else root.append(promptEl(item.prompt, ctx), table2, numpad(item.pad ?? 5, key));
   let busy = false;
+  ctx.reveal = () => {
+    busy = true;
+    target.querySelector('.m-slot-num').textContent = String(want);
+    target.classList.remove('missing', 'wrong');
+    target.classList.add('right');
+  };
 
   async function key(k) {
     if (busy || k === 'back') return;

@@ -1215,7 +1215,7 @@
             "This is my dad."
           ],
           "pic": "art:dad",
-          "say": "听一听：This is my dad. 现在用手指着，一个词一个词点着读。",
+          "say": "This is my dad. 先听一听，再用手指着，一个词一个词读。",
           "after": "This is my dad.",
           "source": "英语 P3"
         },

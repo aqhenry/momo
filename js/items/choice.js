@@ -23,6 +23,11 @@ export function render(root, item, ctx) {
   }
 
   root.append(promptEl(item.prompt, ctx), grid);
+  ctx.reveal = () => {
+    locked = true;
+    order.find(x => x.i === item.answer).btn.classList.add('right', 'reveal');
+    if (confirm) confirm.disabled = true;
+  };
   if (confirm) root.append(confirm);
 
   function tap(o, btn) {

@@ -27,6 +27,10 @@ export function renderHunt(root, item, ctx) {
     grid.append(button);
   }
   root.append(h('div.challenge-title', item.title || '听声音，挖出藏好的声母'), counter, grid);
+  ctx.reveal = () => {
+    locked = true;
+    grid.querySelectorAll('.hunt-cell').forEach(b => { if (b.getAttribute('aria-label') === item.target) b.classList.add('found'); b.disabled = true; });
+  };
 }
 
 const labels = { ini: '声母', med: '介母', fin: '韵母' };
@@ -47,6 +51,14 @@ export function renderLab(root, item, ctx) {
     row.append(h('div.lab-column', h(`span.tag.${slot.kind}`, labels[slot.kind]), slot.el));
   });
   root.append(h('div.challenge-title', '拼一拼'), row, pool, result);
+  ctx.reveal = () => {
+    locked = true;
+    slots.forEach(s => { s.got = s.want; });
+    paint();
+    pool.hidden = true;
+    result.replaceChildren(h('span.lab-arrow', '→'), h('div.paper', gridSVG(item.word || joinSounds(item.parts), 32, { minWidth: 180 })));
+    result.hidden = false;
+  };
   paint();
 
   function paint() {
@@ -149,6 +161,12 @@ export function renderDictation(root, item, ctx) {
   } });
   root.append(h('div.dictation-heading', promptEl(item.prompt, ctx), item.prompt ? null : heading), word, progress, pool,
     h('div.dictation-actions', back, submit));
+  ctx.reveal = () => {
+    locked = true;
+    want.forEach((w, k) => { got[k] = w; done[k] = true; });
+    paint();
+    root.querySelectorAll('button').forEach(b => { b.disabled = true; });
+  };
   paint();
 
   function hasLetters() {

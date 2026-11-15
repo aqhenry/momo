@@ -23,8 +23,20 @@ PROMPT = '''你是小学语文老师，正在检查给一年级小朋友用的�
 - 台本里的完整拼音音节（例如 mú、lǎ ba、dǎ gǔ）要整体读出，不要逐字母拆读。只有单独出现的声母才读呼读音（如 b 读 bō）；单独韵母按它的声调朗读，不能读成英文字母；
 - 拼音可以用同音汉字来生成配音，仅比较实际发音，不因同音汉字的字形不同而判错；三声连读、“一”“不”等正常普通话变调不算错误；
 - 台本里的英文单词和句子（如 grandma、I'm cold、This is my mum.）按标准英语读出即可，不按拼音规则判断；
+- 台本读完后不能再有任何多余的话（比如编出来的故事）；
 - 语气自然，没有奇怪的杂音或重复。
 只输出 JSON：{{"ok": true/false, "problems": "有问题时用中文简短说明哪里不对"}}'''
+
+
+def too_long(script, path):
+    """True if a clip runs far past its script (the voice model sometimes keeps talking: invented stories).
+    Deterministic guard used before any model check; such clips are re-recorded, never published."""
+    out = subprocess.run(['afinfo', str(path)], capture_output=True, text=True).stdout
+    m = re.search(r'estimated duration: ([\d.]+)', out)
+    if not m:
+        return False
+    units = len(re.findall(r'[\u4e00-\u9fff]', script)) + len(re.findall(r"[A-Za-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü']+", script))
+    return float(m.group(1)) > 2.5 + 0.55 * units
 
 
 def check(key, script, path, model=CHECK_MODEL):

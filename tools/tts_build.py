@@ -25,7 +25,7 @@ import tempfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from tts_samples import api_key, synth  # noqa: E402
-from tts_check import check  # noqa: E402
+from tts_check import check, too_long  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 AUDIO = ROOT / 'audio'
@@ -99,8 +99,11 @@ def record(key, text, do_check, fallback=False):
             data, fmt = synth(key, model, voice, extra, spoken)
             source = pathlib.Path(tmp) / f'clip.{fmt}'
             source.write_bytes(data)
-            ok = True
-            if do_check:
+            ok = not too_long(text, source)
+            if not ok:
+                problems = 'clip far longer than the script'
+                print(f'  retry {attempt}/{ATTEMPTS}: {text} -- too long', flush=True)
+            elif do_check:
                 try:
                     verdict = check(key, text, source, **({'model': checker} if checker else {}))
                     ok, problems = bool(verdict.get('ok')), verdict.get('problems', '')

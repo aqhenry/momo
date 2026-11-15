@@ -5,6 +5,8 @@ import { S, PRAISE, stageDone } from './phrases.js';
 import { BLOCKS, RARITY, blockURL, iconEl } from './blocks.js';
 import { answerXP, COMBO_XP, isCombo, levelOf, levelUpDrop, openChest, CHESTS } from './rewards.js';
 import { spriteEl, spriteURL } from './sprites.js';
+
+const HEARTS = 5;
 import { picEl } from './pics.js';
 import { furnaceStatus, workbenchAlert } from './craft.js';
 import { burst, orbs, banner } from './fx.js';
@@ -213,11 +215,21 @@ async function screenPlay(levelId, stageId) {
   const stageIdx = level.stages.findIndex(s => s.id === stageId);
   const stage = level.stages[stageIdx];
   const practice = level.rewardPolicy === 'practice';
+  // challenge: hearts, at most two tries per question, a missed question returns once at the end,
+  // stars and chest from first-try accuracy, no hearts left = stage failed (see CLAUDE.md)
+  const challenge = level.rewardPolicy === 'challenge';
+  const kid = practice || challenge;     // child-friendly play screen (icons, pause, tap guards)
 
-  const items = stageItems(stage);
+  const items = [...stageItems(stage)];
+  const baseTotal = items.length;
   const say = (text, options = {}) => speak(text, { ...options, profile: level.audioProfile });
-  const total = items.length;
   const slots = stage.items.map(() => h('div.hb-slot'));
+  const hotbar = h('div.hotbar', slots);
+  let hearts = HEARTS;
+  const heartRow = h('div.hearts', Array.from({ length: HEARTS }, () => spriteEl('heart')));
+  const paintHearts = () => [...heartRow.children].forEach((el, k) => {
+    el.style.backgroundImage = `url(${spriteURL(k < hearts ? 'heart' : 'heart_off')})`;
+  });
   const xpFill = h('div.xp-fill');
   const xpLevel = h('div.xp-level', '0');
   const paintXP = () => {
@@ -228,21 +240,21 @@ async function screenPlay(levelId, stageId) {
   paintXP();
   const xp = h('div.xp', xpFill, h('div.xp-ticks'), xpLevel);
   const body = h('div.item-body');
-  if (practice) app.classList.add('child-practice');
+  if (kid) app.classList.add('child-practice');
   // Ignore carry-over taps during a transition and accidental rapid double taps.
   let tapAfter = 0;
   body.addEventListener('click', event => {
-    if (!practice || !event.target.closest('button')) return;
+    if (!kid || !event.target.closest('button')) return;
     const now = performance.now();
     if (now < tapAfter) { event.preventDefault(); event.stopImmediatePropagation(); return; }
     tapAfter = now + 240;
   }, true);
   app.append(h('div.screen',
-    topBar(practice ? iconBtn('back', pause) : backBtn(`#/level/${levelId}`, 'cross'), h('div.plate', picEl(stage.icon || 'sprite:pickaxe'), stage.title),
+    topBar(kid ? iconBtn('back', pause) : backBtn(`#/level/${levelId}`, 'cross'), h('div.plate', picEl(stage.icon || 'sprite:pickaxe'), stage.title),
       h('button.mc-btn.icon', { 'aria-label': '再听一次', onclick: () => say(current?.say || '') }, spriteEl('speaker'))),
     h('div.play-wrap',
       h('div.mc-panel.play-panel', body),
-      h('div.hud', xp, h('div.hotbar', slots)))));
+      h('div.hud', challenge ? heartRow : null, xp, hotbar))));
 
   let current = null;
   let firstTry = 0;
@@ -273,29 +285,45 @@ async function screenPlay(levelId, stageId) {
     body.innerHTML = '';
     body.classList.remove('dictation-body', 'lab-body', 'dictation-tones', 'math-explore');
     body.classList.remove('enter'); void body.offsetWidth; body.classList.add('enter');
-    if (!practice && current.source) body.append(h('div.item-source', current.source));
-    if (!practice && stage.note) body.append(h('div.challenge-note', stage.note));
+    if (!kid && current.source) body.append(h('div.item-source', current.source));
+    if (!kid && stage.note) body.append(h('div.challenge-note', stage.note));
+    body.classList.remove('revealed');
     slots.forEach((s, k) => s.classList.toggle('now', k === i));
     let attempts = 0, solved = false;
+    const limit = triesFor(current);
     const ctx = {
       practice,
+      challenge,
       write: level.inputMode === 'write',
       dictation: level.dictation,
       speech: level.speech || {},
       say: (t, fallback) => say(t, { fallback }),
       wrong(got, hint) {
+        if (solved) return;
         attempts++;
         mistakes.push({ q: current.q || current.say, got: String(got ?? '') });
-        if (hint !== null) { (practice ? sfx.tap : sfx.wrong)(); say(hint || retry()); }
+        if (!challenge) {
+          if (hint !== null) { (practice ? sfx.tap : sfx.wrong)(); say(hint || retry()); }
+          return;
+        }
+        sfx.wrong();
+        tapAfter = performance.now() + 1200;      // think before the next tap
+        hearts--;
+        paintHearts();
+        heartRow.classList.remove('hurt'); void heartRow.offsetWidth; heartRow.classList.add('hurt');
+        if (hearts <= 0) { solved = true; fail(); return; }
+        if (attempts >= limit) reveal();
+        else say(hint || retry());
       },
       async right(after) {
         if (solved || !body.isConnected) return;
         solved = true;
-        const first = attempts === 0;
+        const first = attempts === 0 && !current._redo;
         if (first) firstTry++;
         if (practice || first) streak++; else streak = 0;
         // XP instead of a block per answer; a full XP bar (level-up) gives one block.
         let gain = answerXP(current, practice || first);
+        if (challenge && current._redo) gain = 1;
         const combo = (practice || first) && isCombo(streak);
         if (combo) gain += COMBO_XP;
         const before = levelOf(store.state.xp || 0).level;
@@ -327,16 +355,35 @@ async function screenPlay(levelId, stageId) {
         await say(lines);
         await wait(350);
         if (!body.isConnected || location.hash !== `#/play/${levelId}/${stageId}`) return;
-        const next = () => { if (i + 1 < total) show(i + 1); else finish(); };
-        if (paused) pendingNext = next;
-        else next();
+        advance(i);
       },
     };
+    // a missed question in challenge mode: show and say the answer, then move on; it comes back once at the end
+    async function reveal() {
+      solved = true;
+      body.classList.add('revealed');
+      try { ctx.reveal?.(); } catch (e) { console.error(e); }
+      slots[i].className = 'hb-slot missed';
+      slots[i].replaceChildren(spriteEl('cross'));
+      const again = !current._redo;
+      if (again) {
+        items.push({ ...current, _redo: true });
+        const slot = h('div.hb-slot.redo');
+        slots.push(slot);
+        hotbar.append(slot);
+      }
+      await say([again ? S.reveal : S.revealLast, current.after]);
+      await wait(600);
+      if (!body.isConnected || location.hash !== `#/play/${levelId}/${stageId}`) return;
+      advance(i);
+    }
     preload(itemTexts(current), { profile: level.audioProfile });
     ITEM_TYPES[current.type](body, current, ctx);
     setTimeout(() => {
       if (!body.isConnected || current !== items[i] || paused) return;
-      const guide = practice && (i === 0 || items[i - 1].type !== current.type)
+      if (challenge && i === 0) { say([S.challengeIntro, current.say]); return; }
+      if (current._redo && !items[i - 1]?._redo) { say([S.redo, current.say]); return; }
+      const guide = kid && (i === 0 || items[i - 1].type !== current.type)
         ? current.type === 'dictation' ? level.speech.letters : current.type === 'pinyinLab' ? level.speech.labGuide
           : level.inputMode === 'write' && i === 0 && ['calc', 'craft'].includes(current.type) ? level.speech.write : null
         : null;
@@ -344,7 +391,26 @@ async function screenPlay(levelId, stageId) {
     }, 350);
   }
 
+  function advance(i) {
+    const next = () => { if (i + 1 < items.length) show(i + 1); else finish(); };
+    if (paused) pendingNext = next;
+    else next();
+  }
+
+  // out of hearts: the stage is not finished and gives no chest; the XP he earned stays
+  function fail() {
+    stopSpeaking();
+    const overlay = h('div.practice-pause', h('div.mc-panel.fail-panel',
+      h('div.fail-hearts', Array.from({ length: HEARTS }, () => spriteEl('heart_off'))),
+      h('div.challenge-title', '生命值用完了'),
+      h('div.pause-actions',
+        h('button.mc-btn.go', { onclick: () => { overlay.remove(); route(); } }, spriteEl('forward'), '再挑战'),
+        h('button.mc-btn', { onclick: () => go(`#/level/${levelId}`) }, spriteEl('map'), '回地图'))));
+    setTimeout(() => { if (body.isConnected) { app.append(overlay); say(S.outOfHearts); } }, 900);
+  }
+
   function finish() {
+    const total = baseTotal;
     const rate = firstTry / total;
     const stars = practice ? 3 : rate >= 0.9 ? 3 : rate >= 0.7 ? 2 : 1;
     const replay = !!store.stage(levelId, stageId)?.done;
@@ -367,9 +433,17 @@ function itemTexts(it) {
   return [it.say, it.after, it.hint, it.prompt?.picSay, it.read, ...(it.strokes || []), ...(it.pieces || []), ...opts, ...PRAISE];
 }
 
+// How many wrong tries a question gets in challenge mode before its answer is shown. A choice never gets
+// so many that eliminating options would leave only the right one.
+function triesFor(it) {
+  if (it.type === 'choice') return Math.max(1, Math.min(2, it.options.length - 2));
+  if (['letterHunt', 'dictation', 'pointRead', 'order'].includes(it.type)) return 3;
+  return 2;
+}
+
 function showReward(level, stageIdx, stars, chest, fresh, earned, replay, achieved = []) {
   const next = level.stages[stageIdx + 1];
-  const practice = level.rewardPolicy === 'practice';
+  const practice = level.rewardPolicy === 'practice' || level.rewardPolicy === 'challenge';
   app.innerHTML = '';
   const kind = chest.kind === 'wood' ? 'chest' : `chest_${chest.kind}`;
   const chestIcon = spriteEl(kind, `chest ${chest.kind}`);
@@ -492,6 +566,7 @@ async function screenParent() {
       h('h2', `${meta.subject} · ${lv.title}`),
       h('div.p-note', lv.note || ''),
       lv.rewardPolicy === 'practice' ? h('div.p-note', '练习完成并订正即可获得三星；首次答对情况仅供复习参考，重练不减少奖励。') : null,
+      lv.rewardPolicy === 'challenge' ? h('div.p-note', '挑战模式：每关 5 颗心，答错一次少一颗，心用完本关失败；每题最多两次机会，错了会显示答案并在最后重考；星星和宝箱按一次答对率（90% 三星、70% 两星）。') : null,
       rows,
       h('button.mc-btn.small', { onclick: () => { if (confirm('清空这个任务的进度？')) { store.resetLevel(lv.id); route(); } } }, '重置这个任务')));
   }

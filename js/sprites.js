@@ -205,6 +205,7 @@ const DRAW = {
     g.rect(9, 6, 2, 2, '#f3c79a'); g.rect(11, 7, 2, 2, '#f3c79a');
     g.px(7, 2, '#ffe6cf');
   },
+  heart_off(g) { DRAW.heart(g); for (const row of g.grid) row.forEach((c, i) => { if (c) row[i] = c === '#ff9a9a' ? '#8a8a8a' : '#4a4a4a'; }); },
   apple(g) { g.disc(8, 9.5, 5.5, '#d63030'); g.rect(8, 2, 1, 3, '#6a4020'); g.rect(9, 3, 3, 2, '#4caf50'); },
 };
 
