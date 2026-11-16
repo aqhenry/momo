@@ -1,0 +1,1382 @@
+{
+ "id": "english-u5",
+ "title": "国王的动物园",
+ "blockSet": "zoo",
+ "audioProfile": "jqx-b",
+ "rewardPolicy": "challenge",
+ "note": "英语 Unit 5 词卡：宠物、花园里的动物、国王王后与短语 · 字母 Qq Rr Ss Tt · 拼短单词 · 指读 · 复习 Unit 1–3",
+ "intro": "墨然，国王的动物园开门啦！今天认识小动物的英文名字，找字母，拼单词，还要用手指着读句子。闯过全部关卡，国王会送你一个王冠方块哦！",
+ "speech": {
+  "pause": "休息一下吗？点绿色箭头继续玩，点地图回去。",
+  "combo": "你又连对了三题，经验加倍！"
+ },
+ "achievements": [
+  {
+   "id": "zoo-all",
+   "block": "crown_block",
+   "title": "闯过国王的动物园",
+   "stages": [
+    "pets",
+    "garden",
+    "royal",
+    "letters",
+    "spell",
+    "sentences",
+    "review"
+   ]
+  }
+ ],
+ "stages": [
+  {
+   "id": "pets",
+   "title": "宠物朋友",
+   "icon": "art:dog",
+   "note": "dog cat fish bird hamster tortoise",
+   "items": [
+    {
+     "type": "choice",
+     "q": "听音选图 dog",
+     "source": "英语 U5 词卡",
+     "say": "听一听：dog。dog 在哪里？",
+     "options": [
+      {
+       "pic": "art:bird"
+      },
+      {
+       "pic": "art:rabbit"
+      },
+      {
+       "pic": "art:turtle"
+      },
+      {
+       "pic": "art:dog"
+      }
+     ],
+     "answer": 3,
+     "after": "dog，小狗。",
+     "hint": "再听一遍：dog，dog。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 cat",
+     "source": "英语 U5 词卡",
+     "say": "听一听：cat。cat 在哪里？",
+     "options": [
+      {
+       "pic": "art:fish"
+      },
+      {
+       "pic": "art:dog"
+      },
+      {
+       "pic": "art:rabbit"
+      },
+      {
+       "pic": "art:cat"
+      }
+     ],
+     "answer": 3,
+     "after": "cat，小猫。",
+     "hint": "再听一遍：cat，cat。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 fish",
+     "source": "英语 U5 词卡",
+     "say": "听一听：fish。fish 在哪里？",
+     "options": [
+      {
+       "pic": "art:tiger"
+      },
+      {
+       "pic": "art:hamster"
+      },
+      {
+       "pic": "art:cat"
+      },
+      {
+       "pic": "art:fish"
+      }
+     ],
+     "answer": 3,
+     "after": "fish，鱼。",
+     "hint": "再听一遍：fish，fish。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 bird",
+     "source": "英语 U5 词卡",
+     "say": "听一听：bird。bird 在哪里？",
+     "options": [
+      {
+       "pic": "art:rabbit"
+      },
+      {
+       "pic": "art:bird"
+      },
+      {
+       "pic": "art:dog"
+      },
+      {
+       "pic": "art:cat"
+      }
+     ],
+     "answer": 1,
+     "after": "bird，小鸟。",
+     "hint": "再听一遍：bird，bird。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 hamster",
+     "source": "英语 U5 词卡",
+     "say": "听一听：hamster。hamster 在哪里？",
+     "options": [
+      {
+       "pic": "art:bird"
+      },
+      {
+       "pic": "art:tiger"
+      },
+      {
+       "pic": "art:cat"
+      },
+      {
+       "pic": "art:hamster"
+      }
+     ],
+     "answer": 3,
+     "after": "hamster，仓鼠。",
+     "hint": "再听一遍：hamster，hamster。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 tortoise",
+     "source": "英语 U5 词卡",
+     "say": "听一听：tortoise。tortoise 在哪里？",
+     "options": [
+      {
+       "pic": "art:cat"
+      },
+      {
+       "pic": "art:tiger"
+      },
+      {
+       "pic": "art:dog"
+      },
+      {
+       "pic": "art:turtle"
+      }
+     ],
+     "answer": 3,
+     "after": "tortoise，乌龟。",
+     "hint": "再听一遍：tortoise，tortoise。"
+    },
+    {
+     "type": "choice",
+     "q": "看图选词 dog",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:dog"
+     },
+     "say": "看图片，哪个是它的英文单词？先看第一个字母。",
+     "options": [
+      {
+       "text": "dog",
+       "en": true
+      },
+      {
+       "text": "tortoise",
+       "en": true
+      },
+      {
+       "text": "fish",
+       "en": true
+      }
+     ],
+     "answer": 0,
+     "after": "dog，小狗。",
+     "hint": "它是 dog。找一找哪个单词是 dog。"
+    },
+    {
+     "type": "choice",
+     "q": "看图选词 fish",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:fish"
+     },
+     "say": "看图片，哪个是它的英文单词？先看第一个字母。",
+     "options": [
+      {
+       "text": "cat",
+       "en": true
+      },
+      {
+       "text": "tortoise",
+       "en": true
+      },
+      {
+       "text": "fish",
+       "en": true
+      }
+     ],
+     "answer": 2,
+     "after": "fish，鱼。",
+     "hint": "它是 fish。找一找哪个单词是 fish。"
+    }
+   ]
+  },
+  {
+   "id": "garden",
+   "title": "花园探险",
+   "icon": "art:garden",
+   "note": "garden nest bee rabbit snake tiger",
+   "items": [
+    {
+     "type": "choice",
+     "q": "听音选图 garden",
+     "source": "英语 U5 词卡",
+     "say": "听一听：garden。garden 在哪里？",
+     "options": [
+      {
+       "pic": "art:nest"
+      },
+      {
+       "pic": "art:garden"
+      },
+      {
+       "pic": "art:cat"
+      },
+      {
+       "pic": "art:rabbit"
+      }
+     ],
+     "answer": 1,
+     "after": "garden，花园。",
+     "hint": "再听一遍：garden，garden。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 nest",
+     "source": "英语 U5 词卡",
+     "say": "听一听：nest。nest 在哪里？",
+     "options": [
+      {
+       "pic": "art:garden"
+      },
+      {
+       "pic": "art:nest"
+      },
+      {
+       "pic": "art:rabbit"
+      },
+      {
+       "pic": "art:hamster"
+      }
+     ],
+     "answer": 1,
+     "after": "nest，鸟窝。",
+     "hint": "再听一遍：nest，nest。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 bee",
+     "source": "英语 U5 词卡",
+     "say": "听一听：bee。bee 在哪里？",
+     "options": [
+      {
+       "pic": "art:bee"
+      },
+      {
+       "pic": "art:rabbit"
+      },
+      {
+       "pic": "art:dog"
+      },
+      {
+       "pic": "art:garden"
+      }
+     ],
+     "answer": 0,
+     "after": "bee，蜜蜂。",
+     "hint": "再听一遍：bee，bee。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 rabbit",
+     "source": "英语 U5 词卡",
+     "say": "听一听：rabbit。rabbit 在哪里？",
+     "options": [
+      {
+       "pic": "art:dog"
+      },
+      {
+       "pic": "art:rabbit"
+      },
+      {
+       "pic": "art:nest"
+      },
+      {
+       "pic": "art:snake"
+      }
+     ],
+     "answer": 1,
+     "after": "rabbit，兔子。",
+     "hint": "再听一遍：rabbit，rabbit。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 snake",
+     "source": "英语 U5 词卡",
+     "say": "听一听：snake。snake 在哪里？",
+     "options": [
+      {
+       "pic": "art:hamster"
+      },
+      {
+       "pic": "art:snake"
+      },
+      {
+       "pic": "art:garden"
+      },
+      {
+       "pic": "art:bee"
+      }
+     ],
+     "answer": 1,
+     "after": "snake，蛇。",
+     "hint": "再听一遍：snake，snake。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 tiger",
+     "source": "英语 U5 词卡",
+     "say": "听一听：tiger。tiger 在哪里？",
+     "options": [
+      {
+       "pic": "art:bee"
+      },
+      {
+       "pic": "art:rabbit"
+      },
+      {
+       "pic": "art:cat"
+      },
+      {
+       "pic": "art:tiger"
+      }
+     ],
+     "answer": 3,
+     "after": "tiger，老虎。",
+     "hint": "再听一遍：tiger，tiger。"
+    },
+    {
+     "type": "choice",
+     "q": "看图选词 bee",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:bee"
+     },
+     "say": "看图片，哪个是它的英文单词？先看第一个字母。",
+     "options": [
+      {
+       "text": "nest",
+       "en": true
+      },
+      {
+       "text": "tiger",
+       "en": true
+      },
+      {
+       "text": "bee",
+       "en": true
+      }
+     ],
+     "answer": 2,
+     "after": "bee，蜜蜂。",
+     "hint": "它是 bee。找一找哪个单词是 bee。"
+    },
+    {
+     "type": "choice",
+     "q": "看图选词 snake",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:snake"
+     },
+     "say": "看图片，哪个是它的英文单词？先看第一个字母。",
+     "options": [
+      {
+       "text": "snake",
+       "en": true
+      },
+      {
+       "text": "rabbit",
+       "en": true
+      },
+      {
+       "text": "bee",
+       "en": true
+      }
+     ],
+     "answer": 0,
+     "after": "snake，蛇。",
+     "hint": "它是 snake。找一找哪个单词是 snake。"
+    }
+   ]
+  },
+  {
+   "id": "royal",
+   "title": "国王和王后",
+   "icon": "art:king",
+   "note": "king queen baby lovely · Be careful · Go fishing · put · animal",
+   "items": [
+    {
+     "type": "choice",
+     "q": "听音选图 king",
+     "source": "英语 U5 词卡",
+     "say": "听一听：king。king 在哪里？",
+     "options": [
+      {
+       "pic": "art:careful"
+      },
+      {
+       "pic": "art:fishing"
+      },
+      {
+       "pic": "art:lovely"
+      },
+      {
+       "pic": "art:king"
+      }
+     ],
+     "answer": 3,
+     "after": "king，国王。",
+     "hint": "再听一遍：king，king。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 queen",
+     "source": "英语 U5 词卡",
+     "say": "听一听：queen。queen 在哪里？",
+     "options": [
+      {
+       "pic": "art:animals"
+      },
+      {
+       "pic": "art:lovely"
+      },
+      {
+       "pic": "art:queen"
+      },
+      {
+       "pic": "art:king"
+      }
+     ],
+     "answer": 2,
+     "after": "queen，王后。",
+     "hint": "再听一遍：queen，queen。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 baby",
+     "source": "英语 U5 词卡",
+     "say": "听一听：baby。baby 在哪里？",
+     "options": [
+      {
+       "pic": "art:put"
+      },
+      {
+       "pic": "art:lovely"
+      },
+      {
+       "pic": "art:baby"
+      },
+      {
+       "pic": "art:fishing"
+      }
+     ],
+     "answer": 2,
+     "after": "baby，小宝宝。",
+     "hint": "再听一遍：baby，baby。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 lovely",
+     "source": "英语 U5 词卡",
+     "say": "听一听：lovely。lovely 在哪里？",
+     "options": [
+      {
+       "pic": "art:fishing"
+      },
+      {
+       "pic": "art:put"
+      },
+      {
+       "pic": "art:baby"
+      },
+      {
+       "pic": "art:lovely"
+      }
+     ],
+     "answer": 3,
+     "after": "lovely，可爱的。",
+     "hint": "再听一遍：lovely，lovely。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 Be careful",
+     "source": "英语 U5 词卡",
+     "say": "听一听：Be careful。Be careful 在哪里？",
+     "options": [
+      {
+       "pic": "art:careful"
+      },
+      {
+       "pic": "art:king"
+      },
+      {
+       "pic": "art:queen"
+      },
+      {
+       "pic": "art:baby"
+      }
+     ],
+     "answer": 0,
+     "after": "Be careful，小心。",
+     "hint": "再听一遍：Be careful，Be careful。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 Go fishing",
+     "source": "英语 U5 词卡",
+     "say": "听一听：Go fishing。Go fishing 在哪里？",
+     "options": [
+      {
+       "pic": "art:king"
+      },
+      {
+       "pic": "art:lovely"
+      },
+      {
+       "pic": "art:queen"
+      },
+      {
+       "pic": "art:fishing"
+      }
+     ],
+     "answer": 3,
+     "after": "Go fishing，去钓鱼。",
+     "hint": "再听一遍：Go fishing，Go fishing。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 put",
+     "source": "英语 U5 词卡",
+     "say": "听一听：put。put 在哪里？",
+     "options": [
+      {
+       "pic": "art:put"
+      },
+      {
+       "pic": "art:careful"
+      },
+      {
+       "pic": "art:king"
+      },
+      {
+       "pic": "art:queen"
+      }
+     ],
+     "answer": 0,
+     "after": "put，放。",
+     "hint": "再听一遍：put，put。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 animal",
+     "source": "英语 U5 词卡",
+     "say": "听一听：animal。animal 在哪里？",
+     "options": [
+      {
+       "pic": "art:fishing"
+      },
+      {
+       "pic": "art:queen"
+      },
+      {
+       "pic": "art:lovely"
+      },
+      {
+       "pic": "art:animals"
+      }
+     ],
+     "answer": 3,
+     "after": "animal，动物。",
+     "hint": "再听一遍：animal，animal。"
+    }
+   ]
+  },
+  {
+   "id": "letters",
+   "title": "字母 Qq Rr Ss Tt",
+   "icon": "text:Tt",
+   "note": "大小写配对 · 听首字母 · 找字母",
+   "items": [
+    {
+     "type": "choice",
+     "q": "大写 Q 配小写",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "text": "Q",
+      "en": true
+     },
+     "say": "这是大写字母 Q。它的小写字母是哪个？",
+     "options": [
+      {
+       "text": "q",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "g",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "p",
+       "en": true,
+       "big": true
+      }
+     ],
+     "answer": 0,
+     "after": "大写 Q，小写 q。",
+     "hint": "小写 q 和大写 Q 是一对好朋友，再找找看。"
+    },
+    {
+     "type": "choice",
+     "q": "大写 R 配小写",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "text": "R",
+      "en": true
+     },
+     "say": "这是大写字母 R。它的小写字母是哪个？",
+     "options": [
+      {
+       "text": "n",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "h",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "r",
+       "en": true,
+       "big": true
+      }
+     ],
+     "answer": 2,
+     "after": "大写 R，小写 r。",
+     "hint": "小写 r 和大写 R 是一对好朋友，再找找看。"
+    },
+    {
+     "type": "choice",
+     "q": "大写 S 配小写",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "text": "S",
+      "en": true
+     },
+     "say": "这是大写字母 S。它的小写字母是哪个？",
+     "options": [
+      {
+       "text": "z",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "s",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "c",
+       "en": true,
+       "big": true
+      }
+     ],
+     "answer": 1,
+     "after": "大写 S，小写 s。",
+     "hint": "小写 s 和大写 S 是一对好朋友，再找找看。"
+    },
+    {
+     "type": "choice",
+     "q": "大写 T 配小写",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "text": "T",
+      "en": true
+     },
+     "say": "这是大写字母 T。它的小写字母是哪个？",
+     "options": [
+      {
+       "text": "t",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "f",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "l",
+       "en": true,
+       "big": true
+      }
+     ],
+     "answer": 0,
+     "after": "大写 T，小写 t。",
+     "hint": "小写 t 和大写 T 是一对好朋友，再找找看。"
+    },
+    {
+     "type": "choice",
+     "q": "queen 的第一个字母",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:queen"
+     },
+     "say": "听一听：queen。queen 的第一个字母是哪个？",
+     "fixed": true,
+     "options": [
+      {
+       "text": "q",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "r",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "s",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "t",
+       "en": true,
+       "big": true
+      }
+     ],
+     "answer": 0,
+     "after": "queen，第一个字母是 q。",
+     "hint": "再听一遍：queen。"
+    },
+    {
+     "type": "choice",
+     "q": "rabbit 的第一个字母",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:rabbit"
+     },
+     "say": "听一听：rabbit。rabbit 的第一个字母是哪个？",
+     "fixed": true,
+     "options": [
+      {
+       "text": "q",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "r",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "s",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "t",
+       "en": true,
+       "big": true
+      }
+     ],
+     "answer": 1,
+     "after": "rabbit，第一个字母是 r。",
+     "hint": "再听一遍：rabbit。"
+    },
+    {
+     "type": "choice",
+     "q": "snake 的第一个字母",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:snake"
+     },
+     "say": "听一听：snake。snake 的第一个字母是哪个？",
+     "fixed": true,
+     "options": [
+      {
+       "text": "q",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "r",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "s",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "t",
+       "en": true,
+       "big": true
+      }
+     ],
+     "answer": 2,
+     "after": "snake，第一个字母是 s。",
+     "hint": "再听一遍：snake。"
+    },
+    {
+     "type": "choice",
+     "q": "tiger 的第一个字母",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:tiger"
+     },
+     "say": "听一听：tiger。tiger 的第一个字母是哪个？",
+     "fixed": true,
+     "options": [
+      {
+       "text": "q",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "r",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "s",
+       "en": true,
+       "big": true
+      },
+      {
+       "text": "t",
+       "en": true,
+       "big": true
+      }
+     ],
+     "answer": 3,
+     "after": "tiger，第一个字母是 t。",
+     "hint": "再听一遍：tiger。"
+    },
+    {
+     "type": "letterHunt",
+     "q": "找出所有的 t",
+     "source": "英语 U5 词卡",
+     "target": "t",
+     "title": "找出所有的小写 t",
+     "letters": [
+      "t",
+      "f",
+      "t",
+      "l",
+      "i",
+      "t",
+      "f",
+      "l",
+      "t",
+      "i",
+      "j",
+      "f"
+     ],
+     "say": "tiger 的第一个字母是 t。把所有的小写 t 都找出来。",
+     "hint": "小写字母 t 的横短短的，下面向右弯。",
+     "after": "全找到了！tiger 的第一个字母就是 t。"
+    },
+    {
+     "type": "letterHunt",
+     "q": "找出所有的 q",
+     "source": "英语 U5 词卡",
+     "target": "q",
+     "title": "找出所有的小写 q",
+     "letters": [
+      "q",
+      "p",
+      "g",
+      "q",
+      "d",
+      "b",
+      "q",
+      "p",
+      "g",
+      "q",
+      "d",
+      "b"
+     ],
+     "say": "queen 的第一个字母是 q。把所有的小写 q 都找出来。小心，它和字母 p、g 长得很像。",
+     "hint": "小写字母 q 的圆圈在左边，竖线向下，没有弯钩。",
+     "after": "全找到了！queen 的第一个字母就是 q。"
+    }
+   ]
+  },
+  {
+   "id": "spell",
+   "title": "拼单词",
+   "icon": "sprite:bricks",
+   "note": "按顺序点字母",
+   "items": [
+    {
+     "type": "order",
+     "q": "拼 dog",
+     "source": "英语 U5 词卡",
+     "en": true,
+     "pieces": [
+      "d",
+      "o",
+      "g"
+     ],
+     "prompt": {
+      "pic": "art:dog"
+     },
+     "say": "这是 dog。按顺序点字母，拼出 dog。",
+     "after": "dog！拼对啦。",
+     "hint": "再听一遍：dog。从第一个字母开始。"
+    },
+    {
+     "type": "order",
+     "q": "拼 cat",
+     "source": "英语 U5 词卡",
+     "en": true,
+     "pieces": [
+      "c",
+      "a",
+      "t"
+     ],
+     "prompt": {
+      "pic": "art:cat"
+     },
+     "say": "这是 cat。按顺序点字母，拼出 cat。",
+     "after": "cat！拼对啦。",
+     "hint": "再听一遍：cat。从第一个字母开始。"
+    },
+    {
+     "type": "order",
+     "q": "拼 bee",
+     "source": "英语 U5 词卡",
+     "en": true,
+     "pieces": [
+      "b",
+      "e",
+      "e"
+     ],
+     "prompt": {
+      "pic": "art:bee"
+     },
+     "say": "这是 bee。按顺序点字母，拼出 bee。",
+     "after": "bee！拼对啦。",
+     "hint": "再听一遍：bee。从第一个字母开始。"
+    },
+    {
+     "type": "order",
+     "q": "拼 fish",
+     "source": "英语 U5 词卡",
+     "en": true,
+     "pieces": [
+      "f",
+      "i",
+      "s",
+      "h"
+     ],
+     "prompt": {
+      "pic": "art:fish"
+     },
+     "say": "这是 fish。按顺序点字母，拼出 fish。",
+     "after": "fish！拼对啦。",
+     "hint": "再听一遍：fish。从第一个字母开始。"
+    },
+    {
+     "type": "order",
+     "q": "拼 bird",
+     "source": "英语 U5 词卡",
+     "en": true,
+     "pieces": [
+      "b",
+      "i",
+      "r",
+      "d"
+     ],
+     "prompt": {
+      "pic": "art:bird"
+     },
+     "say": "这是 bird。按顺序点字母，拼出 bird。",
+     "after": "bird！拼对啦。",
+     "hint": "再听一遍：bird。从第一个字母开始。"
+    },
+    {
+     "type": "order",
+     "q": "拼 king",
+     "source": "英语 U5 词卡",
+     "en": true,
+     "pieces": [
+      "k",
+      "i",
+      "n",
+      "g"
+     ],
+     "prompt": {
+      "pic": "art:king"
+     },
+     "say": "这是 king。按顺序点字母，拼出 king。",
+     "after": "king！拼对啦。",
+     "hint": "再听一遍：king。从第一个字母开始。"
+    }
+   ]
+  },
+  {
+   "id": "sentences",
+   "title": "指着读句子",
+   "icon": "art:tiger",
+   "note": "用学过的句型说新单词",
+   "items": [
+    {
+     "type": "pointRead",
+     "q": "Look! What do you see?",
+     "source": "英语 U5 句子练习",
+     "lines": [
+      "Look!",
+      "What do you see?"
+     ],
+     "pic": "art:tiger",
+     "say": "听一听：Look! What do you see? 现在用手指着，一个词一个词点着读。",
+     "after": "Look! What do you see?"
+    },
+    {
+     "type": "pointRead",
+     "q": "I see a tiger.",
+     "source": "英语 U5 句子练习",
+     "lines": [
+      "I see a tiger."
+     ],
+     "pic": "art:tiger",
+     "say": "I see a tiger. 指着读一读。",
+     "after": "I see a tiger."
+    },
+    {
+     "type": "pointRead",
+     "q": "I see two bees.",
+     "source": "英语 U5 句子练习",
+     "lines": [
+      "I see two bees."
+     ],
+     "pic": "art:bee",
+     "say": "I see two bees. 指着读一读。",
+     "after": "I see two bees.",
+     "n": 2
+    },
+    {
+     "type": "pointRead",
+     "q": "This is my dog.",
+     "source": "英语 U5 句子练习",
+     "lines": [
+      "This is my dog."
+     ],
+     "pic": "art:dog",
+     "say": "This is my dog. 指着读一读。",
+     "after": "This is my dog."
+    },
+    {
+     "type": "pointRead",
+     "q": "Be careful!",
+     "source": "英语 U5 句子练习",
+     "lines": [
+      "Be careful!"
+     ],
+     "pic": "art:careful",
+     "say": "Be careful! 小心！指着读一读。",
+     "after": "Be careful!"
+    },
+    {
+     "type": "pointRead",
+     "q": "Go fishing.",
+     "source": "英语 U5 句子练习",
+     "lines": [
+      "Go fishing."
+     ],
+     "pic": "art:fishing",
+     "say": "Go fishing. 指着读一读。",
+     "after": "Go fishing."
+    },
+    {
+     "type": "pointRead",
+     "q": "The baby is lovely.",
+     "source": "英语 U5 句子练习",
+     "lines": [
+      "The baby is lovely."
+     ],
+     "pic": "art:baby",
+     "say": "The baby is lovely. 指着读一读。",
+     "after": "The baby is lovely."
+    }
+   ]
+  },
+  {
+   "id": "review",
+   "title": "动物园大复习",
+   "icon": "art:animals",
+   "note": "Unit 5 + Unit 1–3",
+   "shuffle": true,
+   "items": [
+    {
+     "type": "choice",
+     "q": "听音选图 hamster",
+     "source": "英语 U5 词卡",
+     "say": "听一听：hamster。hamster 在哪里？",
+     "options": [
+      {
+       "pic": "art:dog"
+      },
+      {
+       "pic": "art:bird"
+      },
+      {
+       "pic": "art:hamster"
+      },
+      {
+       "pic": "art:cat"
+      }
+     ],
+     "answer": 2,
+     "after": "hamster，仓鼠。",
+     "hint": "再听一遍：hamster，hamster。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 tiger",
+     "source": "英语 U5 词卡",
+     "say": "听一听：tiger。tiger 在哪里？",
+     "options": [
+      {
+       "pic": "art:rabbit"
+      },
+      {
+       "pic": "art:tiger"
+      },
+      {
+       "pic": "art:bee"
+      },
+      {
+       "pic": "art:garden"
+      }
+     ],
+     "answer": 1,
+     "after": "tiger，老虎。",
+     "hint": "再听一遍：tiger，tiger。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 queen",
+     "source": "英语 U5 词卡",
+     "say": "听一听：queen。queen 在哪里？",
+     "options": [
+      {
+       "pic": "art:queen"
+      },
+      {
+       "pic": "art:put"
+      },
+      {
+       "pic": "art:fishing"
+      },
+      {
+       "pic": "art:careful"
+      }
+     ],
+     "answer": 0,
+     "after": "queen，王后。",
+     "hint": "再听一遍：queen，queen。"
+    },
+    {
+     "type": "choice",
+     "q": "听音选图 put",
+     "source": "英语 U5 词卡",
+     "say": "听一听：put。put 在哪里？",
+     "options": [
+      {
+       "pic": "art:lovely"
+      },
+      {
+       "pic": "art:fishing"
+      },
+      {
+       "pic": "art:put"
+      },
+      {
+       "pic": "art:baby"
+      }
+     ],
+     "answer": 2,
+     "after": "put，放。",
+     "hint": "再听一遍：put，put。"
+    },
+    {
+     "type": "choice",
+     "q": "看图选词 cat",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:cat"
+     },
+     "say": "看图片，哪个是它的英文单词？先看第一个字母。",
+     "options": [
+      {
+       "text": "cat",
+       "en": true
+      },
+      {
+       "text": "bird",
+       "en": true
+      },
+      {
+       "text": "king",
+       "en": true
+      }
+     ],
+     "answer": 0,
+     "after": "cat，小猫。",
+     "hint": "它是 cat。找一找哪个单词是 cat。"
+    },
+    {
+     "type": "choice",
+     "q": "看图选词 rabbit",
+     "source": "英语 U5 词卡",
+     "prompt": {
+      "pic": "art:rabbit"
+     },
+     "say": "看图片，哪个是它的英文单词？先看第一个字母。",
+     "options": [
+      {
+       "text": "nest",
+       "en": true
+      },
+      {
+       "text": "bee",
+       "en": true
+      },
+      {
+       "text": "rabbit",
+       "en": true
+      }
+     ],
+     "answer": 2,
+     "after": "rabbit，兔子。",
+     "hint": "它是 rabbit。找一找哪个单词是 rabbit。"
+    },
+    {
+     "type": "choice",
+     "q": "复习 grandma",
+     "source": "复习 英语 P3",
+     "say": "听一听：grandma。grandma 在哪里？",
+     "options": [
+      {
+       "pic": "art:grandpa"
+      },
+      {
+       "pic": "art:grandma"
+      },
+      {
+       "pic": "art:baby"
+      },
+      {
+       "pic": "art:queen"
+      }
+     ],
+     "answer": 1,
+     "after": "grandma，奶奶。",
+     "hint": "再听一遍：grandma。"
+    },
+    {
+     "type": "choice",
+     "q": "复习 I'm hungry",
+     "source": "复习 英语 P11",
+     "say": "听一听：I'm hungry. 哪个小朋友在说这句话？",
+     "options": [
+      {
+       "pic": "art:kid_cold"
+      },
+      {
+       "pic": "art:kid_thirsty"
+      },
+      {
+       "pic": "art:kid_hungry"
+      },
+      {
+       "pic": "art:kid_hot"
+      }
+     ],
+     "answer": 2,
+     "after": "I'm hungry. 饿了。",
+     "hint": "再听一遍：I'm hungry."
+    },
+    {
+     "type": "choice",
+     "q": "复习 I see three birds",
+     "source": "复习 英语 P19",
+     "listen": true,
+     "say": "Look! What do you see? 数一数，点句子听一听，选出对的那句。",
+     "prompt": {
+      "pic": "art:bird",
+      "n": 3
+     },
+     "options": [
+      "I see two birds.",
+      "I see three birds.",
+      "I see four birds."
+     ],
+     "answer": 1,
+     "after": "I see three birds.",
+     "hint": "再数一数，有几只小鸟？"
+    },
+    {
+     "type": "order",
+     "q": "拼 nest",
+     "source": "英语 U5 词卡",
+     "en": true,
+     "pieces": [
+      "n",
+      "e",
+      "s",
+      "t"
+     ],
+     "prompt": {
+      "pic": "art:nest"
+     },
+     "say": "这是 nest。按顺序点字母，拼出 nest。",
+     "after": "nest！拼对啦。",
+     "hint": "再听一遍：nest。从第一个字母开始。"
+    },
+    {
+     "type": "pointRead",
+     "q": "This is my mum.",
+     "source": "英语 U5 句子练习",
+     "lines": [
+      "This is my mum."
+     ],
+     "pic": "art:mom",
+     "say": "复习一下：This is my mum. 指着读一读。",
+     "after": "This is my mum."
+    }
+   ]
+  }
+ ]
+}

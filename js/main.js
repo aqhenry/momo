@@ -8,7 +8,7 @@ import { spriteEl, spriteURL } from './sprites.js';
 
 const HEARTS = 5;
 import { picEl } from './pics.js';
-import { furnaceStatus, workbenchAlert } from './craft.js';
+import { furnaceStatus, fishStatus, workbenchAlert } from './craft.js';
 import { burst, orbs, banner } from './fx.js';
 import { initScene } from './scene.js';
 import { measureFont } from './pinyin.js';
@@ -333,8 +333,10 @@ async function screenPlay(levelId, stageId) {
         if (combo) gain += COMBO_XP;
         const before = levelOf(store.state.xp || 0).level;
         const smelting = furnaceStatus() && !furnaceStatus().ready;
+        const fishing = fishStatus() && !fishStatus().ready;
         store.addXP(gain);
         if (smelting && furnaceStatus().ready) setTimeout(() => { if (body.isConnected) { banner('furnace', '熔炉烧好啦！去工作台取出来'); sfx.chest(); } }, 1600);
+        else if (fishing && fishStatus().ready) setTimeout(() => { if (body.isConnected) { banner('prismarine', '鱼上钩啦！去工作台收竿'); sfx.chest(); } }, 1600);
         const nowLevel = levelOf(store.state.xp).level;
         const ups = [];
         for (let k = before; k < nowLevel; k++) {

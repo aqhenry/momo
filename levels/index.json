@@ -1,5 +1,16 @@
 [
   {
+    "id": "english-u5",
+    "chapter": 10,
+    "subject": "英语",
+    "title": "国王的动物园",
+    "subtitle": "Unit 5 · 动物单词、字母 Qq Rr Ss Tt、拼单词、指读",
+    "date": "2026-11-16",
+    "block": "crown_block",
+    "path": "levels/english-u5/level.json",
+    "audioProfile": "jqx-b"
+  },
+  {
     "id": "yuwen-poems2",
     "chapter": 9,
     "subject": "语文",

@@ -17,7 +17,7 @@ export function render(root, item, ctx) {
     const btn = h('button.option', { onclick: () => tap(o, btn) });
     if (o.pic) btn.append(picEl(o.pic));
     if (o.py) btn.append(o.grid ? gridSVG(o.py, item.band || 34, { minWidth: 150 }) : h('div.py.opt-py', o.py));
-    if (o.text) btn.append(h(o.big ? 'div.opt-text.big' : 'div.opt-text', o.text));
+    if (o.text) btn.append(h(`div.opt-text${o.big ? '.big' : ''}${o.en ? '.en' : ''}`, o.text));
     o.btn = btn;
     grid.append(btn);
   }

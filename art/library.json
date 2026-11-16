@@ -358,5 +358,57 @@
   "schoolbag": {
     "zh": "书包",
     "prompt": "书包 (drawn in tools/art_draw.py)"
+  },
+  "dog": {
+    "zh": "小狗",
+    "prompt": "小狗 (drawn in tools/art_draw.py)"
+  },
+  "hamster": {
+    "zh": "仓鼠",
+    "prompt": "仓鼠 (drawn in tools/art_draw.py)"
+  },
+  "tiger": {
+    "zh": "老虎",
+    "prompt": "老虎 (drawn in tools/art_draw.py)"
+  },
+  "snake": {
+    "zh": "蛇",
+    "prompt": "蛇 (drawn in tools/art_draw.py)"
+  },
+  "king": {
+    "zh": "国王",
+    "prompt": "国王 (drawn in tools/art_draw.py)"
+  },
+  "queen": {
+    "zh": "王后",
+    "prompt": "王后 (drawn in tools/art_draw.py)"
+  },
+  "baby": {
+    "zh": "小宝宝",
+    "prompt": "小宝宝 (drawn in tools/art_draw.py)"
+  },
+  "garden": {
+    "zh": "花园",
+    "prompt": "花园 (drawn in tools/art_draw.py)"
+  },
+  "careful": {
+    "zh": "小心标志",
+    "prompt": "小心标志 (drawn in tools/art_draw.py)"
+  },
+  "lovely": {
+    "zh": "可爱的小猫",
+    "prompt": "可爱的小猫 (drawn in tools/art_draw.py)"
+  },
+  "fishing": {
+    "zh": "去钓鱼",
+    "prompt": "去钓鱼 (drawn in tools/art_draw.py)"
+  },
+  "put": {
+    "zh": "把书放进书包",
+    "prompt": "把书放进书包 (drawn in tools/art_draw.py)"
+  },
+  "animals": {
+    "zh": "动物们",
+    "prompt": "动物们 (drawn in tools/art_draw.py)"
   }
 }

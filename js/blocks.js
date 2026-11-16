@@ -137,6 +137,12 @@ export const BLOCKS = {
   bamboo_mosaic:   { name: '竹马赛克', rarity: 2, set: 'bamboo' },
   wind_block:      { name: '旋风方块', rarity: 3, obtain: 'achieve' },
   sunflower_block: { name: '向日葵方块', rarity: 3, obtain: 'achieve', glow: true },
+  // English unit 5 (国王的动物园)
+  mud_bricks:       { name: '泥砖', rarity: 1, set: 'zoo' },
+  dark_oak_planks:  { name: '深色橡木板', rarity: 1, set: 'zoo' },
+  honeycomb_block:  { name: '蜜脾块', rarity: 2, set: 'zoo' },
+  turtle_egg_block: { name: '海龟蛋块', rarity: 2, set: 'zoo' },
+  crown_block:      { name: '王冠方块', rarity: 4, obtain: 'achieve', glow: true },
 };
 
 // blocks of a rarity that can drop in an adventure using `set` (base blocks always can)
@@ -544,6 +550,26 @@ Object.assign(PAINT, {
   sunflower_block: px => each((x, y) => {
     const d = Math.hypot(x - 7.5, y - 7.5);
     px(x, y, d < 3.2 ? ((x + y) % 2 ? '#6a4020' : '#4a2a10') : d < 7 ? '#ffcc20' : '#5aa030');
+  }),
+  mud_bricks: (px, r) => each((x, y) => {
+    const row = y >> 2, mortar = y % 4 === 3 || (x + (row % 2) * 4) % 8 === 7;
+    px(x, y, mortar ? '#8a7560' : shade([150, 112, 82], 0.9 + r() * 0.15));
+  }),
+  dark_oak_planks: (px, r) => planksOf(px, r, [70, 46, 24]),
+  honeycomb_block: (px, r) => each((x, y) => {
+    const cx = (x + ((y >> 2) % 2) * 2) % 4, wall = cx === 0 || y % 4 === 0;
+    px(x, y, wall ? '#c98a18' : shade([250, 190, 50], 0.92 + r() * 0.12));
+  }),
+  turtle_egg_block: (px, r) => each((x, y) => {
+    const egg = [[4, 5], [11, 4], [5, 11], [11, 11]].some(([cx, cy]) => ((x - cx) ** 2) / 7 + ((y - cy) ** 2) / 10 < 1);
+    px(x, y, egg ? (r() < 0.15 ? '#7ab060' : '#f2eedc') : shade([214, 196, 140], 0.9 + r() * 0.15));
+  }),
+  crown_block: px => each((x, y) => {
+    const edge = x === 0 || y === 0 || x === 15 || y === 15;
+    const band = y >= 9 && y <= 12 && x >= 2 && x <= 13;
+    const spike = y >= 3 && y < 9 && x >= 2 && x <= 13 && Math.abs(((x - 2) % 4) - 1.5) <= (y - 3) * 0.35;
+    const gem = (y === 10 || y === 11) && (x === 4 || x === 7 || x === 8 || x === 11);
+    px(x, y, edge ? '#8a3aa8' : gem ? (x === 7 || x === 8 ? '#e0303a' : '#3f8fd8') : band || spike ? (x + y) % 5 === 0 ? '#fff2a0' : '#ffcf30' : '#b05ad0');
   }),
 });
 

@@ -15,7 +15,9 @@ const fresh = () => ({
   tools: {},      // pickaxes owned -> date (they unlock recipe tiers)
   furnace: null,  // { job: index into SMELT, start: xp when loaded }
   trophies: {},   // trophy id -> tiers claimed (0..3)
-  stats: { crafted: 0, smelted: 0 },
+  stats: { crafted: 0, smelted: 0, fished: 0 },
+  pets: {},       // pet id -> date tamed (workbench 宠物 tab)
+  fishing: null,  // { start: xp when the line was cast }
 });
 
 let state = load();
@@ -25,7 +27,7 @@ function load() {
     const raw = localStorage.getItem(KEY);
     if (raw) {
       const s = { ...fresh(), ...JSON.parse(raw) };
-      s.stats = { crafted: 0, smelted: 0, ...s.stats };
+      s.stats = { crafted: 0, smelted: 0, fished: 0, ...s.stats };
       // anything already owned counts as found
       for (const t of Object.keys(s.inventory)) s.found[t] ||= new Date().toISOString();
       return s;
@@ -120,6 +122,8 @@ export const store = {
   },
   setTool(id) { state.tools[id] = new Date().toISOString(); save(); },
   setFurnace(f) { state.furnace = f; save(); },
+  setFishing(f) { state.fishing = f; save(); },
+  tamePet(id) { state.pets[id] = new Date().toISOString(); save(); },
   bump(stat, n = 1) { state.stats[stat] = (state.stats[stat] || 0) + n; save(); },
   claimTrophy(id) { state.trophies[id] = (state.trophies[id] || 0) + 1; save(); },
 

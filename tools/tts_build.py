@@ -56,7 +56,7 @@ def level_lines(level):
     for stage in level['stages']:
         for it in stage['items']:
             out += [it.get('say'), it.get('after'), it.get('hint'), it.get('read'), (it.get('prompt') or {}).get('picSay')]
-            out += it.get('strokes', []) + it.get('pieces', [])
+            out += it.get('strokes', []) + ([] if it.get('en') else it.get('pieces', []))
             if it.get('listen'):
                 out += [o if isinstance(o, str) else o.get('say') or o.get('text') for o in it['options']]
             if it['type'] == 'pointRead':   # tapping an English word reads it (see js/items/english.js)

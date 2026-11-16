@@ -53,7 +53,11 @@ def check(key, script, path, model=CHECK_MODEL):
     sounds = {'j': 'jī（鸡）', 'q': 'qī（七），不是英文字母 Q，也不是 qiū',
               'x': 'xī（西）', 'n': 'nē（讷）', 'l': 'lē（勒）',
               'i': 'ī（衣）', 'u': 'ū（乌）', 'ü': 'ǖ（迂）'}
-    isolated = [f'{t} 读 {sounds[t]}' for t in dict.fromkeys(tokens) if t in sounds]
+    # English letters (lines that say 字母 / 大写 / 小写, e.g. "大写 Q，小写 q。") use English letter names, not pinyin 呼读音
+    english = re.search(r'字母|大写|小写', script)
+    isolated = [] if english else [f'{t} 读 {sounds[t]}' for t in dict.fromkeys(tokens) if t in sounds]
+    if english:
+        prompt += '\n这是英语课的台本：其中单独的英文字母（大写或小写）按英文字母名称读，例如 q 读 /kjuː/，r 读 /ɑːr/，s 读 /es/，t 读 /tiː/，不按拼音呼读音判断。'
     if isolated:
         prompt += '\n本台本中单独字母的教学呼读音：' + '；'.join(isolated)
     body = {

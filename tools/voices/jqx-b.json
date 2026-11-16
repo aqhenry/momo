@@ -9,7 +9,8 @@
     "math-week10",
     "yuwen-u12",
     "math-week11",
-    "yuwen-poems2"
+    "yuwen-poems2",
+    "english-u5"
   ],
   "check_models": [
     "qwen/qwen3.8-omni-flash",

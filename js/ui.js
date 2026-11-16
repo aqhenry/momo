@@ -84,7 +84,7 @@ export function promptEl(p = {}, ctx) {
     box.append(frame);
   }
   if (p.label) box.append(h('div.label', p.label));
-  if (p.text) box.append(h('div.ptext', p.text));
+  if (p.text) box.append(h(`div.ptext${p.en ? '.en' : ''}`, p.text));
   if (p.py) box.append(h('div.paper', gridSVG(p.py, 36, { minWidth: 180 })));
   if (p.context) box.append(h('div.paper', contextLine(p.context)));
   return box;

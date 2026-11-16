@@ -429,6 +429,218 @@ def schoolbag():
     return p.finish()
 
 
+# ---------- English unit 5: animals and people ----------
+def heart(p, x, y, col='#ff4f7a'):
+    p.px([(x, y), (x + 2, y), (x - 1, y + 1), (x, y + 1), (x + 1, y + 1), (x + 2, y + 1), (x + 3, y + 1),
+          (x, y + 2), (x + 1, y + 2), (x + 2, y + 2), (x + 1, y + 3)], col)
+
+
+@pic
+def dog():
+    p = Pic()
+    p.poly([(22, 22), (28, 15), (29, 17), (24, 25)], '#d89a52')                 # tail
+    p.ellipse((9, 15, 23, 29), '#e2a862')                                        # body
+    p.ellipse((12, 19, 20, 28), '#fbf1de', bevel=False)                          # chest
+    p.ellipse((8, 3, 24, 18), '#e2a862')                                         # head
+    p.ellipse((5, 5, 11, 16), '#8a5a2e')                                         # floppy ears
+    p.ellipse((21, 5, 27, 16), '#8a5a2e')
+    p.ellipse((12, 10, 20, 17), '#fbf1de', bevel=False)                          # muzzle
+    p.rect((15, 11, 17, 12), '#2a1d18', bevel=False)                             # nose
+    p.px([(12, 8), (19, 8), (12, 9), (19, 9)], '#2a1d18')                        # eyes
+    p.px([(15, 14), (16, 14), (16, 15)], '#ff7a8a')                              # tongue
+    p.rect((10, 26, 13, 28), '#e2a862'); p.rect((19, 26, 22, 28), '#e2a862')     # paws
+    return p.finish()
+
+
+@pic
+def hamster():
+    p = Pic()
+    p.ellipse((5, 8, 27, 29), '#e0a060')                                         # round body
+    p.ellipse((10, 15, 22, 28), '#fbf1de', bevel=False)                          # belly
+    p.ellipse((6, 5, 12, 11), '#e0a060'); p.ellipse((20, 5, 26, 11), '#e0a060')  # ears
+    p.ellipse((8, 7, 10, 9), '#ffb0b8', bevel=False); p.ellipse((22, 7, 24, 9), '#ffb0b8', bevel=False)
+    p.ellipse((7, 13, 12, 17), '#ffb0a0', bevel=False); p.ellipse((20, 13, 25, 17), '#ffb0a0', bevel=False)  # cheeks
+    p.px([(11, 12), (20, 12), (11, 13), (20, 13)], '#2a1d18')                    # eyes
+    p.px([(15, 14), (16, 14)], '#ff7a8a')                                        # nose
+    p.rect((14, 18, 17, 22), '#7cc04a')                                          # green snack in its paws
+    p.rect((12, 19, 13, 21), '#f0c8a0', bevel=False); p.rect((18, 19, 19, 21), '#f0c8a0', bevel=False)
+    return p.finish()
+
+
+@pic
+def tiger():
+    p = Pic()
+    p.ellipse((4, 4, 11, 11), '#f08a24'); p.ellipse((21, 4, 28, 11), '#f08a24')  # ears
+    p.ellipse((6, 6, 9, 9), '#fbf1de', bevel=False); p.ellipse((23, 6, 26, 9), '#fbf1de', bevel=False)
+    p.ellipse((4, 6, 28, 29), '#f08a24')                                         # big head
+    for pts in (((15, 7), (15, 11)), ((17, 7), (17, 11)), ((12, 8), (13, 11)), ((20, 8), (19, 11)),
+                ((5, 15), (9, 16)), ((5, 19), (9, 19)), ((27, 15), (23, 16)), ((27, 19), (23, 19))):
+        p.line(list(pts), '#2a1d18', width=1)                                    # stripes
+    p.ellipse((9, 17, 23, 28), '#fbf1de', bevel=False)                           # white muzzle
+    p.px([(11, 14), (12, 14), (20, 14), (21, 14)], '#3a8a2a')                    # green eyes
+    p.px([(11, 15), (12, 15), (20, 15), (21, 15)], '#2a1d18')
+    p.rect((14, 18, 18, 19), '#d0505a', bevel=False)                             # nose
+    p.line([(16, 20), (16, 22)], '#2a1d18'); p.line([(13, 23), (16, 22), (19, 23)], '#2a1d18')
+    return p.finish()
+
+
+@pic
+def snake():
+    p = Pic()
+    p.layer(lambda d, c: d.arc((6, 14, 26, 29), 200, 520, fill=c, width=5), '#5ab43a')   # coil
+    p.layer(lambda d, c: d.arc((10, 4, 22, 20), 90, 300, fill=c, width=5), '#5ab43a')    # neck
+    p.ellipse((14, 2, 27, 11), '#6ac44a')                                        # head
+    p.ellipse((17, 1, 21, 5), '#ffffff'); p.ellipse((22, 1, 26, 5), '#ffffff')   # eyes
+    p.px([(19, 3), (24, 3)], '#2a1d18')
+    p.line([(27, 8), (30, 8)], '#e0303a'); p.px([(31, 7), (31, 9)], '#e0303a')   # tongue
+    for x, y in ((8, 23), (12, 27), (19, 27), (24, 22), (11, 13)):
+        p.px([(x, y), (x + 1, y)], '#c8e85a')                                    # spots
+    return p.finish()
+
+
+def crown(p, x0, y0, w, col='#ffcf30'):
+    p.poly([(x0, y0 + 5), (x0, y0 + 1), (x0 + w // 4, y0 + 3), (x0 + w // 2, y0), (x0 + 3 * w // 4, y0 + 3), (x0 + w, y0 + 1), (x0 + w, y0 + 5)], col)
+    p.px([(x0 + w // 2, y0 + 3)], '#e0303a')
+    p.px([(x0 + 2, y0 + 4), (x0 + w - 2, y0 + 4)], '#3f8fd8')
+
+
+@pic
+def king():
+    img = strip_outline(library('kid'))
+
+    def rule(x, y, c):
+        h, s, v = hsv(c)
+        if y > 13 and 0.5 < h < 0.72 and s > 0.35:
+            return shade((214, 40, 48), 0.55 + v * 0.5)                          # blue shirt -> red robe
+        return None
+    p = Pic(recolor(img, rule))
+    p.rect((9, 13, 22, 15), '#f6f2ea')                                           # fur collar
+    p.px([(12, 14), (16, 14), (20, 14)], '#2a1d18')
+    p.line([(26, 6), (26, 28)], '#e8b020', width=2)                              # sceptre
+    p.ellipse((24, 3, 28, 7), '#e0303a')
+    crown(p, 10, 0, 11)
+    return p.finish()
+
+
+@pic
+def queen():
+    img = strip_outline(library('girl'))
+
+    def rule(x, y, c):
+        h, s, v = hsv(c)
+        if y > 15 and (h > 0.85 or h < 0.04) and s > 0.2 and v > 0.5:
+            return shade((150, 60, 170), 0.6 + v * 0.45)                         # pink dress -> purple gown
+        return None
+    p = Pic(recolor(img, rule))
+    p.poly([(9, 26), (22, 26), (25, 30), (6, 30)], '#9a3cb0')                    # long skirt
+    p.rect((10, 22, 21, 23), '#ffcf30', bevel=False)                             # gold belt
+    crown(p, 10, 0, 11)
+    return p.finish()
+
+
+@pic
+def baby():
+    p = Pic()
+    p.ellipse((9, 18, 22, 29), '#ffffff')                                        # nappy / body
+    p.ellipse((5, 18, 10, 23), '#f6c9a0'); p.ellipse((21, 18, 26, 23), '#f6c9a0')  # arms
+    p.ellipse((10, 26, 15, 31), '#f6c9a0'); p.ellipse((17, 26, 22, 31), '#f6c9a0')  # legs
+    p.ellipse((7, 3, 24, 20), '#f8d2ae')                                         # big head
+    p.poly([(14, 4), (16, 0), (19, 4)], '#8a5a2e')                               # curl of hair
+    p.px([(12, 11), (19, 11), (12, 12), (19, 12)], '#2a1d18')
+    p.px([(10, 14), (21, 14)], '#ff9a9a')
+    p.line([(14, 15), (15, 16), (16, 16), (17, 15)], '#c04050')
+    p.rect((25, 14, 29, 23), '#e8f4ff'); p.rect((26, 11, 28, 13), '#f0a040')     # bottle
+    p.rect((25, 18, 29, 23), '#fffbe8', bevel=False)
+    return p.finish()
+
+
+@pic
+def garden():
+    p = Pic()
+    p.rect((0, 22, 31, 31), '#5aaa3a')                                           # grass
+    p.ellipse((22, 1, 30, 9), '#ffd23a')                                         # sun
+    for x in range(1, 31, 5):
+        p.poly([(x, 22), (x, 13), (x + 1, 11), (x + 3, 13), (x + 3, 22)], '#c08a50')   # fence pickets
+    p.rect((0, 15, 31, 16), '#a06a38')
+    for x, col in ((4, '#e0303a'), (12, '#ffd23a'), (20, '#ff6fa0'), (27, '#e0303a')):
+        p.line([(x, 21), (x, 26)], '#3f7a25')
+        p.ellipse((x - 2, 17, x + 2, 21), col)                                   # flowers
+    for x in (8, 16, 24):
+        p.poly([(x - 1, 27), (x + 2, 27), (x, 31)], '#ff8a20')                   # carrots in the soil
+        p.px([(x, 26), (x + 1, 25)], '#4f9a30')
+    return p.finish()
+
+
+@pic
+def careful():
+    p = Pic()
+    p.poly([(16, 2), (30, 28), (2, 28)], '#ffcf30')                              # yellow warning sign
+    p.poly([(16, 6), (27, 26), (5, 26)], '#2a1d18', bevel=False)
+    p.poly([(16, 9), (25, 25), (7, 25)], '#ffcf30', bevel=False)
+    p.rect((15, 12, 17, 20), '#2a1d18', bevel=False)                             # !
+    p.rect((15, 22, 17, 23), '#2a1d18', bevel=False)
+    return p.finish()
+
+
+@pic
+def lovely():
+    img = strip_outline(library('cat'))
+
+    def rule(x, y, c):
+        h, s, v = hsv(c)
+        if s > 0.3 and 0.03 < h < 0.15:
+            return shade((250, 214, 160), 0.7 + v * 0.35)                        # orange -> cream
+        return None
+    p = Pic(recolor(img, rule))
+    p.ellipse((11, 11, 14, 13), '#ff8aa8', bevel=False); p.ellipse((21, 11, 24, 13), '#ff8aa8', bevel=False)  # blush
+    heart(p, 2, 3); heart(p, 26, 2, '#ff6f9a'); heart(p, 27, 20, '#ff4f7a')
+    return p.finish()
+
+
+def kid_scene(dx, extra):
+    base = strip_outline(library('kid'))
+    img = Image.new('RGBA', (SIZE, SIZE), (0, 0, 0, 0))
+    img.alpha_composite(base, (dx, 0))
+    p = Pic(img)
+    extra(p)
+    return p.finish()
+
+
+@pic
+def fishing():
+    def extra(p):
+        p.rect((20, 25, 31, 31), '#4fa0e0')                                      # pond
+        p.line([(22, 26), (25, 26)], '#bfe6ff'); p.line([(27, 29), (30, 29)], '#bfe6ff')
+        p.line([(17, 17), (29, 2)], '#3f6fd0', width=2)                          # rod
+        p.line([(30, 2), (30, 23)], '#f4f4f4')                                   # line
+        p.ellipse((27, 22, 31, 25), '#e0303a')                                   # little red fish on the hook
+        p.layer(lambda d, c: d.pieslice((5, 0, 22, 12), 180, 360, fill=c), '#ffd23a')   # sun hat
+        p.rect((4, 5, 23, 6), '#ffd23a')
+    return kid_scene(-4, extra)
+
+
+@pic
+def put():
+    def extra(p):
+        p.layer(lambda d, c: d.rounded_rectangle((19, 17, 30, 30), radius=3, fill=c), '#5aaa5a')   # bag
+        p.layer(lambda d, c: d.arc((21, 12, 28, 21), 180, 360, fill=c, width=2), '#2f6a30')
+        p.rect((23, 22, 26, 23), '#ffd23a')
+        p.rect((17, 9, 23, 16), '#e0303a')                                       # book going in
+        p.rect((18, 10, 22, 10), '#ffd0d0', bevel=False)
+        p.line([(24, 9), (25, 12)], '#2a1d18'); p.px([(24, 12), (26, 11)], '#2a1d18')   # little arrow
+    return kid_scene(-6, extra)
+
+
+@pic
+def animals():
+    # four friends together: dog, cat, rabbit, bird at half size
+    img = Image.new('RGBA', (SIZE, SIZE), (0, 0, 0, 0))
+    for name, (x, y) in (('rabbit', (8, 0)), ('bird', (17, 3)), ('dog', (0, 14)), ('cat', (15, 14))):
+        small = library(name).resize((17, 17), Image.NEAREST)
+        img.alpha_composite(small, (x, y))
+    return img
+
+
 def main():
     names = sys.argv[1:] or [n for n in DRAW if not (ART / f'{n}.png').exists()]
     for n in names:

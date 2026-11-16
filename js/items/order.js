@@ -6,8 +6,10 @@ import { S } from '../phrases.js';
 export function render(root, item, ctx) {
   const pieces = item.pieces.map((text, i) => ({ text, i }));
   const long = item.pieces.some(p => p.length > 8);
-  const built = h(`div.order-built${long ? '.long' : ''}`);
-  const pool = h(`div.order-pool${long ? '.long' : ''}`);
+  // en: spelling an English word from its letters (Andika, no letter names spoken; `after` says the word)
+  const en = item.en ? '.en' : '';
+  const built = h(`div.order-built${long ? '.long' : ''}${en}`);
+  const pool = h(`div.order-pool${long ? '.long' : ''}${en}`);
   let next = 0;
   let firstMiss = true;
 
@@ -24,14 +26,14 @@ export function render(root, item, ctx) {
 
   function tap(p, btn) {
     if (btn.disabled) return;
-    if (p.i === next) {
+    if (p.text === item.pieces[next]) {   // equal pieces (the two e's in bee) are interchangeable
       sfx.place();
       btn.disabled = true;
       btn.classList.add('used');
       const slot = built.children[next];
       slot.textContent = p.text;
       slot.classList.add('filled');
-      ctx.say(p.text);
+      if (!item.en) ctx.say(p.text);
       next++;
       if (next === pieces.length) ctx.right(item.after);
     } else {
