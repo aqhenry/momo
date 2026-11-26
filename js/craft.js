@@ -34,6 +34,7 @@ const TIER_TOOL = ['', 'wood_pickaxe', 'stone_pickaxe', 'iron_pickaxe', 'diamond
 
 // tier: the pickaxe level needed to make it (0 = bare hands). out: block, material or tool; n: how many.
 export const RECIPES = [
+  { tier: 0, out: 'planks', n: 4, in: { log: 1 } },
   { tier: 0, out: 'stick', n: 4, in: { planks: 2 } },
   { tier: 0, out: 'crafting_table', in: { planks: 4 } },
   { tier: 0, out: 'bookshelf', in: { planks: 6 } },

@@ -3,7 +3,7 @@ import { store } from './store.js';
 import { speak, stopSpeaking, preload, warmCache, sfx, praise, retry } from './audio.js';
 import { S, PRAISE, stageDone } from './phrases.js';
 import { BLOCKS, RARITY, blockURL, iconEl } from './blocks.js';
-import { answerXP, COMBO_XP, isCombo, levelOf, levelUpDrop, openChest, CHESTS } from './rewards.js';
+import { answerXP, COMBO_XP, isCombo, levelOf, levelUpDrop, openChest, CHESTS, materialPack } from './rewards.js';
 import { spriteEl, spriteURL } from './sprites.js';
 
 const HEARTS = 5;
@@ -436,11 +436,13 @@ async function screenPlay(levelId, stageId) {
     store.finishStage(levelId, stageId, { stars, firstTry, total, mistakes });
     const chest = openChest(stars, practice ? false : replay, level.blockSet);
     const fresh = chest.blocks.map(b => store.addBlock(b));
+    const pack = materialPack(stars);
+    for (const [b, n] of Object.entries(pack)) store.addBlock(b, n);
     // one-time achievement blocks: every listed stage of this adventure finished
     const achieved = (level.achievements || [])
       .filter(a => a.stages.every(id => store.stage(levelId, id)?.done) && store.achieve(a.id))
       .map(a => ({ ...a, isNew: store.addBlock(a.block) }));
-    showReward(level, stageIdx, stars, chest, fresh, earned, practice ? false : replay, achieved);
+    showReward(level, stageIdx, stars, chest, fresh, earned, practice ? false : replay, achieved, pack);
   }
 
   show(0);
@@ -460,7 +462,7 @@ function triesFor(it) {
   return 2;
 }
 
-function showReward(level, stageIdx, stars, chest, fresh, earned, replay, achieved = []) {
+function showReward(level, stageIdx, stars, chest, fresh, earned, replay, achieved = [], pack = {}) {
   const next = level.stages[stageIdx + 1];
   const practice = level.rewardPolicy === 'practice' || level.rewardPolicy === 'challenge';
   app.innerHTML = '';
@@ -487,10 +489,12 @@ function showReward(level, stageIdx, stars, chest, fresh, earned, replay, achiev
       h('div.chest-wrap', h('div.rays'), chestIcon),
       h('div.chest-name', CHESTS[chest.kind].name + (replay ? '（重玩）' : '')),
       blocks,
+      Object.keys(pack).length ? h('div.reward-pack', h('span.pack-tag', '材料包'),
+        Object.entries(pack).map(([b, n]) => h('div.pack-item', h('div.inv-slot.r0', iconEl(b)), h('span.pack-n', `×${n}`)))) : null,
       achieved.length ? h('div.reward-ach', achieved.map(a => h('div.ach-card.got',
         h(`div.inv-slot.r${BLOCKS[a.block].rarity}`, iconEl(a.block)),
         h('div.ach-text', h('div.craft-name', { style: { color: RARITY[BLOCKS[a.block].rarity].color } }, BLOCKS[a.block].name), h('div.ach-title', `成就：${a.title}`))))) : null,
-      h('div.reward-sub', `这一关一共得到 ${earned.length + chest.blocks.length + achieved.length} 个方块`),
+      h('div.reward-sub', `这一关一共得到 ${earned.length + chest.blocks.length + achieved.length + Object.values(pack).reduce((a, n) => a + n, 0)} 个方块`),
       btns)));
   const lines = [stageDone(stars)];
   if (replay) lines.push(S.replayChest);

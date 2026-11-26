@@ -83,3 +83,18 @@ export function openChest(stars, replay, set) {
   }
   return { kind, blocks: out };
 }
+
+// Material pack: every finished stage (replays too) also gives basic workbench materials, 2 + stars of them.
+// Chests and level-ups hardly ever hold 普通 blocks (gold chests never do), so without this the first recipes
+// (木棍, 木镐, 熔炉) were out of reach. Weighted towards what the recipes use most (planks, logs, cobble).
+const PACK = { planks: 4, log: 3, cobble: 4, sand: 2, dirt: 2, grass: 2, clay: 1, wool_white: 1, hay: 1 };
+export function materialPack(stars) {
+  const entries = Object.entries(PACK), total = entries.reduce((a, [, w]) => a + w, 0);
+  const out = {};
+  for (let k = 0; k < 2 + Math.max(1, stars); k++) {
+    let t = Math.random() * total;
+    const [b] = entries.find(([, w]) => (t -= w) < 0) || entries[0];
+    out[b] = (out[b] || 0) + 1;
+  }
+  return out;   // { blockType: count }
+}
