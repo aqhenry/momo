@@ -1,0 +1,1433 @@
+{
+  "id": "yuwen-snow",
+  "title": "雪地小画家",
+  "blockSet": "snowpaint",
+  "audioProfile": "jqx-b",
+  "rewardPolicy": "challenge",
+  "note": "背诵《雪地里的小画家》（教材 P64），复习《秋天》（P60）；复习 P45 复韵母 ai ei ui，为听写做准备。",
+  "intro": "墨然，下雪啦！今天先背《雪地里的小画家》，再复习《秋天》，然后练一练复韵母 ai、ei、ui，为明天的听写做准备。背会课文，能得到专属方块哦！",
+  "dictation": {
+    "initials": [
+      "b",
+      "p",
+      "m",
+      "f",
+      "d",
+      "t",
+      "n",
+      "l"
+    ],
+    "vowels": [
+      "a",
+      "o",
+      "e",
+      "i",
+      "u",
+      "ü"
+    ]
+  },
+  "paperStage": "dict",
+  "speech": {
+    "letters": "先选声母，再选韵母。拼好了，点绿色箭头。",
+    "chooseTone": "现在选一个声调，再点绿色勾勾。",
+    "nextSyllable": "这个音节拼好了，接着拼下一个。",
+    "labGuide": "看亮起来的格子，点一块积木放进去。",
+    "combo": "你又完成了三题，经验加倍！",
+    "pause": "休息一下吗？点绿色箭头继续玩，点地图回去。"
+  },
+  "achievements": [
+    {
+      "id": "xuedi",
+      "block": "easel_block",
+      "title": "会背《雪地里的小画家》",
+      "stages": [
+        "xuedi-recite"
+      ]
+    },
+    {
+      "id": "qiutian",
+      "block": "autumn_block",
+      "title": "会背《秋天》",
+      "stages": [
+        "qiutian-recite"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "xuedi",
+      "title": "读《雪地里的小画家》",
+      "icon": "art:duck",
+      "note": "教材 P64",
+      "items": [
+        {
+          "type": "read",
+          "q": "读《雪地里的小画家》",
+          "title": "雪地里的小画家",
+          "lines": [
+            "下雪啦，下雪啦！雪地里来了一群小画家。",
+            "小鸡画竹叶，小狗画梅花，小鸭画枫叶，小马画月牙。",
+            "不用颜料不用笔，几步就成一幅画。",
+            "青蛙为什么没参加？他在洞里睡着啦。"
+          ],
+          "py": [
+            "xià xuě la xià xuě la xuě dì lǐ lái le yì qún xiǎo huà jiā",
+            "xiǎo jī huà zhú yè xiǎo gǒu huà méi huā xiǎo yā huà fēng yè xiǎo mǎ huà yuè yá",
+            "bú yòng yán liào bú yòng bǐ jǐ bù jiù chéng yì fú huà",
+            "qīng wā wèi shén me méi cān jiā tā zài dòng lǐ shuì zháo la"
+          ],
+          "tapSay": {
+            "r": "一会儿",
+            "mǎ": "小马的马",
+            "bǐ": "不用笔的笔"
+          },
+          "read": "雪地里的小画家。下雪啦，下雪啦！雪地里来了一群小画家。小鸡画竹叶，小狗画梅花，小鸭画枫叶，小马画月牙。不用颜料不用笔，几步就成一幅画。青蛙为什么没参加？他在洞里睡着啦。",
+          "say": "这篇课文叫《雪地里的小画家》。先听一听，再跟着读。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "小鸡画什么",
+          "source": "课文 P64",
+          "prompt": {
+            "pic": "art:chicken",
+            "label": "小鸡"
+          },
+          "options": [
+            {
+              "pic": "art:bamboo_leaf",
+              "say": "竹叶"
+            },
+            {
+              "pic": "art:plum_flower",
+              "say": "梅花"
+            },
+            {
+              "pic": "art:maple_leaf",
+              "say": "枫叶"
+            },
+            {
+              "pic": "art:crescent",
+              "say": "月牙"
+            }
+          ],
+          "answer": 0,
+          "say": "小鸡在雪地里走一走，画出了什么？",
+          "after": "小鸡画竹叶。小鸡的脚印像竹叶。",
+          "hint": "想一想小鸡的脚印是什么样子的。"
+        },
+        {
+          "type": "choice",
+          "q": "小狗画什么",
+          "source": "课文 P64",
+          "prompt": {
+            "pic": "art:dog",
+            "label": "小狗"
+          },
+          "options": [
+            {
+              "pic": "art:plum_flower",
+              "say": "梅花"
+            },
+            {
+              "pic": "art:bamboo_leaf",
+              "say": "竹叶"
+            },
+            {
+              "pic": "art:maple_leaf",
+              "say": "枫叶"
+            },
+            {
+              "pic": "art:crescent",
+              "say": "月牙"
+            }
+          ],
+          "answer": 0,
+          "say": "小狗在雪地里走一走，画出了什么？",
+          "after": "小狗画梅花。小狗的脚印像梅花。",
+          "hint": "想一想小狗的脚印是什么样子的。"
+        },
+        {
+          "type": "choice",
+          "q": "小鸭画什么",
+          "source": "课文 P64",
+          "prompt": {
+            "pic": "art:duck",
+            "label": "小鸭"
+          },
+          "options": [
+            {
+              "pic": "art:bamboo_leaf",
+              "say": "竹叶"
+            },
+            {
+              "pic": "art:crescent",
+              "say": "月牙"
+            },
+            {
+              "pic": "art:maple_leaf",
+              "say": "枫叶"
+            },
+            {
+              "pic": "art:plum_flower",
+              "say": "梅花"
+            }
+          ],
+          "answer": 2,
+          "say": "小鸭在雪地里走一走，画出了什么？",
+          "after": "小鸭画枫叶。小鸭的脚印像枫叶。",
+          "hint": "想一想小鸭的脚印是什么样子的。"
+        },
+        {
+          "type": "choice",
+          "q": "小马画什么",
+          "source": "课文 P64",
+          "prompt": {
+            "pic": "art:horse",
+            "label": "小马"
+          },
+          "options": [
+            {
+              "pic": "art:maple_leaf",
+              "say": "枫叶"
+            },
+            {
+              "pic": "art:crescent",
+              "say": "月牙"
+            },
+            {
+              "pic": "art:bamboo_leaf",
+              "say": "竹叶"
+            },
+            {
+              "pic": "art:plum_flower",
+              "say": "梅花"
+            }
+          ],
+          "answer": 1,
+          "say": "小马在雪地里走一走，画出了什么？",
+          "after": "小马画月牙。小马的脚印像月牙。",
+          "hint": "想一想小马的脚印是什么样子的。"
+        },
+        {
+          "type": "choice",
+          "q": "青蛙为什么没参加",
+          "source": "课文 P64",
+          "prompt": {
+            "pic": "art:frog",
+            "label": "青蛙"
+          },
+          "options": [
+            {
+              "text": "他在洞里睡着啦"
+            },
+            {
+              "text": "他不会画画"
+            },
+            {
+              "text": "他在河里游泳"
+            }
+          ],
+          "answer": 0,
+          "say": "青蛙为什么没参加？",
+          "after": "冬天到了，青蛙躲在洞里冬眠，睡得正香呢。",
+          "hint": "读一读最后一句。"
+        },
+        {
+          "type": "choice",
+          "q": "不用__不用笔，",
+          "source": "课文",
+          "prompt": {
+            "context": "不用▢▢不用笔，"
+          },
+          "options": [
+            "颜料",
+            "纸张",
+            "画板"
+          ],
+          "answer": 0,
+          "say": "小画家们画画，不用什么，也不用笔？",
+          "after": "不用颜料不用笔。",
+          "hint": "再读一读课文里的这一句。"
+        },
+        {
+          "type": "choice",
+          "q": "几步就成一_画。",
+          "source": "课文",
+          "prompt": {
+            "context": "几步就成一▢画。"
+          },
+          "options": [
+            "幅",
+            "张",
+            "个"
+          ],
+          "answer": 0,
+          "say": "几步就成一什么画？",
+          "after": "几步就成一幅画。",
+          "hint": "再读一读课文里的这一句。"
+        }
+      ]
+    },
+    {
+      "id": "xuedi-recite",
+      "title": "背《雪地里的小画家》",
+      "icon": "art:plum_flower",
+      "items": [
+        {
+          "type": "order",
+          "q": "《雪地里的小画家》排序",
+          "pieces": [
+            "下雪啦，下雪啦！雪地里来了一群小画家。",
+            "小鸡画竹叶，小狗画梅花，小鸭画枫叶，小马画月牙。",
+            "不用颜料不用笔，几步就成一幅画。",
+            "青蛙为什么没参加？他在洞里睡着啦。"
+          ],
+          "say": "按课文的顺序，把句子排一排。",
+          "after": "下雪啦，下雪啦！雪地里来了一群小画家。小鸡画竹叶，小狗画梅花，小鸭画枫叶，小马画月牙。不用颜料不用笔，几步就成一幅画。青蛙为什么没参加？他在洞里睡着啦。"
+        },
+        {
+          "type": "recite",
+          "q": "背《雪地里的小画家》",
+          "title": "雪地里的小画家",
+          "lines": [
+            "下雪啦，下雪啦！雪地里来了一群小画家。",
+            "小鸡画竹叶，小狗画梅花，小鸭画枫叶，小马画月牙。",
+            "不用颜料不用笔，几步就成一幅画。",
+            "青蛙为什么没参加？他在洞里睡着啦。"
+          ],
+          "py": [
+            "xià xuě la xià xuě la xuě dì lǐ lái le yì qún xiǎo huà jiā",
+            "xiǎo jī huà zhú yè xiǎo gǒu huà méi huā xiǎo yā huà fēng yè xiǎo mǎ huà yuè yá",
+            "bú yòng yán liào bú yòng bǐ jǐ bù jiù chéng yì fú huà",
+            "qīng wā wèi shén me méi cān jiā tā zài dòng lǐ shuì zháo la"
+          ],
+          "tapSay": {
+            "r": "一会儿",
+            "mǎ": "小马的马",
+            "bǐ": "不用笔的笔"
+          },
+          "showFirst": true,
+          "cover": "snow",
+          "say": "现在不看书，大声背一背《雪地里的小画家》！想不起来，就点雪块挖开看一看。背完点我背好了。",
+          "after": "背得真好！下雪啦，下雪啦！雪地里来了一群小画家。小鸡画竹叶，小狗画梅花，小鸭画枫叶，小马画月牙。不用颜料不用笔，几步就成一幅画。青蛙为什么没参加？他在洞里睡着啦。"
+        }
+      ]
+    },
+    {
+      "id": "qiutian",
+      "title": "读《秋天》",
+      "icon": "art:maple_leaf",
+      "note": "教材 P60–61",
+      "items": [
+        {
+          "type": "read",
+          "q": "读《秋天》",
+          "title": "秋天",
+          "lines": [
+            "天气凉了，树叶黄了，一片片叶子从树上落下来。",
+            "天那么蓝，那么高。一群大雁往南飞，",
+            "一会儿排成个“人”字，一会儿排成个“一”字。",
+            "啊！秋天来了！"
+          ],
+          "py": [
+            "tiān qì liáng le shù yè huáng le yí piàn piàn yè zi cóng shù shàng luò xià lái",
+            "tiān nà me lán nà me gāo yì qún dà yàn wǎng nán fēi",
+            "yí huì r pái chéng gè rén zì yí huì r pái chéng gè yī zì",
+            "à qiū tiān lái le"
+          ],
+          "tapSay": {
+            "r": "一会儿",
+            "mǎ": "小马的马",
+            "bǐ": "不用笔的笔"
+          },
+          "read": "秋天。天气凉了，树叶黄了，一片片叶子从树上落下来。天那么蓝，那么高。一群大雁往南飞，一会儿排成个“人”字，一会儿排成个“一”字。啊！秋天来了！",
+          "say": "这篇课文叫《秋天》。先听一听，再跟着读。读完点我读好了。",
+          "after": "读得真好！"
+        },
+        {
+          "type": "choice",
+          "q": "天气凉了，树叶_了，",
+          "source": "课文",
+          "prompt": {
+            "context": "天气凉了，树叶▢了，",
+            "pic": "art:maple_leaf"
+          },
+          "options": [
+            "黄",
+            "绿",
+            "红"
+          ],
+          "answer": 0,
+          "say": "秋天到了，树叶变成什么颜色？",
+          "after": "天气凉了，树叶黄了。",
+          "hint": "再读一读课文里的这一句。"
+        },
+        {
+          "type": "choice",
+          "q": "一群大雁往_飞，",
+          "source": "课文",
+          "prompt": {
+            "context": "一群大雁往▢飞，",
+            "pic": "art:geese"
+          },
+          "options": [
+            "南",
+            "北",
+            "东"
+          ],
+          "answer": 0,
+          "say": "秋天，大雁往哪里飞？",
+          "after": "一群大雁往南飞。",
+          "hint": "再读一读课文里的这一句。"
+        },
+        {
+          "type": "choice",
+          "q": "一会儿排成个“_”字，",
+          "source": "课文",
+          "prompt": {
+            "context": "一会儿排成个“▢”字，",
+            "pic": "art:geese"
+          },
+          "options": [
+            "人",
+            "大",
+            "八"
+          ],
+          "answer": 0,
+          "say": "大雁一会儿排成个什么字？",
+          "after": "一会儿排成个人字，一会儿排成个一字。",
+          "hint": "再读一读课文里的这一句。"
+        },
+        {
+          "type": "choice",
+          "q": "“一”的读音 一片片",
+          "source": "课文 P61",
+          "prompt": {
+            "text": "一片片"
+          },
+          "options": [
+            {
+              "py": "yí piàn piàn"
+            },
+            {
+              "py": "yī piàn piàn"
+            },
+            {
+              "py": "yì piàn piàn"
+            }
+          ],
+          "answer": 0,
+          "say": "读一读：一片片。这里的一，拼音该怎么写？",
+          "after": "一片片，yí piàn piàn。一在第四声前面，读第二声。",
+          "hint": "想一想课文里是怎么读的，再看后面那个字是第几声。"
+        },
+        {
+          "type": "choice",
+          "q": "“一”的读音 一会儿",
+          "source": "课文 P61",
+          "prompt": {
+            "text": "一会儿"
+          },
+          "options": [
+            {
+              "py": "yí huìr"
+            },
+            {
+              "py": "yī huìr"
+            },
+            {
+              "py": "yì huìr"
+            }
+          ],
+          "answer": 0,
+          "say": "读一读：一会儿。这里的一，拼音该怎么写？",
+          "after": "一会儿，yí huìr。一在第四声前面，读第二声。",
+          "hint": "想一想课文里是怎么读的，再看后面那个字是第几声。"
+        },
+        {
+          "type": "choice",
+          "q": "“一”的读音 一群",
+          "source": "课文 P61",
+          "prompt": {
+            "text": "一群"
+          },
+          "options": [
+            {
+              "py": "yì qún"
+            },
+            {
+              "py": "yí qún"
+            },
+            {
+              "py": "yī qún"
+            }
+          ],
+          "answer": 0,
+          "say": "读一读：一群。这里的一，拼音该怎么写？",
+          "after": "一群，yì qún。一在第二声前面，读第四声。",
+          "hint": "想一想课文里是怎么读的，再看后面那个字是第几声。"
+        }
+      ]
+    },
+    {
+      "id": "qiutian-recite",
+      "title": "背《秋天》",
+      "icon": "art:geese",
+      "items": [
+        {
+          "type": "order",
+          "q": "《秋天》排序",
+          "pieces": [
+            "天气凉了，树叶黄了，一片片叶子从树上落下来。",
+            "天那么蓝，那么高。一群大雁往南飞，",
+            "一会儿排成个“人”字，一会儿排成个“一”字。",
+            "啊！秋天来了！"
+          ],
+          "say": "按课文的顺序，把句子排一排。",
+          "after": "天气凉了，树叶黄了，一片片叶子从树上落下来。天那么蓝，那么高。一群大雁往南飞，一会儿排成个“人”字，一会儿排成个“一”字。啊！秋天来了！"
+        },
+        {
+          "type": "recite",
+          "q": "背《秋天》",
+          "title": "秋天",
+          "lines": [
+            "天气凉了，树叶黄了，一片片叶子从树上落下来。",
+            "天那么蓝，那么高。一群大雁往南飞，",
+            "一会儿排成个“人”字，一会儿排成个“一”字。",
+            "啊！秋天来了！"
+          ],
+          "py": [
+            "tiān qì liáng le shù yè huáng le yí piàn piàn yè zi cóng shù shàng luò xià lái",
+            "tiān nà me lán nà me gāo yì qún dà yàn wǎng nán fēi",
+            "yí huì r pái chéng gè rén zì yí huì r pái chéng gè yī zì",
+            "à qiū tiān lái le"
+          ],
+          "tapSay": {
+            "r": "一会儿",
+            "mǎ": "小马的马",
+            "bǐ": "不用笔的笔"
+          },
+          "showFirst": true,
+          "cover": "cherry_leaves",
+          "say": "现在不看书，大声背一背《秋天》！想不起来，就点树叶挖开看一看。背完点我背好了。",
+          "after": "背得真好！天气凉了，树叶黄了，一片片叶子从树上落下来。天那么蓝，那么高。一群大雁往南飞，一会儿排成个“人”字，一会儿排成个“一”字。啊！秋天来了！"
+        }
+      ]
+    },
+    {
+      "id": "finals",
+      "title": "复韵母 ai ei ui",
+      "icon": "text:ai",
+      "note": "教材 P45",
+      "items": [
+        {
+          "type": "letterHunt",
+          "q": "找 ai",
+          "source": "教材 P45",
+          "target": "ai",
+          "title": "找出所有的 ai",
+          "letters": [
+            "ai",
+            "ei",
+            "ia",
+            "ai",
+            "ui",
+            "ai",
+            "ie",
+            "ei",
+            "ai",
+            "iu",
+            "ia",
+            "ui"
+          ],
+          "say": "a 和 i 手拉手，组成复韵母 ai。把所有的 ai 都找出来。",
+          "hint": "ai 是 a 在前，i 在后。",
+          "after": "全找到了，ai！"
+        },
+        {
+          "type": "letterHunt",
+          "q": "找 ei",
+          "source": "教材 P45",
+          "target": "ei",
+          "title": "找出所有的 ei",
+          "letters": [
+            "ei",
+            "ie",
+            "ai",
+            "ei",
+            "ui",
+            "ie",
+            "ei",
+            "iu",
+            "ai",
+            "ei",
+            "ie",
+            "ui"
+          ],
+          "say": "e 和 i 手拉手，组成复韵母 ei。把所有的 ei 都找出来。",
+          "hint": "ei 是 e 在前，i 在后，别和 ie 弄混。",
+          "after": "全找到了，ei！"
+        },
+        {
+          "type": "letterHunt",
+          "q": "找 ui",
+          "source": "教材 P45",
+          "target": "ui",
+          "title": "找出所有的 ui",
+          "letters": [
+            "ui",
+            "iu",
+            "ei",
+            "ui",
+            "ai",
+            "iu",
+            "ui",
+            "ie",
+            "iu",
+            "ui",
+            "ei",
+            "iu"
+          ],
+          "say": "u 和 i 手拉手，组成复韵母 ui。把所有的 ui 都找出来。",
+          "hint": "ui 是 u 在前，i 在后，别和 iu 弄混。",
+          "after": "全找到了，ui！"
+        },
+        {
+          "type": "choice",
+          "q": "kāi 的复韵母",
+          "source": "教材 P45",
+          "prompt": {
+            "py": "kāi",
+            "label": "开门的开"
+          },
+          "options": [
+            {
+              "py": "ai",
+              "grid": true
+            },
+            {
+              "py": "ei",
+              "grid": true
+            },
+            {
+              "py": "ui",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 0,
+          "say": "看拼音：开门的开。它的韵母是哪一个复韵母？",
+          "after": "开门的开，韵母是 ai。",
+          "hint": "去掉前面的声母，看看剩下的是哪两个字母。"
+        },
+        {
+          "type": "choice",
+          "q": "fēi 的复韵母",
+          "source": "教材 P45",
+          "prompt": {
+            "py": "fēi",
+            "label": "飞机的飞"
+          },
+          "options": [
+            {
+              "py": "ai",
+              "grid": true
+            },
+            {
+              "py": "ei",
+              "grid": true
+            },
+            {
+              "py": "ui",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 1,
+          "say": "看拼音：飞机的飞。它的韵母是哪一个复韵母？",
+          "after": "飞机的飞，韵母是 e 和 i 手拉手组成的复韵母。",
+          "hint": "去掉前面的声母，看看剩下的是哪两个字母。"
+        },
+        {
+          "type": "choice",
+          "q": "huì 的复韵母",
+          "source": "教材 P45",
+          "prompt": {
+            "py": "huì",
+            "label": "开会的会"
+          },
+          "options": [
+            {
+              "py": "ai",
+              "grid": true
+            },
+            {
+              "py": "ei",
+              "grid": true
+            },
+            {
+              "py": "ui",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 2,
+          "say": "看拼音：开会的会。它的韵母是哪一个复韵母？",
+          "after": "开会的会，韵母是 ui。",
+          "hint": "去掉前面的声母，看看剩下的是哪两个字母。"
+        },
+        {
+          "type": "choice",
+          "q": "gěi 的复韵母",
+          "source": "教材 P45",
+          "prompt": {
+            "py": "gěi",
+            "label": "给你的给"
+          },
+          "options": [
+            {
+              "py": "ai",
+              "grid": true
+            },
+            {
+              "py": "ei",
+              "grid": true
+            },
+            {
+              "py": "ui",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 1,
+          "say": "看拼音：给你的给。它的韵母是哪一个复韵母？",
+          "after": "给你的给，韵母是 e 和 i 手拉手组成的复韵母。",
+          "hint": "去掉前面的声母，看看剩下的是哪两个字母。"
+        },
+        {
+          "type": "choice",
+          "q": "tuǐ 的复韵母",
+          "source": "教材 P45",
+          "prompt": {
+            "py": "tuǐ",
+            "label": "大腿的腿"
+          },
+          "options": [
+            {
+              "py": "ai",
+              "grid": true
+            },
+            {
+              "py": "ei",
+              "grid": true
+            },
+            {
+              "py": "ui",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 2,
+          "say": "看拼音：大腿的腿。它的韵母是哪一个复韵母？",
+          "after": "大腿的腿，韵母是 ui。",
+          "hint": "去掉前面的声母，看看剩下的是哪两个字母。"
+        },
+        {
+          "type": "choice",
+          "q": "cāi 的复韵母",
+          "source": "教材 P45",
+          "prompt": {
+            "py": "cāi",
+            "label": "猜一猜的猜"
+          },
+          "options": [
+            {
+              "py": "ai",
+              "grid": true
+            },
+            {
+              "py": "ei",
+              "grid": true
+            },
+            {
+              "py": "ui",
+              "grid": true
+            }
+          ],
+          "fixed": true,
+          "answer": 0,
+          "say": "看拼音：猜一猜的猜。它的韵母是哪一个复韵母？",
+          "after": "猜一猜的猜，韵母是 ai。",
+          "hint": "去掉前面的声母，看看剩下的是哪两个字母。"
+        }
+      ]
+    },
+    {
+      "id": "rule",
+      "title": "声调标在哪",
+      "icon": "sprite:target",
+      "shuffle": true,
+      "items": [
+        {
+          "type": "choice",
+          "q": "标调 腿",
+          "source": "教材 P45",
+          "prompt": {
+            "text": "腿"
+          },
+          "options": [
+            {
+              "py": "tuǐ",
+              "grid": true
+            },
+            {
+              "py": "tǔi",
+              "grid": true
+            },
+            {
+              "py": "tuí",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "腿的拼音，声调标在哪里？哪个写对了？",
+          "after": "腿，tuǐ。i 和 u 在一起，标在后面的 i 上。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 会",
+          "source": "教材 P45",
+          "prompt": {
+            "text": "会"
+          },
+          "options": [
+            {
+              "py": "huì",
+              "grid": true
+            },
+            {
+              "py": "hùi",
+              "grid": true
+            },
+            {
+              "py": "huī",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "会的拼音，声调标在哪里？哪个写对了？",
+          "after": "会，huì。i 和 u 在一起，标在后面。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 堆",
+          "source": "教材 P45",
+          "prompt": {
+            "text": "堆"
+          },
+          "options": [
+            {
+              "py": "duī",
+              "grid": true
+            },
+            {
+              "py": "dūi",
+              "grid": true
+            },
+            {
+              "py": "duí",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "堆的拼音，声调标在哪里？哪个写对了？",
+          "after": "堆，duī。i u 并列标在后。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 累",
+          "source": "教材 P45",
+          "prompt": {
+            "text": "累"
+          },
+          "options": [
+            {
+              "py": "lèi",
+              "grid": true
+            },
+            {
+              "py": "leì",
+              "grid": true
+            },
+            {
+              "py": "lài",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "累的拼音，声调标在哪里？哪个写对了？",
+          "after": "累，lèi。有 e 标在 e 上。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 乖",
+          "source": "教材 P45",
+          "prompt": {
+            "text": "乖"
+          },
+          "options": [
+            {
+              "py": "guāi",
+              "grid": true
+            },
+            {
+              "py": "guaī",
+              "grid": true
+            },
+            {
+              "py": "gūai",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "乖的拼音，声调标在哪里？哪个写对了？",
+          "after": "乖乖的乖，有 a 不放过，声调标在 a 上。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        },
+        {
+          "type": "choice",
+          "q": "标调 白",
+          "source": "教材 P45",
+          "prompt": {
+            "text": "白"
+          },
+          "options": [
+            {
+              "py": "bái",
+              "grid": true
+            },
+            {
+              "py": "baí",
+              "grid": true
+            },
+            {
+              "py": "béi",
+              "grid": true
+            }
+          ],
+          "answer": 0,
+          "say": "白的拼音，声调标在哪里？哪个写对了？",
+          "after": "白，bái。有 a 不放过。",
+          "hint": "有 a 不放过，没 a 找 o e，i u 并列标在后。"
+        }
+      ]
+    },
+    {
+      "id": "lab",
+      "title": "拼音合成",
+      "icon": "sprite:bricks",
+      "items": [
+        {
+          "type": "pinyinLab",
+          "q": "拼合 gāi",
+          "source": "教材 P45",
+          "word": "gāi",
+          "parts": [
+            "g",
+            "āi"
+          ],
+          "choices": [
+            [
+              "g",
+              "k",
+              "h"
+            ],
+            [
+              "āi",
+              "ēi",
+              "uī"
+            ]
+          ],
+          "say": "拼一拼：应该的该。请把积木一块一块放好。",
+          "after": "gāi，应该的该！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 lèi",
+          "source": "教材 P45",
+          "word": "lèi",
+          "parts": [
+            "l",
+            "èi"
+          ],
+          "choices": [
+            [
+              "l",
+              "n",
+              "d"
+            ],
+            [
+              "èi",
+              "ài",
+              "uì"
+            ]
+          ],
+          "say": "拼一拼：很累的累。请把积木一块一块放好。",
+          "after": "lèi，很累的累！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 tuǐ",
+          "source": "教材 P45",
+          "word": "tuǐ",
+          "parts": [
+            "t",
+            "uǐ"
+          ],
+          "choices": [
+            [
+              "t",
+              "d",
+              "f"
+            ],
+            [
+              "uǐ",
+              "ǎi",
+              "ěi"
+            ]
+          ],
+          "say": "拼一拼：大腿的腿。请把积木一块一块放好。",
+          "after": "tuǐ，大腿的腿！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 guāi",
+          "source": "教材 P45",
+          "word": "guāi",
+          "parts": [
+            "g",
+            "u",
+            "āi"
+          ],
+          "choices": [
+            [
+              "g",
+              "k",
+              "h"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "āi",
+              "ēi",
+              "ā"
+            ]
+          ],
+          "say": "拼一拼：乖乖的乖。请把积木一块一块放好。",
+          "after": "guāi，乖乖的乖！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 huài",
+          "source": "教材 P45",
+          "word": "huài",
+          "parts": [
+            "h",
+            "u",
+            "ài"
+          ],
+          "choices": [
+            [
+              "h",
+              "f",
+              "k"
+            ],
+            [
+              "u",
+              "i",
+              "ü"
+            ],
+            [
+              "ài",
+              "èi",
+              "à"
+            ]
+          ],
+          "say": "拼一拼：坏蛋的坏。请把积木一块一块放好。",
+          "after": "huài，坏蛋的坏！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        },
+        {
+          "type": "pinyinLab",
+          "q": "拼合 duī",
+          "source": "教材 P45",
+          "word": "duī",
+          "parts": [
+            "d",
+            "uī"
+          ],
+          "choices": [
+            [
+              "d",
+              "t",
+              "b"
+            ],
+            [
+              "uī",
+              "ēi",
+              "āi"
+            ]
+          ],
+          "say": "拼一拼：堆雪人的堆。请把积木一块一块放好。",
+          "after": "duī，堆雪人的堆！",
+          "hint": "看清亮起来的格子要放什么，声调跟着韵母走。"
+        }
+      ]
+    },
+    {
+      "id": "dict",
+      "title": "听写词语",
+      "icon": "sprite:chest_gold",
+      "note": "也可以用拼音听写本在纸上练",
+      "shuffleWithinPhase": true,
+      "items": [
+        {
+          "type": "dictation",
+          "q": "听写 排队",
+          "source": "教材 P45 复韵母",
+          "word": "pái duì",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "b",
+              "p",
+              "d",
+              "t",
+              "g",
+              "k"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：排队。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 飞机",
+          "source": "教材 P45 复韵母",
+          "word": "fēi jī",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "b",
+              "f",
+              "h",
+              "j",
+              "q",
+              "x"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：飞机。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 黑色",
+          "source": "教材 P45 复韵母",
+          "word": "hēi sè",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "f",
+              "h",
+              "sh",
+              "z",
+              "c",
+              "s"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：黑色。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 大腿",
+          "source": "教材 P45 复韵母",
+          "word": "dà tuǐ",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "b",
+              "p",
+              "d",
+              "t",
+              "n",
+              "l"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：大腿。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 美丽",
+          "source": "教材 P45 复韵母",
+          "word": "měi lì",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "b",
+              "p",
+              "m",
+              "f",
+              "n",
+              "l"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：美丽。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 白菜",
+          "source": "教材 P45 复韵母",
+          "word": "bái cài",
+          "phase": 1,
+          "bank": {
+            "initials": [
+              "b",
+              "p",
+              "d",
+              "z",
+              "c",
+              "s"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：白菜。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 快乐",
+          "source": "教材 P45 复韵母",
+          "word": "kuài lè",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "d",
+              "n",
+              "l",
+              "g",
+              "k",
+              "h"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：快乐。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 回家",
+          "source": "教材 P45 复韵母",
+          "word": "huí jiā",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "f",
+              "k",
+              "h",
+              "j",
+              "q",
+              "x"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：回家。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 卖菜",
+          "source": "教材 P45 复韵母",
+          "word": "mài cài",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "m",
+              "n",
+              "ch",
+              "z",
+              "c",
+              "s"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：卖菜。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 给你",
+          "source": "教材 P45 复韵母",
+          "word": "gěi nǐ",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "m",
+              "n",
+              "l",
+              "g",
+              "k",
+              "h"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：给你。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 桂花",
+          "source": "教材 P45 复韵母",
+          "word": "guì huā",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "f",
+              "d",
+              "t",
+              "g",
+              "k",
+              "h"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：桂花。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        },
+        {
+          "type": "dictation",
+          "q": "听写 吹气",
+          "source": "教材 P45 复韵母",
+          "word": "chuī qì",
+          "phase": 2,
+          "bank": {
+            "initials": [
+              "j",
+              "q",
+              "x",
+              "zh",
+              "ch",
+              "sh"
+            ],
+            "vowels": [
+              "a",
+              "o",
+              "e",
+              "i",
+              "u",
+              "ü"
+            ]
+          },
+          "say": "听写词语：吹气。",
+          "hint": "一个音节一个音节写：先写声母，再写韵母，最后标声调。"
+        }
+      ]
+    }
+  ]
+}

@@ -143,6 +143,13 @@ export const BLOCKS = {
   honeycomb_block:  { name: '蜜脾块', rarity: 2, set: 'zoo' },
   turtle_egg_block: { name: '海龟蛋块', rarity: 2, set: 'zoo' },
   crown_block:      { name: '王冠方块', rarity: 4, obtain: 'achieve', glow: true },
+  // 雪地小画家 (语文: 雪地里的小画家, 秋天, ai ei ui)
+  maple_leaves:     { name: '枫树叶', rarity: 1, set: 'snowpaint' },
+  pawprint_snow:    { name: '脚印雪块', rarity: 1, set: 'snowpaint' },
+  plum_blossom:     { name: '梅花方块', rarity: 2, set: 'snowpaint' },
+  paint_block:      { name: '颜料方块', rarity: 2, set: 'snowpaint' },
+  easel_block:      { name: '画架方块', rarity: 3, obtain: 'achieve' },
+  autumn_block:     { name: '金秋方块', rarity: 3, obtain: 'achieve', glow: true },
 };
 
 // blocks of a rarity that can drop in an adventure using `set` (base blocks always can)
@@ -563,6 +570,30 @@ Object.assign(PAINT, {
   turtle_egg_block: (px, r) => each((x, y) => {
     const egg = [[4, 5], [11, 4], [5, 11], [11, 11]].some(([cx, cy]) => ((x - cx) ** 2) / 7 + ((y - cy) ** 2) / 10 < 1);
     px(x, y, egg ? (r() < 0.15 ? '#7ab060' : '#f2eedc') : shade([214, 196, 140], 0.9 + r() * 0.15));
+  }),
+  maple_leaves: (px, r) => each((x, y) => px(x, y, r() < 0.1 ? 'rgb(120,30,20)' : r() < 0.08 ? '#ffb030' : shade([214, 74, 36], 0.75 + r() * 0.4))),
+  pawprint_snow: (px, r) => each((x, y) => {
+    const paw = [[4, 5, 1.6], [11, 10, 1.6]].some(([cx, cy, rr]) => Math.hypot(x - cx, y - cy) < rr) ||
+      [[2, 2], [4, 1.5], [6, 2], [9, 7], [11, 6.5], [13, 7]].some(([cx, cy]) => Math.hypot(x - cx, y - cy) < 0.9);
+    px(x, y, paw ? '#a8bcd0' : shade([240, 246, 252], 0.95 + r() * 0.06));
+  }),
+  plum_blossom: (px, r) => each((x, y) => {
+    const fx = x % 8 - 3.5, fy = y % 8 - 3.5, d = Math.hypot(fx, fy);
+    px(x, y, d < 1 ? '#ffd23a' : d < 3.2 ? (r() < 0.2 ? '#ffb0c8' : '#ff6f9a') : shade([90, 60, 50], 0.85 + r() * 0.2));
+  }),
+  paint_block: px => each((x, y) => {
+    const cols = ['#e0303a', '#ff8a20', '#ffd23a', '#5aaa3a', '#3f8fd8', '#9a3cb0'];
+    const edge = x === 0 || y === 0 || x === 15 || y === 15;
+    px(x, y, edge ? '#5a4030' : cols[Math.floor((x + y * 0.6) / 3.6) % 6]);
+  }),
+  easel_block: (px, r) => each((x, y) => {
+    const frame = x < 2 || x > 13 || y < 2 || y > 13;
+    const dots = [[5, 5, '#e0303a'], [10, 6, '#3f8fd8'], [6, 10, '#ffd23a'], [10, 10, '#5aaa3a']].find(([cx, cy]) => Math.hypot(x - cx, y - cy) < 1.8);
+    px(x, y, frame ? shade([150, 100, 55], 0.9 + r() * 0.15) : dots ? dots[2] : '#fbf7ee');
+  }),
+  autumn_block: (px, r) => each((x, y) => {
+    const edge = x === 0 || y === 0 || x === 15 || y === 15;
+    px(x, y, edge ? '#a05a18' : r() < 0.25 ? '#ffd23a' : r() < 0.3 ? '#e8502a' : '#f2a030');
   }),
   crown_block: px => each((x, y) => {
     const edge = x === 0 || y === 0 || x === 15 || y === 15;

@@ -96,6 +96,8 @@ export const ACHIEVEMENTS = [
   { id: 'feng', block: 'wind_block', title: '会背《风》' },
   { id: 'changge', block: 'sunflower_block', title: '会背《长歌行》' },
   { id: 'zoo-all', block: 'crown_block', title: '闯过国王的动物园' },
+  { id: 'xuedi', block: 'easel_block', title: '会背《雪地里的小画家》' },
+  { id: 'qiutian', block: 'autumn_block', title: '会背《秋天》' },
 ];
 
 const stagesDone = s => Object.values(s.progress).reduce((a, lv) => a + Object.values(lv).filter(x => x.done).length, 0);

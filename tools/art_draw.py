@@ -641,6 +641,71 @@ def animals():
     return img
 
 
+# ---------- 雪地里的小画家 / 秋天 ----------
+@pic
+def duck():
+    p = Pic()
+    p.ellipse((5, 14, 26, 28), '#ffd23a')                                        # body
+    p.poly([(5, 18), (1, 14), (6, 15)], '#ffd23a')                               # tail
+    p.ellipse((15, 4, 27, 16), '#ffd23a')                                        # head
+    p.ellipse((9, 17, 19, 24), '#f2b820', bevel=False)                           # wing
+    p.rect((26, 10, 31, 12), '#ff8a20')                                          # bill
+    p.px([(22, 8), (22, 9)], '#2a1d18')
+    p.rect((11, 28, 13, 30), '#ff8a20'); p.rect((18, 28, 20, 30), '#ff8a20')     # feet
+    return p.finish()
+
+
+@pic
+def bamboo_leaf():
+    # three narrow leaves from one point, like a chick's footprint in the snow
+    p = Pic()
+    p.line([(16, 30), (16, 22)], '#5a8a30', width=2)
+    for pts in ([(16, 22), (12, 14), (6, 3), (9, 13)], [(16, 22), (18, 12), (16, 1), (14, 12)], [(16, 22), (21, 14), (27, 4), (23, 15)]):
+        p.poly(pts, '#5aaa3a')
+    return p.finish()
+
+
+@pic
+def plum_flower():
+    # five round petals, like a puppy's paw print
+    p = Pic()
+    for cx, cy in ((16, 7), (25, 13), (22, 24), (10, 24), (7, 13)):
+        p.ellipse((cx - 6, cy - 6, cx + 6, cy + 6), '#ff6f9a')
+    p.ellipse((12, 12, 20, 20), '#ffd23a')
+    p.px([(16, 14), (14, 16), (18, 16)], '#c06a10')
+    return p.finish()
+
+
+@pic
+def maple_leaf():
+    p = Pic()
+    p.poly([(16, 1), (19, 9), (26, 5), (24, 13), (31, 14), (25, 19), (27, 24), (19, 22), (17, 27),
+            (15, 27), (13, 22), (5, 24), (7, 19), (1, 14), (8, 13), (6, 5), (13, 9)], '#e8502a')
+    p.line([(16, 27), (16, 31)], '#8a3a1a', width=2)
+    p.line([(16, 26), (16, 8)], '#b83a1a')
+    p.line([(16, 18), (24, 12)], '#b83a1a'); p.line([(16, 18), (8, 12)], '#b83a1a')
+    return p.finish()
+
+
+@pic
+def crescent():
+    # a crescent moon, like a horse's hoof print
+    p = Pic()
+    p.layer(lambda d, c: (d.ellipse((3, 3, 29, 29), fill=c), d.ellipse((10, 0, 33, 26), fill=(0, 0, 0, 0))), '#ffd23a')
+    return p.finish()
+
+
+@pic
+def geese():
+    # wild geese flying south in a 人 shape
+    p = Pic()
+    for x, y in ((15, 4), (11, 9), (7, 14), (3, 19), (19, 9), (23, 14), (27, 19)):
+        p.line([(x - 2, y + 1), (x, y), (x + 2, y + 1)], '#4a4a52', width=1)
+        p.px([(x, y + 1)], '#4a4a52')
+    p.px([(15, 3)], '#4a4a52')
+    return p.finish()
+
+
 def main():
     names = sys.argv[1:] or [n for n in DRAW if not (ART / f'{n}.png').exists()]
     for n in names:

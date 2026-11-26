@@ -1,5 +1,16 @@
 [
   {
+    "id": "yuwen-snow",
+    "chapter": 11,
+    "subject": "语文",
+    "title": "雪地小画家",
+    "subtitle": "背《雪地里的小画家》《秋天》· 复韵母 ai ei ui 听写",
+    "date": "2026-11-26",
+    "block": "plum_blossom",
+    "path": "levels/yuwen-snow/level.json",
+    "audioProfile": "jqx-b"
+  },
+  {
     "id": "english-u5",
     "chapter": 10,
     "subject": "英语",

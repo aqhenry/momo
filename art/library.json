@@ -410,5 +410,29 @@
   "animals": {
     "zh": "动物们",
     "prompt": "动物们 (drawn in tools/art_draw.py)"
+  },
+  "duck": {
+    "zh": "小鸭",
+    "prompt": "小鸭 (drawn in tools/art_draw.py)"
+  },
+  "bamboo_leaf": {
+    "zh": "竹叶",
+    "prompt": "竹叶 (drawn in tools/art_draw.py)"
+  },
+  "plum_flower": {
+    "zh": "梅花",
+    "prompt": "梅花 (drawn in tools/art_draw.py)"
+  },
+  "maple_leaf": {
+    "zh": "枫叶",
+    "prompt": "枫叶 (drawn in tools/art_draw.py)"
+  },
+  "crescent": {
+    "zh": "月牙",
+    "prompt": "月牙 (drawn in tools/art_draw.py)"
+  },
+  "geese": {
+    "zh": "大雁排成人字",
+    "prompt": "大雁排成人字 (drawn in tools/art_draw.py)"
   }
 }
