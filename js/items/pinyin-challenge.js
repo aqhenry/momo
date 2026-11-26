@@ -211,8 +211,7 @@ export function renderDictation(root, item, ctx) {
       pool.append(keys);
       }
     } else {
-      const tones = [1, 2, 3, 4];
-      if (want.some(s => toneOf(s) === 0)) tones.push(0);
+      const tones = [1, 2, 3, 4, 0];   // 轻声 is always offered, so its key never gives away a neutral-tone word
       pool.append(h('div.tone-keys.steps', tones.map(tone => h(`button.tone-key${selectedTone === tone ? '.selected' : ''}`, {
         'aria-label': ['轻声', '一声', '二声', '三声', '四声'][tone], onclick: () => {
           if (locked) return;

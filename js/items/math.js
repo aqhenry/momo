@@ -131,8 +131,22 @@ export function renderCalc(root, item, ctx) {
     if (midB) midLabel.textContent = `${answer[0]}${answer[1]}${answer[2]}=`;
   };
   // one true filling of all blanks (for showing the answer); numbers 0..20, signs from the sign pad
+  const choicesFor = b => (b.kind === 'num' ? Array.from({ length: 21 }, (_, v) => String(v)) : signs);
+  // could the blanks in `fixed` ({index: value}) be part of a right answer, whatever goes in the other blanks?
+  function fits(fixed) {
+    if (item.accept) return item.accept.some(a => { const t = a.match(TOKEN); return Object.entries(fixed).every(([i, v]) => t[i] === v); });
+    const free = blanks.filter(b => !b.mid && !(b.i in fixed));
+    const cur = [...tokens];
+    for (const [i, v] of Object.entries(fixed)) cur[i] = v;
+    const fill = k => {
+      if (k === free.length) return isTrue(cur);
+      for (const v of choicesFor(free[k])) { cur[free[k].i] = v; if (fill(k + 1)) return true; }
+      cur[free[k].i] = '□';
+      return false;
+    };
+    return fill(0);
+  }
   function solveAll() {
-    const choicesFor = b => (b.kind === 'num' ? Array.from({ length: 21 }, (_, v) => String(v)) : signs);
     const real = blanks.filter(b => !b.mid);
     const fill = (k, cur) => {
       if (k === real.length) return isTrue(cur) ? cur : null;
@@ -169,8 +183,9 @@ export function renderCalc(root, item, ctx) {
     numPad?.classList.toggle('off', !n || n.kind !== 'num');
     sgnPad?.classList.toggle('off', !n || n.kind !== 'sign');
   }
+  let pending = null;   // a number written while the last wrong answer was still showing: used once it clears
   async function key(k) {
-    if (busy) return;
+    if (busy) { if (k !== 'back' && !revealed) pending = k; return; }
     if (k === 'back') {
       const filled = blanks.filter(b => b.val !== '');
       if (filled.length) { filled.at(-1).val = ''; sfx.dig(); paint(); }
@@ -188,7 +203,8 @@ export function renderCalc(root, item, ctx) {
     const filled = tokens.map((t, i) => blanks.find(b => b.i === i)?.val ?? t);
     const str = filled.join('');
     const midOk = !midB || Number(midB.val) === midValue();
-    const ok = midOk && (item.accept ? item.accept.includes(str) : isTrue(filled));
+    const mainOk = item.accept ? item.accept.includes(str) : isTrue(filled);
+    const ok = midOk && mainOk;
     if (ok) {
       busy = true;
       blanks.forEach(b => b.el.classList.add('right'));
@@ -196,14 +212,20 @@ export function renderCalc(root, item, ctx) {
       return;
     }
     busy = true;
-    blanks.forEach(b => b.el.classList.add('wrong'));
+    // only the blanks that cannot be right are cleared; the rest of his answer stays
+    const real = blanks.filter(b => !b.mid);
+    let bad = mainOk ? [] : real.filter(b => !fits({ [b.i]: b.val }));
+    if (!mainOk && !bad.length) bad = real;
+    if (!midOk) bad.push(midB);
+    bad.forEach(b => b.el.classList.add('wrong'));
     shake(eqEl);
     ctx.wrong(str, item.hint);
     await wait(1000);
     if (revealed) return;                 // the answer is showing now (challenge mode)
-    blanks.forEach(b => { b.val = ''; b.el.classList.remove('wrong'); });
+    bad.forEach(b => { b.val = ''; b.el.classList.remove('wrong'); });
     busy = false;
     paint();
+    if (pending) { const k = pending; pending = null; key(k); }
   }
 }
 
@@ -346,8 +368,9 @@ export function renderFour(root, item, ctx) {
       r.el.classList.toggle('active', r === cur());
     });
   }
+  let pending = null;
   async function key(k) {
-    if (busy) return;
+    if (busy) { if (k !== 'back' && !revealed) pending = k; return; }
     if (k === 'back') {
       const f = cur()?.blanks.filter(x => x.val !== '');
       if (f?.length) { f.at(-1).val = ''; sfx.dig(); paint(); }
@@ -370,12 +393,15 @@ export function renderFour(root, item, ctx) {
     busy = true;
     r.blanks.forEach(x => x.el.classList.add('wrong'));
     shake(r.el);
-    ctx.wrong(str, item.hint);
+    // a right equation he has already written in another row is a reminder, not a mistake
+    if (used.has(str)) ctx.nudge(S.fourSame);
+    else ctx.wrong(str, item.hint);
     await wait(1000);
     if (revealed) return;
     r.blanks.forEach(x => { x.val = ''; x.el.classList.remove('wrong'); });
     busy = false;
     paint();
+    if (pending) { const k = pending; pending = null; key(k); }
   }
   ctx.reveal = () => {
     busy = revealed = true;

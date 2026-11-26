@@ -865,3 +865,7 @@ div.num-tile { display: flex; align-items: center; justify-content: center; }
 .pet-heart .sprite { width: 40px; height: 40px; }
 .pet-feed { min-width: 120px; }
 .pet-feed:disabled { opacity: .35; filter: grayscale(1); }
+
+/* challenge mode: the short pause after a wrong answer is visible — inputs dim and ignore touches */
+.item-body.cooldown button, .item-body.cooldown canvas, .item-body.cooldown .tzg-writer { pointer-events: none; }
+.item-body.cooldown button, .item-body.cooldown canvas { filter: grayscale(.7) brightness(.85); transition: filter .15s; }

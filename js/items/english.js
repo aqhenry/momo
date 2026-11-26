@@ -34,6 +34,7 @@ export function renderPointRead(root, item, ctx) {
   }
   root.append(board);
   paint();
+  ctx.reveal = () => { done = true; next = tiles.length; paint(); };
 
   function paint() {
     tiles.forEach((t, k) => { t.classList.toggle('read', k < next); t.classList.toggle('now', k === next && !done); });
@@ -44,8 +45,9 @@ export function renderPointRead(root, item, ctx) {
     const k = tiles.indexOf(tile);
     if (k < next) { ctx.say(tile.word); return; }   // re-hear a word already read
     if (k !== next) {
+      // tapping ahead is not a wrong answer: a reminder, no heart lost
       shake(tile);
-      ctx.wrong(tile.word, firstMiss ? (item.hint || S.pointNext) : null);
+      ctx.nudge(firstMiss ? (item.hint || S.pointNext) : null);
       firstMiss = false;
       return;
     }

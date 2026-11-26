@@ -1166,12 +1166,12 @@
           "phase": 1,
           "bank": {
             "initials": [
+              "b",
               "f",
               "h",
               "j",
               "q",
-              "x",
-              "b"
+              "x"
             ],
             "vowels": [
               "a",
@@ -1194,10 +1194,10 @@
             "initials": [
               "b",
               "p",
-              "c",
-              "s",
+              "d",
               "z",
-              "d"
+              "c",
+              "s"
             ],
             "vowels": [
               "a",
@@ -1218,8 +1218,8 @@
           "phase": 1,
           "bank": {
             "initials": [
-              "p",
               "b",
+              "p",
               "d",
               "t",
               "g",
@@ -1244,12 +1244,12 @@
           "phase": 1,
           "bank": {
             "initials": [
-              "x",
-              "j",
-              "q",
               "g",
               "k",
-              "h"
+              "h",
+              "j",
+              "q",
+              "x"
             ],
             "vowels": [
               "a",
@@ -1270,12 +1270,12 @@
           "phase": 2,
           "bank": {
             "initials": [
-              "h",
               "f",
-              "ch",
-              "sh",
+              "k",
+              "h",
               "zh",
-              "k"
+              "ch",
+              "sh"
             ],
             "vowels": [
               "a",
@@ -1296,12 +1296,12 @@
           "phase": 2,
           "bank": {
             "initials": [
-              "k",
-              "g",
-              "h",
               "f",
               "d",
-              "t"
+              "t",
+              "g",
+              "k",
+              "h"
             ],
             "vowels": [
               "a",
@@ -1322,12 +1322,12 @@
           "phase": 2,
           "bank": {
             "initials": [
-              "m",
-              "n",
-              "l",
-              "f",
               "b",
-              "p"
+              "p",
+              "m",
+              "f",
+              "n",
+              "l"
             ],
             "vowels": [
               "a",
@@ -1348,12 +1348,12 @@
           "phase": 2,
           "bank": {
             "initials": [
-              "n",
-              "l",
+              "b",
               "m",
               "d",
               "t",
-              "b"
+              "n",
+              "l"
             ],
             "vowels": [
               "a",

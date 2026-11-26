@@ -35,6 +35,7 @@ export const S = {
   outOfHearts: '生命值用完了。没关系，休息一下，再挑战一次吧！',
   writeConfirm: '是这个数吗？对就点它，不对就擦掉重写。',
   pointNext: '从左往右，一个词一个词地点。',
+  fourSame: '这个算式已经写过了，换一个不一样的。',
   epicFind: '哇，开到了紫色的宝贝方块！',
   legendFind: '太厉害了，传说方块！',
   replayChest: '这一关玩过啦，奖励少一点哦。做新任务能拿到更好的宝箱！',

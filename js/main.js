@@ -262,7 +262,9 @@ async function screenPlay(levelId, stageId) {
   let streak = 0;   // first-try answers in a row
   const mistakes = [];
   const earned = [];
-  let paused = false, pendingNext = null;
+  let paused = false, pendingNext = null, cooldownTimer = null;
+  // the hearts rule is explained once per adventure (until a stage of it is finished), not before every stage
+  const explainHearts = challenge && !level.stages.some(s => store.stage(levelId, s.id)?.done);
 
   function pause() {
     if (paused) return;
@@ -288,7 +290,7 @@ async function screenPlay(levelId, stageId) {
     body.classList.remove('enter'); void body.offsetWidth; body.classList.add('enter');
     if (!kid && current.source) body.append(h('div.item-source', current.source));
     if (!kid && stage.note) body.append(h('div.challenge-note', stage.note));
-    body.classList.remove('revealed');
+    body.classList.remove('revealed', 'cooldown');
     slots.forEach((s, k) => s.classList.toggle('now', k === i));
     let attempts = 0, solved = false;
     const limit = triesFor(current);
@@ -303,6 +305,12 @@ async function screenPlay(levelId, stageId) {
       toneSounds: !!level.toneSounds,
       speech: level.speech || {},
       say: (t, fallback) => say(t, { fallback }),
+      // a slip that is not an answer (tapping ahead while point-reading, repeating an equation): a gentle hint, no heart
+      nudge(hint) {
+        if (solved) return;
+        sfx.tap();
+        if (hint) say(hint);
+      },
       wrong(got, hint) {
         if (solved) return;
         attempts++;
@@ -313,6 +321,10 @@ async function screenPlay(levelId, stageId) {
         }
         sfx.wrong();
         tapAfter = performance.now() + 1200;      // think before the next tap
+        // show the pause: inputs dim and ignore touches until it is over (a tap that does nothing looks broken)
+        body.classList.add('cooldown');
+        clearTimeout(cooldownTimer);
+        cooldownTimer = setTimeout(() => body.classList.remove('cooldown'), 1200);
         hearts--;
         paintHearts();
         heartRow.classList.remove('hurt'); void heartRow.offsetWidth; heartRow.classList.add('hurt');
@@ -388,7 +400,7 @@ async function screenPlay(levelId, stageId) {
     ITEM_TYPES[current.type](body, current, ctx);
     setTimeout(() => {
       if (!body.isConnected || current !== items[i] || paused) return;
-      if (challenge && i === 0) { say([S.challengeIntro, ...current._ask]); return; }
+      if (explainHearts && i === 0) { say([S.challengeIntro, ...current._ask]); return; }
       if (current._redo && !items[i - 1]?._redo) { say([S.redo, ...current._ask]); return; }
       const guide = kid && (i === 0 || items[i - 1].type !== current.type)
         ? current.type === 'dictation' ? level.speech.letters : current.type === 'pinyinLab' ? level.speech.labGuide

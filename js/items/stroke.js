@@ -16,7 +16,9 @@ export function render(root, item, ctx) {
 
   const names = item.strokes || [];
   const status = h('div.stroke-status', names.length ? `一共 ${names.length} 笔` : '');
-  const demoBtn = h('button.mc-btn.small', { onclick: demo }, item.outline === false ? '提示' : '看示范');
+  // before the first stroke: the whole demo. Once he has started, 提示 flashes only the next stroke, so the strokes he
+  // already wrote stay (restarting the demo used to wipe them)
+  const demoBtn = h('button.mc-btn.small', { onclick: () => (done > 0 ? writer.highlightStroke(done) : demo()) }, item.outline === false ? '提示' : '看示范');
 
   root.append(promptEl(item.prompt, ctx), h('div.stroke-area', box, h('div.stroke-side', status, demoBtn)));
 
@@ -28,12 +30,13 @@ export function render(root, item, ctx) {
     charDataLoader: loader,
   });
 
-  let misses = 0;
+  let misses = 0, done = 0;
   function quiz() {
     writer.quiz({
       // challenge mode: every third wrong stroke is one mistake (costs a heart)
       onMistake: () => { misses++; if (ctx.challenge && misses % 3 === 0) ctx.wrong(`写错 ${misses} 笔`, item.hint); },
       onCorrectStroke: ({ strokeNum, strokesRemaining }) => {
+        done = strokeNum + 1;
         const name = names[strokeNum];
         status.textContent = name ? `第${strokeNum + 1}笔：${name}` : `还剩 ${strokesRemaining} 笔`;
         if (name) ctx.say(name);
@@ -49,7 +52,7 @@ export function render(root, item, ctx) {
     writer.cancelQuiz();
     writer.hideCharacter();
     if (item.demoSay) ctx.say(item.demoSay);
-    writer.animateCharacter({ onComplete: () => { writer.hideCharacter(); quiz(); } });
+    writer.animateCharacter({ onComplete: () => { writer.hideCharacter(); done = 0; quiz(); } });
   }
 
   ctx.reveal = () => { writer.cancelQuiz(); writer.showCharacter(); demoBtn.disabled = true; };
